@@ -10,11 +10,12 @@ from pinecone import Pinecone
 load_dotenv()
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+PINECONE_INDEX_NAME_NUTRITION = os.getenv("PINECONE_INDEX_NAME_NUTRITION")
+PINECONE_INDEX_NAME_WORKOUTS = os.getenv("PINECONE_INDEX_NAME_WORKOUTS")
 LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
 OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
 
-JSON_PATH = "cleaned_papers.json"  
+JSON_PATH = "cleaned_papers_workouts.json"  
 CHUNK_SIZE = 1024             
 CHUNK_OVERLAP = 120            
 BATCH_SIZE = 100               
@@ -22,17 +23,17 @@ BATCH_SIZE = 100
 LIMIT = None
 
 def ingest_data():
-    print("Starting RAG ingestion pipeline for the Meal Planner...")
+    print("Starting RAG ingestion pipeline for the Workout Planner...")
 
     pc = Pinecone(api_key=PINECONE_API_KEY)
     
-    if PINECONE_INDEX_NAME not in [i.name for i in pc.list_indexes()]:
-        print(f"Index '{PINECONE_INDEX_NAME}' not found in Pinecone!")
+    if PINECONE_INDEX_NAME_WORKOUTS not in [i.name for i in pc.list_indexes()]:
+        print(f"Index '{PINECONE_INDEX_NAME_WORKOUTS}' not found in Pinecone!")
         print("Please create it in the Pinecone console with Dimension=1536, Metric=cosine.")
         return
     
-    index = pc.Index(PINECONE_INDEX_NAME)
-    print(f"Connected to Pinecone Index: {PINECONE_INDEX_NAME}")
+    index = pc.Index(PINECONE_INDEX_NAME_WORKOUTS)
+    print(f"Connected to Pinecone Index: {PINECONE_INDEX_NAME_WORKOUTS}")
 
     # Initialize Embedding Model via LLMod.ai
     embeddings = OpenAIEmbeddings(

@@ -1,7 +1,7 @@
 import requests
 import json
 
-MAX_RESULTS = 1000
+MAX_RESULTS = 1500
 
 def get_relevant_pmcids(search_query, max_results):
     """
@@ -48,7 +48,7 @@ def save_to_json(data, filename="pmcids.json"):
 
 
 if __name__ == "__main__":
-    query = (
+    nutrition_query = (
         '("Diet, Healthy"[MeSH Terms] OR "Diet, Reducing"[MeSH Terms] OR '
         '"Diet Therapy"[MeSH Terms] OR "Nutritional Physiological Phenomena"[MeSH Terms] OR '
         '"meal planning"[Title/Abstract] OR "meal plan*"[Title/Abstract] OR '
@@ -59,9 +59,22 @@ if __name__ == "__main__":
         'AND ("open access"[filter]) '
         'NOT ("exercise"[Title] OR "workout*"[Title] OR "sports"[Title] OR "resistance training"[Title])'
     )
+
+    workouts_query = (
+        '("Exercise"[MeSH Terms] OR "Resistance Training"[MeSH Terms] OR '
+        '"Physical Fitness"[MeSH Terms] OR "High-Intensity Interval Training"[MeSH Terms] OR '
+        '"exercise prescription"[Title/Abstract] OR "workout routine*"[Title/Abstract] OR '
+        '"training volume"[Title/Abstract] OR "training frequency"[Title/Abstract] OR '
+        '"periodization"[Title/Abstract] OR "resistance exercise*"[Title/Abstract] OR '
+        '"aerobic capacity"[Title/Abstract] OR "warm-up"[Title/Abstract] OR '
+        '"cool-down"[Title/Abstract] OR "rest interval*"[Title/Abstract] OR '
+        '"repetition maximum"[Title/Abstract] OR "muscle hypertrophy"[Title/Abstract]) '
+        'AND ("open access"[filter]) '
+        'NOT ("Diet"[Title] OR "Nutrition*"[Title] OR "Meal"[Title] OR "Dietary"[Title])'
+    )
     
-    pmcid_list = get_relevant_pmcids(query, MAX_RESULTS)
+    pmcid_list = get_relevant_pmcids(workouts_query, MAX_RESULTS)
 
     # Save the results
     if pmcid_list:
-        save_to_json(pmcid_list, "pmcids.json")
+        save_to_json(pmcid_list, "pmcids_workouts.json")

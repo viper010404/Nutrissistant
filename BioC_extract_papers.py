@@ -75,7 +75,7 @@ def fetch_and_clean_paper(pmcid):
         print(f"  -> Error processing {formatted_id}: {e}")
         return None
 
-def process_pipeline(input_file="pmcids.json", output_file="cleaned_papers.json"):
+def process_pipeline(input_file="pmcids_workouts.json", output_file="cleaned_papers_workouts.json"):
     if not os.path.exists(input_file):
         print(f"Error: {input_file} not found. Run Phase 1 first.")
         return
