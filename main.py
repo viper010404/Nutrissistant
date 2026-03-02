@@ -1,5 +1,7 @@
 import streamlit as st
 import base64
+import requests
+import state_manager
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="Nutrissistant", layout="wide")
@@ -8,14 +10,16 @@ st.set_page_config(page_title="Nutrissistant", layout="wide")
 if 'current_page' not in st.session_state:
     st.session_state.current_page = 'welcome'
 if 'user_profile' not in st.session_state:
-    st.session_state.user_profile = ""
-    
-# Initialize the schedule data and edit mode
+    st.session_state.user_profile = state_manager.load_state()["user_profile"]
+
+# Safely initialize schedule_data
 if 'schedule_data' not in st.session_state:
-    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    hours = [f"{h:02d}:00" for h in range(6, 24)]
-    # Creates a dictionary like: {'Monday': {'06:00': '-', '07:00': '-'}, ...}
-    st.session_state.schedule_data = {d: {h: "-" for h in hours} for d in days}
+    if "schedule_data" in state_manager.load_state() and state_manager.load_state()["schedule_data"]:
+        st.session_state.schedule_data = state_manager.load_state()["schedule_data"]
+    else:
+        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        hours = [f"{h:02d}:00" for h in range(6, 24)]
+        st.session_state.schedule_data = {d: {h: "-" for h in hours} for d in days}
 
 if 'is_editing' not in st.session_state:
     st.session_state.is_editing = False
@@ -27,7 +31,7 @@ def get_base64_of_bin_file(bin_file):
     return base64.b64encode(data).decode()
 
 try:
-    bg_base64 = get_base64_of_bin_file("background_image.png")
+    bg_base64 = get_base64_of_bin_file("images/background_image.png")
     bg_css = f"""
     <style>
     .stApp {{
@@ -115,15 +119,15 @@ if st.session_state.current_page == 'welcome':
     with col1:
         user_input = st.text_area(
             label="User Goals",
-            value="",
+            value=state_manager.load_state()["user_profile"],
             placeholder="Example: I'm Yoav, 30 years old. I have a wife and 2 little kids at the ages of 10 and 12. I want to lose 3kg of body weight in 4 months.",
             height=300, 
             label_visibility="collapsed" 
         )
-        
+
     with col2:
         try:
-            st.image("yoav_image.png", use_container_width=True)
+            st.image("images/yoav_image.png", use_container_width=True)
         except FileNotFoundError:
             st.warning("Person image missing.")
 
@@ -133,6 +137,7 @@ if st.session_state.current_page == 'welcome':
     if st.button("Continue"):
         if user_input.strip() != "":
             st.session_state.user_profile = user_input
+            state_manager.update_user_profile(user_input)
         
         st.session_state.current_page = 'home'
         st.rerun()
@@ -244,8 +249,7 @@ elif st.session_state.current_page == 'home':
                 with day_cols[i]:
                     card_html = f'<div class="day-card"><div class="day-title">{day}</div>'
                     for hour in hours:
-                        activity = st.session_state.schedule_data[day][hour]
-                        # UPDATED: We now apply the new CSS classes to the spans
+                        activity = state_manager.load_state()["schedule_data"][day][hour]
                         card_html += f'<div class="schedule-row"><span class="schedule-time">{hour}</span><span class="schedule-activity">{activity}</span></div>'
                     card_html += '</div>'
                     st.markdown(card_html, unsafe_allow_html=True)
@@ -273,18 +277,43 @@ elif st.session_state.current_page == 'home':
         
         with prompt_col1:
             # st.text_input for a single line, or st.text_area for multiple lines
-            user_prompt = st.text_input(
+            user_prompt = st.text_area(
                 label="Prompt",
                 placeholder="e.g. Can you suggest a healthy dinner for Tuesday evening?",
-                label_visibility="collapsed"
+                label_visibility="collapsed",
+                height=100
             )
             
         with prompt_col2:
-            if st.button("Submit Request", type="primary"):
-                if user_prompt:
-                    st.success(f"You asked: {user_prompt}")
+            if st.button("Run Agent", type="primary"): 
+                if user_prompt.strip():
+                    with st.spinner("Nutrissistant is thinking..."):
+                        # Call the supervisor 
+                        try:
+                            api_url = "http://localhost:8000/api/execute"
+                            payload = {"prompt": user_prompt}
+                            
+                            res = requests.post(api_url, json=payload)
+                            data = res.json()
+                            
+                            if data.get("status") == "ok":
+                                st.session_state.latest_response = data["response"]
+                                st.session_state.latest_steps = data["steps"]
+                            else:
+                                st.error(f"Agent Error: {data.get('error')}")
+                        except Exception as e:
+                            st.error(f"Failed to connect to API: {e}. Is FastAPI running?")
                 else:
                     st.warning("Please enter a request first.")
+
+        # Display the Agent's Final Output and Traced Steps
+        if "latest_response" in st.session_state:
+            st.markdown("### Agent Response")
+            st.success(st.session_state.latest_response)
+            
+            st.markdown("### Execution Trace")
+            with st.expander("View Agent Steps (JSON)"):
+                st.json(st.session_state.latest_steps)
 
     # ==========================================
     # EDIT MODE 
@@ -323,7 +352,8 @@ elif st.session_state.current_page == 'home':
                         for hour in hours:
                             typed_text = st.session_state[f"input_{day}_{hour}"].strip()
                             st.session_state.schedule_data[day][hour] = typed_text if typed_text else "-"
-                    
+
+                    state_manager.update_schedule(st.session_state.schedule_data)
                     st.session_state.is_editing = False
                     st.rerun()
 
