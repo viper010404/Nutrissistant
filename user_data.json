@@ -144,15 +144,9 @@
         }
     },
     "plan_drafts": {
-        "nutrition": "Placeholder Nutrition Plan",
-        "fitness": "Placeholder Fitness Plan"
+        "nutrition": [],
+        "fitness": []
     },
-    "missing_info": [
-        "equipment_available_at_university_gym",
-        "current_fitness_level_and_experience",
-        "typical_session_duration",
-        "which_days_and_times_you_can_work_out",
-        "any_injuries_or_medical_conditions"
-    ],
+    "missing_info": [],
     "status": "idle"
 }
