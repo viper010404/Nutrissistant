@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
+import schedule_agent
 import state_manager
 
 # Load environment variables
@@ -33,23 +34,34 @@ def get_user_data():
     """Fetches the current user data from the state manager."""
     return state_manager.load_state()
 
+#TO DO: hard coded response structure
 def analyze_intent_and_extract_metadata(user_query, user_profile, step_tracer):
-    """Analyzes intent and extracts missing info."""
+    """Analyzes intent and extracts missing info and required tasks."""
     
     sys_prompt = """You are the Nutrissistant Supervisor. Analyze the user query against their profile.
     
-CRITICAL RULES FOR 'missing_info' (Avoid unnecessary ping-pong):
-1. MINIMIZE QUESTIONS: Only ask for absolute blockers (e.g., 'home' vs 'gym').
-2. ASSUME GYM EQUIPMENT: If the user mentions a 'gym' for example, assume access to standard equipment (dumbbells, barbells, machines, cardio). DO NOT ask for an equipment list.
-3. DO NOT ASK FOR SCHEDULE: The system has a dedicated Schedule Agent that will find the appropriate time and duration for the workout based on the user's calendar. Make sure that the workout is not too long or too short based on user'd profile and goals.
-4. ASSUME DEFAULTS: Assume an intermediate fitness level and no injuries unless the user explicitly mentions them. Do not ask for medical history.
+    CRITICAL RULES FOR 'missing_info':
+    1. MINIMIZE QUESTIONS: Only ask for absolute blockers.
+    2. EQUIPMENT: Assume access to standard gym equipment if a gym is mentioned.
+    3. DO NOT ASK FOR SCHEDULE: The Schedule Agent handles time.
+    4. ASSUME DEFAULTS: Assume intermediate fitness, no injuries unless stated.
 
-Output JSON only with this schema:
-{
-    "intent": "PLANNING" or "GENERAL_QUESTION",
-    "goals": ["extracted goal 1"],
-    "missing_info": [] // Array of strings. Keep empty [] if the rules above apply.
-}"""
+    Output JSON only with this schema:
+    {
+        "tasks": [], // Array of strings. MUST be from the allowed list below.
+        "goals": ["extracted goal 1"],
+        "missing_info": [] // Array of strings. Keep empty [] if rules above apply.
+    }
+
+    ALLOWED TASKS:
+    - "PLAN_MEAL": Planning nutrition/meals.
+    - "PLAN_WORKOUT": Planning fitness/workouts.
+    - "FIND_RECIPE": Searching for or extracting recipe details.
+    - "EXTRACT_WORKOUT": Extracting existing workout details or making workout modifications.
+    - "SCHEDULE": Checking or modifying the user's schedule/calendar.
+    - "GENERAL_QUESTION": Answering general fitness/nutrition questions.
+    - "OTHER": Anything that doesn't fit the above.
+    """
     user_prompt = f"Profile: {user_profile}\nQuery: {user_query}"
 
     messages = [
@@ -57,11 +69,9 @@ Output JSON only with this schema:
         HumanMessage(content=user_prompt)
     ]
 
-    # Call the JSON-bound LangChain model
     response = json_llm.invoke(messages)
     result = json.loads(response.content)
     
-    # Log the step 
     step_tracer.append({
         "module": MODULE_NAME,
         "prompt": {"system": sys_prompt, "user": user_prompt},
@@ -69,22 +79,6 @@ Output JSON only with this schema:
     })
     
     return result
-
-def generate_tasks_from_intent(intent_data):
-    """
-    generates a list of tasks for the sub-agents based on the extracted intent and missing info.
-    """
-    tasks = []
-    missing_info = intent_data.get("missing_info", [])
-
-    if missing_info:
-        tasks = ["ask_clarification"]
-    elif intent_data.get("intent") == "GENERAL_QUESTION":
-        tasks = ["answer_general"]
-    elif intent_data.get("intent") == "PLANNING":
-        tasks = ["check_schedule", "plan_nutrition", "plan_fitness"]
-        
-    return tasks, missing_info
 
 def check_for_clarification(missing_info, step_tracer):
     """Generates a polite clarification question."""
@@ -133,49 +127,102 @@ def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     
     return result
 
+# Order of Operations
+TASK_PRIORITY = {
+    "GENERAL_QUESTION": 1,
+    "OTHER": 1,
+    "FIND_RECIPE": 2,
+    "EXTRACT_WORKOUT": 2,
+    "SCHEDULE": 3,      
+    "PLAN_MEAL": 4,    
+    "PLAN_WORKOUT": 4   
+}
+
 def orchestrate_workflow(user_query):
-    """Main orchestration loop."""
+    """Main orchestration loop with dynamic constraint passing."""
     
     state = get_user_data()
     step_tracer = [] 
-    final_response = ""
+    responses = [] 
+    
+    # This dictionary will pass constraints between agents in real-time
+    shared_context = {
+        "workout_time_limit_mins": None,
+        "meal_prep_time_limit_mins": None,
+        "other_event_limit_mins": None,
+        "scheduled_slots": []
+    }
 
-    # Extract Intent
     intent_data = analyze_intent_and_extract_metadata(user_query, state["user_profile"], step_tracer)
     
-    # Generate Task List
-    tasks, missing_info = generate_tasks_from_intent(intent_data)
+    missing_info = intent_data.get("missing_info", [])
+    tasks = intent_data.get("tasks", [])
 
-    # Execute Tasks based on State
-    if "ask_clarification" in tasks:
+    # Handle Clarifications First
+    if missing_info:
         state["status"] = "asking"
-        final_response = check_for_clarification(missing_info, step_tracer)
+        clarification = check_for_clarification(missing_info, step_tracer)
         state["missing_info"] = missing_info
         state_manager.save_state(state)
-        
-        return {"response": final_response, "steps": step_tracer}
+        return {"response": clarification, "steps": step_tracer}
 
-    if "answer_general" in tasks:
-        final_response = "Placeholder: Routed to expert for general answer."
-        return {"response": final_response, "steps": step_tracer}
+    # Sort tasks by the new priority
+    tasks = sorted(tasks, key=lambda x: TASK_PRIORITY.get(x, 99))
 
-    if "check_schedule" in tasks:
-        state["status"] = "planning"
+    nutrition_draft = state.get("plan_drafts", {}).get("nutrition", None)
+    fitness_draft = state.get("plan_drafts", {}).get("fitness", None)
+
+    # Execute Sub-Agents Sequentially with Context Sharing
+    for task in tasks:
         
-        # Placeholder for sub-agent execution
-        nutrition_draft = "Placeholder Nutrition Plan"
-        fitness_draft = "Placeholder Fitness Plan"
-        
-        validation = validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer)
-        
-        if validation["status"] == "ok":
-            state["plan_drafts"]["nutrition"] = nutrition_draft
-            state["plan_drafts"]["fitness"] = fitness_draft
-            state["status"] = "idle"
-            final_response = "I have successfully created your plans and updated your schedule!"
-        else:
-            final_response = f"I encountered an issue while planning: {validation['reason']}. Let me adjust."
+        if task == "SCHEDULE":
+            # Pass the query, tracer, and shared context to the schedule agent
+            schedule_result = schedule_agent.execute_schedule_task(
+                user_query, 
+                step_tracer, 
+                shared_context
+            )
+            # Update the orchestrator's shared context with time constraints found
+            shared_context = schedule_result["shared_context"]
+            responses.append(schedule_result["response"])
+
+        elif task == "PLAN_WORKOUT":
+            # The Exercise Planner now reads from the shared context!
+            time_limit = shared_context.get("workout_time_limit_mins", 60) # Default to 60 if no schedule was requested
             
-        state_manager.save_state(state)
+            fitness_draft = f"Placeholder Fitness Plan (Strictly {time_limit} minutes)"
+            responses.append(f"Placeholder: Planned your {time_limit}-minute workout.")
+
+        elif task == "PLAN_MEAL":
+            # Meal planner can also use constraints (e.g., if schedule only leaves 15 mins for cooking)
+            prep_limit = shared_context.get("meal_prep_time_limit_mins", 30)
+            
+            nutrition_draft = f"Placeholder Nutrition Plan (Under {prep_limit} mins prep)"
+            responses.append("Placeholder: Planned your meals.")
+            
+        elif task == "FIND_RECIPE":
+            responses.append("Placeholder: Found your recipe.")
+            
+        elif task == "EXTRACT_WORKOUT":
+            responses.append("Placeholder: Extracted workout details.")
+            
+        elif task == "GENERAL_QUESTION":
+            responses.append("Placeholder: Answered general question.")
+            
+        elif task == "OTHER":
+            responses.append("Placeholder: Handled 'other' request.")
+
+    state = state_manager.load_state()
+    # Save final drafts and update status
+    if "plan_drafts" not in state:
+        state["plan_drafts"] = {}
+    
+    if nutrition_draft: state["plan_drafts"]["nutrition"] = nutrition_draft
+    if fitness_draft: state["plan_drafts"]["fitness"] = fitness_draft
+    
+    state["status"] = "idle"
+    state_manager.save_state(state)
+
+    final_response = "\n".join(responses)
 
     return {"response": final_response, "steps": step_tracer}
