@@ -299,6 +299,12 @@ elif st.session_state.current_page == 'home':
                             if data.get("status") == "ok":
                                 st.session_state.latest_response = data["response"]
                                 st.session_state.latest_steps = data["steps"]
+
+                                # re-read the updated user_data.json
+                                fresh_state = state_manager.load_state()
+                                if "schedule_data" in fresh_state:
+                                    st.session_state.schedule_data = fresh_state["schedule_data"]
+                                st.rerun()
                             else:
                                 st.error(f"Agent Error: {data.get('error')}")
                         except Exception as e:
@@ -356,7 +362,3 @@ elif st.session_state.current_page == 'home':
                     state_manager.update_schedule(st.session_state.schedule_data)
                     st.session_state.is_editing = False
                     st.rerun()
-
-
-
-
