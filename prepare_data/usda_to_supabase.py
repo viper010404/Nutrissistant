@@ -78,7 +78,7 @@ def build_usda_database():
         aggfunc='max'
     ).reset_index()
 
-    df_pivoted = df_pivoted.fillna(0)
+    df_pivoted = df_pivoted.fillna(-1)
 
     # Merge Foods with Pivoted Nutrients
     print("Merging foods with nutrient data...")
@@ -87,11 +87,7 @@ def build_usda_database():
     final_df = final_df.drop(columns=['data_type'])
     final_df = final_df.rename(columns={'description': 'food_name'})
     
-    # Safely ensure all expected columns exist before rounding
     numeric_cols = ['calories', 'protein_g', 'fat_g', 'carbs_g', 'fiber_g']
-    for col in numeric_cols:
-        if col not in final_df.columns:
-            final_df[col] = 0.0
             
     final_df[numeric_cols] = final_df[numeric_cols].round(2)
 
