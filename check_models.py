@@ -29,3 +29,4 @@ if __name__ == "__main__":
     # Insert the shared group LLMod API key here
     LLMOD_API_KEY = "sk-SslThmxFDTDqS2H16uzG8w"
     list_available_models(LLMOD_API_KEY)
+
