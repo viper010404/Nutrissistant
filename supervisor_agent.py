@@ -1,11 +1,13 @@
 import os
 import json
 from dotenv import load_dotenv
+from pydantic import SecretStr
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
 import schedule_agent
+import workout_agent
 import state_manager
 
 # Load environment variables
@@ -17,17 +19,65 @@ MODEL_NAME = "RPRTHPB-gpt-5-mini"
 MODULE_NAME = "Supervisor" 
 
 text_llm = ChatOpenAI(
-    api_key=LLMOD_API_KEY,
+    api_key=SecretStr(LLMOD_API_KEY or ""),
     base_url=OPENAI_API_BASE,
     model=MODEL_NAME
 )
 
 # JSON LLM for strict data extraction 
 json_llm = ChatOpenAI(
-    api_key=LLMOD_API_KEY,
+    api_key=SecretStr(LLMOD_API_KEY or ""),
     base_url=OPENAI_API_BASE,
     model=MODEL_NAME,
 ).bind(response_format={"type": "json_object"})
+
+
+def _parse_json_response_content(content):
+    if isinstance(content, list):
+        content = "".join(
+            block if isinstance(block, str) else block.get("text", "")
+            for block in content
+        )
+    return json.loads(content)
+
+
+def _attach_slots_to_units(units, scheduled_slots):
+    """Attach available schedule slots to routine units using day match then index fallback."""
+    prepared_units = []
+    free_slots = [slot for slot in scheduled_slots if isinstance(slot, dict)]
+
+    for unit in units:
+        if isinstance(unit, dict):
+            unit_copy = dict(unit)
+        else:
+            unit_copy = {}
+        unit_copy["scheduled_slots"] = []
+        prepared_units.append(unit_copy)
+
+    # Prefer day-label matching first.
+    for unit in prepared_units:
+        day_label = (unit.get("day") or unit.get("day_label") or "").strip().lower()
+        if not day_label:
+            continue
+        match_idx = next(
+            (
+                idx for idx, slot in enumerate(free_slots)
+                if str(slot.get("day", "")).strip().lower() == day_label
+            ),
+            None,
+        )
+        if match_idx is not None:
+            unit["scheduled_slots"].append(free_slots.pop(match_idx))
+
+    # Fill remaining units in order with remaining slots.
+    for unit in prepared_units:
+        if not free_slots:
+            break
+        if unit["scheduled_slots"]:
+            continue
+        unit["scheduled_slots"].append(free_slots.pop(0))
+
+    return prepared_units
 
 
 def get_user_data():
@@ -55,9 +105,8 @@ def analyze_intent_and_extract_metadata(user_query, user_profile, step_tracer):
 
     ALLOWED TASKS:
     - "PLAN_MEAL": Planning nutrition/meals.
-    - "PLAN_WORKOUT": Planning fitness/workouts.
+    - "WORKOUT": Creating, extracting, or modifying workout plans.
     - "FIND_RECIPE": Searching for or extracting recipe details.
-    - "EXTRACT_WORKOUT": Extracting existing workout details or making workout modifications.
     - "SCHEDULE": Checking or modifying the user's schedule/calendar.
     - "GENERAL_QUESTION": Answering general fitness/nutrition questions.
     - "OTHER": Anything that doesn't fit the above.
@@ -70,7 +119,7 @@ def analyze_intent_and_extract_metadata(user_query, user_profile, step_tracer):
     ]
 
     response = json_llm.invoke(messages)
-    result = json.loads(response.content)
+    result = _parse_json_response_content(response.content)
     
     step_tracer.append({
         "module": MODULE_NAME,
@@ -103,6 +152,7 @@ def check_for_clarification(missing_info, step_tracer):
     
     return clarification_message
 
+
 def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     """Validates the generated plans for conflicts."""
     
@@ -117,7 +167,7 @@ def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     ]
 
     response = json_llm.invoke(messages)
-    result = json.loads(response.content)
+    result = _parse_json_response_content(response.content)
     
     step_tracer.append({
         "module": MODULE_NAME,
@@ -127,19 +177,7 @@ def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     
     return result
 
-<<<<<<< Updated upstream
-# Order of Operations
-TASK_PRIORITY = {
-    "GENERAL_QUESTION": 1,
-    "OTHER": 1,
-    "FIND_RECIPE": 2,
-    "EXTRACT_WORKOUT": 2,
-    "SCHEDULE": 3,      
-    "PLAN_MEAL": 4,    
-    "PLAN_WORKOUT": 4   
-}
 
-=======
 def _select_workout_pipeline(user_query, current_routine, step_tracer):
     """Uses a lightweight LLM decision to pick workout pipeline mode."""
     sys_prompt = """You are a routing assistant for workout generation.
@@ -214,21 +252,17 @@ Selection policy:
         })
         return fallback
 
->>>>>>> Stashed changes
 def orchestrate_workflow(user_query):
     """Main orchestration loop with multi-phase execution."""
     
     state = get_user_data()
     step_tracer = [] 
     responses = [] 
-<<<<<<< Updated upstream
-=======
     
     # State tracking variables
     routine_generated = False
     latest_routine_response = None
     routine_draft = None
->>>>>>> Stashed changes
     
     shared_context = {
         "workout_time_limit_mins": None,
@@ -245,10 +279,6 @@ def orchestrate_workflow(user_query):
     task_aliases = {"PLAN_WORKOUT": "WORKOUT", "EXTRACT_WORKOUT": "WORKOUT"}
     tasks = set(task_aliases.get(t, t) for t in raw_tasks if isinstance(t, str))
 
-<<<<<<< Updated upstream
-    # Handle Clarifications First
-    if missing_info:
-=======
     # --- AUTONOMIC BEHAVIOR TRIGGER ---
     # If a generative task is present, force the schedule agent to participate
     if "WORKOUT" in tasks or "PLAN_MEAL" in tasks:
@@ -257,9 +287,7 @@ def orchestrate_workflow(user_query):
     # Handle missing info first
     if missing_info:
         clarification = check_for_clarification(missing_info, step_tracer)
->>>>>>> Stashed changes
         state["status"] = "asking"
-        clarification = check_for_clarification(missing_info, step_tracer)
         state["missing_info"] = missing_info
         state_manager.save_state(state)
         return {"response": clarification, "steps": step_tracer}
@@ -267,15 +295,12 @@ def orchestrate_workflow(user_query):
     # Extract current state data
     nutrition_draft = state.get("plan_drafts", {}).get("nutrition", None)
     fitness_draft = state.get("plan_drafts", {}).get("fitness", None)
-<<<<<<< Updated upstream
-=======
     workouts_state = state.get("workouts", {}) if isinstance(state.get("workouts"), dict) else {}
     current_routine_id = workouts_state.get("current_routine_id")
     routines = workouts_state.get("routines", []) if isinstance(workouts_state.get("routines"), list) else []
     current_routine = next(
         (r for r in routines if isinstance(r, dict) and r.get("id") == current_routine_id), None
     )
->>>>>>> Stashed changes
 
     # ==========================================
     # PHASE 1: GATHER CONSTRAINTS (Read)
@@ -297,46 +322,6 @@ def orchestrate_workflow(user_query):
         if schedule_resp and schedule_resp != "Checked schedule constraints.":
             responses.append(schedule_resp)
 
-<<<<<<< Updated upstream
-        elif task == "PLAN_WORKOUT":
-            # The Exercise Planner now reads from the shared context!
-            time_limit = shared_context.get("workout_time_limit_mins", 60) # Default to 60 if no schedule was requested
-            
-            fitness_draft = f"Placeholder Fitness Plan (Strictly {time_limit} minutes)"
-            responses.append(f"Placeholder: Planned your {time_limit}-minute workout.")
-
-        elif task == "PLAN_MEAL":
-            # Meal planner can also use constraints (e.g., if schedule only leaves 15 mins for cooking)
-            prep_limit = shared_context.get("meal_prep_time_limit_mins", 30)
-            
-            nutrition_draft = f"Placeholder Nutrition Plan (Under {prep_limit} mins prep)"
-            responses.append("Placeholder: Planned your meals.")
-            
-        elif task == "FIND_RECIPE":
-            responses.append("Placeholder: Found your recipe.")
-            
-        elif task == "EXTRACT_WORKOUT":
-            responses.append("Placeholder: Extracted workout details.")
-            
-        elif task == "GENERAL_QUESTION":
-            responses.append("Placeholder: Answered general question.")
-            
-        elif task == "OTHER":
-            responses.append("Placeholder: Handled 'other' request.")
-
-    state = state_manager.load_state()
-    # Save final drafts and update status
-    if "plan_drafts" not in state:
-        state["plan_drafts"] = {}
-    
-    if nutrition_draft: state["plan_drafts"]["nutrition"] = nutrition_draft
-    if fitness_draft: state["plan_drafts"]["fitness"] = fitness_draft
-    
-    state["status"] = "idle"
-    state_manager.save_state(state)
-
-    final_response = "\n".join(responses)
-=======
     # ==========================================
     # PHASE 2: GENERATION 
     # ==========================================
@@ -417,6 +402,5 @@ def orchestrate_workflow(user_query):
     state_manager.save_state(state)
 
     final_response = "\n\n".join(filter(None, responses))
->>>>>>> Stashed changes
 
     return {"response": final_response, "steps": step_tracer}
