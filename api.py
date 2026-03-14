@@ -14,6 +14,21 @@ class ExecuteRequest(BaseModel):
 
 # --- API ENDPOINTS ---
 
+@app.get("/")
+def root():
+    """Basic root endpoint so the primary Render URL does not return 404."""
+    return {
+        "service": "Nutrissistant API",
+        "status": "ok",
+        "docs": "/docs"
+    }
+
+
+@app.get("/health")
+def health_check():
+    """Lightweight health endpoint for uptime checks."""
+    return {"status": "ok"}
+
 @app.get("/api/team_info")
 def get_team_info():
     """Returns student details as required."""
