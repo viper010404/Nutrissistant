@@ -118,7 +118,7 @@ def remove_event_from_schedule(schedule, event_name):
                 removed = True
     return removed, orig_day, orig_time
 
-def execute_schedule_task(user_query, step_tracer, shared_context=None):
+def execute_schedule_task(user_query, step_tracer, shared_context=None, mode="execute_full"):
     if shared_context is None:
         shared_context = {"scheduled_slots": []}
         
@@ -237,12 +237,61 @@ def execute_schedule_task(user_query, step_tracer, shared_context=None):
                 current_event = schedule.get(pref_day, {}).get(pref_time, "Unknown")
                 agent_messages.append(f"No, you have '{current_event}' scheduled on {pref_day} at {pref_time}.")
 
+
+    if mode == "gather_constraints":
+        # Extract all currently free slots so generation agents (Workout/Meal) can use them
+        free_slots = []
+        for d, times in schedule.items():
+            for t, e in times.items():
+                if e == "-":
+                    free_slots.append({"day": d, "time": t, "event": "Free"})
+            
+        # Avoid duplicating slots if they were already added by explicit schedule actions above
+        existing_pairs = {(s.get("day"), s.get("time")) for s in shared_context["scheduled_slots"]}
+        for fs in free_slots:
+            if (fs["day"], fs["time"]) not in existing_pairs:
+                shared_context["scheduled_slots"].append(fs)
+
     state["schedule_data"] = schedule
     state_manager.save_state(state)
 
-    final_response = " ".join(agent_messages)
+    final_response = " ".join(agent_messages) if agent_messages else "Checked schedule constraints."
 
     return {
         "response": final_response,
         "shared_context": shared_context
     }
+
+def commit_routine_to_calendar(units_with_slots, step_tracer):
+    """
+    Takes a finalized routine from another agent (Workout, Meal Planner) 
+    and locks it into the calendar.
+    """
+    state = state_manager.load_state()
+    schedule = state.get("schedule_data", {})
+    messages = []
+    
+    for unit in units_with_slots:
+        # Fallback naming to support future Meal Planner agents as well
+        event_name = unit.get("title") or unit.get("meal_name") or unit.get("name") or "Scheduled Activity"
+        
+        for slot in unit.get("scheduled_slots", []):
+            day = slot.get("day")
+            time = slot.get("time")
+            
+            if day and time and day in schedule and time in schedule[day]:
+                schedule[day][time] = event_name
+                messages.append(f"Successfully scheduled '{event_name}' on {day} at {time}.")
+                
+    state["schedule_data"] = schedule
+    state_manager.save_state(state)
+    
+    # Log the commit action
+    step_tracer.append({
+        "module": MODULE_NAME,
+        "stage": "commit_to_calendar",
+        "data": units_with_slots,
+        "response": messages
+    })
+    
+    return {"status": "success", "messages": messages}
