@@ -1,16 +1,29 @@
 {
     "user_query": "",
+<<<<<<< Updated upstream
     "user_profile": "I'm Galit. I'm a student, 21 years old. I want to maintain a healthy lifestyle.",
+=======
+    "user_profile": "I'm Galit, I'm a 21 years old student. I want to maintain a healthy lifestyle and exercise regularly.",
+>>>>>>> Stashed changes
     "schedule_data": {
         "Monday": {
             "06:00": "Workout 2",
             "07:00": "-",
+<<<<<<< Updated upstream
             "08:00": "-",
             "09:00": "-",
             "10:00": "-",
             "11:00": "lecture",
             "12:00": "lecture",
             "13:00": "Lunch",
+=======
+            "08:00": "breakfast",
+            "09:00": "lecture",
+            "10:00": "lecture",
+            "11:00": "lecture",
+            "12:00": "meeting",
+            "13:00": "lunch",
+>>>>>>> Stashed changes
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
@@ -24,12 +37,21 @@
         },
         "Tuesday": {
             "06:00": "-",
+<<<<<<< Updated upstream
             "07:00": "-",
             "08:00": "breakfast",
             "09:00": "lecture",
             "10:00": "lecture",
             "11:00": "lecture",
             "12:00": "-",
+=======
+            "07:00": "breakfast",
+            "08:00": "lecture",
+            "09:00": "lecture",
+            "10:00": "meeting",
+            "11:00": "meeting",
+            "12:00": "lunch",
+>>>>>>> Stashed changes
             "13:00": "-",
             "14:00": "-",
             "15:00": "-",
@@ -49,8 +71,8 @@
             "09:00": "-",
             "10:00": "-",
             "11:00": "-",
-            "12:00": "-",
-            "13:00": "-",
+            "12:00": "lecture",
+            "13:00": "lecture",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
@@ -75,15 +97,15 @@
             "15:00": "-",
             "16:00": "-",
             "17:00": "-",
-            "18:00": "-",
-            "19:00": "-",
-            "20:00": "-",
+            "18:00": "meeting",
+            "19:00": "meeting",
+            "20:00": "meeting",
             "21:00": "-",
             "22:00": "-",
             "23:00": "-"
         },
         "Friday": {
-            "06:00": "-",
+            "06:00": "doctor's appointment",
             "07:00": "-",
             "08:00": "-",
             "09:00": "-",
@@ -92,8 +114,8 @@
             "12:00": "-",
             "13:00": "-",
             "14:00": "-",
-            "15:00": "-",
-            "16:00": "-",
+            "15:00": "lecture",
+            "16:00": "lcture",
             "17:00": "-",
             "18:00": "-",
             "19:00": "Homework",
@@ -117,7 +139,7 @@
             "17:00": "-",
             "18:00": "-",
             "19:00": "-",
-            "20:00": "-",
+            "20:00": "go out with friends",
             "21:00": "-",
             "22:00": "-",
             "23:00": "-"
@@ -144,8 +166,19 @@
         }
     },
     "plan_drafts": {
+<<<<<<< Updated upstream
         "nutrition": "Placeholder Nutrition Plan (Under None mins prep)",
         "fitness": "Placeholder Fitness Plan (Strictly None minutes)"
+=======
+        "nutrition": [],
+        "fitness": {}
+    },
+    "workouts": {
+        "current_workout_id": null,
+        "current_routine_id": null,
+        "history": [],
+        "routines": []
+>>>>>>> Stashed changes
     },
     "missing_info": [],
     "status": "idle"
