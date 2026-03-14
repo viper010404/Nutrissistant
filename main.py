@@ -76,7 +76,7 @@ try:
     """
 except FileNotFoundError:
     bg_css = ""
-    st.warning("Background image not found. Please check the file path.")
+    st.markdown("Background image not found. Please check the file path.")
 
 # --- CUSTOM CSS FOR STYLING ---
 custom_css = f"""
@@ -123,7 +123,7 @@ custom_css = f"""
         display: block;
         margin: 0 auto;
         background-color: #933833;
-        color: white;
+        color: white !important;
         border-radius: 12px;
         padding: 1rem 3rem; 
         font-size: 2rem !important; 
@@ -163,7 +163,7 @@ if st.session_state.current_page == 'welcome':
             with open("images/yoav_image.png", "rb") as _img_f:
                 st.image(_img_f.read(), width="stretch")
         except FileNotFoundError:
-            st.warning("Person image missing.")
+            st.markdown("Person image missing.")
 
     st.write("") 
 
@@ -236,6 +236,7 @@ elif st.session_state.current_page == 'home':
         }}
         .stButton>button {{
             width: 100% !important; 
+            color: white !important;
             margin-bottom: 0.5rem;
             font-size: 1rem !important; 
             padding: 0.5rem 1rem !important;
@@ -293,7 +294,10 @@ elif st.session_state.current_page == 'home':
                 st.session_state.current_page = 'welcome'
                 st.rerun()
             if st.button("Meal History"):
-                st.session_state.current_page = 'meals'
+                st.session_state.current_page = 'all recipes'
+                st.rerun()
+            if st.button("Current Recipes"):
+                st.session_state.current_page = 'current recipes'
                 st.rerun()
             if st.button("Workout History"):
                 st.session_state.current_page = 'workouts'
@@ -343,16 +347,16 @@ elif st.session_state.current_page == 'home':
                                     st.session_state.schedule_data = fresh_state["schedule_data"]
                                 st.rerun()
                             else:
-                                st.error(f"Agent Error: {data.get('error')}")
+                                st.markdown(f"Agent Error: {data.get('error')}")
                         except Exception as e:
-                            st.error(f"Failed to connect to API: {e}. Is FastAPI running?")
+                            st.markdown(f"Failed to connect to API: {e}. Is FastAPI running?")
                 else:
-                    st.warning("Please enter a request first.")
+                    st.markdown("Please enter a request first.")
 
         # Display the Agent's Final Output and Traced Steps
         if "latest_response" in st.session_state:
             st.markdown("### Agent Response")
-            st.success(st.session_state.latest_response)
+            st.markdown(st.session_state.latest_response)
             
             st.markdown("### Execution Trace")
             with st.expander("View Agent Steps (JSON)"):
@@ -485,7 +489,7 @@ elif st.session_state.current_page == 'workouts':
         }}
         .stButton>button {{
             background-color: #933833;
-            color: white;
+            color: white !important;
             border-radius: 10px;
             padding: 0.5rem 1.5rem;
             font-size: 1rem;
@@ -570,7 +574,7 @@ elif st.session_state.current_page == 'workouts':
 
             with st.expander("View routine units"):
                 if not units:
-                    st.info("No units found for this routine.")
+                    st.markdown("No units found for this routine.")
                 for idx, unit in enumerate(units, start=1):
                     unit_id = unit.get("unit_id", "")
                     day = unit.get("day", "")
@@ -606,7 +610,7 @@ elif st.session_state.current_page == 'workouts':
                     st.rerun()
 
     if not routines:
-        st.info("No routines generated yet. Ask Nutrissistant to create your weekly routine.")
+        st.markdown("No routines generated yet. Ask Nutrissistant to create your weekly routine.")
 
 # ==========================================
 # CURRENT ROUTINE PAGE
@@ -665,7 +669,7 @@ elif st.session_state.current_page == 'routine':
         }}
         .stButton>button {{
             background-color: #933833;
-            color: white;
+            color: white !important;
             border-radius: 10px;
             padding: 0.5rem 1.5rem;
             font-size: 1rem;
@@ -749,7 +753,7 @@ elif st.session_state.current_page == 'routine':
         st.markdown("---")
 
         if not current_record:
-            st.info("Select a workout unit to see full details.")
+            st.markdown("Select a workout unit to see full details.")
         else:
             draft = current_record.get("draft") or {}
             selected_meta = selected_unit_meta or {}
@@ -825,7 +829,7 @@ elif st.session_state.current_page == 'routine':
                     st.session_state.current_page = 'home'
                     st.rerun()
     else:
-        st.info("No active routine yet. Ask Nutrissistant to create or update your weekly routine.")
+        st.markdown("No active routine yet. Ask Nutrissistant to create or update your weekly routine.")
         if st.button("Go to Workout History"):
             st.session_state.current_page = 'workouts'
             st.rerun()
