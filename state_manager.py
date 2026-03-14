@@ -53,6 +53,15 @@ def _normalize_state_structure(state):
     """Normalizes legacy state shapes so workout data can be rendered reliably."""
     changed = False
 
+    context_keys = [
+        "allergies", "dietary_restrictions", "general_meal_restrictions", 
+        "injuries", "equipment", "general_workout_restrictions"
+    ]
+    for key in context_keys:
+        if key not in state or not isinstance(state[key], list):
+            state[key] = []
+            changed = True
+
     if "plan_drafts" not in state or not isinstance(state["plan_drafts"], dict):
         state["plan_drafts"] = {"nutrition": [], "fitness": {}}
         changed = True
@@ -97,6 +106,10 @@ def _normalize_state_structure(state):
 
     if "routines" not in workouts_state or not isinstance(workouts_state["routines"], list):
         workouts_state["routines"] = []
+        changed = True
+
+    if "chat_history" not in state or not isinstance(state["chat_history"], list):
+        state["chat_history"] = []
         changed = True
 
     normalized_history = []
@@ -267,7 +280,14 @@ def init_state():
                 "routines": []
             },
             "missing_info": [],
-            "status": "idle"
+            "allergies": [],
+            "dietary_restrictions": [],
+            "general_meal_restrictions": [],
+            "injuries": [],
+            "equipment": [],
+            "general_workout_restrictions": [],
+            "status": "idle",
+            "chat_history": []
         }
         save_state(default_state)
         return default_state
@@ -454,3 +474,15 @@ def save_weekly_routine(routine_name, goal, units, source_query="", response_tex
 
     save_state(state)
     return routine_record
+
+def update_user_context(context_key, new_items):
+    """Appends new items to specific context lists like allergies or equipment."""
+    state = load_state()
+    if context_key in state and isinstance(state[context_key], list):
+        # Add new items, avoiding duplicates
+        for item in new_items:
+            if item not in state[context_key]:
+                state[context_key].append(item)
+        save_state(state)
+        return True
+    return False

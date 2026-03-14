@@ -9,6 +9,8 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from pinecone import Pinecone
 from pydantic import SecretStr
 
+import state_manager
+
 # Load environment variables
 load_dotenv()
 
@@ -150,23 +152,16 @@ def _infer_routine_operation(user_query):
 
 def _extract_requested_unit_count(user_query):
     q = (user_query or "").lower()
-    keyword_to_num = {
-        "two": 2,
-        "three": 3,
-        "four": 4,
-        "five": 5,
-        "six": 6,
-        "seven": 7,
-    }
-    for word, num in keyword_to_num.items():
-        if f"{word} workout" in q or f"{word} session" in q:
-            return num
-
-    digits = "".join(ch if ch.isdigit() else " " for ch in q).split()
-    for token in digits:
-        value = int(token)
-        if 2 <= value <= 7:
-            return value
+    
+    # Look for explicit phrases like "3 workouts", "two sessions", "4 days"
+    pattern = r"\b(two|three|four|five|six|seven|[2-7])\s*(?:workouts?|sessions?|days?|times)\b"
+    match = re.search(pattern, q)
+    
+    if match:
+        val = match.group(1)
+        keyword_to_num = {"two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7}
+        # Return the mapped word, or the integer if it was a digit
+        return keyword_to_num.get(val, int(val) if val.isdigit() else None)
 
     return None
 
@@ -326,6 +321,7 @@ Rules:
 11. Phrase evidence naturally, for example: "research indicates", "it is recommended", or "based on best practices".
 12. When pipeline_mode is "simple_rag", prioritize minimal targeted edits for update requests.
 13. When pipeline_mode is "reflection", return a complete cohesive full-week routine.
+14. You MUST strictly adhere to the `user_context` provided in the payload. Do not include exercises requiring equipment the user does not have. You must modify the routine to accommodate any listed injuries or restrictions.
 """
 
 
@@ -337,6 +333,7 @@ def _build_generation_payload(
     current_routine,
     rag_result,
     pipeline_mode,
+    user_context=None,
     reflection_feedback=None,
     initial_draft=None,
 ):
@@ -344,6 +341,7 @@ def _build_generation_payload(
         "query": user_query,
         "routine_operation": routine_operation,
         "schedule_context": schedule_guidance,
+        "user_context": user_context or {},
         "requested_units": requested_units,
         "current_routine": current_routine if isinstance(current_routine, dict) else None,
         "retrieval": {
@@ -394,7 +392,8 @@ def _run_critique_stage(
     current_routine,
     candidate_result,
     step_tracer,
-        iteration,
+    iteration,
+    user_context=None,
 ):
     sys_prompt = """You are a strict workout-plan critic.
 Review a generated weekly routine and return JSON only with this schema:
@@ -418,6 +417,7 @@ Rules:
         "query": user_query,
         "routine_operation": routine_operation,
         "schedule_context": schedule_guidance,
+        "user_context": user_context or {},
         "requested_units": requested_units,
         "current_routine": current_routine if isinstance(current_routine, dict) else None,
         "candidate_result": candidate_result,
@@ -483,6 +483,14 @@ def _normalize_and_validate_routine(parsed):
 
 def execute_weekly_routine_task(user_query, shared_context, step_tracer, current_routine=None):
     """Generates a weekly routine composed of multiple workout units."""
+    state = state_manager.load_state()
+    user_context = {
+        "profile": state.get("user_profile", ""),
+        "equipment": state.get("equipment", []),
+        "injuries": state.get("injuries", []),
+        "restrictions": state.get("general_workout_restrictions", [])
+    }
+
     schedule_guidance = _build_schedule_guidance(shared_context)
     requested_units = _extract_requested_unit_count(user_query)
     routine_operation = _infer_routine_operation(user_query)
@@ -511,6 +519,7 @@ def execute_weekly_routine_task(user_query, shared_context, step_tracer, current
             current_routine=current_routine,
             rag_result=rag_result,
             pipeline_mode=pipeline_mode,
+            user_context=user_context,
         )
 
         if pipeline_mode == PIPELINE_REFLECTION:
@@ -534,6 +543,7 @@ def execute_weekly_routine_task(user_query, shared_context, step_tracer, current
                         candidate_result=parsed,
                         step_tracer=step_tracer,
                         iteration=iteration,
+                        user_context=user_context,
                     )
                 except Exception as critique_error:
                     step_tracer.append({
@@ -561,6 +571,7 @@ def execute_weekly_routine_task(user_query, shared_context, step_tracer, current
                     current_routine=current_routine,
                     rag_result=rag_result,
                     pipeline_mode=pipeline_mode,
+                    user_context=user_context,
                     reflection_feedback=critique.get("suggested_edits", []) if isinstance(critique, dict) else [],
                     initial_draft=parsed.get("routine_draft") if isinstance(parsed, dict) else None,
                 )
