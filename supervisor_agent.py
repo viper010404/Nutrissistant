@@ -2,6 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from pydantic import SecretStr
+from datetime import datetime, timedelta, timezone
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -85,33 +86,80 @@ def get_user_data():
     return state_manager.load_state()
 
 #TO DO: hard coded response structure
-def analyze_intent_and_extract_metadata(user_query, user_profile, step_tracer):
-    """Analyzes intent and extracts missing info and required tasks."""
+def analyze_intent_and_extract_metadata(user_query, state, step_tracer):
+    """Analyzes intent, extracts missing info, and categorizes new persistent context."""
+    # Build the 60-minute history block
+    history_entries = state.get("chat_history", [])
+    recent_history = []
+    now = datetime.now(timezone.utc)
     
-    sys_prompt = """You are the Nutrissistant Supervisor. Analyze the user query against their profile.
+    for entry in history_entries:
+        try:
+            entry_time = datetime.fromisoformat(entry["timestamp"])
+            if now - entry_time <= timedelta(minutes=60):
+                role = entry.get("role", "unknown").capitalize()
+                content = entry.get("content", "")
+                recent_history.append(f"{role}: {content}")
+        except Exception:
+            continue
+            
+    history_text = "\n".join(recent_history[-10:]) if recent_history else "No recent history."
+    # Check if we were previously asking a clarification question
+    pending_info = state.get("missing_info", []) if state.get("status") == "asking" else []
     
-    CRITICAL RULES FOR 'missing_info':
-    1. MINIMIZE QUESTIONS: Only ask for absolute blockers.
-    2. EQUIPMENT: Assume access to standard gym equipment if a gym is mentioned.
-    3. DO NOT ASK FOR SCHEDULE: The Schedule Agent handles time.
-    4. ASSUME DEFAULTS: Assume intermediate fitness, no injuries unless stated.
+    sys_prompt = f"""You are the Nutrissistant Supervisor. Analyze the user query.
+    
+    --- CURRENT KNOWN CONTEXT ---
+    Profile: {state.get('user_profile', '')}
+    Equipment: {state.get('equipment', [])}
+    Injuries: {state.get('injuries', [])}
+    Allergies: {state.get('allergies', [])}
+    Dietary Restrictions: {state.get('dietary_restrictions', [])}
+    Workout Preferences: {state.get('general_workout_restrictions', [])}
+    Meal Preferences: {state.get('general_meal_restrictions', [])}
+    Pending Info Requested from User: {pending_info}
+
+    --- RECENT CONVERSATION HISTORY (Last 60 mins) ---
+    {history_text}
+    -----------------------------
+    
+    CRITICAL RULES:
+    1. RESOLVE CONTEXT (COREFERENCE): If the user's query relies on previous context (e.g., using pronouns like "these", "it", "that plan"), use the Recent Conversation History to figure out exactly what they mean. 
+    2. REWRITE QUERY (CONTINUATION & MERGING): Output a `resolved_query` that makes the user's intent completely explicit and standalone. 
+       - If the user is providing missing information to a previous request (e.g., "I have 2kg dumbbells"), you MUST combine it with their original goal from the history. 
+       - If they say "remove these", rewrite as "Remove the workouts we just scheduled".
+    3. EXTRACT NEW CONTEXT: Categorize new persistent info into `extracted_context`.
+    4. MINIMIZE QUESTIONS: Only ask absolutely necessary questions for the task.
+       - For WORKOUT generation: Check if Target workouts/week, Preferred time, and Equipment are known.
+       - For SCHEDULE tasks: DO NOT ask for the target day or time if the user leaves them out. The scheduling system is autonomous and will automatically find the next open slot. NEVER add day or time to `missing_info` for a scheduling request.
+    5. AVOID RE-ASKING: Do NOT ask for information already in the 'CURRENT KNOWN CONTEXT'.
+    6. INFER CONTINUATION: If the user is answering a question, infer the task from the 'Pending Info'.
+    7. STRICT SCHEDULING SEPARATION: If the user's query is ONLY about moving, rescheduling, or removing an existing event on the calendar (e.g., "move my workout to 5pm", "cancel tomorrow's meal", "reschedule the run"), output ONLY the "SCHEDULE" task. Do NOT output "WORKOUT" or "PLAN_MEAL" unless they explicitly want to change the exercises or recipes.
 
     Output JSON only with this schema:
-    {
-        "tasks": [], // Array of strings. MUST be from the allowed list below.
-        "goals": ["extracted goal 1"],
-        "missing_info": [] // Array of strings. Keep empty [] if rules above apply.
-    }
-
+    {{
+        "tasks": [], // MUST use ONLY the allowed tasks below.
+        "goals": [],
+        "missing_info": [],
+        "extracted_context": {{
+            "equipment": [],
+            "injuries": [],
+            "allergies": [],
+            "dietary_restrictions": [],
+            "general_workout_restrictions": [],
+            "general_meal_restrictions": []
+        }}
+    }}
+    
     ALLOWED TASKS:
-    - "PLAN_MEAL": Planning nutrition/meals.
-    - "WORKOUT": Creating, extracting, or modifying workout plans.
+    - "SCHEDULE": Moving, removing, booking, or checking availability on the calendar.
+    - "WORKOUT": Generating new routines or changing the actual exercises/content of a workout.
+    - "PLAN_MEAL": Generating new meals or changing the actual food/recipes.
     - "FIND_RECIPE": Searching for or extracting recipe details.
-    - "SCHEDULE": Checking or modifying the user's schedule/calendar.
-    - "GENERAL_QUESTION": Answering general fitness/nutrition questions.
     - "OTHER": Anything that doesn't fit the above.
     """
-    user_prompt = f"Profile: {user_profile}\nQuery: {user_query}"
+    
+    user_prompt = f"Query: {user_query}"
 
     messages = [
         SystemMessage(content=sys_prompt),
@@ -176,16 +224,6 @@ def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     })
     
     return result
-
-# Order of Operations
-TASK_PRIORITY = {
-    "GENERAL_QUESTION": 1,
-    "OTHER": 1,
-    "FIND_RECIPE": 2,
-    "SCHEDULE": 3,      
-    "PLAN_MEAL": 4,    
-    "WORKOUT": 4   
-}
 
 
 def _select_workout_pipeline(user_query, current_routine, step_tracer):
@@ -263,16 +301,26 @@ Selection policy:
         return fallback
 
 def orchestrate_workflow(user_query):
-    """Main orchestration loop with dynamic constraint passing."""
+    """Main orchestration loop with multi-phase execution."""
     
     state = get_user_data()
     step_tracer = [] 
     responses = [] 
+
+    # Log the user's raw input right away
+    if "chat_history" not in state:
+        state["chat_history"] = []
+    
+    state["chat_history"].append({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "role": "user",
+        "content": user_query
+    })
+    
     routine_generated = False
     latest_routine_response = None
     routine_draft = None
     
-    # This dictionary will pass constraints between agents in real-time
     shared_context = {
         "workout_time_limit_mins": None,
         "meal_prep_time_limit_mins": None,
@@ -280,110 +328,142 @@ def orchestrate_workflow(user_query):
         "scheduled_slots": []
     }
 
-    intent_data = analyze_intent_and_extract_metadata(user_query, state["user_profile"], step_tracer)
+    intent_data = analyze_intent_and_extract_metadata(user_query, state, step_tracer)
+
+    # OVERRIDE THE QUERY WITH THE RESOLVED VERSION
+    effective_query = intent_data.get("resolved_query", user_query)
     
+    # SAVE EXTRACTED CONTEXT 
+    extracted = intent_data.get("extracted_context", {})
+    context_keys = [
+        "equipment", "injuries", "allergies", "dietary_restrictions", 
+        "general_workout_restrictions", "general_meal_restrictions"
+    ]
+    context_changed = False
+    
+    for key in context_keys:
+        if key in extracted and isinstance(extracted[key], list):
+            for item in extracted[key]:
+                # Append only if it's not already in the list
+                if item not in state.get(key, []):
+                    state[key].append(item)
+                    context_changed = True
+                    
+    if context_changed:
+        state_manager.save_state(state)
+        # Update our local reference to pass down to other agents if needed
+        shared_context["updated_user_context"] = {k: state[k] for k in context_keys}
+
     missing_info = intent_data.get("missing_info", [])
-    tasks = intent_data.get("tasks", [])
+    
+    # Normalize tasks
+    raw_tasks = intent_data.get("tasks", [])
+    task_aliases = {"PLAN_WORKOUT": "WORKOUT", "EXTRACT_WORKOUT": "WORKOUT"}
+    tasks = set(task_aliases.get(t, t) for t in raw_tasks if isinstance(t, str))
 
-    # Backward compatibility: map legacy workout task labels into the single WORKOUT task.
-    task_aliases = {
-        "PLAN_WORKOUT": "WORKOUT",
-        "EXTRACT_WORKOUT": "WORKOUT"
-    }
-    tasks = [task_aliases.get(t, t) for t in tasks if isinstance(t, str)]
-    tasks = list(dict.fromkeys(tasks))
+    # --- AUTONOMIC BEHAVIOR TRIGGER ---
+    if "WORKOUT" in tasks or "PLAN_MEAL" in tasks:
+        tasks.add("SCHEDULE")
 
+    # Handle missing info first
     if missing_info:
         clarification = check_for_clarification(missing_info, step_tracer)
-
         state["status"] = "asking"
         state["missing_info"] = missing_info
         state_manager.save_state(state)
         return {"response": clarification, "steps": step_tracer}
+    elif state.get("status") == "asking":
+        # If we were asking, and now missing_info is empty, the user answered!
+        # Clear the asking status so we don't get stuck.
+        state["status"] = "idle"
+        state["missing_info"] = []
+        state_manager.save_state(state)
 
-    # Sort tasks by the new priority
-    tasks = sorted(tasks, key=lambda x: TASK_PRIORITY.get(x, 99))
-
+    # Extract current state data (Rest of your existing function continues here...)
     nutrition_draft = state.get("plan_drafts", {}).get("nutrition", None)
     fitness_draft = state.get("plan_drafts", {}).get("fitness", None)
     workouts_state = state.get("workouts", {}) if isinstance(state.get("workouts"), dict) else {}
     current_routine_id = workouts_state.get("current_routine_id")
     routines = workouts_state.get("routines", []) if isinstance(workouts_state.get("routines"), list) else []
     current_routine = next(
-        (routine for routine in routines if isinstance(routine, dict) and routine.get("id") == current_routine_id),
-        None,
+        (r for r in routines if isinstance(r, dict) and r.get("id") == current_routine_id), None
     )
 
-    # Execute Sub-Agents Sequentially with Context Sharing
-    for task in tasks:
+    # ==========================================
+    # PHASE 1: GATHER CONSTRAINTS (Read)
+    # ==========================================
+    if "SCHEDULE" in tasks:
+        # Check if we are generating something new (Workout, Meal) or JUST scheduling
+        is_generation_planned = "WORKOUT" in tasks or "PLAN_MEAL" in tasks
         
-        if task == "SCHEDULE":
-            # Pass the query, tracer, and shared context to the schedule agent
-            schedule_result = schedule_agent.execute_schedule_task(
-                user_query, 
-                step_tracer, 
-                shared_context
-            )
-            # Update the orchestrator's shared context with time constraints found
-            shared_context = schedule_result["shared_context"]
-            responses.append(schedule_result["response"])
+        schedule_result = schedule_agent.execute_schedule_task(
+            user_query=effective_query, 
+            step_tracer=step_tracer, 
+            shared_context=shared_context,
+            mode="gather_constraints" if is_generation_planned else "execute_full"
+        )
+        shared_context = schedule_result.get("shared_context", shared_context)
+        
+        # Only output schedule responses if it's relevant (skip silence on background gathering)
+        schedule_resp = schedule_result.get("response", "").strip()
+        if schedule_resp:
+            # Only hide the default response if we are secretly gathering slots for a workout generator
+            if is_generation_planned and schedule_resp == "Checked schedule constraints.":
+                pass 
+            elif schedule_resp == "Checked schedule constraints.":
+                responses.append("I couldn't identify the specific calendar action. Could you clarify the event and time?")
+            else:
+                responses.append(schedule_resp)
 
-        elif task == "WORKOUT":
-            selected_pipeline = _select_workout_pipeline(user_query, current_routine, step_tracer)
-            shared_context["workout_pipeline"] = selected_pipeline
+    # ==========================================
+    # PHASE 2: GENERATION 
+    # ==========================================
+    if "WORKOUT" in tasks:
+        selected_pipeline = _select_workout_pipeline(effective_query, current_routine, step_tracer)
+        shared_context["workout_pipeline"] = selected_pipeline
 
-            routine_result = workout_agent.execute_weekly_routine_task(
-                user_query=user_query,
-                shared_context=shared_context,
-                step_tracer=step_tracer,
-                current_routine=current_routine,
-            )
-            routine_generated = True
-            routine_draft = routine_result.get("routine_draft", {})
-            routine_units = routine_draft.get("units", []) if isinstance(routine_draft, dict) else []
-            if routine_units and isinstance(routine_units[0], dict):
-                first_draft = routine_units[0].get("draft")
-                if isinstance(first_draft, dict):
-                    fitness_draft = first_draft
-            latest_routine_response = routine_result.get("response", "Prepared your weekly routine.")
-            responses.append(latest_routine_response)
+        routine_result = workout_agent.execute_weekly_routine_task(
+            user_query=effective_query,
+            shared_context=shared_context,
+            step_tracer=step_tracer,
+            current_routine=current_routine,
+        )
+        routine_generated = True
+        routine_draft = routine_result.get("routine_draft", {})
+        
+        routine_units = routine_draft.get("units", []) if isinstance(routine_draft, dict) else []
+        if routine_units and isinstance(routine_units[0], dict):
+            first_draft = routine_units[0].get("draft")
+            if isinstance(first_draft, dict):
+                fitness_draft = first_draft
+                
+        latest_routine_response = routine_result.get("response", "Prepared your weekly routine.")
+        responses.append(latest_routine_response)
 
-        elif task == "PLAN_MEAL":
-            # Meal planner can also use constraints (e.g., if schedule only leaves 15 mins for cooking)
-            prep_limit = shared_context.get("meal_prep_time_limit_mins", 30)
-            
-            nutrition_draft = f"Placeholder Nutrition Plan (Under {prep_limit} mins prep)"
-            responses.append("Placeholder: Planned your meals.")
-            
-        elif task == "FIND_RECIPE":
-            responses.append("Placeholder: Found your recipe.")
-            
-        elif task == "GENERAL_QUESTION":
-            responses.append("Placeholder: Answered general question.")
-            
-        elif task == "OTHER":
-            responses.append("Placeholder: Handled 'other' request.")
+    if "PLAN_MEAL" in tasks:
+        prep_limit = shared_context.get("meal_prep_time_limit_mins", 30)
+        nutrition_draft = f"Placeholder Nutrition Plan (Under {prep_limit} mins prep)"
+        responses.append("Placeholder: Planned your meals.")
+        
+    if "FIND_RECIPE" in tasks:
+        responses.append("Placeholder: Found your recipe.")
+        
+    if "OTHER" in tasks:
+        responses.append("I'm sorry, I can't help with that.")
 
-    state = state_manager.load_state()
-    # Save final drafts and update status
-    if "plan_drafts" not in state:
-        state["plan_drafts"] = {}
-    
-    if nutrition_draft is not None:
-        state["plan_drafts"]["nutrition"] = nutrition_draft
-    if fitness_draft is not None:
-        state["plan_drafts"]["fitness"] = fitness_draft
-
-    state["user_query"] = user_query
-    
-    state["status"] = "idle"
-    state_manager.save_state(state)
-
+    # ==========================================
+    # PHASE 3: COMMIT & SYNC (Write)
+    # ==========================================
     if routine_generated and isinstance(routine_draft, dict):
         routine_units = routine_draft.get("units", []) if isinstance(routine_draft.get("units"), list) else []
+        
+        # Supervisor maps the free slots gathered in Phase 1 to the generated units
         units_with_slots = _attach_slots_to_units(routine_units, shared_context.get("scheduled_slots", []))
+        
         base_name = current_routine.get("routine_name", "Weekly Routine") if isinstance(current_routine, dict) else "Weekly Routine"
         routine_name = routine_draft.get("routine_name") or base_name
+        
+        # Save to state
         state_manager.save_weekly_routine(
             routine_name=routine_name,
             goal=routine_draft.get("goal", "general fitness"),
@@ -392,7 +472,36 @@ def orchestrate_workflow(user_query):
             response_text=latest_routine_response or "",
             source="agent",
         )
+        
+        # Autonomically lock the new units into the calendar
+        if "SCHEDULE" in tasks:
+            schedule_agent.commit_routine_to_calendar(units_with_slots, step_tracer)
+            responses.append("I have successfully added these to your calendar.")
 
-    final_response = "\n".join(responses)
+    # Update global state plan drafts
+    state = state_manager.load_state()
+    if "plan_drafts" not in state:
+        state["plan_drafts"] = {}
+    if nutrition_draft is not None:
+        state["plan_drafts"]["nutrition"] = nutrition_draft
+    if fitness_draft is not None:
+        state["plan_drafts"]["fitness"] = fitness_draft
+
+    state["user_query"] = effective_query
+    state["status"] = "idle"
+
+    final_response = "\n\n".join(filter(None, responses))
+
+    if not final_response:
+        final_response = "I'm sorry, I couldn't find an action to take based on that. Could you rephrase what you'd like to do?"
+
+
+    # Log the agent's response
+    state["chat_history"].append({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "role": "agent",
+        "content": final_response
+    })
+    state_manager.save_state(state)
 
     return {"response": final_response, "steps": step_tracer}
