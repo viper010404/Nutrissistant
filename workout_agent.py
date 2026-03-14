@@ -19,12 +19,30 @@ PINECONE_INDEX_NAME_WORKOUTS = os.getenv("PINECONE_INDEX_NAME_WORKOUTS")
 MODEL_NAME = "RPRTHPB-gpt-5-mini"
 EMBEDDING_MODEL = "RPRTHPB-text-embedding-3-small"
 MODULE_NAME = "WorkoutAgent"
+PIPELINE_SIMPLE_RAG = "simple_rag"
+PIPELINE_REFLECTION = "reflection"
+MAX_REFLECTION_LOOPS = 3
 
 json_llm = ChatOpenAI(
     api_key=SecretStr(LLMOD_API_KEY or ""),
     base_url=OPENAI_API_BASE,
     model=MODEL_NAME,
 ).bind(response_format={"type": "json_object"})
+
+critique_json_llm = ChatOpenAI(
+    api_key=SecretStr(LLMOD_API_KEY or ""),
+    base_url=OPENAI_API_BASE,
+    model=MODEL_NAME,
+).bind(response_format={"type": "json_object"})
+
+
+def _parse_json_response_content(content):
+    if isinstance(content, list):
+        content = "".join(
+            block if isinstance(block, str) else block.get("text", "")
+            for block in content
+        )
+    return json.loads(content)
 
 
 def _fetch_workout_rag_context(user_query, top_k=4, max_chunk_chars=1200):
@@ -249,14 +267,8 @@ def _fallback_weekly_routine(user_query, requested_units, schedule_guidance=""):
     }
 
 
-def execute_weekly_routine_task(user_query, shared_context, step_tracer, current_routine=None):
-    """Generates a weekly routine composed of multiple workout units."""
-    schedule_guidance = _build_schedule_guidance(shared_context)
-    requested_units = _extract_requested_unit_count(user_query)
-    routine_operation = _infer_routine_operation(user_query)
-    rag_result = _fetch_workout_rag_context(user_query)
-
-    sys_prompt = """You are the Nutrissistant Workout Agent.
+def _build_generation_system_prompt():
+    return """You are the Nutrissistant Workout Agent.
 Generate a single JSON object only for a weekly routine composed of multiple workout units.
 
 Return exactly this schema:
@@ -312,9 +324,23 @@ Rules:
 9. Use retrieved_context as evidence when relevant. Do not invent citations.
 10. Never mention backend identifiers or provenance tokens in user-facing text (no PMCID, source numbers, or similarity scores).
 11. Phrase evidence naturally, for example: "research indicates", "it is recommended", or "based on best practices".
+12. When pipeline_mode is "simple_rag", prioritize minimal targeted edits for update requests.
+13. When pipeline_mode is "reflection", return a complete cohesive full-week routine.
 """
 
-    user_prompt = json.dumps({
+
+def _build_generation_payload(
+    user_query,
+    routine_operation,
+    schedule_guidance,
+    requested_units,
+    current_routine,
+    rag_result,
+    pipeline_mode,
+    reflection_feedback=None,
+    initial_draft=None,
+):
+    payload = {
         "query": user_query,
         "routine_operation": routine_operation,
         "schedule_context": schedule_guidance,
@@ -325,75 +351,251 @@ Rules:
             "reason": rag_result.get("reason"),
             "sources": rag_result.get("sources", [])
         },
-        "retrieved_context": rag_result.get("context", "")
-    })
+        "retrieved_context": rag_result.get("context", ""),
+        "pipeline_mode": pipeline_mode,
+    }
+    if isinstance(initial_draft, dict):
+        payload["initial_draft"] = initial_draft
+    if isinstance(reflection_feedback, list) and reflection_feedback:
+        payload["reflection_feedback"] = reflection_feedback
+    return payload
 
-    messages = [
+
+def _run_generation_stage(stage_name, sys_prompt, payload, step_tracer, rag_result):
+    user_prompt = json.dumps(payload)
+    response = json_llm.invoke([
         SystemMessage(content=sys_prompt),
         HumanMessage(content=user_prompt)
-    ]
+    ])
+    parsed = _parse_json_response_content(response.content)
+
+    step_tracer.append({
+        "module": MODULE_NAME,
+        "stage": stage_name,
+        "prompt": {"system": sys_prompt, "user": user_prompt},
+        "response": {
+            **parsed,
+            "retrieval": {
+                "status": rag_result.get("status"),
+                "reason": rag_result.get("reason"),
+                "sources": rag_result.get("sources", [])
+            }
+        }
+    })
+
+    return parsed
+
+
+def _run_critique_stage(
+    user_query,
+    routine_operation,
+    schedule_guidance,
+    requested_units,
+    current_routine,
+    candidate_result,
+    step_tracer,
+        iteration,
+):
+    sys_prompt = """You are a strict workout-plan critic.
+Review a generated weekly routine and return JSON only with this schema:
+{
+    "needs_refinement": true,
+  "valid": true,
+  "critical_issues": ["string"],
+  "suggested_edits": ["string"],
+  "summary": "string"
+}
+
+Rules:
+1. Focus only on objective checks: structural schema consistency, safety contradictions, unrealistic overload, and conflicts with explicit user intent.
+2. Do NOT give subjective style feedback.
+3. Keep suggested_edits actionable and concise.
+4. Set needs_refinement=false only if no further refinement is needed at all.
+5. If no critical issues, set valid=true, critical_issues=[], and suggested_edits=[].
+"""
+
+    critique_payload = {
+        "query": user_query,
+        "routine_operation": routine_operation,
+        "schedule_context": schedule_guidance,
+        "requested_units": requested_units,
+        "current_routine": current_routine if isinstance(current_routine, dict) else None,
+        "candidate_result": candidate_result,
+    }
+    user_prompt = json.dumps(critique_payload)
+
+    response = critique_json_llm.invoke([
+        SystemMessage(content=sys_prompt),
+        HumanMessage(content=user_prompt)
+    ])
+    critique = _parse_json_response_content(response.content)
+
+    step_tracer.append({
+        "module": MODULE_NAME,
+        "stage": f"reflection_critique_{iteration}",
+        "prompt": {"system": sys_prompt, "user": user_prompt},
+        "response": critique,
+    })
+
+    return critique
+
+
+def _should_continue_reflection(critique):
+    if not isinstance(critique, dict):
+        return False
+
+    needs_refinement = critique.get("needs_refinement")
+    if isinstance(needs_refinement, bool):
+        return needs_refinement
+
+    critical_issues = critique.get("critical_issues")
+    return isinstance(critical_issues, list) and len(critical_issues) > 0
+
+
+def _normalize_and_validate_routine(parsed):
+    routine_draft = parsed.get("routine_draft")
+    if not isinstance(routine_draft, dict):
+        raise ValueError("routine_draft missing or invalid")
+
+    units = routine_draft.get("units")
+    if not isinstance(units, list) or not units:
+        raise ValueError("routine_draft.units missing or invalid")
+
+    for unit in units:
+        if not isinstance(unit, dict):
+            continue
+        # Keep model-provided per-unit duration semantics; only add a fallback default if missing.
+        unit_duration = unit.get("duration_limit_mins")
+        if not isinstance(unit_duration, int) or unit_duration <= 0:
+            unit["duration_limit_mins"] = 60
+
+        draft = unit.get("draft")
+        if isinstance(draft, dict):
+            draft_duration = draft.get("duration_limit_mins")
+            if not isinstance(draft_duration, int) or draft_duration <= 0:
+                draft["duration_limit_mins"] = unit.get("duration_limit_mins", 60)
+
+    response_text = parsed.get("response") or "Created a weekly routine with multiple workout units."
+    response_text = _sanitize_user_text(response_text)
+    routine_draft = _sanitize_user_payload(routine_draft)
+    return response_text, routine_draft
+
+
+def execute_weekly_routine_task(user_query, shared_context, step_tracer, current_routine=None):
+    """Generates a weekly routine composed of multiple workout units."""
+    schedule_guidance = _build_schedule_guidance(shared_context)
+    requested_units = _extract_requested_unit_count(user_query)
+    routine_operation = _infer_routine_operation(user_query)
+    rag_result = _fetch_workout_rag_context(user_query)
+
+    requested_pipeline = None
+    if isinstance(shared_context, dict):
+        requested_pipeline = shared_context.get("workout_pipeline")
+
+    if requested_pipeline in (PIPELINE_SIMPLE_RAG, PIPELINE_REFLECTION):
+        pipeline_mode = requested_pipeline
+    else:
+        pipeline_mode = PIPELINE_REFLECTION if routine_operation == "create" else PIPELINE_SIMPLE_RAG
+
+    if routine_operation == "update":
+        pipeline_mode = PIPELINE_SIMPLE_RAG
+
+    sys_prompt = _build_generation_system_prompt()
 
     try:
-        response = json_llm.invoke(messages)
-        raw_content = response.content
-        if isinstance(raw_content, list):
-            raw_content = "".join(
-                block if isinstance(block, str) else block.get("text", "")
-                for block in raw_content
+        base_payload = _build_generation_payload(
+            user_query=user_query,
+            routine_operation=routine_operation,
+            schedule_guidance=schedule_guidance,
+            requested_units=requested_units,
+            current_routine=current_routine,
+            rag_result=rag_result,
+            pipeline_mode=pipeline_mode,
+        )
+
+        if pipeline_mode == PIPELINE_REFLECTION:
+            parsed = _run_generation_stage(
+                stage_name="reflection_generation",
+                sys_prompt=sys_prompt,
+                payload=base_payload,
+                step_tracer=step_tracer,
+                rag_result=rag_result,
             )
-        parsed = json.loads(raw_content)
 
-        routine_draft = parsed.get("routine_draft")
-        if not isinstance(routine_draft, dict):
-            raise ValueError("routine_draft missing or invalid")
+            for iteration in range(1, MAX_REFLECTION_LOOPS + 1):
+                critique = None
+                try:
+                    critique = _run_critique_stage(
+                        user_query=user_query,
+                        routine_operation=routine_operation,
+                        schedule_guidance=schedule_guidance,
+                        requested_units=requested_units,
+                        current_routine=current_routine,
+                        candidate_result=parsed,
+                        step_tracer=step_tracer,
+                        iteration=iteration,
+                    )
+                except Exception as critique_error:
+                    step_tracer.append({
+                        "module": MODULE_NAME,
+                        "stage": f"reflection_critique_error_{iteration}",
+                        "response": {"error": str(critique_error)}
+                    })
+                    break
 
-        units = routine_draft.get("units")
-        if not isinstance(units, list) or not units:
-            raise ValueError("routine_draft.units missing or invalid")
+                if not _should_continue_reflection(critique):
+                    step_tracer.append({
+                        "module": MODULE_NAME,
+                        "stage": f"reflection_stop_{iteration}",
+                        "response": {
+                            "reason": "critic_marked_no_further_refinement_needed"
+                        }
+                    })
+                    break
 
-        for unit in units:
-            if not isinstance(unit, dict):
-                continue
-            # Keep model-provided per-unit duration semantics; only add a fallback default if missing.
-            unit_duration = unit.get("duration_limit_mins")
-            if not isinstance(unit_duration, int) or unit_duration <= 0:
-                unit["duration_limit_mins"] = 60
+                refine_payload = _build_generation_payload(
+                    user_query=user_query,
+                    routine_operation=routine_operation,
+                    schedule_guidance=schedule_guidance,
+                    requested_units=requested_units,
+                    current_routine=current_routine,
+                    rag_result=rag_result,
+                    pipeline_mode=pipeline_mode,
+                    reflection_feedback=critique.get("suggested_edits", []) if isinstance(critique, dict) else [],
+                    initial_draft=parsed.get("routine_draft") if isinstance(parsed, dict) else None,
+                )
+                parsed = _run_generation_stage(
+                    stage_name=f"reflection_refinement_{iteration}",
+                    sys_prompt=sys_prompt,
+                    payload=refine_payload,
+                    step_tracer=step_tracer,
+                    rag_result=rag_result,
+                )
+        else:
+            parsed = _run_generation_stage(
+                stage_name="simple_rag_generation",
+                sys_prompt=sys_prompt,
+                payload=base_payload,
+                step_tracer=step_tracer,
+                rag_result=rag_result,
+            )
 
-            draft = unit.get("draft")
-            if isinstance(draft, dict):
-                draft_duration = draft.get("duration_limit_mins")
-                if not isinstance(draft_duration, int) or draft_duration <= 0:
-                    draft["duration_limit_mins"] = unit.get("duration_limit_mins", 60)
-
-        response_text = parsed.get("response") or "Created a weekly routine with multiple workout units."
-        response_text = _sanitize_user_text(response_text)
-        routine_draft = _sanitize_user_payload(routine_draft)
-
-        step_tracer.append({
-            "module": MODULE_NAME,
-            "prompt": {"system": sys_prompt, "user": user_prompt},
-            "response": {
-                **parsed,
-                "retrieval": {
-                    "status": rag_result.get("status"),
-                    "reason": rag_result.get("reason"),
-                    "sources": rag_result.get("sources", [])
-                }
-            }
-        })
+        response_text, routine_draft = _normalize_and_validate_routine(parsed)
 
         return {
             "response": response_text,
             "routine_draft": routine_draft
         }
 
-    except Exception:
+    except Exception as e:
         fallback = _fallback_weekly_routine(user_query, requested_units, schedule_guidance=schedule_guidance)
         step_tracer.append({
             "module": MODULE_NAME,
-            "prompt": {"system": sys_prompt, "user": user_prompt},
+            "stage": "pipeline_fallback",
             "response": {
+                "pipeline_mode": pipeline_mode,
                 "error": "weekly_model_output_invalid_or_failed",
+                "details": str(e),
                 "retrieval": {
                     "status": rag_result.get("status"),
                     "reason": rag_result.get("reason"),

@@ -152,109 +152,6 @@ def check_for_clarification(missing_info, step_tracer):
     
     return clarification_message
 
-def _build_compact_state_summary(state):
-    """Builds a compact, trimmed state bundle for the clarification gate LLM."""
-    user_profile = state.get("user_profile", {})
-
-    # Extract a small set of profile fields relevant to clarification
-    if isinstance(user_profile, dict):
-        profile_summary = {
-            k: user_profile[k]
-            for k in ("name", "age", "fitness_level", "goals", "injuries", "preferences", "equipment")
-            if user_profile.get(k)
-        }
-    else:
-        profile_summary = {"raw": str(user_profile)[:300]}
-
-    # Current routine — compact unit list only
-    workouts_state = state.get("workouts", {}) if isinstance(state.get("workouts"), dict) else {}
-    current_routine_id = workouts_state.get("current_routine_id")
-    routines = workouts_state.get("routines", []) if isinstance(workouts_state.get("routines"), list) else []
-    current_routine = next(
-        (r for r in routines if isinstance(r, dict) and r.get("id") == current_routine_id),
-        None,
-    )
-    routine_summary = None
-    if current_routine:
-        compact_units = [
-            {k: u.get(k) for k in ("focus", "day", "duration_mins") if u.get(k)}
-            for u in (current_routine.get("units") or [])
-            if isinstance(u, dict)
-        ]
-        routine_summary = {
-            "name": current_routine.get("routine_name"),
-            "goal": current_routine.get("goal"),
-            "units": compact_units,
-        }
-
-    # Known hard constraints from profile
-    known_constraints = {
-        k: user_profile[k]
-        for k in ("injuries", "equipment", "dietary_restrictions", "allergies")
-        if isinstance(user_profile, dict) and user_profile.get(k)
-    }
-
-    return {
-        "user_profile_summary": profile_summary,
-        "current_routine_summary": routine_summary,
-        "known_constraints": known_constraints,
-        "system_defaults": {
-            "fitness_level": "intermediate",
-            "equipment": "standard gym",
-            "workout_duration_mins": 60,
-            "units_per_week": 3,
-        },
-    }
-
-
-def assess_clarification_need(user_query, tasks, state, step_tracer):
-    """Decides whether a single critical clarification question is needed before executing tasks.
-
-    Returns a dict with:
-      needs_clarification (bool)
-      questions          (list[str], max 1 item)
-      reason             (str)
-      assumptions_if_skipped (list[str])
-    """
-    state_summary = _build_compact_state_summary(state)
-
-    sys_prompt = """You are a smart gating system for a fitness assistant. Decide whether to ask the user ONE clarification question before proceeding.
-
-RULES:
-1. Use defaults when ambiguity is minor.
-2. ASK AT MOST ONE QUESTION. Pick the single most critical one only.
-3. Ask a question when ambiguity would materially change the output structure, make the result likely wrong, or create a safety risk.
-4. For vague workout requests (for example "add a workout" or "change my routine"), it is appropriate to ask one disambiguation question about intent.
-5. Do NOT ask for minor preferences or non-critical details.
-6. NEVER ask about schedule — the system handles that separately.
-
-
-Respond in JSON only:
-{
-  "needs_clarification": true | false,
-  "questions": [],
-  "reason": "brief explanation",
-  "assumptions_if_skipped": []
-}"""
-
-    user_prompt = json.dumps(
-        {"user_query": user_query, "detected_tasks": tasks, "context": state_summary},
-        indent=2,
-        default=str,
-    )
-
-    messages = [SystemMessage(content=sys_prompt), HumanMessage(content=user_prompt)]
-    response = json_llm.invoke(messages)
-    result = _parse_json_response_content(response.content)
-
-    step_tracer.append({
-        "module": MODULE_NAME,
-        "prompt": {"system": sys_prompt, "user": user_prompt},
-        "response": result,
-    })
-
-    return result
-
 
 def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     """Validates the generated plans for conflicts."""
@@ -290,6 +187,81 @@ TASK_PRIORITY = {
     "WORKOUT": 4   
 }
 
+
+def _select_workout_pipeline(user_query, current_routine, step_tracer):
+    """Uses a lightweight LLM decision to pick workout pipeline mode."""
+    sys_prompt = """You are a routing assistant for workout generation.
+Choose exactly one pipeline mode and return JSON only:
+{
+    "pipeline": "reflection|simple_rag",
+  "reason": "short reason"
+}
+
+Selection policy:
+1. Choose "reflection" when the request is for a full new routine, broad redesign, or substantial restructuring.
+2. Choose "simple_rag" when the request is a small adjustment (swap/replace/add/remove/modify one part).
+3. Use current_routine context if available.
+4. Be decisive: always return one mode.
+"""
+
+    compact_routine = None
+    if isinstance(current_routine, dict):
+        units = current_routine.get("units")
+        compact_units = []
+        if isinstance(units, list):
+            for unit in units[:7]:
+                if isinstance(unit, dict):
+                    compact_units.append({
+                        "title": unit.get("title"),
+                        "focus_type": unit.get("focus_type") or unit.get("focus"),
+                        "day_label": unit.get("day_label") or unit.get("day"),
+                        "duration_limit_mins": unit.get("duration_limit_mins") or unit.get("duration_mins"),
+                    })
+        compact_routine = {
+            "routine_name": current_routine.get("routine_name"),
+            "goal": current_routine.get("goal"),
+            "units": compact_units,
+        }
+
+    user_prompt = json.dumps({
+        "query": user_query,
+        "current_routine": compact_routine,
+    })
+
+    try:
+        response = json_llm.invoke([
+            SystemMessage(content=sys_prompt),
+            HumanMessage(content=user_prompt)
+        ])
+        result = _parse_json_response_content(response.content)
+        raw_pipeline = (result.get("pipeline") or "").strip().lower()
+        pipeline = raw_pipeline if raw_pipeline in ("reflection", "simple_rag") else "simple_rag"
+
+        step_tracer.append({
+            "module": MODULE_NAME,
+            "stage": "workout_pipeline_selection",
+            "prompt": {"system": sys_prompt, "user": user_prompt},
+            "response": {
+                "pipeline": pipeline,
+                "raw_pipeline": raw_pipeline,
+                "reason": result.get("reason", "")
+            }
+        })
+        return pipeline
+    except Exception as e:
+        fallback = "reflection" if not isinstance(current_routine, dict) else "simple_rag"
+        step_tracer.append({
+            "module": MODULE_NAME,
+            "stage": "workout_pipeline_selection_fallback",
+            "prompt": {"system": sys_prompt, "user": user_prompt},
+            "response": {
+                "pipeline": fallback,
+                "reason": "selector_failed",
+                "error": str(e)
+            }
+        })
+        return fallback
+
 def orchestrate_workflow(user_query):
     """Main orchestration loop with dynamic constraint passing."""
     
@@ -321,23 +293,11 @@ def orchestrate_workflow(user_query):
     tasks = [task_aliases.get(t, t) for t in tasks if isinstance(t, str)]
     tasks = list(dict.fromkeys(tasks))
 
-    # Smart clarification gate — runs after intent detection, before task execution
-    clarification_result = assess_clarification_need(user_query, tasks, state, step_tracer)
-
-    # Merge legacy missing_info items with smart-gate questions into one list
-    gate_questions = clarification_result.get("questions", []) if isinstance(clarification_result, dict) else []
-    combined_questions = list(missing_info) + [q for q in gate_questions if q not in missing_info]
-
-    if combined_questions or clarification_result.get("needs_clarification"):
-        # If the gate produced a ready-phrased question, use it directly;
-        # otherwise fall back to re-phrasing the raw missing_info items.
-        if gate_questions:
-            clarification = gate_questions[0]
-        else:
-            clarification = check_for_clarification(combined_questions, step_tracer)
+    if missing_info:
+        clarification = check_for_clarification(missing_info, step_tracer)
 
         state["status"] = "asking"
-        state["missing_info"] = combined_questions
+        state["missing_info"] = missing_info
         state_manager.save_state(state)
         return {"response": clarification, "steps": step_tracer}
 
@@ -369,6 +329,9 @@ def orchestrate_workflow(user_query):
             responses.append(schedule_result["response"])
 
         elif task == "WORKOUT":
+            selected_pipeline = _select_workout_pipeline(user_query, current_routine, step_tracer)
+            shared_context["workout_pipeline"] = selected_pipeline
+
             routine_result = workout_agent.execute_weekly_routine_task(
                 user_query=user_query,
                 shared_context=shared_context,
