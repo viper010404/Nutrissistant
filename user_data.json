@@ -1,0 +1,595 @@
+{
+    "user_query": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings",
+    "user_profile": "I'm Ido, 21 year old student. I have some spare time, I'd like to get into shape and lose 10-15 kg in the next year (My height  is 1.80 m and my weight is 150 kg). I enjoy cycling and boxing.",
+    "schedule_data": {
+        "Monday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "-",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        },
+        "Tuesday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "Tuesday \u2014 Boxing Intervals & Technical Work",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        },
+        "Wednesday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "Wednesday \u2014 Foundational Bodyweight Strength (Circuit)",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        },
+        "Thursday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "Thursday \u2014 Low-Impact Cardio Endurance (Brisk Walk)",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        },
+        "Friday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "-",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        },
+        "Saturday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "Saturday \u2014 Longer Low-Impact Conditioning + Mobility Flow",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        },
+        "Sunday": {
+            "06:00": "-",
+            "07:00": "-",
+            "08:00": "-",
+            "09:00": "-",
+            "10:00": "-",
+            "11:00": "-",
+            "12:00": "-",
+            "13:00": "-",
+            "14:00": "-",
+            "15:00": "-",
+            "16:00": "-",
+            "17:00": "-",
+            "18:00": "-",
+            "19:00": "-",
+            "20:00": "-",
+            "21:00": "-",
+            "22:00": "-",
+            "23:00": "-"
+        }
+    },
+    "plan_drafts": {
+        "nutrition": [],
+        "fitness": {
+            "goal": "Raise cardio fitness, practice boxing movement and technique, and burn calories with no-equipment interval work; begin conservatively and progress gradually.",
+            "duration_limit_mins": 50,
+            "workout_name": "Shadowboxing Intervals + Technical Rounds",
+            "difficulty": "beginner",
+            "focus_type": "boxing",
+            "session_outline": [
+                {
+                    "section": "warmup",
+                    "minutes": 10,
+                    "items": [
+                        "3 min easy marching in place and arm swings",
+                        "3 min joint mobility (neck, shoulders, hips, ankles)",
+                        "2 rounds of 45s easy shadowboxing (light jab-cross, step and pivot) with 15s transition"
+                    ]
+                },
+                {
+                    "section": "main",
+                    "minutes": 32,
+                    "items": [
+                        "Weeks 1\u20132 (conservative start): 8 rounds of 1:00 work / 1:30 rest (technical focus; total ~20 min work + rest transitions).",
+                        "Weeks 3+: progress to 6 rounds of 2:00 work / 1:00 rest or 8 rounds of 1:30 work / 1:00 rest as tolerated (aim RPE 6\u20137 on work intervals).",
+                        "Active rest during rests: 30\u201345s of low-load bodyweight move (sit-to-stand, standing core twist) + breathing; use 30\u201360s transition/setup time between rounds as needed."
+                    ]
+                },
+                {
+                    "section": "cooldown",
+                    "minutes": 8,
+                    "items": [
+                        "3\u20134 min slow walking and diaphragmatic breathing",
+                        "4\u20135 min shoulder/upper-back/neck soft stretching and mobility"
+                    ]
+                }
+            ],
+            "exercise_details": [
+                {
+                    "name": "Shadowboxing (technical rounds)",
+                    "sets": 8,
+                    "reps": "1:00 work / 1:30 rest (weeks 1\u20132) \u2192 progress to 6x(2:00/1:00) or 8x(1:30/1:00)",
+                    "rest_seconds": 90,
+                    "notes": "Keep hands up, move feet, practice jab-cross and light hooks; strike with control. If very breathless, reduce work to 45s and increase rest."
+                },
+                {
+                    "name": "Active-rest bodyweight move (rotate each rest)",
+                    "sets": 8,
+                    "reps": "30-45s each during rest",
+                    "rest_seconds": 0,
+                    "notes": "Options: sit-to-stand from chair, standing core twist, or slow marching; use these to keep heart rate moderate without fatiguing prime movers."
+                }
+            ],
+            "safety_notes": [
+                "Obtain medical clearance before attempting higher-intensity intervals if you have cardiovascular risk factors or have been inactive.",
+                "Start conservatively (Weeks 1\u20132: shorter work and longer rest). Increase intensity only if you recover well and maintain good form.",
+                "Aim for RPE 5\u20137 during work intervals at first (talk test: can say short phrases).",
+                "Stop immediately for chest pain, faintness, severe dizziness or unusual breathlessness.",
+                "Allow 30\u201360s transition/setup time between rounds in your time accounting so total session fits the 50-minute block."
+            ]
+        }
+    },
+    "workouts": {
+        "current_workout_id": "workout_eaad0520a3e6",
+        "current_routine_id": "routine_e868592790ce",
+        "history": [
+            {
+                "id": "workout_2aef2b3ccbcb",
+                "created_at": "2026-03-14T22:58:30.512180+00:00",
+                "source": "agent",
+                "source_query": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings",
+                "response_text": "Got it \u2014 here\u2019s a 4x/week plan scheduled for your midweek evenings (Tue/Wed/Thu) plus a weekend session on Saturday. It uses only bodyweight and walking (no equipment), emphasizes boxing-style intervals you enjoy, steady cardio for fat loss, and progressive strength work. Start conservatively for the first 2\u20133 weeks and get medical clearance if you have cardiovascular risk factors.",
+                "scheduled_slots": [
+                    {
+                        "day": "Tuesday",
+                        "time": "19:00",
+                        "event": "Workout"
+                    }
+                ],
+                "routine_id": "routine_e868592790ce",
+                "unit_index": 0,
+                "unit_day": "Tuesday",
+                "focus_type": "boxing",
+                "draft": {
+                    "goal": "Raise cardio fitness, practice boxing movement and technique, and burn calories with no-equipment interval work; begin conservatively and progress gradually.",
+                    "duration_limit_mins": 50,
+                    "workout_name": "Shadowboxing Intervals + Technical Rounds",
+                    "difficulty": "beginner",
+                    "focus_type": "boxing",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 10,
+                            "items": [
+                                "3 min easy marching in place and arm swings",
+                                "3 min joint mobility (neck, shoulders, hips, ankles)",
+                                "2 rounds of 45s easy shadowboxing (light jab-cross, step and pivot) with 15s transition"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 32,
+                            "items": [
+                                "Weeks 1\u20132 (conservative start): 8 rounds of 1:00 work / 1:30 rest (technical focus; total ~20 min work + rest transitions).",
+                                "Weeks 3+: progress to 6 rounds of 2:00 work / 1:00 rest or 8 rounds of 1:30 work / 1:00 rest as tolerated (aim RPE 6\u20137 on work intervals).",
+                                "Active rest during rests: 30\u201345s of low-load bodyweight move (sit-to-stand, standing core twist) + breathing; use 30\u201360s transition/setup time between rounds as needed."
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 8,
+                            "items": [
+                                "3\u20134 min slow walking and diaphragmatic breathing",
+                                "4\u20135 min shoulder/upper-back/neck soft stretching and mobility"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Shadowboxing (technical rounds)",
+                            "sets": 8,
+                            "reps": "1:00 work / 1:30 rest (weeks 1\u20132) \u2192 progress to 6x(2:00/1:00) or 8x(1:30/1:00)",
+                            "rest_seconds": 90,
+                            "notes": "Keep hands up, move feet, practice jab-cross and light hooks; strike with control. If very breathless, reduce work to 45s and increase rest."
+                        },
+                        {
+                            "name": "Active-rest bodyweight move (rotate each rest)",
+                            "sets": 8,
+                            "reps": "30-45s each during rest",
+                            "rest_seconds": 0,
+                            "notes": "Options: sit-to-stand from chair, standing core twist, or slow marching; use these to keep heart rate moderate without fatiguing prime movers."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Obtain medical clearance before attempting higher-intensity intervals if you have cardiovascular risk factors or have been inactive.",
+                        "Start conservatively (Weeks 1\u20132: shorter work and longer rest). Increase intensity only if you recover well and maintain good form.",
+                        "Aim for RPE 5\u20137 during work intervals at first (talk test: can say short phrases).",
+                        "Stop immediately for chest pain, faintness, severe dizziness or unusual breathlessness.",
+                        "Allow 30\u201360s transition/setup time between rounds in your time accounting so total session fits the 50-minute block."
+                    ]
+                }
+            },
+            {
+                "id": "workout_c901494e65ac",
+                "created_at": "2026-03-14T22:58:30.512214+00:00",
+                "source": "agent",
+                "source_query": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings",
+                "response_text": "Got it \u2014 here\u2019s a 4x/week plan scheduled for your midweek evenings (Tue/Wed/Thu) plus a weekend session on Saturday. It uses only bodyweight and walking (no equipment), emphasizes boxing-style intervals you enjoy, steady cardio for fat loss, and progressive strength work. Start conservatively for the first 2\u20133 weeks and get medical clearance if you have cardiovascular risk factors.",
+                "scheduled_slots": [
+                    {
+                        "day": "Wednesday",
+                        "time": "19:00",
+                        "event": "Workout"
+                    }
+                ],
+                "routine_id": "routine_e868592790ce",
+                "unit_index": 1,
+                "unit_day": "Wednesday",
+                "focus_type": "strength",
+                "draft": {
+                    "goal": "Build functional strength to improve daily movement, raise resting metabolic rate, and support weight loss using progressive bodyweight exercises.",
+                    "duration_limit_mins": 50,
+                    "workout_name": "Bodyweight Strength Circuit (2\u20133 rounds)",
+                    "difficulty": "beginner",
+                    "focus_type": "strength",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 10,
+                            "items": [
+                                "4\u20135 min brisk walk in place or around the block",
+                                "4 min dynamic mobility (hip circles, leg swings, shoulder swings)",
+                                "1 set activation: 8 bodyweight squats + 8 shoulder taps (slow)"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 32,
+                            "items": [
+                                "2 rounds to start of a 5-exercise circuit; rest 60\u201390s between rounds. Target \u2248 30\u201345s per exercise plus 30s transition/setup between exercises.",
+                                "Progression: after 3\u20134 weeks add a 3rd round or increase reps/hold times before moving to harder variations."
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 8,
+                            "items": [
+                                "5 min gentle static stretches (glutes, hamstrings, chest, shoulders)",
+                                "3 min diaphragmatic breathing and relaxation"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Sit-to-stand (from a chair)",
+                            "sets": 2,
+                            "reps": "10-15",
+                            "rest_seconds": 60,
+                            "notes": "Use hands if needed; control descent. Expect ~30-40s per set depending on tempo."
+                        },
+                        {
+                            "name": "Incline push-ups (hands on counter or wall) or knee push-ups",
+                            "sets": 2,
+                            "reps": "8-12",
+                            "rest_seconds": 60,
+                            "notes": "Keep torso straight; lower incline as strength improves. Allow ~30-45s per set."
+                        },
+                        {
+                            "name": "Glute bridge",
+                            "sets": 2,
+                            "reps": "12-15",
+                            "rest_seconds": 45,
+                            "notes": "Pause 1-2s at top; aim for controlled tempo (~30-40s per set)."
+                        },
+                        {
+                            "name": "Assisted split squat / stationary lunge",
+                            "sets": 2,
+                            "reps": "8-10 per leg",
+                            "rest_seconds": 60,
+                            "notes": "Hold a stable surface for balance; reduce depth if knees feel strained. Each set may take ~45-60s."
+                        },
+                        {
+                            "name": "Plank (knee or elevated if needed)",
+                            "sets": 2,
+                            "reps": "20-45s (build toward 45-60s)",
+                            "rest_seconds": 60,
+                            "notes": "Keep neutral spine. Use elevated surface or knees to reduce load; include 30s transition to next exercise."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Prioritize clean technique over more reps. If form breaks, rest and reduce reps or choose an easier variation.",
+                        "Include 30\u201360s transition/setup between exercises and 60\u201390s between rounds in your timing so the circuit fits within 32 minutes.",
+                        "Aim for RPE 5\u20137 on strength sets; sharp joint pain is a stop signal\u2014reduce ROM or choose an alternative.",
+                        "If balance is a concern, perform single-leg attempts next to a stable support and reduce reps."
+                    ]
+                }
+            },
+            {
+                "id": "workout_feefd8df3c58",
+                "created_at": "2026-03-14T22:58:30.512227+00:00",
+                "source": "agent",
+                "source_query": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings",
+                "response_text": "Got it \u2014 here\u2019s a 4x/week plan scheduled for your midweek evenings (Tue/Wed/Thu) plus a weekend session on Saturday. It uses only bodyweight and walking (no equipment), emphasizes boxing-style intervals you enjoy, steady cardio for fat loss, and progressive strength work. Start conservatively for the first 2\u20133 weeks and get medical clearance if you have cardiovascular risk factors.",
+                "scheduled_slots": [
+                    {
+                        "day": "Thursday",
+                        "time": "19:00",
+                        "event": "Workout"
+                    }
+                ],
+                "routine_id": "routine_e868592790ce",
+                "unit_index": 2,
+                "unit_day": "Thursday",
+                "focus_type": "cardio",
+                "draft": {
+                    "goal": "Accumulate moderate aerobic minutes safely to support fat loss while protecting joints; brisk walking is the primary mode (no equipment required).",
+                    "duration_limit_mins": 45,
+                    "workout_name": "Brisk Walk Intervals / Continuous Walk",
+                    "difficulty": "beginner",
+                    "focus_type": "cardio",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 5,
+                            "items": [
+                                "3 min easy walking",
+                                "2 min ankle and hip mobility + light marching"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 35,
+                            "items": [
+                                "35 min brisk walk at conversational pace (RPE 4\u20136). If very fatigued, use interval pattern (3\u20134 min brisk / 1 min easy) to reach total time.",
+                                "Keep pace to raise breathing but allow short sentences (talk test)."
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 5,
+                            "items": [
+                                "3 min slow walking",
+                                "2 min calf and hamstring stretch"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Brisk walk (continuous) or interval pattern",
+                            "sets": 1,
+                            "reps": "35 minutes total (use intervals if needed)",
+                            "rest_seconds": 0,
+                            "notes": "If weather/time prevents outdoor activity, march in place or walk indoors to approximate effort."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Research indicates ~150 minutes/week of moderate activity is a useful baseline for health benefits; this plan builds toward that over weeks.",
+                        "Use the talk test to manage intensity (RPE 4\u20136). Stop if dizzy, extremely breathless, or in significant pain.",
+                        "If you later acquire a bike, you can swap this session for a moderate 30\u201345 min bike ride \u2014 confirm bike availability and a safe route before doing so."
+                    ]
+                }
+            },
+            {
+                "id": "workout_eaad0520a3e6",
+                "created_at": "2026-03-14T22:58:30.512239+00:00",
+                "source": "agent",
+                "source_query": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings",
+                "response_text": "Got it \u2014 here\u2019s a 4x/week plan scheduled for your midweek evenings (Tue/Wed/Thu) plus a weekend session on Saturday. It uses only bodyweight and walking (no equipment), emphasizes boxing-style intervals you enjoy, steady cardio for fat loss, and progressive strength work. Start conservatively for the first 2\u20133 weeks and get medical clearance if you have cardiovascular risk factors.",
+                "scheduled_slots": [
+                    {
+                        "day": "Saturday",
+                        "time": "19:00",
+                        "event": "Workout"
+                    }
+                ],
+                "routine_id": "routine_e868592790ce",
+                "unit_index": 3,
+                "unit_day": "Saturday",
+                "focus_type": "mixed",
+                "draft": {
+                    "goal": "Provide a longer, lower-intensity aerobic session plus mobility work to increase weekly volume and improve movement quality while protecting joints.",
+                    "duration_limit_mins": 60,
+                    "workout_name": "Steady Movement + Mobility Flow",
+                    "difficulty": "beginner",
+                    "focus_type": "mixed",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 10,
+                            "items": [
+                                "5 min easy walk or light marching",
+                                "5 min gentle dynamic mobility (spine twists, cat-cow, hip openers)"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 35,
+                            "items": [
+                                "25\u201330 min steady low-impact movement (brisk walk or extended stroll) at conversational effort (RPE 4\u20135).",
+                                "10 min mobility flow focusing on hips, thoracic spine and shoulders (controlled, slow movements)."
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 15,
+                            "items": [
+                                "8 min longer static stretches for legs and lower back (hold gentle tension)",
+                                "7 min breathing, relaxation and optional self-massage"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Steady low-impact movement (walk/hike)",
+                            "sets": 1,
+                            "reps": "25-30 minutes",
+                            "rest_seconds": 0,
+                            "notes": "Treat as your weekly longer aerobic session; keep effort conversational to aid recovery (RPE 4\u20135)."
+                        },
+                        {
+                            "name": "Mobility flow (hip openers, thoracic rotations, shoulder circles)",
+                            "sets": 3,
+                            "reps": "6-10 movements each",
+                            "rest_seconds": 30,
+                            "notes": "Move smoothly and avoid forcing ranges; use this time to reduce stiffness and improve movement."
+                        },
+                        {
+                            "name": "Long hamstring/glute/back static stretches",
+                            "sets": 1,
+                            "reps": "1-3 minutes per stretch",
+                            "rest_seconds": 0,
+                            "notes": "Hold gentle tension; do not push into sharp pain."
+                        }
+                    ],
+                    "safety_notes": [
+                        "This session is intentionally lower-intensity to increase weekly activity while supporting recovery from midweek sessions.",
+                        "If any mobility move causes sharp pain, stop and choose gentler alternatives (seated mobility or shorter holds).",
+                        "If you concentrate activity mostly on weekends, research indicates this can be feasible for some people, but spreading sessions through the week (as in this plan) generally improves adherence and recovery."
+                    ]
+                }
+            }
+        ],
+        "routines": [
+            {
+                "id": "routine_e868592790ce",
+                "created_at": "2026-03-14T22:58:30.512246+00:00",
+                "source": "agent",
+                "source_query": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings",
+                "response_text": "Got it \u2014 here\u2019s a 4x/week plan scheduled for your midweek evenings (Tue/Wed/Thu) plus a weekend session on Saturday. It uses only bodyweight and walking (no equipment), emphasizes boxing-style intervals you enjoy, steady cardio for fat loss, and progressive strength work. Start conservatively for the first 2\u20133 weeks and get medical clearance if you have cardiovascular risk factors.",
+                "routine_name": "Midweek Focus: Boxing + Bodyweight Conditioning (4x/week)",
+                "goal": "Lose 10\u201315 kg over the year by building consistent aerobic capacity, boxing-specific conditioning, and foundational bodyweight strength with four weekly sessions prioritized midweek.",
+                "version": 1,
+                "units": [
+                    {
+                        "unit_id": "workout_2aef2b3ccbcb",
+                        "day": "Tuesday",
+                        "time": "19:00",
+                        "focus_type": "boxing",
+                        "title": "Tuesday \u2014 Boxing Intervals & Technical Work"
+                    },
+                    {
+                        "unit_id": "workout_c901494e65ac",
+                        "day": "Wednesday",
+                        "time": "19:00",
+                        "focus_type": "strength",
+                        "title": "Wednesday \u2014 Foundational Bodyweight Strength (Circuit)"
+                    },
+                    {
+                        "unit_id": "workout_feefd8df3c58",
+                        "day": "Thursday",
+                        "time": "19:00",
+                        "focus_type": "cardio",
+                        "title": "Thursday \u2014 Low-Impact Cardio Endurance (Brisk Walk)"
+                    },
+                    {
+                        "unit_id": "workout_eaad0520a3e6",
+                        "day": "Saturday",
+                        "time": "19:00",
+                        "focus_type": "mixed",
+                        "title": "Saturday \u2014 Longer Low-Impact Conditioning + Mobility Flow"
+                    }
+                ]
+            }
+        ]
+    },
+    "missing_info": [],
+    "allergies": [],
+    "dietary_restrictions": [],
+    "general_meal_restrictions": [],
+    "injuries": [],
+    "equipment": [],
+    "general_workout_restrictions": [
+        "4 workouts per week",
+        "prefer midweek evenings for workouts",
+        "enjoys cycling and boxing (prefer incorporation)",
+        "User profile: 21 years old, 1.80 m, 150 kg"
+    ],
+    "status": "idle",
+    "chat_history": [
+        {
+            "timestamp": "2026-03-14T22:54:19.163653+00:00",
+            "role": "user",
+            "content": "I would like a 4 time a week workout plan, I prefer to workout in midweek evenings"
+        },
+        {
+            "timestamp": "2026-03-14T22:58:30.515465+00:00",
+            "role": "agent",
+            "content": "Proposed 'Workout' on Tuesday at 19:00. Proposed 'Workout' on Wednesday at 19:00. Proposed 'Workout' on Thursday at 19:00. Proposed 'Workout' on Saturday at 19:00.\n\nGot it \u2014 here\u2019s a 4x/week plan scheduled for your midweek evenings (Tue/Wed/Thu) plus a weekend session on Saturday. It uses only bodyweight and walking (no equipment), emphasizes boxing-style intervals you enjoy, steady cardio for fat loss, and progressive strength work. Start conservatively for the first 2\u20133 weeks and get medical clearance if you have cardiovascular risk factors.\n\nI have successfully added these to your calendar."
+        }
+    ]
+}
