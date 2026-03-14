@@ -4,3 +4,6 @@ venv/
 .venv/
 
 .env
+API_KEY.txt
+.env.*
+!.env.example
