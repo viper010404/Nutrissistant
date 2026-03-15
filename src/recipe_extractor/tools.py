@@ -251,12 +251,12 @@ def _run_refinement_tool(tool_input, tool_func, base_context=None, step_tracer=N
         )
     return tool_func(resolved_context, recipe, step_tracer=step_tracer)
 
+
 def context_to_query_DB_llm(context, step_tracer=None):
     """
     Tool to query the recipe database using the LLM system prompt for context-to-query conversion.
     Uses the structured_query function with parameters extracted from context.
     """
-    # Use the system prompt to convert context to query parameters
     prompt = prompts_module.CONTEXT_TO_QUERY_DB_SYSTEM_PROMPT
     result = llm_utils_module._invoke_json_llm(prompt, context, step_tracer, module_name=_MODULE_NAME)
     if not isinstance(result, dict) or result.get("status") != "ok":
@@ -269,12 +269,10 @@ def context_to_query_DB_llm(context, step_tracer=None):
     if not isinstance(query_params, dict):
         query_params = {}
 
-    # Normalize key aliases coming from prompt/LLM output.
     if "exclude_ingredients" not in query_params and "excluded_ingredients" in query_params:
         query_params["exclude_ingredients"] = query_params.get("excluded_ingredients")
     query_params.pop("excluded_ingredients", None)
 
-    # TODO: make sure the returned value a json dict?
     errors = utils_module.validate_query_params(**query_params)
     if len(errors) > 0:
         return {
@@ -283,7 +281,6 @@ def context_to_query_DB_llm(context, step_tracer=None):
             "message": str(errors),
         }   
 
-    # Call the structured query function with the parameters
     result = utils_module.stractured_query(
         names=query_params.get("names"),
         category=query_params.get("category"),
@@ -369,45 +366,37 @@ def query_vector_database(context, step_tracer=None):
 
 
 def build_generation_tools(step_tracer=None, base_context=None):
+    def run_free_query(tool_input: str):
+        return _run_generation_tool(tool_input, context_to_query_DB_llm, base_context, step_tracer)
+        
+    def run_structured_query(tool_input: str):
+        return _run_generation_tool(tool_input, get_recipe_from_database_stractured, base_context, step_tracer)
+        
+    def run_llm_gen(tool_input: str):
+        return _run_generation_tool(tool_input, generate_recepie_with_llm, base_context, step_tracer)
+        
+    def run_vector_query(tool_input: str):
+        return _run_generation_tool(tool_input, query_vector_database, base_context, step_tracer)
+
     return [
         Tool(
             name="FREE_QUERY_DATABASE",
-            func=functools.partial(
-                _run_generation_tool,
-                tool_func=context_to_query_DB_llm,
-                base_context=base_context,
-                step_tracer=step_tracer,
-            ),
+            func=run_free_query,
             description="Best for natural-language requests. Converts full context into structured DB filters with an LLM, then runs SQL retrieval. Returns candidate recipes from the recipes table when constraints are somewhat fuzzy or text-heavy.",
         ),
         Tool(
             name="STRACTURED_DATABASE_QUERY",
-            func=functools.partial(
-                _run_generation_tool,
-                tool_func=get_recipe_from_database_stractured,
-                base_context=base_context,
-                step_tracer=step_tracer,
-            ),
+            func=run_structured_query,
             description="Best for explicit constraints. Builds deterministic filters (time, category, nutrition bounds, available/excluded ingredients) and retrieves matching DB recipes. Use when user requirements are clear and structured.",
         ),
         Tool(
             name="LLM_GENERATION",
-            func=functools.partial(
-                _run_generation_tool,
-                tool_func=generate_recepie_with_llm,
-                base_context=base_context,
-                step_tracer=step_tracer,
-            ),
+            func=run_llm_gen,
             description="Generates one new recipe JSON from context (including ingredients, instructions, tags, timing, and nutrition-per-serving). Use when DB/vector retrieval cannot satisfy the request or when customization is high.",
         ),
         Tool(
             name="USE_VECTOR_DB",
-            func=functools.partial(
-                _run_generation_tool,
-                tool_func=query_vector_database,
-                base_context=base_context,
-                step_tracer=step_tracer,
-            ),
+            func=run_vector_query,
             description="Semantic retrieval over recipe embeddings. Converts context to a vector query and returns nearest recipe candidates. Use for fuzzy intent (style/flavor similarity) or when exact DB filters miss good matches.",
         ),
     ]
@@ -525,23 +514,21 @@ def strict_evaluate_recipe(context, recipe):
 
 
 def build_evaluation_tools(step_tracer=None, base_context=None):
+    def run_llm_evaluator(tool_input: str):
+        return _run_evaluation_tool(tool_input, evaluate_recipe_llm, base_context, step_tracer)
+        
+    def run_strict_evaluator(tool_input: str):
+        return _run_strict_evaluation_tool(tool_input, base_context)
+
     return [
         Tool(
             name="LLM_EVALUATOR",
-            func=functools.partial(
-                _run_evaluation_tool,
-                tool_func=evaluate_recipe_llm,
-                base_context=base_context,
-                step_tracer=step_tracer,
-            ),
+            func=run_llm_evaluator,
             description="Soft scoring and ranking tool. Evaluates one candidate recipe against context and returns overall score, dimension scores, strengths/issues, and improvement suggestions. Use after strict filtering to pick the best recipe.",
         ),
         Tool(
             name="STRICT_EVALUATOR",
-            func=functools.partial(
-                _run_strict_evaluation_tool,
-                base_context=base_context,
-            ),
+            func=run_strict_evaluator,
             description="Hard rule-based validator. Fails recipes that violate excluded ingredients, nutrition min/max bounds, or available time. Use as mandatory pass/fail gate before LLM_EVALUATOR ranking.",
         ),
     ]
@@ -573,15 +560,13 @@ def revise_recepie_llm(context, recipe, step_tracer=None):
     return revised_recipe
 
 def build_refinement_tools(step_tracer=None, base_context=None):
+    def run_llm_reviser(tool_input: str):
+        return _run_refinement_tool(tool_input, revise_recepie_llm, base_context, step_tracer)
+
     return [
         Tool(
             name="LLM_REVISER",
-            func=functools.partial(
-                _run_refinement_tool,
-                tool_func=revise_recepie_llm,
-                base_context=base_context,
-                step_tracer=step_tracer,
-            ),
+            func=run_llm_reviser,
             description="Refines an existing recipe using revision feedback while preserving base identity when requested. Use to fix evaluator issues (time, constraints, nutrition, ingredient choices) without restarting generation.",
         ),
     ]
@@ -646,4 +631,3 @@ def build_output_tools():
     ]
 
 output_tools = build_output_tools()
-
