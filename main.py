@@ -306,9 +306,14 @@ elif st.session_state.current_page == 'home':
             if st.button("Current Routine"):
                 st.session_state.current_page = 'routine'
                 st.rerun()
-            
             if st.button("Edit Schedule"):
                 st.session_state.is_editing = True
+                st.rerun()
+
+            if st.button("Clear info"):
+                state_manager.clear_state()
+                st.session_state.schedule_data = {d: {h: "-" for h in hours} for d in days_of_week}
+                st.session_state.user_profile = ""
                 st.rerun()
 
         # Prompt Box at the bottom of the home page
@@ -935,7 +940,17 @@ elif st.session_state.current_page == 'all recipes':
     current_plan_id = meals_state.get("current_plan_id")
     
     # Fetch the historical single recipes we fixed in the backend
-    saved_recipes = state.get("plan_drafts", {}).get("nutrition", [])
+    nutrition_data = state.get("plan_drafts", {}).get("nutrition", {})
+    saved_recipes = []
+
+    # Safely extract dishes out of the new blueprint dictionary structure
+    if isinstance(nutrition_data, dict):
+        for m in nutrition_data.get("meals", []):
+            if isinstance(m, dict):
+                saved_recipes.extend(m.get("dishes", []))
+    # Fallback just in case you have older legacy data saved
+    elif isinstance(nutrition_data, list):
+        saved_recipes = [r for r in nutrition_data if isinstance(r, dict)]
 
     if plans or saved_recipes:
         
@@ -1150,25 +1165,29 @@ elif st.session_state.current_page == 'current recipes':
     # 3. Create the UI selection
     if all_dishes:
         st.markdown("### Select a Meal")
-        valid_recipe_ids = [d.get("recipe_id") for d in all_dishes if isinstance(d, dict)]
+        
+        # FIX: Check both "recipe_id" and "id" so the UI doesn't break
+        valid_recipe_ids = [d.get("recipe_id") or d.get("id") for d in all_dishes if isinstance(d, dict)]
         selected_recipe_id = st.session_state.get("selected_recipe_id")
         
         if selected_recipe_id not in valid_recipe_ids and valid_recipe_ids:
             selected_recipe_id = valid_recipe_ids[0]
             
         st.session_state.selected_recipe_id = selected_recipe_id
-        selected_dish = next((d for d in all_dishes if d.get("recipe_id") == selected_recipe_id), None)
+        
+        # FIX: Find the dish using both keys
+        selected_dish = next((d for d in all_dishes if (d.get("recipe_id") or d.get("id")) == selected_recipe_id), None)
         
         # Display recipe buttons
         recipe_cols = st.columns(max(len(all_dishes), 1))
         for idx, dish in enumerate(all_dishes):
             with recipe_cols[idx]:
-                r_id = dish.get("recipe_id")
+                # Safely get the ID
+                r_id = dish.get("recipe_id") or dish.get("id") or f"fallback_{idx}"
                 label = dish.get("_context_label", f"Dish {idx+1}")
                 name = dish.get("name", "Recipe")
                 button_label = f"{label}\n{name}"
                 
-                # Appending idx to the key prevents DuplicateKey errors if IDs match
                 if st.button(button_label, key=f"recipe_btn_{r_id}_{idx}"):
                     st.session_state.selected_recipe_id = r_id
                     st.rerun()
@@ -1208,17 +1227,22 @@ elif st.session_state.current_page == 'current recipes':
         with col_ing:
             st.markdown('<div class="section-header">Ingredients</div>', unsafe_allow_html=True)
             ingredients = selected_dish.get("ingredients", [])
-            for ing in ingredients:
-                name = ing.get("name", "")
-                qty = ing.get("quantity", "")
-                unit = ing.get("unit", "")
-                st.markdown(
-                    f'<div class="ingredient-row">'
-                    f'<span class="ingredient-name">{name}</span>'
-                    f'<span>{qty} {unit}</span>'
-                    f'</div>',
-                    unsafe_allow_html=True
-                )
+            
+            # FIX: Tell the user if the LLM hallucinated and forgot the ingredients
+            if not ingredients:
+                st.info("No ingredients provided by the agent.")
+            else:
+                for ing in ingredients:
+                    name = ing.get("name", "")
+                    qty = ing.get("quantity", "")
+                    unit = ing.get("unit", "")
+                    st.markdown(
+                        f'<div class="ingredient-row">'
+                        f'<span class="ingredient-name">{name}</span>'
+                        f'<span>{qty} {unit}</span>'
+                        f'</div>',
+                        unsafe_allow_html=True
+                    )
                 
             # Nutrition Macros directly under ingredients
             nutrition = selected_dish.get("nutrition_per_serving", {})
@@ -1246,8 +1270,12 @@ elif st.session_state.current_page == 'current recipes':
         with col_inst:
             st.markdown('<div class="section-header">Instructions</div>', unsafe_allow_html=True)
             instructions = selected_dish.get("instructions", [])
-            for idx, step in enumerate(instructions, 1):
-                st.markdown(f"**Step {idx}:** {step}")
+            
+            if not instructions:
+                st.info("No instructions provided by the agent.")
+            else:
+                for idx, step in enumerate(instructions, 1):
+                    st.markdown(f"**Step {idx}:** {step}")
                 
         st.markdown("---")
         if st.button("View Meal History"):

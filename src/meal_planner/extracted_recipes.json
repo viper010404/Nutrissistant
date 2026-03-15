@@ -1,0 +1,863 @@
+[
+  {
+    "recipe_id": "llm_generated_quinoa_chickpea_bowl_001",
+    "name": "Warm Quinoa & Chickpea Veggie Bowl with Lemon-Herb Dressing",
+    "description": "A 25-minute nut-free, fiber-forward grain-and-protein bowl: quick-cooked quinoa, canned chickpeas, fast-sautéed bell pepper, zucchini and cherry tomatoes, finished with a bright lemon-garlic-parsley dressing. Optional crumbled feta for extra flavor and protein.",
+    "component": "main_course",
+    "prep_time_mins": 10,
+    "cook_time_mins": 15,
+    "total_time_mins": 25,
+    "ingredients": [
+      {
+        "name": "quinoa (dry)",
+        "quantity": 0.75,
+        "unit": "cup"
+      },
+      {
+        "name": "canned chickpeas (drained, rinsed)",
+        "quantity": 15,
+        "unit": "oz"
+      },
+      {
+        "name": "red bell pepper",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "zucchini",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "fresh lemon juice",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "garlic (minced)",
+        "quantity": 1,
+        "unit": "clove"
+      },
+      {
+        "name": "fresh parsley (chopped)",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "crumbled feta (optional)",
+        "quantity": 2,
+        "unit": "oz"
+      },
+      {
+        "name": "salt",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.25,
+        "unit": "tsp"
+      }
+    ],
+    "instructions": [
+      "Rinse quinoa in a fine mesh sieve. Combine quinoa and 1 1/4 cups water (or low-sodium vegetable broth) in a small pot. Bring to a boil, reduce to a simmer, cover and cook until liquid is absorbed and quinoa is tender, about 12–15 minutes. Remove from heat and let sit covered 5 minutes, then fluff with a fork.",
+      "While the quinoa cooks, heat 1 tbsp olive oil in a large skillet over medium-high heat. Dice the bell pepper and zucchini; halve the cherry tomatoes.",
+      "Add bell pepper and zucchini to the hot skillet. Sauté, stirring occasionally, until just tender and lightly browned, about 5–7 minutes. Add cherry tomatoes in the last 1–2 minutes just to warm through.",
+      "Drain and rinse the canned chickpeas. Add chickpeas to the skillet with the vegetables just to heat through (about 2 minutes). Season with a pinch of salt and pepper.",
+      "Make the dressing: in a small bowl whisk together the remaining 1 tbsp olive oil, lemon juice, minced garlic, chopped parsley, 1/4 tsp salt and 1/8 tsp black pepper.",
+      "Divide the cooked quinoa between two bowls. Top evenly with the warm chickpea-and-vegetable mixture. Drizzle dressing over each bowl and toss gently to combine.",
+      "Finish with a squeeze of lemon and, if using, 1 oz crumbled feta per bowl. Taste and adjust salt and pepper as needed. Serve warm."
+    ],
+    "nutrition_per_serving": {
+      "calories": 613,
+      "protein_g": 23.1,
+      "carbs_g": 74.9,
+      "fat_g": 25.7,
+      "fiber_g": 16.5
+    },
+    "tags": [
+      "nut-free",
+      "vegetarian",
+      "high-fiber",
+      "quick",
+      "weeknight"
+    ]
+  },
+  {
+    "recipe_id": "llm_generated_1",
+    "name": "Quick Cucumber & Cherry Tomato Salad with Yogurt Drizzle",
+    "description": "A very quick, nut-free side salad that adds freshness and fiber. Crisp cucumber and cherry tomatoes tossed with olive oil and lemon, finished with an optional plain-yogurt drizzle. Beginner-friendly and mild.",
+    "component": "side_dish",
+    "prep_time_mins": 10,
+    "cook_time_mins": 0,
+    "total_time_mins": 10,
+    "ingredients": [
+      {
+        "name": "cucumber",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 200,
+        "unit": "g"
+      },
+      {
+        "name": "red onion",
+        "quantity": 30,
+        "unit": "g"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "fresh lemon juice",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "plain yogurt (optional)",
+        "quantity": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "instructions": [
+      "Wash cucumber and cherry tomatoes. Halve the cherry tomatoes. Thinly slice the cucumber (or quarter lengthwise and slice) and thinly slice the red onion.",
+      "Combine cucumber, cherry tomatoes, and red onion in a bowl.",
+      "Drizzle with olive oil and lemon juice; toss gently to combine. Season to taste with salt and freshly ground black pepper.",
+      "If using, thin plain yogurt with a little water or lemon juice to a drizzleable consistency and spoon over the salad just before serving.",
+      "Taste and adjust seasoning. Serve immediately."
+    ],
+    "nutrition_per_serving": {
+      "calories": 226,
+      "protein_g": 4.4,
+      "carbs_g": 19.4,
+      "fat_g": 14.5,
+      "fiber_g": 3.9
+    },
+    "tags": [
+      "nut-free",
+      "quick",
+      "no-cook",
+      "fiber-rich",
+      "beginner-friendly"
+    ]
+  },
+  {
+    "recipe_id": "llm_salmon_quinoa_broccoli_main_001",
+    "name": "Mediterranean Lemon-Herb Salmon or Tofu with Quinoa & Roasted Broccoli (with Yogurt Finish)",
+    "description": "A mild Mediterranean-style main: oven-baked lemon-herb salmon (Option A) or marinated roasted/pan-seared firm tofu (Option B) served on a small portion of quinoa with roasted broccoli. Finished with a small dollop of plain Greek yogurt for a sleep-friendly dairy component. Beginner-friendly, nut-free, total time under 50 minutes.",
+    "component": "main_course",
+    "prep_time_mins": 15,
+    "cook_time_mins": 25,
+    "total_time_mins": 40,
+    "ingredients": [
+      {
+        "name": "salmon fillet (skin-on or skinless) — Option A",
+        "quantity": 100,
+        "unit": "g"
+      },
+      {
+        "name": "firm tofu — Option B (pressed, patted dry)",
+        "quantity": 140,
+        "unit": "g"
+      },
+      {
+        "name": "lemon (juice)",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "dried oregano",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "quantity": 0.25,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.125,
+        "unit": "tsp"
+      },
+      {
+        "name": "quinoa (dry)",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "water (for quinoa)",
+        "quantity": 0.5,
+        "unit": "cup"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "name": "plain nonfat Greek yogurt",
+        "quantity": 80,
+        "unit": "g"
+      },
+      {
+        "name": "fresh parsley (optional, chopped)",
+        "quantity": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "instructions": [
+      "Preheat oven to 425°F (220°C). Line a baking sheet with foil or parchment.",
+      "Rinse 1/4 cup dry quinoa. Combine quinoa and 1/2 cup water in a small pot, bring to a boil, reduce heat to low, cover and simmer 12 minutes. Remove from heat and let stand 5 minutes; fluff with a fork.",
+      "Toss broccoli florets with 1/2 tsp olive oil (from the tablespoon listed) and a pinch of salt and pepper. Spread broccoli on one side of the baking sheet.",
+      "Option A (salmon): Pat salmon dry and place on the other side of the baking sheet. Drizzle salmon with remaining olive oil and 1 tbsp lemon juice; sprinkle with 1/2 tsp dried oregano (use 1/2 of the 0.5 tsp if you prefer even milder), 1/4 tsp salt, and 1/8 tsp black pepper.",
+      "Option B (tofu): If using tofu, marinate pressed tofu briefly (5–10 min) with 1 tbsp lemon juice, 1 tsp olive oil, 1/2 tsp dried oregano, 1/4 tsp salt and 1/8 tsp pepper. Roast tofu on the baking sheet (or pan-sear in a nonstick skillet with 1 tsp oil) until golden, 18–22 minutes in oven or ~6–8 minutes per side if pan-searing.",
+      "Roast salmon and broccoli together for 12–15 minutes, until salmon flakes easily and broccoli is tender and lightly browned. (If using roasted tofu, check for golden edges at ~18–22 minutes.)",
+      "Portion the fluffed quinoa onto plates. Place the cooked salmon fillet or tofu on top of the quinoa and arrange roasted broccoli alongside.",
+      "Spoon 80 g plain Greek yogurt into a small ramekin or a small dollop on the plate. Garnish yogurt with chopped parsley if using. Serve warm."
+    ],
+    "nutrition_per_serving": {
+      "calories": 540,
+      "protein_g": 38,
+      "carbs_g": 34,
+      "fat_g": 28,
+      "fiber_g": 8
+    },
+    "tags": [
+      "mediterranean-inspired",
+      "lean-protein",
+      "fish-or-tofu-option",
+      "whole-grain",
+      "low-spice",
+      "nut-free",
+      "beginner-friendly"
+    ]
+  },
+  {
+    "recipe_id": "llm_generated_quinoa_chickpea_bowl_friday_lunch_1",
+    "name": "Quick Quinoa & Chickpea Grain Bowl with Lemon-Greek Dressing",
+    "description": "A 25-minute protein- and fiber-forward vegetarian grain bowl: fluffy quinoa and canned chickpeas sautéed with spinach and cherry tomatoes, finished with a tangy lemon–Greek-yogurt dressing and a sprinkle of sunflower seeds for savory fat and crunch.",
+    "component": "main_course",
+    "prep_time_mins": 10,
+    "cook_time_mins": 15,
+    "total_time_mins": 25,
+    "ingredients": [
+      {
+        "name": "quinoa (dry)",
+        "quantity": 0.33,
+        "unit": "cup"
+      },
+      {
+        "name": "canned chickpeas, drained and rinsed",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "baby spinach, packed",
+        "quantity": 2,
+        "unit": "cup"
+      },
+      {
+        "name": "cherry tomatoes, halved",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 1,
+        "unit": "tablespoon"
+      },
+      {
+        "name": "plain Greek yogurt (2%)",
+        "quantity": 3,
+        "unit": "tablespoon"
+      },
+      {
+        "name": "fresh lemon juice",
+        "quantity": 1,
+        "unit": "tablespoon"
+      },
+      {
+        "name": "garlic, minced",
+        "quantity": 1,
+        "unit": "clove"
+      },
+      {
+        "name": "ground cumin",
+        "quantity": 0.5,
+        "unit": "teaspoon"
+      },
+      {
+        "name": "smoked paprika",
+        "quantity": 0.25,
+        "unit": "teaspoon"
+      },
+      {
+        "name": "sunflower seeds",
+        "quantity": 1,
+        "unit": "tablespoon"
+      },
+      {
+        "name": "salt",
+        "quantity": 0.25,
+        "unit": "teaspoon"
+      }
+    ],
+    "instructions": [
+      "Rinse quinoa in a fine-mesh sieve. In a small pot combine rinsed quinoa and 2/3 cup water, bring to a boil, reduce heat to low, cover and simmer until water is absorbed (about 12–15 minutes). Remove from heat and let sit covered 5 minutes, then fluff with a fork.",
+      "While quinoa cooks, heat olive oil in a medium skillet over medium heat. Add minced garlic and sauté 30 seconds until fragrant.",
+      "Add drained chickpeas, ground cumin, smoked paprika and salt to the skillet. Sauté, stirring occasionally, until chickpeas are warmed and lightly golden, about 5–6 minutes.",
+      "Add cherry tomatoes and spinach to the skillet and cook 1–2 minutes until spinach wilts and tomatoes soften slightly. Remove from heat.",
+      "Make the dressing: in a small bowl whisk together Greek yogurt and lemon juice (add a splash of water if needed to thin to dressing consistency). Taste and adjust salt if desired.",
+      "Assemble the bowl: place the cooked quinoa in a bowl, top with the warm chickpea-spinach-tomato mixture, drizzle the lemon-Greek dressing over the top, and sprinkle with sunflower seeds for crunch. Stir lightly to combine and serve warm."
+    ],
+    "nutrition_per_serving": {
+      "calories": 720,
+      "protein_g": 33,
+      "carbs_g": 92,
+      "fat_g": 27,
+      "fiber_g": 21
+    },
+    "tags": [
+      "vegetarian",
+      "high-protein",
+      "high-fiber",
+      "30-minute",
+      "quick",
+      "beginner-friendly",
+      "gluten-free"
+    ]
+  },
+  {
+    "recipe_id": "db_98227",
+    "name": "Sweet Chickpea Salad",
+    "description": "Bright, quick chickpea salad with cucumber and mango — a no-cook, high-fiber side that’s ready in minutes and nut-free.",
+    "component": "side_dish",
+    "prep_time_mins": 5,
+    "cook_time_mins": 0,
+    "total_time_mins": 5,
+    "ingredients": [
+      {
+        "name": "canned chickpeas, drained and rinsed",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "ripe mango, diced",
+        "quantity": 0.5,
+        "unit": "cup"
+      },
+      {
+        "name": "cucumber, diced",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "fresh parsley, chopped",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "lime juice",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "cayenne pepper",
+        "quantity": 0.125,
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "quantity": 0.25,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.125,
+        "unit": "tsp"
+      }
+    ],
+    "instructions": [
+      "In a bowl, combine the drained chickpeas, diced mango, diced cucumber, and chopped parsley.",
+      "Whisk together lime juice, salt, black pepper and cayenne; pour over the salad and toss gently to combine.",
+      "Taste and adjust seasoning. Serve immediately or chill for up to 30 minutes."
+    ],
+    "nutrition_per_serving": {
+      "calories": 156,
+      "protein_g": 5.5,
+      "carbs_g": 32.2,
+      "fat_g": 1.4,
+      "fiber_g": 5.7
+    },
+    "tags": [
+      "vegetarian",
+      "quick",
+      "fiber-rich",
+      "no-nuts",
+      "side_dish"
+    ]
+  },
+  {
+    "recipe_id": "llm_generated",
+    "name": "Roasted Vegetable & Lentil Tray Bake with Crumbled Feta",
+    "description": "Light Mediterranean-style tray bake: oven-roasted seasonal vegetables folded with cooked brown lentils, finished with lemon and crumbled feta for creaminess and extra protein. Beginner-friendly and mild-flavored.",
+    "component": "main_course",
+    "prep_time_mins": 15,
+    "cook_time_mins": 30,
+    "total_time_mins": 45,
+    "ingredients": [
+      {
+        "name": "dry brown or green lentils",
+        "quantity": 1.5,
+        "unit": "cups"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 2,
+        "unit": "tablespoons"
+      },
+      {
+        "name": "red bell pepper",
+        "quantity": 1,
+        "unit": "large"
+      },
+      {
+        "name": "zucchini",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "red onion",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "garlic",
+        "quantity": 3,
+        "unit": "cloves"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 200,
+        "unit": "grams"
+      },
+      {
+        "name": "dried oregano",
+        "quantity": 1,
+        "unit": "teaspoon"
+      },
+      {
+        "name": "fresh lemon juice",
+        "quantity": 2,
+        "unit": "tablespoons"
+      },
+      {
+        "name": "crumbled feta",
+        "quantity": 100,
+        "unit": "grams"
+      }
+    ],
+    "instructions": [
+      "Preheat oven to 425°F (220°C). Line a rimmed baking sheet with foil or parchment.",
+      "Rinse lentils and pick out debris. Place lentils in a pot, cover with 3 cups water, bring to a boil, then simmer uncovered 20–25 minutes until tender but not mushy. Drain and set aside. (If using canned lentils, drain and rinse; skip cooking.)",
+      "While lentils cook, chop bell pepper, zucchini, and red onion into bite-sized pieces. Smash and thinly slice garlic.",
+      "Toss chopped vegetables and cherry tomatoes with 2 tablespoons olive oil and dried oregano on the prepared sheet pan; spread into a single layer.",
+      "Roast vegetables 20–25 minutes, stirring once halfway, until edges are golden and vegetables are tender.",
+      "Transfer roasted vegetables to a large bowl. Add cooked lentils, lemon juice, and gently fold to combine. Taste and adjust seasoning with salt and pepper if needed.",
+      "Fold in crumbled feta, reserving a little to sprinkle on top if desired. Divide into two portions and serve warm with a dollop of plain Greek yogurt if desired."
+    ],
+    "nutrition_per_serving": {
+      "calories": 882,
+      "protein_g": 51.3,
+      "carbs_g": 111.1,
+      "fat_g": 25.8,
+      "fiber_g": 41.0
+    },
+    "tags": [
+      "vegetarian",
+      "mediterranean",
+      "high-protein",
+      "high-fiber",
+      "oven-roasted",
+      "beginner-friendly"
+    ]
+  },
+  {
+    "recipe_id": "llm_chickpea_feta_salad_v1",
+    "name": "Lemon-Herb Chickpea & Feta Salad",
+    "description": "A quick, 10-minute Mediterranean-style side: protein- and fiber-rich chickpeas tossed with cherry tomatoes, cucumber, lemon, olive oil, and crumbled feta. Nut-free and designed as a light evening accompaniment; serves 2.",
+    "component": "side_dish",
+    "prep_time_mins": 10,
+    "cook_time_mins": 0,
+    "total_time_mins": 10,
+    "ingredients": [
+      {
+        "name": "canned chickpeas (drained)",
+        "quantity": 1.0,
+        "unit": "15 oz can"
+      },
+      {
+        "name": "cherry tomatoes (halved)",
+        "quantity": 1.0,
+        "unit": "cup"
+      },
+      {
+        "name": "cucumber (diced)",
+        "quantity": 0.5,
+        "unit": "medium"
+      },
+      {
+        "name": "feta cheese (crumbled)",
+        "quantity": 0.75,
+        "unit": "oz"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "instructions": [
+      "Drain and rinse the chickpeas well; place in a medium bowl.",
+      "Halve the cherry tomatoes and dice the cucumber; add to the bowl with chickpeas.",
+      "Crumble feta over the mixture.",
+      "Whisk lemon juice and olive oil together, season lightly with salt and freshly ground black pepper to taste, and toss with the salad.",
+      "Let sit 5 minutes for flavors to meld, then serve at room temperature or slightly chilled."
+    ],
+    "nutrition_per_serving": {
+      "calories": 300,
+      "protein_g": 12,
+      "carbs_g": 32,
+      "fat_g": 12,
+      "fiber_g": 6
+    },
+    "tags": [
+      "Mediterranean",
+      "quick",
+      "vegetarian",
+      "nut-free",
+      "no-cook",
+      "fiber-forward"
+    ]
+  },
+  {
+    "recipe_id": "llm_generated_001",
+    "name": "Pan-Seared Salmon with Warm Lentil & Spinach Salad",
+    "description": "A light, vegetable-forward main featuring gently pan-seared salmon, a warm green-lentil and carrot salad, wilted spinach, a dollop of Greek yogurt, and toasted pumpkin seeds for tryptophan and healthy fats. Beginner-friendly and ready in ~40 minutes (2 servings).",
+    "component": "main_course",
+    "prep_time_mins": 15,
+    "cook_time_mins": 25,
+    "total_time_mins": 40,
+    "ingredients": [
+      {
+        "name": "salmon fillets (skin-on if available)",
+        "quantity": 200,
+        "unit": "g"
+      },
+      {
+        "name": "green or brown lentils, dry",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "name": "carrot, peeled and diced",
+        "quantity": 120,
+        "unit": "g"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 120,
+        "unit": "g"
+      },
+      {
+        "name": "plain Greek yogurt",
+        "quantity": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pumpkin seeds (pepitas), toasted",
+        "quantity": 8,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 1.5,
+        "unit": "tbsp"
+      },
+      {
+        "name": "lemon (juice and zest)",
+        "quantity": 1,
+        "unit": "whole"
+      },
+      {
+        "name": "garlic, minced",
+        "quantity": 1,
+        "unit": "clove"
+      },
+      {
+        "name": "Dijon mustard",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "dried oregano",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "salt & pepper",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "instructions": [
+      "Rinse lentils and place in a small saucepan with 1 cup (240 ml) water and the diced carrot. Bring to a boil, reduce to a simmer and cook uncovered 18–20 minutes until lentils are tender but not mushy. Drain any excess water and return lentils and carrots to the pan; keep warm.",
+      "While lentils cook, pat salmon dry and season both sides with a pinch of salt, pepper, and half the dried oregano. Zest half the lemon and set aside; cut the lemon in two.",
+      "Heat 1 tbsp olive oil in a nonstick or stainless pan over medium-high. When hot, add salmon skin-side down (if using skin). Cook 3–4 minutes until skin is crisp, then flip and cook 2–4 more minutes until just cooked through (cook until opaque and flaky or to preferred doneness). Remove salmon to a plate and let rest.",
+      "Lower heat to medium and add the remaining 0.5 tbsp olive oil to the pan. Add minced garlic and sauté 20–30 seconds until fragrant (do not brown). Add the warm lentil-and-carrot mix and gently toss to combine. Stir in Dijon, juice of half the lemon, remaining oregano, salt & pepper to taste, and lemon zest. Keep warm.",
+      "Quickly wilt the spinach in a separate skillet over medium heat with a splash of water or 1 tsp olive oil, stirring until just wilted (about 1–2 minutes). Season lightly with salt and pepper.",
+      "To serve (2 plates): divide the warm lentil salad between plates, top with wilted spinach and a salmon fillet. Add a dollop (~40 g) of Greek yogurt beside the salmon and sprinkle pumpkin seeds over the yogurt or salad. Finish with an extra squeeze of lemon and serve immediately."
+    ],
+    "nutrition_per_serving": {
+      "calories": 483,
+      "protein_g": 36,
+      "carbs_g": 26,
+      "fat_g": 26,
+      "fiber_g": 11
+    },
+    "tags": [
+      "lean protein",
+      "sleep-supporting",
+      "vegetable-forward",
+      "beginner",
+      "quick",
+      "high-protein"
+    ]
+  },
+  {
+    "recipe_id": "db_128804",
+    "name": "Microwaved Sweet Potato Mash",
+    "description": "Quick mashed sweet potato prepared in the microwave: a simple source of complex carbs and potassium, lightly seasoned with olive oil, salt, and pepper. Beginner-friendly, ready in ~20 minutes.",
+    "component": "side_dish",
+    "prep_time_mins": 5,
+    "cook_time_mins": 12,
+    "total_time_mins": 17,
+    "ingredients": [
+      {
+        "name": "sweet potato",
+        "quantity": 1,
+        "unit": "large"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "unsalted butter (optional)",
+        "quantity": 0.5,
+        "unit": "tbsp"
+      },
+      {
+        "name": "salt",
+        "quantity": 0.25,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.125,
+        "unit": "tsp"
+      }
+    ],
+    "instructions": [
+      "Pierce the sweet potato several times all over with a fork.",
+      "Place on a microwave-safe plate and microwave on high for 8–12 minutes, turning once halfway, until very tender (see wattage note in suggestions).",
+      "Slice open and scoop the flesh into a bowl.",
+      "Mash with olive oil and optional butter until smooth; season with salt and black pepper to taste.",
+      "Serve warm alongside the pan-seared salmon and sautéed greens."
+    ],
+    "nutrition_per_serving": {
+      "calories": 225.7,
+      "protein_g": 2.6,
+      "carbs_g": 33.7,
+      "fat_g": 9.7,
+      "fiber_g": 4.4
+    },
+    "tags": [
+      "quick",
+      "microwave",
+      "sweet potato",
+      "potassium",
+      "fiber",
+      "beginner"
+    ]
+  },
+  {
+    "recipe_id": "llm_lentil_sweetpotato_salad_001",
+    "name": "Warm Lentil & Roasted Sweet Potato Salad with Tahini-Lemon Dressing",
+    "description": "A quick, plant-forward warm main: tender brown lentils and roasted sweet potato tossed with spinach (or arugula), toasted sunflower seeds and a simple tahini-lemon dressing. Beginner-friendly and ready in ~30 minutes.",
+    "component": "main_course",
+    "prep_time_mins": 10,
+    "cook_time_mins": 20,
+    "total_time_mins": 30,
+    "ingredients": [
+      {
+        "name": "dry brown or green lentils",
+        "quantity": 200,
+        "unit": "g"
+      },
+      {
+        "name": "sweet potato (peeled and diced)",
+        "quantity": 200,
+        "unit": "g"
+      },
+      {
+        "name": "baby spinach or arugula",
+        "quantity": 120,
+        "unit": "g"
+      },
+      {
+        "name": "tahini",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "fresh lemon juice",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "garlic (minced)",
+        "quantity": 1,
+        "unit": "clove"
+      },
+      {
+        "name": "sunflower seeds (toasted)",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "salt",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "feta cheese (optional)",
+        "quantity": 57,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Preheat oven to 425°F (220°C). Toss diced sweet potato with 1/2 tbsp olive oil and a pinch of salt and pepper; spread in a single layer on a baking sheet.",
+      "Roast sweet potato for 18–22 minutes, turning once, until edges are browned and pieces are tender.",
+      "While sweet potato roasts, rinse lentils. Place lentils in a pot with 3 cups (750 ml) water, bring to a boil, reduce to a simmer and cook uncovered 18–20 minutes until tender but holding shape. Drain any excess water.",
+      "Make the dressing: whisk together tahini, lemon juice, remaining 1/2 tbsp olive oil, minced garlic and 1/4 tsp salt. If too thick, thin with 1–2 tsp warm water until pourable.",
+      "In a large bowl combine warm lentils, roasted sweet potato, greens and sunflower seeds. Pour dressing over and gently toss to combine. Taste and adjust salt and pepper.",
+      "Divide between plates (recipe yields ~2 servings). If using, crumble feta on top of each serving. Serve warm or at room temperature."
+    ],
+    "nutrition_per_serving": {
+      "calories": 594,
+      "protein_g": 31,
+      "carbs_g": 78,
+      "fat_g": 21,
+      "fiber_g": 27
+    },
+    "tags": [
+      "warm",
+      "salad",
+      "plant-forward",
+      "high-fiber",
+      "quick"
+    ]
+  },
+  {
+    "recipe_id": "db_314780",
+    "name": "Chicken Caesar Wrap",
+    "description": "Quick 15-minute whole-wheat wrap with cooked chicken (or swap turkey), romaine, tomato and a sprinkle of Parmesan — handheld lunch, easy to assemble.",
+    "component": "main_course",
+    "prep_time_mins": 10,
+    "cook_time_mins": 5,
+    "total_time_mins": 15,
+    "ingredients": [
+      {
+        "name": "boneless skinless chicken breast (or thinly sliced deli turkey)",
+        "quantity": 100,
+        "unit": "g"
+      },
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "romaine lettuce, shredded",
+        "quantity": 40,
+        "unit": "g"
+      },
+      {
+        "name": "tomato, sliced",
+        "quantity": 30,
+        "unit": "g"
+      },
+      {
+        "name": "Parmesan cheese, grated",
+        "quantity": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "If using raw chicken, thinly slice and quickly pan-sear for 4–5 minutes until cooked through; for fastest assembly use pre-cooked chicken or deli turkey slices.",
+      "Lay the whole wheat tortilla flat. Layer romaine, tomato slices, cooked chicken/turkey, and sprinkle Parmesan.",
+      "Optionally fold in a light Caesar-style dressing (use sparingly to control calories) or a smear of hummus for Mediterranean twist.",
+      "Roll tightly, cut in half if desired, and serve with carrot sticks or a small side salad."
+    ],
+    "nutrition_per_serving": {
+      "calories": 388,
+      "protein_g": 35.2,
+      "carbs_g": 11.6,
+      "fat_g": 22.6,
+      "fiber_g": 4.2
+    },
+    "tags": [
+      "quick",
+      "wrap",
+      "lunch",
+      "handheld"
+    ]
+  }
+]

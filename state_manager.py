@@ -486,3 +486,10 @@ def update_user_context(context_key, new_items):
         save_state(state)
         return True
     return False
+
+def clear_state():
+    """Wipes the current state by deleting the file and re-initializing defaults."""
+    if os.path.exists(STATE_FILE):
+        os.remove(STATE_FILE)
+    
+    return init_state()
