@@ -211,11 +211,20 @@ def check_for_clarification(missing_info, step_tracer):
 
 
 def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
-    """Validates the generated plans for conflicts."""
+    """Validates the generated plans for conflicts and generates a friendly warning."""
     
-    sys_prompt = """Compare the nutrition and fitness drafts. 
-    Are there any critical conflicts? (e.g. heavy leg day with zero carb recovery meal).
-    Return JSON: {"status": "ok" | "error", "reason": "...", "suggested_fix": "..."}"""
+    sys_prompt = """You are Nutrissistant, a helpful fitness and nutrition assistant. Compare the nutrition and fitness drafts. 
+    Are there any critical conflicts? (e.g. heavy leg day with a zero-carb recovery meal, or a heavy meal scheduled 30 minutes before a high-intensity run).
+    
+    If there is a conflict, you MUST generate a friendly, conversational message for the user. Explain the issue simply, and ask if they would like you to fix it.
+    
+    Return JSON strictly matching this schema: 
+    {
+        "status": "ok" | "error", 
+        "internal_reason": "Brief technical reason for the logs", 
+        "friendly_message": "e.g., 'I noticed you have a heavy leg day planned on Tuesday, but your post-workout meal is very low in carbs. Would you like me to find a better recovery recipe?'"
+    }"""
+    
     user_prompt = f"Nutrition: {nutrition_draft}\nFitness: {fitness_draft}"
 
     messages = [
@@ -286,7 +295,6 @@ Selection policy:
 
         step_tracer.append({
             "module": MODULE_NAME,
-            "stage": "workout_pipeline_selection",
             "prompt": {"system": sys_prompt, "user": user_prompt},
             "response": {
                 "pipeline": pipeline,
@@ -299,7 +307,6 @@ Selection policy:
         fallback = "reflection" if not isinstance(current_routine, dict) else "simple_rag"
         step_tracer.append({
             "module": MODULE_NAME,
-            "stage": "workout_pipeline_selection_fallback",
             "prompt": {"system": sys_prompt, "user": user_prompt},
             "response": {
                 "pipeline": fallback,
@@ -509,8 +516,9 @@ def orchestrate_workflow(user_query):
     if active_fitness and active_nutrition:
         conflict_check = validate_and_resolve_conflicts(active_nutrition, active_fitness, step_tracer)
         if conflict_check.get("status") == "error":
-            # Append the warning to the UI without forcing the agents to fix it
-            responses.append(f"Note: {conflict_check.get('reason')} - {conflict_check.get('suggested_fix')}")
+            # Show the friendly conversational warning to the user
+            responses.append(f"**Heads up:** {conflict_check.get('friendly_message')}")
+
 
     # ==========================================
     # PHASE 3: COMMIT & SYNC (Write)

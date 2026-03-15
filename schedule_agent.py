@@ -61,7 +61,7 @@ def extract_schedule_intent(user_query, step_tracer):
        - If scheduling a Workout: Do not place it within 2 hours after a scheduled meal.
        - If scheduling a Meal: If there is a workout that day, explicitly set `preferred_time` to 1-2 hours AFTER the workout for recovery, or 2+ hours BEFORE. 
        - Always output a specific `preferred_time` that respects these biological rules whenever possible.
-       
+
     Output strictly in JSON with a list of "events":
     {{
         "events": [
@@ -310,11 +310,11 @@ def commit_routine_to_calendar(units_with_slots, step_tracer):
     state_manager.save_state(state)
     
     # Log the commit action
-    step_tracer.append({
-        "module": MODULE_NAME,
-        "stage": "commit_to_calendar",
-        "data": units_with_slots,
-        "response": messages
-    })
+    # step_tracer.append({
+    #     "module": MODULE_NAME,
+    #     "stage": "commit_to_calendar",
+    #     "data": units_with_slots,
+    #     "response": messages
+    # })
     
     return {"status": "success", "messages": messages}

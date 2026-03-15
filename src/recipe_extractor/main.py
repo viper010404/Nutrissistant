@@ -254,8 +254,8 @@ def run_recipe_extractor(context: dict, step_tracer: list | None = None) -> dict
 
         parsed = _copy_meal_id_from_context(parsed, context)
 
-        if step_tracer is not None and hasattr(step_tracer, "append"):
-            step_tracer.append({"module": "RecipeExtractorAgent", "output": parsed})
+        # if step_tracer is not None and hasattr(step_tracer, "append"):
+        #     step_tracer.append({"module": "RecipeExtractorAgent", "output": parsed})
 
         return parsed
 

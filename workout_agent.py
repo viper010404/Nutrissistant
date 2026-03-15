@@ -370,7 +370,6 @@ def _run_generation_stage(stage_name, sys_prompt, payload, step_tracer, rag_resu
 
     step_tracer.append({
         "module": MODULE_NAME,
-        "stage": stage_name,
         "prompt": {"system": sys_prompt, "user": user_prompt},
         "response": {
             **parsed,
@@ -433,7 +432,6 @@ Rules:
 
     step_tracer.append({
         "module": MODULE_NAME,
-        "stage": f"reflection_critique_{iteration}",
         "prompt": {"system": sys_prompt, "user": user_prompt},
         "response": critique,
     })
@@ -547,21 +545,21 @@ def execute_weekly_routine_task(user_query, shared_context, step_tracer, current
                         user_context=user_context,
                     )
                 except Exception as critique_error:
-                    step_tracer.append({
-                        "module": MODULE_NAME,
-                        "stage": f"reflection_critique_error_{iteration}",
-                        "response": {"error": str(critique_error)}
-                    })
+                    # step_tracer.append({
+                    #     "module": MODULE_NAME,
+                    #     "stage": f"reflection_critique_error_{iteration}",
+                    #     "response": {"error": str(critique_error)}
+                    # })
                     break
 
                 if not _should_continue_reflection(critique):
-                    step_tracer.append({
-                        "module": MODULE_NAME,
-                        "stage": f"reflection_stop_{iteration}",
-                        "response": {
-                            "reason": "critic_marked_no_further_refinement_needed"
-                        }
-                    })
+                    # step_tracer.append({
+                    #     "module": MODULE_NAME,
+                    #     "stage": f"reflection_stop_{iteration}",
+                    #     "response": {
+                    #         "reason": "critic_marked_no_further_refinement_needed"
+                    #     }
+                    # })
                     break
 
                 refine_payload = _build_generation_payload(
@@ -601,21 +599,21 @@ def execute_weekly_routine_task(user_query, shared_context, step_tracer, current
 
     except Exception as e:
         fallback = _fallback_weekly_routine(user_query, requested_units, schedule_guidance=schedule_guidance)
-        step_tracer.append({
-            "module": MODULE_NAME,
-            "stage": "pipeline_fallback",
-            "response": {
-                "pipeline_mode": pipeline_mode,
-                "error": "weekly_model_output_invalid_or_failed",
-                "details": str(e),
-                "retrieval": {
-                    "status": rag_result.get("status"),
-                    "reason": rag_result.get("reason"),
-                    "sources": rag_result.get("sources", [])
-                },
-                "fallback": fallback
-            }
-        })
+        # step_tracer.append({
+        #     "module": MODULE_NAME,
+        #     "stage": "pipeline_fallback",
+        #     "response": {
+        #         "pipeline_mode": pipeline_mode,
+        #         "error": "weekly_model_output_invalid_or_failed",
+        #         "details": str(e),
+        #         "retrieval": {
+        #             "status": rag_result.get("status"),
+        #             "reason": rag_result.get("reason"),
+        #             "sources": rag_result.get("sources", [])
+        #         },
+        #         "fallback": fallback
+        #     }
+        # })
         fallback["response"] = _sanitize_user_text(fallback.get("response", ""))
         fallback["routine_draft"] = _sanitize_user_payload(fallback.get("routine_draft", {}))
         return fallback
