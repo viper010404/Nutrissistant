@@ -403,6 +403,7 @@ def orchestrate_workflow(user_query):
         The user just said something conversational (like a greeting, "thanks", or general chat) OR something off-topic. 
         Respond warmly, naturally, and briefly (1-3 sentences). 
         If it's a greeting, say hello back and gently remind them that you can help plan meals, find recipes, and schedule workout routines.
+        If they asked for something you can't do, politely explain that and suggest something you can help with instead.
         
         IMPORTANT: Return your response strictly as a JSON object with a single key: "reply".
         """
