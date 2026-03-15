@@ -4,12 +4,11 @@ from sqlalchemy import create_engine, text
 import os
 from dotenv import load_dotenv
 
-from constants import (
+from src.config import (
     DB_NOT_FOUND_MESSAGE as DATABASE_NOT_FOUND_MESSAGE,
     DB_EMPTY_RESULT_MESSAGE as EMPTY_QUERY_RESULT_MESSAGE,
     DB_SUCCESS_MESSAGE as SUCCESSFUL_QUERY_MESSAGE,
     DB_ERROR_MESSAGE as ERROR_QUERY_MESSAGE,
-    DB_TABLE_NAMES as TABLE_NAMES,
 )
 
 load_dotenv()
@@ -84,23 +83,6 @@ def parse_recipes_query_result(df_result):
     return recipes
 
 
-def test_quick_usda():
-    """
-    Connects to Supabase and prints foods from USDA database that match 'chicken'.
-    """
-    query = """
-       SELECT food_name, calories, description
-       FROM usda_foods
-       WHERE food_name ILIKE '%bread%'
-       LIMIT 5;"""
-    message, df = query_database(query)
-    
-    if df is not None and not df.empty:
-        print(SUCCESSFUL_QUERY_MESSAGE)
-        print(df.to_string(index=False))
-    else:
-        print(message)
-
 def test_quick_recipes():
     """
     Connects to Supabase and prints recipes taking less than 20 minutes.
@@ -133,5 +115,4 @@ def test_quick_recipes():
         
 if __name__ == "__main__":
     test_quick_recipes()
-    # test_quick_usda()
     pass

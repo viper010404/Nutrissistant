@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import base64
 import requests
-import state_manager
+from src.core import state_manager
 
 
 def _format_slots(slots):

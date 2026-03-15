@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import json
 
-from constants import LLM_MODEL_NAME
+from src.config import LLM_MODEL_NAME
 
 load_dotenv()
 
@@ -51,6 +51,15 @@ def _coerce_user_prompt(payload):
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
+def _parse_json_response_content(content):
+    if isinstance(content, list):
+        content = "".join(
+            block if isinstance(block, str) else block.get("text", "")
+            for block in content
+        )
+    return json.loads(content)
+
+
 def _invoke_json_llm(system_prompt, user_payload, step_tracer=None, module_name: str = DEFAULT_MODULE_NAME):
     user_prompt = _coerce_user_prompt(user_payload)
     messages = [
@@ -59,6 +68,6 @@ def _invoke_json_llm(system_prompt, user_payload, step_tracer=None, module_name:
     ]
 
     response = json_llm.invoke(messages)
-    result = json.loads(response.content)
+    result = _parse_json_response_content(response.content)
     _append_step(step_tracer, system_prompt, user_prompt, result, module_name)
     return result

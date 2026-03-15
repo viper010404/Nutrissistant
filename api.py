@@ -7,7 +7,7 @@ import os
 import httpx
 import websockets
 
-import supervisor_agent
+from src.agents import supervisor_agent
 
 app = FastAPI(title="Nutrissistant API")
 
@@ -192,7 +192,7 @@ def get_agent_info():
                         }
                     },
                     {
-                        "module": "LLM",
+                        "module": "RecipeExtractor",
                         "prompt": {
                             "system": """You are a recipe database search assistant.
 
@@ -252,7 +252,7 @@ def get_agent_info():
                         }
                     },
                     {
-                        "module": "LLM",
+                        "module": "RecipeExtractor",
                         "prompt": {
                             "system": """You are a recipe database query assistant.
 
@@ -791,7 +791,7 @@ Selection policy:
 @app.get("/api/model_architecture")
 def get_model_architecture():
     """Returns the architecture diagram as a PNG image."""
-    image_path = "agent_architecture.png"
+    image_path = os.path.join("images", "agent_architecture.png")
     if not os.path.exists(image_path):
         raise HTTPException(status_code=404, detail="Architecture diagram not found.")
     
@@ -803,13 +803,31 @@ def execute_agent(request: ExecuteRequest):
     try:
         # Call the logic we built earlier
         agent_result = supervisor_agent.orchestrate_workflow(request.prompt)
+
+        if not isinstance(agent_result, dict):
+            return {
+                "status": "error",
+                "error": "Supervisor returned an invalid response shape.",
+                "response": None,
+                "steps": []
+            }
+
+        response_text = agent_result.get("response")
+        steps = agent_result.get("steps", [])
+        if response_text is None:
+            return {
+                "status": "error",
+                "error": "Supervisor returned no response text.",
+                "response": None,
+                "steps": steps if isinstance(steps, list) else []
+            }
         
         # Format the response exactly as the PDF requires
         return {
             "status": "ok",
             "error": None,
-            "response": agent_result["response"],
-            "steps": agent_result["steps"]
+            "response": response_text,
+            "steps": steps if isinstance(steps, list) else []
         }
     except Exception as e:
         # If anything crashes, return the required error schema
