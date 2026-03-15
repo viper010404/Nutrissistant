@@ -859,5 +859,366 @@
       "lunch",
       "handheld"
     ]
+  },
+  {
+    "recipe_id": "llm_parfait_001",
+    "name": "Protein-Fiber Greek Yogurt Parfait",
+    "description": "Plain Greek yogurt blended with unflavored protein powder, layered with mixed berries, chopped almonds, and ground flaxseed for a quick high-protein, high-fiber breakfast parfait.",
+    "component": "main_course",
+    "prep_time_mins": 5,
+    "cook_time_mins": 0,
+    "total_time_mins": 5,
+    "ingredients": [
+      {
+        "name": "plain Greek yogurt (2% or full-fat)",
+        "quantity": 1.5,
+        "unit": "cups"
+      },
+      {
+        "name": "unflavored whey or plant protein powder",
+        "quantity": 1,
+        "unit": "scoop (≈25 g)"
+      },
+      {
+        "name": "mixed berries (blueberries and raspberries)",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "almonds, chopped",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "ground flaxseed",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "honey (optional)",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "instructions": [
+      "Spoon the Greek yogurt into a bowl or jar.",
+      "Stir the protein powder into the yogurt until smooth and evenly mixed.",
+      "Layer half the yogurt mixture, then half the berries. Repeat to create two layers.",
+      "Top with chopped almonds and sprinkle the ground flaxseed.",
+      "Drizzle honey only if you want extra sweetness."
+    ],
+    "nutrition_per_serving": {
+      "calories": 450,
+      "protein_g": 30,
+      "carbs_g": 36,
+      "fat_g": 18,
+      "fiber_g": 7
+    },
+    "tags": [
+      "quick",
+      "high-protein",
+      "high-fiber",
+      "breakfast",
+      "no-cook"
+    ]
+  },
+  {
+    "recipe_id": "llm_generated_turkey_black_bean_chili",
+    "name": "Turkey & Black Bean Chili with Brown Rice",
+    "description": "A simple, protein-forward turkey and black bean chili served over brown rice. Mild-medium spice, beginner-friendly, and designed to meet high-protein, high-fiber dinner targets.",
+    "component": "main_course",
+    "prep_time_mins": 20,
+    "cook_time_mins": 40,
+    "total_time_mins": 60,
+    "ingredients": [
+      {
+        "name": "lean ground turkey",
+        "quantity": 340,
+        "unit": "g"
+      },
+      {
+        "name": "canned black beans, drained and rinsed",
+        "quantity": 1,
+        "unit": "15 oz can (≈240 g drained)"
+      },
+      {
+        "name": "brown rice (dry)",
+        "quantity": 0.75,
+        "unit": "cup (dry)"
+      },
+      {
+        "name": "diced tomatoes (canned, with juices)",
+        "quantity": 1,
+        "unit": "14 oz can (≈400 g)"
+      },
+      {
+        "name": "red bell pepper, diced",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "yellow onion, diced",
+        "quantity": 1,
+        "unit": "small"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "chili powder",
+        "quantity": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "ground cumin",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "plain nonfat Greek yogurt (optional topping)",
+        "quantity": 120,
+        "unit": "g"
+      },
+      {
+        "name": "scallions, sliced (optional garnish)",
+        "quantity": 2,
+        "unit": "stalks"
+      }
+    ],
+    "instructions": [
+      "Cook the brown rice first: rinse 0.75 cup dry brown rice. In a small pot combine rice with 1 1/2 cups water and a pinch of salt. Bring to a boil, reduce heat to low, cover, and simmer 35–40 minutes until tender. Remove from heat and let rest covered 5 minutes.",
+      "While the rice cooks, heat a large skillet or medium pot over medium heat and add 1 tbsp olive oil.",
+      "Add the diced onion and bell pepper. Sauté 5–7 minutes until softened.",
+      "Add the ground turkey, breaking it up with a spoon. Cook until no longer pink, about 6–8 minutes.",
+      "Stir in diced tomatoes (with juices), drained black beans, 1.5 tsp chili powder, 1 tsp ground cumin, 1 tsp salt, and 1/2 tsp black pepper. Mix well.",
+      "Bring to a gentle simmer, reduce heat to low, and simmer uncovered 20–25 minutes, stirring occasionally, until the chili thickens and flavors meld.",
+      "Taste and adjust seasoning (more chili powder for heat, more salt if needed). If too thick, add a splash of water and simmer 2–3 minutes.",
+      "Divide the cooked brown rice between two bowls or plates and spoon the chili over the rice.",
+      "Top each serving with about 60 g Greek yogurt and a sprinkle of sliced scallions. Serve warm."
+    ],
+    "nutrition_per_serving": {
+      "calories": 767,
+      "protein_g": 56,
+      "carbs_g": 88,
+      "fat_g": 21,
+      "fiber_g": 17
+    },
+    "tags": [
+      "high-protein",
+      "fiber-rich",
+      "gluten-free",
+      "weeknight",
+      "beginner-friendly"
+    ]
+  },
+  {
+    "recipe_id": "59402",
+    "name": "Chocolate-Peanut butter Smoothie",
+    "description": "Quick breakfast smoothie with banana, soymilk, vanilla yogurt, and peanut butter. Fast, beginner-friendly, and ready in minutes.",
+    "component": "main_course",
+    "prep_time_mins": 5,
+    "cook_time_mins": 0,
+    "total_time_mins": 5,
+    "ingredients": [
+      {
+        "name": "banana",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "soymilk",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "vanilla yogurt",
+        "quantity": 0.5,
+        "unit": "cup"
+      },
+      {
+        "name": "peanut butter",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "ice or frozen banana chunks",
+        "quantity": 0.5,
+        "unit": "cup"
+      }
+    ],
+    "instructions": [
+      "Place banana, soymilk, vanilla yogurt, peanut butter and ice/frozen banana chunks in a blender.",
+      "Blend until very smooth and thick.",
+      "Pour into a bowl (for a thicker bowl texture use more frozen banana and less liquid) or a glass and serve immediately."
+    ],
+    "nutrition_per_serving": {
+      "calories": 495.3,
+      "protein_g": 24.5,
+      "carbs_g": 51.0,
+      "fat_g": 25.2,
+      "fiber_g": 8.2
+    },
+    "tags": [
+      "quick",
+      "smoothie",
+      "breakfast",
+      "peanut-butter",
+      "beginner"
+    ]
+  },
+  {
+    "recipe_id": "llm_generated_nicoise_style_tuna_salad_001",
+    "name": "Quick Niçoise-style Tuna Salad (single serving)",
+    "description": "Beginner-friendly Niçoise-style salad with canned tuna, baby potatoes, blanched green beans, hard-boiled egg, olives and mixed greens tossed in a simple Dijon-lemon vinaigrette. Ready in ~22 minutes and targeted to ~600–700 kcal and ~35–45 g protein.",
+    "component": "main_course",
+    "prep_time_mins": 10,
+    "cook_time_mins": 12,
+    "total_time_mins": 22,
+    "ingredients": [
+      {
+        "name": "canned tuna in water, drained",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "name": "baby potatoes (halved if large)",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "name": "green beans, trimmed",
+        "quantity": 80,
+        "unit": "g"
+      },
+      {
+        "name": "mixed salad greens (romaine/spinach/arugula)",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "name": "large egg",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "Kalamata or black olives, pitted",
+        "quantity": 30,
+        "unit": "g"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 1.5,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Dijon mustard",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "fresh lemon juice",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "salt",
+        "quantity": 1,
+        "unit": "pinch"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 1,
+        "unit": "pinch"
+      }
+    ],
+    "instructions": [
+      "Place potatoes and the egg in a medium saucepan and cover with cold water. Bring to a gentle boil, then simmer for 9 minutes.",
+      "With about 4 minutes left on the timer, add trimmed green beans to the same pot to blanch for the remaining 4 minutes.",
+      "When time is up, drain the potatoes, egg, and green beans. Plunge the egg into cold water to stop cooking; set potatoes and beans aside to cool slightly.",
+      "While they cool, whisk together olive oil, Dijon mustard, lemon juice, and a pinch each of salt and pepper to make the dressing.",
+      "Peel and quarter the egg. Cut potatoes into bite-sized pieces if needed.",
+      "On a plate or in a bowl, arrange mixed greens, warm potatoes, blanched green beans, drained tuna (flaked), olives, and quartered egg.",
+      "Drizzle the dressing over the salad and gently toss, or serve the dressing on the side. Adjust seasoning to taste.",
+      "Serve immediately. Store dressing separately if refrigerating leftovers."
+    ],
+    "nutrition_per_serving": {
+      "calories": 634,
+      "protein_g": 41,
+      "carbs_g": 34,
+      "fat_g": 37,
+      "fiber_g": 7
+    },
+    "tags": [
+      "salad",
+      "high-protein",
+      "quick",
+      "beginner",
+      "main_course"
+    ]
+  },
+  {
+    "recipe_id": "llm_greek_yogurt_berry_walnut_cup_001",
+    "name": "Greek Yogurt Berry & Walnut Cup",
+    "description": "A quick, light Mediterranean-style dessert: 100 g plain Greek yogurt (or a high-protein dairy-free alternative) topped with a small handful of berries and a teaspoon of chopped walnuts for modest protein and satiety. Ready in 5 minutes.",
+    "component": "dessert",
+    "prep_time_mins": 5,
+    "cook_time_mins": 0,
+    "total_time_mins": 5,
+    "ingredients": [
+      {
+        "name": "plain nonfat Greek yogurt (or high-protein dairy-free yogurt)",
+        "quantity": 100,
+        "unit": "g"
+      },
+      {
+        "name": "mixed fresh berries (blueberries, raspberries, or strawberries)",
+        "quantity": 30,
+        "unit": "g"
+      },
+      {
+        "name": "chopped walnuts",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "vanilla extract (optional)",
+        "quantity": 2,
+        "unit": "drops"
+      }
+    ],
+    "instructions": [
+      "Spoon 100 g of plain Greek yogurt into a small cup or bowl.",
+      "Top with 30 g mixed fresh berries.",
+      "Sprinkle 1 teaspoon of chopped walnuts over the berries.",
+      "If using, add 2 drops of vanilla extract and gently swirl to combine.",
+      "Serve immediately."
+    ],
+    "nutrition_per_serving": {
+      "calories": 92,
+      "protein_g": 10.9,
+      "carbs_g": 7.9,
+      "fat_g": 2.1,
+      "fiber_g": 1.5
+    },
+    "tags": [
+      "quick",
+      "low-calorie",
+      "high-protein",
+      "Mediterranean-style",
+      "vegetarian",
+      "beginner-friendly"
+    ]
   }
 ]

@@ -997,10 +997,20 @@ elif st.session_state.current_page == 'all recipes':
                 col_a, col_b = st.columns([1, 1])
                 with col_a:
                     if st.button("Open Plan", key=f"open_plan_{plan_id}"):
+                        if "meals" not in state or not isinstance(state["meals"], dict):
+                            state["meals"] = {"plans": plans, "current_plan_id": None}
+                        state["meals"]["current_plan_id"] = plan_id
+                        state_manager.save_state(state)
+                        st.session_state.pop("selected_recipe_id", None)
                         st.session_state.current_page = "current recipes"
                         st.rerun()
                 
                 if not is_current_plan and st.button("Set as Current Plan", key=f"set_plan_{plan_id}"):
+                    if "meals" not in state or not isinstance(state["meals"], dict):
+                        state["meals"] = {"plans": plans, "current_plan_id": None}
+                    state["meals"]["current_plan_id"] = plan_id
+                    state_manager.save_state(state)
+                    st.session_state.pop("selected_recipe_id", None)
                     st.rerun()
 
         # --- RENDER SAVED SINGLE RECIPES ---

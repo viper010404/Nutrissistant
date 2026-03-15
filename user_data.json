@@ -1,5 +1,5 @@
 {
-    "user_query": "Can you give me a protein heavy meal for Sunday dinner? Preferably Italian, with no necessary prep time limit",
+    "user_query": "Can you plan me a Tuesday Dinner please",
     "user_profile": "",
     "schedule_data": {
         "Monday": {
@@ -15,7 +15,7 @@
             "15:00": "-",
             "16:00": "-",
             "17:00": "Monday Evening: Lower-Body Strength",
-            "18:00": "-",
+            "18:00": "Meal: Chinese Cabbage, Snow Pea and Mushroom Stir-Fry",
             "19:00": "-",
             "20:00": "-",
             "21:00": "-",
@@ -35,7 +35,7 @@
             "15:00": "-",
             "16:00": "-",
             "17:00": "Thursday Evening: Low-Intensity Cardio & Habit Review",
-            "18:00": "-",
+            "18:00": "Meal: Pan-baked or oven-roasted lean protein (e.g., salmon fillet or skinless chicken breast) seasoned with olive oil, lemon, garlic, and mixed herbs; serve on a small bed (1/2 cup cooked) of whole grain (quinoa, farro, or bulgur) with a quick saut\u00e9 of spinach and cherry tomatoes mixed in., Mediterranean Chickpea & Cucumber Side Salad, Greek Yogurt Berry & Walnut Cup",
             "19:00": "-",
             "20:00": "-",
             "21:00": "-",
@@ -148,91 +148,185 @@
             "date": "2026-03-15",
             "meals": [
                 {
-                    "meal_id": "meal_33ae8895",
+                    "meal_id": "tuesday-dinner-1",
                     "meal_type": "dinner",
-                    "day_of_week": "Monday",
+                    "day_of_week": "Tuesday",
                     "dishes": [
                         {
-                            "recipe_id": "86054",
-                            "name": "Crispy Parmesan Chicken and Linguine",
-                            "description": "Parmesan-crusted, pan-seared chicken breasts served over garlic-parmesan linguine \u2014 a protein-forward Italian-American main perfect for Sunday dinner.",
-                            "component": "main_course",
-                            "prep_time_mins": 15,
-                            "cook_time_mins": 20,
-                            "total_time_mins": 35,
+                            "recipe_id": "fallback_00b948a1",
+                            "name": "Pan-baked or oven-roasted lean protein (e.g., salmon fillet or skinless chicken breast) seasoned with olive oil, lemon, garlic, and mixed herbs; serve on a small bed (1/2 cup cooked) of whole grain (quinoa, farro, or bulgur) with a quick saut\u00e9 of spinach and cherry tomatoes mixed in.",
+                            "description": "The agent planned this meal, but the recipe details failed to generate properly due to an AI timeout.",
+                            "prep_time_mins": 30,
+                            "ingredients": [],
+                            "instructions": [
+                                "Ask Nutrissistant to specifically generate a recipe for this dish!"
+                            ],
+                            "nutrition_per_serving": {},
+                            "component": "main_course"
+                        },
+                        {
+                            "recipe_id": "llm_generated",
+                            "name": "Mediterranean Chickpea & Cucumber Side Salad",
+                            "description": "A light, vegetable-forward Mediterranean-style salad with a small portion of chickpeas for fiber and a bright lemon-olive oil dressing. Ready in 10 minutes and beginner-friendly. Olives are optional to keep sodium low; a small crumbled feta or a few toasted pine nuts are suggested as a small dairy-or-nut finish for satiety.",
+                            "component": "side_dish",
+                            "prep_time_mins": 10,
+                            "cook_time_mins": 0,
+                            "total_time_mins": 10,
                             "ingredients": [
                                 {
-                                    "name": "boneless skinless chicken breast halves",
+                                    "name": "cooked chickpeas, well-rinsed (low-sodium if canned)",
+                                    "quantity": 30,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "mixed leafy greens (baby spinach or mixed greens)",
+                                    "quantity": 40,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "cucumber, diced",
+                                    "quantity": 50,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "grated carrot",
+                                    "quantity": 30,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "Kalamata olives, pitted and halved (optional - omit for lower sodium)",
                                     "quantity": 2,
-                                    "unit": "pieces"
+                                    "unit": "count"
                                 },
                                 {
-                                    "name": "parmesan cheese, grated",
-                                    "quantity": 0.75,
-                                    "unit": "cup"
+                                    "name": "fresh lemon juice",
+                                    "quantity": 15,
+                                    "unit": "ml"
                                 },
                                 {
-                                    "name": "salt",
+                                    "name": "extra-virgin olive oil",
+                                    "quantity": 5,
+                                    "unit": "ml"
+                                },
+                                {
+                                    "name": "fresh parsley, chopped (optional)",
+                                    "quantity": 5,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "freshly ground black pepper",
+                                    "quantity": 1,
+                                    "unit": "pinch"
+                                },
+                                {
+                                    "name": "small crumbled feta OR toasted pine nuts (optional finish)",
+                                    "quantity": 10,
+                                    "unit": "g"
+                                }
+                            ],
+                            "instructions": [
+                                "Place the mixed leafy greens in a medium bowl.",
+                                "Add the diced cucumber and grated carrot to the greens.",
+                                "Toss in the well-rinsed chickpeas and halved olives if using.",
+                                "In a small cup, whisk together the lemon juice, olive oil, and a pinch of black pepper (add chopped parsley if using).",
+                                "Pour the dressing over the salad and toss gently to combine.",
+                                "Top with a small sprinkle of crumbled feta or toasted pine nuts if using, and serve immediately."
+                            ],
+                            "nutrition_per_serving": {
+                                "calories": 113,
+                                "protein_g": 3.9,
+                                "carbs_g": 16.5,
+                                "fat_g": 4.2,
+                                "fiber_g": 4.7
+                            },
+                            "tags": [
+                                "Mediterranean",
+                                "vegetable-forward",
+                                "side_dish",
+                                "quick",
+                                "beginner-friendly",
+                                "low-calorie",
+                                "fiber-rich"
+                            ]
+                        },
+                        {
+                            "recipe_id": "llm_greek_yogurt_berry_walnut_cup_001",
+                            "name": "Greek Yogurt Berry & Walnut Cup",
+                            "description": "A quick, light Mediterranean-style dessert: 100 g plain Greek yogurt (or a high-protein dairy-free alternative) topped with a small handful of berries and a teaspoon of chopped walnuts for modest protein and satiety. Ready in 5 minutes.",
+                            "component": "dessert",
+                            "prep_time_mins": 5,
+                            "cook_time_mins": 0,
+                            "total_time_mins": 5,
+                            "ingredients": [
+                                {
+                                    "name": "plain nonfat Greek yogurt (or high-protein dairy-free yogurt)",
+                                    "quantity": 100,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "mixed fresh berries (blueberries, raspberries, or strawberries)",
+                                    "quantity": 30,
+                                    "unit": "g"
+                                },
+                                {
+                                    "name": "chopped walnuts",
                                     "quantity": 1,
                                     "unit": "tsp"
                                 },
                                 {
-                                    "name": "ground black pepper",
-                                    "quantity": 0.5,
-                                    "unit": "tsp"
-                                },
-                                {
-                                    "name": "cayenne pepper",
-                                    "quantity": 0.25,
-                                    "unit": "tsp"
-                                },
-                                {
-                                    "name": "olive oil",
+                                    "name": "vanilla extract (optional)",
                                     "quantity": 2,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "linguine",
-                                    "quantity": 8,
-                                    "unit": "oz"
-                                },
-                                {
-                                    "name": "garlic, minced",
-                                    "quantity": 3,
-                                    "unit": "cloves"
-                                },
-                                {
-                                    "name": "red pepper flakes",
-                                    "quantity": 0.25,
-                                    "unit": "tsp"
+                                    "unit": "drops"
                                 }
                             ],
                             "instructions": [
-                                "Preheat oven to 400\u00b0F (200\u00b0C). Pound chicken to an even ~1/2-inch thickness; season both sides with salt, pepper, and cayenne.",
-                                "Press chicken into grated parmesan (option: mix 1/2 cup panko breadcrumbs with the parmesan for extra crust).",
-                                "Heat 1 tbsp olive oil in an oven-safe skillet over medium-high heat. Sear chicken 2\u20133 minutes per side until golden-brown.",
-                                "Transfer skillet to oven and bake 8\u201310 minutes (until internal temp reaches 165\u00b0F / 74\u00b0C) or until cooked through. Remove and rest 5 minutes.",
-                                "While chicken cooks, boil linguine in salted water per package directions; reserve 1/2 cup pasta water before draining.",
-                                "In a large skillet, heat remaining 1 tbsp olive oil over medium; saut\u00e9 garlic 30\u201360 seconds until fragrant. Add cooked linguine, 1/2 cup grated parmesan, a splash of reserved pasta water, and red pepper flakes. Toss to combine and create a light sauce, adding more pasta water as needed.",
-                                "Plate linguine, top with rested chicken, and sprinkle extra parmesan and red pepper flakes to taste."
+                                "Spoon 100 g of plain Greek yogurt into a small cup or bowl.",
+                                "Top with 30 g mixed fresh berries.",
+                                "Sprinkle 1 teaspoon of chopped walnuts over the berries.",
+                                "If using, add 2 drops of vanilla extract and gently swirl to combine.",
+                                "Serve immediately."
                             ],
                             "nutrition_per_serving": {
-                                "calories": 815,
-                                "protein_g": 52,
-                                "carbs_g": 85,
-                                "fat_g": 28,
-                                "fiber_g": 4
+                                "calories": 92,
+                                "protein_g": 10.9,
+                                "carbs_g": 7.9,
+                                "fat_g": 2.1,
+                                "fiber_g": 1.5
                             },
                             "tags": [
-                                "Italian",
-                                "high_protein",
-                                "chicken",
-                                "dinner"
+                                "quick",
+                                "low-calorie",
+                                "high-protein",
+                                "Mediterranean-style",
+                                "vegetarian",
+                                "beginner-friendly"
                             ]
                         }
                     ],
-                    "warnings": [],
-                    "suggestions": []
+                    "warnings": [
+                        "If you have any food allergies or intolerances, check ingredient choices (fish, dairy, nuts) before preparing.",
+                        "Keep portion sizes moderate if eating late to support glucose metabolism and sleep.",
+                        "Limit added salt and high-sodium condiments to stay within the sodium targets.",
+                        "Agent raised an exception: Too many arguments to single-input tool STRICT_EVALUATOR.\n                Consider using StructuredTool instead. Args: [{'recipe_id': 'llm_generated_001', 'name': 'Lemon-Herb Pan-Baked Chicken on Quinoa with Saut\u00e9ed Spinach & Cherry Tomatoes', 'description': 'A light Mediterranean-style main course: a pan-baked lean chicken breast seasoned with lemon, garlic and herbs, served over 1/2 cup cooked quinoa with quickly saut\u00e9ed spinach and cherry tomatoes, finished with a small sprinkle of feta for satiety.', 'component': 'main_course', 'prep_time_mins': 10, 'cook_time_mins': 18, 'total_time_mins': 28, 'ingredients': [{'name': 'skinless boneless chicken breast', 'quantity': 120, 'unit': 'g'}, {'name': 'cooked quinoa', 'quantity': 0.5, 'unit': 'cup'}, {'name': 'extra-virgin olive oil', 'quantity': 1, 'unit': 'tsp'}, {'name': 'fresh spinach', 'quantity': 1, 'unit': 'cup'}, {'name': 'cherry tomatoes', 'quantity': 6, 'unit': 'piece'}, {'name': 'feta cheese, crumbled', 'quantity': 15, 'unit': 'g'}, {'name': 'garlic', 'quantity': 1, 'unit': 'clove'}, {'name': 'lemon juice', 'quantity': 1, 'unit': 'tbsp'}, {'name': 'dried oregano', 'quantity': 0.5, 'unit': 'tsp'}, {'name': 'black pepper', 'quantity': 0.125, 'unit': 'tsp'}], 'instructions': ['Preheat oven to 200\u00b0C (400\u00b0F). Pat the chicken breast dry. In a small bowl combine 0.5 tsp olive oil, lemon juice, minced garlic, dried oregano and black pepper; rub over the chicken.', 'Place the chicken on a small baking sheet or ovenproof dish and bake 12\u201315 minutes (depending on thickness) until internal temperature reaches 74\u00b0C (165\u00b0F). Remove and let rest 3 minutes, then slice.', 'While chicken bakes, warm a nonstick skillet over medium heat and add the remaining 0.5 tsp olive oil. Add halved cherry tomatoes and saut\u00e9 1\u20132 minutes until they begin to soften.', 'Add spinach to the pan, toss with tomatoes and cook 1\u20132 minutes until wilted. Season with a little black pepper and a squeeze of lemon if desired.', 'Warm the cooked quinoa (microwave 30\u201360 sec or heat gently in a pan). Plate 1/2 cup quinoa, top with the saut\u00e9ed spinach and tomatoes, and place sliced chicken on top.', 'Finish with crumbled feta over the dish. Serve immediately.'], 'nutrition_per_serving': {'calories': 359, 'protein_g': 34.7, 'carbs_g': 24.9, 'fat_g': 13.1, 'fiber_g': 4.3}, 'tags': ['mediterranean', 'lean-protein', 'quick', 'beginner-friendly', 'one-plate']}, {'meal_context': {'meal_id': 'tuesday-dinner-1', 'meal_type': 'dinner', 'day_of_week': 'Tuesday', 'free_time_mins': 30, 'course': 'main_course'}, 'nutritional_targets_min': {'calories_kcal': 300, 'protein_g': 20, 'fat_g': 10, 'carbs_g': 20, 'fiber_g': 3}, 'nutritional_targets_max': {'calories_kcal': 450, 'protein_g': 35, 'fat_g': 20, 'carbs_g': 40, 'fiber_g': 6, 'sodium_mg': 600}, 'constraints': {'dietary_restrictions': [], 'allergies': [], 'excluded_ingredients': [], 'max_ingredients': 12}}]",
+                        "EVAL_TRACE: strict_runs=2, strict_pass=1, llm_runs=1, best_llm_score=96, refinement_loops=0",
+                        "Sodium caution: canned chickpeas and Kalamata olives can increase sodium; use low-sodium or thoroughly rinse chickpeas and omit or reduce olives to stay under 200 mg sodium per serving. Nutrition values are estimates.",
+                        "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=96, refinement_loops=0",
+                        "Contains tree nuts (walnuts). If you have a nut allergy, substitute 1 tsp sunflower seeds or omit the nuts.",
+                        "If using a dairy-free yogurt, not all brands provide the same protein \u2014 choose an unsweetened, high-protein soy or pea-based yogurt to meet the protein target."
+                    ],
+                    "suggestions": [
+                        "Research suggests evening meals should be lighter and vegetable-forward; prioritize legumes or lean proteins and whole grains to balance satiety and metabolic load.",
+                        "Include a small tryptophan-containing finish (e.g., Greek yogurt + nuts) to modestly support sleep quality.",
+                        "To reduce late-night snacking, avoid heavy desserts and sip a non-caloric herbal infusion after the meal.",
+                        "If you prefer plant-based, swap the animal protein for a roasted chickpea & eggplant mixture atop the grain to maintain fiber and protein.",
+                        "Prepare grains earlier in the day or use quick-cook whole grains to keep active time under 30\u201340 minutes.",
+                        "To lower sodium further, omit olives and add extra herbs (mint, basil) or a small pinch of ground cumin for flavor.",
+                        "If you want a dairy finish for satiety and sleep support, choose a small 10 g crumbled feta; for a nut option, use 10 g toasted pine nuts (both included as optional).",
+                        "Serve immediately; double the greens and slightly reduce chickpeas if you prefer a lighter, more leafy side while keeping calories similar.",
+                        "For clearer nutrition tracking, note that 1 tsp chopped walnuts \u2248 4 g \u2014 adjust if you prefer exact gram measures.",
+                        "If you want slightly more satiety/calories, increase yogurt to 125 g or berries to 40 g; this will raise calories and protein proportionally.",
+                        "Wash and dry berries ahead of time to keep prep within 5 minutes on busy nights."
+                    ]
                 }
             ]
         },
@@ -952,84 +1046,297 @@
             "timestamp": "2026-03-15T20:45:56.882700+00:00",
             "role": "user",
             "content": "Can you please give me a weekly meal plan. Make it protein dense, with about 2000 daily calories and an average of 30 to 90 minute prep time on weekdays. No dietary restrictions and not special needs."
+        },
+        {
+            "timestamp": "2026-03-15T21:11:03.756708+00:00",
+            "role": "user",
+            "content": "Can you give me a quick Monday dinner, Chinese, with rice"
+        },
+        {
+            "timestamp": "2026-03-15T21:12:54.414996+00:00",
+            "role": "agent",
+            "content": "Proposed 'Dinner: Quick Chinese with Rice' on Monday at 18:00.\n\nI found a great recipe for you: Chinese Cabbage, Snow Pea and Mushroom Stir-Fry. It takes about 25 minutes."
+        },
+        {
+            "timestamp": "2026-03-15T21:22:17.500059+00:00",
+            "role": "user",
+            "content": "Can you plan me a Tuesday Dinner please"
+        },
+        {
+            "timestamp": "2026-03-15T21:29:20.228618+00:00",
+            "role": "agent",
+            "content": "Proposed 'Tuesday Dinner' on Tuesday at 18:00.\n\nPrepared your meal plan.\n\nI've successfully added these meals to your schedule."
         }
     ],
     "last_found_recipe": {
-        "recipe_id": "86054",
-        "name": "Crispy Parmesan Chicken and Linguine",
-        "description": "Parmesan-crusted, pan-seared chicken breasts served over garlic-parmesan linguine \u2014 a protein-forward Italian-American main perfect for Sunday dinner.",
+        "recipe_id": "db_129769",
+        "name": "Chinese Cabbage, Snow Pea and Mushroom Stir-Fry",
+        "description": "Quick Chinese-style vegetable stir-fry that pairs with steamed rice \u2014 crisp snow peas, tender napa cabbage and shiitake mushrooms in a light savory-sweet sauce.",
         "component": "main_course",
-        "prep_time_mins": 15,
-        "cook_time_mins": 20,
-        "total_time_mins": 35,
+        "prep_time_mins": 10,
+        "cook_time_mins": 15,
+        "total_time_mins": 25,
         "ingredients": [
             {
-                "name": "boneless skinless chicken breast halves",
-                "quantity": 2,
-                "unit": "pieces"
+                "name": "Chinese cabbage (napa), shredded",
+                "quantity": 200,
+                "unit": "g"
             },
             {
-                "name": "parmesan cheese, grated",
-                "quantity": 0.75,
-                "unit": "cup"
+                "name": "Snow peas, trimmed",
+                "quantity": 100,
+                "unit": "g"
             },
             {
-                "name": "salt",
+                "name": "Shiitake mushrooms, sliced",
+                "quantity": 100,
+                "unit": "g"
+            },
+            {
+                "name": "Fresh ginger, minced",
                 "quantity": 1,
                 "unit": "tsp"
             },
             {
-                "name": "ground black pepper",
-                "quantity": 0.5,
-                "unit": "tsp"
-            },
-            {
-                "name": "cayenne pepper",
-                "quantity": 0.25,
-                "unit": "tsp"
-            },
-            {
-                "name": "olive oil",
+                "name": "Light soy sauce",
                 "quantity": 2,
                 "unit": "tbsp"
             },
             {
-                "name": "linguine",
-                "quantity": 8,
-                "unit": "oz"
+                "name": "Ketjap manis (or substitute: 1 tbsp soy + 1 tsp sugar)",
+                "quantity": 1,
+                "unit": "tbsp"
             },
             {
-                "name": "garlic, minced",
-                "quantity": 3,
-                "unit": "cloves"
-            },
-            {
-                "name": "red pepper flakes",
-                "quantity": 0.25,
+                "name": "Caster (superfine) sugar",
+                "quantity": 0.5,
                 "unit": "tsp"
+            },
+            {
+                "name": "Vegetable oil",
+                "quantity": 1,
+                "unit": "tbsp"
+            },
+            {
+                "name": "Garlic, minced (optional)",
+                "quantity": 1,
+                "unit": "clove"
             }
         ],
         "instructions": [
-            "Preheat oven to 400\u00b0F (200\u00b0C). Pound chicken to an even ~1/2-inch thickness; season both sides with salt, pepper, and cayenne.",
-            "Press chicken into grated parmesan (option: mix 1/2 cup panko breadcrumbs with the parmesan for extra crust).",
-            "Heat 1 tbsp olive oil in an oven-safe skillet over medium-high heat. Sear chicken 2\u20133 minutes per side until golden-brown.",
-            "Transfer skillet to oven and bake 8\u201310 minutes (until internal temp reaches 165\u00b0F / 74\u00b0C) or until cooked through. Remove and rest 5 minutes.",
-            "While chicken cooks, boil linguine in salted water per package directions; reserve 1/2 cup pasta water before draining.",
-            "In a large skillet, heat remaining 1 tbsp olive oil over medium; saut\u00e9 garlic 30\u201360 seconds until fragrant. Add cooked linguine, 1/2 cup grated parmesan, a splash of reserved pasta water, and red pepper flakes. Toss to combine and create a light sauce, adding more pasta water as needed.",
-            "Plate linguine, top with rested chicken, and sprinkle extra parmesan and red pepper flakes to taste."
+            "Heat oil in a wok or large skillet over high heat.",
+            "Add minced garlic and ginger; stir-fry 20\u201330 seconds until fragrant.",
+            "Add shiitake mushrooms; stir-fry 2\u20133 minutes until starting to soften.",
+            "Add snow peas and shredded Chinese cabbage; stir-fry 2\u20133 minutes until vegetables are crisp-tender.",
+            "Stir together light soy sauce, ketjap manis and sugar; pour over vegetables and toss to coat.",
+            "Cook another 1\u20132 minutes to heat through and slightly thicken sauce. Serve immediately over steamed white or brown rice."
         ],
         "nutrition_per_serving": {
-            "calories": 815,
-            "protein_g": 52,
-            "carbs_g": 85,
-            "fat_g": 28,
-            "fiber_g": 4
+            "calories": 248.2,
+            "protein_g": 8.4,
+            "carbs_g": 14.2,
+            "fat_g": 19.2,
+            "fiber_g": 5.0
         },
         "tags": [
-            "Italian",
-            "high_protein",
-            "chicken",
-            "dinner"
+            "Chinese",
+            "vegetarian",
+            "stir-fry",
+            "quick",
+            "pairs-with-rice"
         ]
+    },
+    "meals": {
+        "plans": [
+            {
+                "id": "plan_21dc6431e48a",
+                "plan_name": "Custom Meal Plan",
+                "created_at": "2026-03-15T21:29:20.228570+00:00",
+                "meals": [
+                    {
+                        "meal_id": "tuesday-dinner-1",
+                        "meal_type": "dinner",
+                        "day_of_week": "Tuesday",
+                        "dishes": [
+                            {
+                                "recipe_id": "fallback_00b948a1",
+                                "name": "Pan-baked or oven-roasted lean protein (e.g., salmon fillet or skinless chicken breast) seasoned with olive oil, lemon, garlic, and mixed herbs; serve on a small bed (1/2 cup cooked) of whole grain (quinoa, farro, or bulgur) with a quick saut\u00e9 of spinach and cherry tomatoes mixed in.",
+                                "description": "The agent planned this meal, but the recipe details failed to generate properly due to an AI timeout.",
+                                "prep_time_mins": 30,
+                                "ingredients": [],
+                                "instructions": [
+                                    "Ask Nutrissistant to specifically generate a recipe for this dish!"
+                                ],
+                                "nutrition_per_serving": {},
+                                "component": "main_course"
+                            },
+                            {
+                                "recipe_id": "llm_generated",
+                                "name": "Mediterranean Chickpea & Cucumber Side Salad",
+                                "description": "A light, vegetable-forward Mediterranean-style salad with a small portion of chickpeas for fiber and a bright lemon-olive oil dressing. Ready in 10 minutes and beginner-friendly. Olives are optional to keep sodium low; a small crumbled feta or a few toasted pine nuts are suggested as a small dairy-or-nut finish for satiety.",
+                                "component": "side_dish",
+                                "prep_time_mins": 10,
+                                "cook_time_mins": 0,
+                                "total_time_mins": 10,
+                                "ingredients": [
+                                    {
+                                        "name": "cooked chickpeas, well-rinsed (low-sodium if canned)",
+                                        "quantity": 30,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "mixed leafy greens (baby spinach or mixed greens)",
+                                        "quantity": 40,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "cucumber, diced",
+                                        "quantity": 50,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "grated carrot",
+                                        "quantity": 30,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "Kalamata olives, pitted and halved (optional - omit for lower sodium)",
+                                        "quantity": 2,
+                                        "unit": "count"
+                                    },
+                                    {
+                                        "name": "fresh lemon juice",
+                                        "quantity": 15,
+                                        "unit": "ml"
+                                    },
+                                    {
+                                        "name": "extra-virgin olive oil",
+                                        "quantity": 5,
+                                        "unit": "ml"
+                                    },
+                                    {
+                                        "name": "fresh parsley, chopped (optional)",
+                                        "quantity": 5,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "freshly ground black pepper",
+                                        "quantity": 1,
+                                        "unit": "pinch"
+                                    },
+                                    {
+                                        "name": "small crumbled feta OR toasted pine nuts (optional finish)",
+                                        "quantity": 10,
+                                        "unit": "g"
+                                    }
+                                ],
+                                "instructions": [
+                                    "Place the mixed leafy greens in a medium bowl.",
+                                    "Add the diced cucumber and grated carrot to the greens.",
+                                    "Toss in the well-rinsed chickpeas and halved olives if using.",
+                                    "In a small cup, whisk together the lemon juice, olive oil, and a pinch of black pepper (add chopped parsley if using).",
+                                    "Pour the dressing over the salad and toss gently to combine.",
+                                    "Top with a small sprinkle of crumbled feta or toasted pine nuts if using, and serve immediately."
+                                ],
+                                "nutrition_per_serving": {
+                                    "calories": 113,
+                                    "protein_g": 3.9,
+                                    "carbs_g": 16.5,
+                                    "fat_g": 4.2,
+                                    "fiber_g": 4.7
+                                },
+                                "tags": [
+                                    "Mediterranean",
+                                    "vegetable-forward",
+                                    "side_dish",
+                                    "quick",
+                                    "beginner-friendly",
+                                    "low-calorie",
+                                    "fiber-rich"
+                                ]
+                            },
+                            {
+                                "recipe_id": "llm_greek_yogurt_berry_walnut_cup_001",
+                                "name": "Greek Yogurt Berry & Walnut Cup",
+                                "description": "A quick, light Mediterranean-style dessert: 100 g plain Greek yogurt (or a high-protein dairy-free alternative) topped with a small handful of berries and a teaspoon of chopped walnuts for modest protein and satiety. Ready in 5 minutes.",
+                                "component": "dessert",
+                                "prep_time_mins": 5,
+                                "cook_time_mins": 0,
+                                "total_time_mins": 5,
+                                "ingredients": [
+                                    {
+                                        "name": "plain nonfat Greek yogurt (or high-protein dairy-free yogurt)",
+                                        "quantity": 100,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "mixed fresh berries (blueberries, raspberries, or strawberries)",
+                                        "quantity": 30,
+                                        "unit": "g"
+                                    },
+                                    {
+                                        "name": "chopped walnuts",
+                                        "quantity": 1,
+                                        "unit": "tsp"
+                                    },
+                                    {
+                                        "name": "vanilla extract (optional)",
+                                        "quantity": 2,
+                                        "unit": "drops"
+                                    }
+                                ],
+                                "instructions": [
+                                    "Spoon 100 g of plain Greek yogurt into a small cup or bowl.",
+                                    "Top with 30 g mixed fresh berries.",
+                                    "Sprinkle 1 teaspoon of chopped walnuts over the berries.",
+                                    "If using, add 2 drops of vanilla extract and gently swirl to combine.",
+                                    "Serve immediately."
+                                ],
+                                "nutrition_per_serving": {
+                                    "calories": 92,
+                                    "protein_g": 10.9,
+                                    "carbs_g": 7.9,
+                                    "fat_g": 2.1,
+                                    "fiber_g": 1.5
+                                },
+                                "tags": [
+                                    "quick",
+                                    "low-calorie",
+                                    "high-protein",
+                                    "Mediterranean-style",
+                                    "vegetarian",
+                                    "beginner-friendly"
+                                ]
+                            }
+                        ],
+                        "warnings": [
+                            "If you have any food allergies or intolerances, check ingredient choices (fish, dairy, nuts) before preparing.",
+                            "Keep portion sizes moderate if eating late to support glucose metabolism and sleep.",
+                            "Limit added salt and high-sodium condiments to stay within the sodium targets.",
+                            "Agent raised an exception: Too many arguments to single-input tool STRICT_EVALUATOR.\n                Consider using StructuredTool instead. Args: [{'recipe_id': 'llm_generated_001', 'name': 'Lemon-Herb Pan-Baked Chicken on Quinoa with Saut\u00e9ed Spinach & Cherry Tomatoes', 'description': 'A light Mediterranean-style main course: a pan-baked lean chicken breast seasoned with lemon, garlic and herbs, served over 1/2 cup cooked quinoa with quickly saut\u00e9ed spinach and cherry tomatoes, finished with a small sprinkle of feta for satiety.', 'component': 'main_course', 'prep_time_mins': 10, 'cook_time_mins': 18, 'total_time_mins': 28, 'ingredients': [{'name': 'skinless boneless chicken breast', 'quantity': 120, 'unit': 'g'}, {'name': 'cooked quinoa', 'quantity': 0.5, 'unit': 'cup'}, {'name': 'extra-virgin olive oil', 'quantity': 1, 'unit': 'tsp'}, {'name': 'fresh spinach', 'quantity': 1, 'unit': 'cup'}, {'name': 'cherry tomatoes', 'quantity': 6, 'unit': 'piece'}, {'name': 'feta cheese, crumbled', 'quantity': 15, 'unit': 'g'}, {'name': 'garlic', 'quantity': 1, 'unit': 'clove'}, {'name': 'lemon juice', 'quantity': 1, 'unit': 'tbsp'}, {'name': 'dried oregano', 'quantity': 0.5, 'unit': 'tsp'}, {'name': 'black pepper', 'quantity': 0.125, 'unit': 'tsp'}], 'instructions': ['Preheat oven to 200\u00b0C (400\u00b0F). Pat the chicken breast dry. In a small bowl combine 0.5 tsp olive oil, lemon juice, minced garlic, dried oregano and black pepper; rub over the chicken.', 'Place the chicken on a small baking sheet or ovenproof dish and bake 12\u201315 minutes (depending on thickness) until internal temperature reaches 74\u00b0C (165\u00b0F). Remove and let rest 3 minutes, then slice.', 'While chicken bakes, warm a nonstick skillet over medium heat and add the remaining 0.5 tsp olive oil. Add halved cherry tomatoes and saut\u00e9 1\u20132 minutes until they begin to soften.', 'Add spinach to the pan, toss with tomatoes and cook 1\u20132 minutes until wilted. Season with a little black pepper and a squeeze of lemon if desired.', 'Warm the cooked quinoa (microwave 30\u201360 sec or heat gently in a pan). Plate 1/2 cup quinoa, top with the saut\u00e9ed spinach and tomatoes, and place sliced chicken on top.', 'Finish with crumbled feta over the dish. Serve immediately.'], 'nutrition_per_serving': {'calories': 359, 'protein_g': 34.7, 'carbs_g': 24.9, 'fat_g': 13.1, 'fiber_g': 4.3}, 'tags': ['mediterranean', 'lean-protein', 'quick', 'beginner-friendly', 'one-plate']}, {'meal_context': {'meal_id': 'tuesday-dinner-1', 'meal_type': 'dinner', 'day_of_week': 'Tuesday', 'free_time_mins': 30, 'course': 'main_course'}, 'nutritional_targets_min': {'calories_kcal': 300, 'protein_g': 20, 'fat_g': 10, 'carbs_g': 20, 'fiber_g': 3}, 'nutritional_targets_max': {'calories_kcal': 450, 'protein_g': 35, 'fat_g': 20, 'carbs_g': 40, 'fiber_g': 6, 'sodium_mg': 600}, 'constraints': {'dietary_restrictions': [], 'allergies': [], 'excluded_ingredients': [], 'max_ingredients': 12}}]",
+                            "EVAL_TRACE: strict_runs=2, strict_pass=1, llm_runs=1, best_llm_score=96, refinement_loops=0",
+                            "Sodium caution: canned chickpeas and Kalamata olives can increase sodium; use low-sodium or thoroughly rinse chickpeas and omit or reduce olives to stay under 200 mg sodium per serving. Nutrition values are estimates.",
+                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=96, refinement_loops=0",
+                            "Contains tree nuts (walnuts). If you have a nut allergy, substitute 1 tsp sunflower seeds or omit the nuts.",
+                            "If using a dairy-free yogurt, not all brands provide the same protein \u2014 choose an unsweetened, high-protein soy or pea-based yogurt to meet the protein target."
+                        ],
+                        "suggestions": [
+                            "Research suggests evening meals should be lighter and vegetable-forward; prioritize legumes or lean proteins and whole grains to balance satiety and metabolic load.",
+                            "Include a small tryptophan-containing finish (e.g., Greek yogurt + nuts) to modestly support sleep quality.",
+                            "To reduce late-night snacking, avoid heavy desserts and sip a non-caloric herbal infusion after the meal.",
+                            "If you prefer plant-based, swap the animal protein for a roasted chickpea & eggplant mixture atop the grain to maintain fiber and protein.",
+                            "Prepare grains earlier in the day or use quick-cook whole grains to keep active time under 30\u201340 minutes.",
+                            "To lower sodium further, omit olives and add extra herbs (mint, basil) or a small pinch of ground cumin for flavor.",
+                            "If you want a dairy finish for satiety and sleep support, choose a small 10 g crumbled feta; for a nut option, use 10 g toasted pine nuts (both included as optional).",
+                            "Serve immediately; double the greens and slightly reduce chickpeas if you prefer a lighter, more leafy side while keeping calories similar.",
+                            "For clearer nutrition tracking, note that 1 tsp chopped walnuts \u2248 4 g \u2014 adjust if you prefer exact gram measures.",
+                            "If you want slightly more satiety/calories, increase yogurt to 125 g or berries to 40 g; this will raise calories and protein proportionally.",
+                            "Wash and dry berries ahead of time to keep prep within 5 minutes on busy nights."
+                        ]
+                    }
+                ]
+            }
+        ],
+        "current_plan_id": "plan_21dc6431e48a"
     }
 }

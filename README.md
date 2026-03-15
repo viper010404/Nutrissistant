@@ -40,7 +40,7 @@ The Schedule Agent follows a plan-and-execute design. In the planning stage, an 
 
 **Workout Agent** — Reflection RAG Agent
 
-The Workout Agent is a retrieval-augmented generation agent with two operation modes. For routine creation and large edits, it runs a reflection loop (`generation -> critique -> refinement`) to improve safety and alignment. For smaller updates, it uses a faster single-pass RAG generation path. It consumes schedule-derived constraints from shared context and uses vector retrieval evidence when Pinecone is configured.
+The Workout Agent is a retrieval-augmented generation agent with two operation modes. For routine creation and large edits, it runs a reflection loop (`generation -> critique -> refinement`) to improve safety and alignment. For smaller updates, it uses a faster single-pass RAG generation path. It uses vector retrieval evidence via RAG
 
 **Recipe Extractor Agent** — Tool-Calling Agent (LangChain AgentExecutor)
 
@@ -84,21 +84,9 @@ The Meal Planner layer uses a strict structured JSON output contract, including 
    - `response`: final natural-language output.
    - `steps`: ordered module trace for observability.
 
-### Data Contracts Between Components
-
-- Execute request contract:
-  - Input: `{ "prompt": "..." }`
-  - Output envelope: `{ "status", "error", "response", "steps" }`
-- Shared context contract:
-  - Contains runtime constraints (for example discovered slots and duration limits).
-- Routine draft contract:
-  - Structured weekly units returned by workout generation and consumed by schedule commit logic.
-- Persistent state contract:
-  - Single source of truth in `user_data.json` accessed through `src/core/state_manager.py`.
-
 ## API Endpoints
 
-Base URL for local run: `http://127.0.0.1:10000`
+Base URL for local run (when using `start.sh`): `http://127.0.0.1:${PORT:-10000}`
 
 ### 1) GET /health
 
@@ -196,9 +184,16 @@ cp .env.example .env
 
 Fill values in `.env` for your environment.
 
+Important local alignment:
+- `main.py` reads `NUTRISSISTANT_API_URL` first, then falls back to `http://127.0.0.1:${PORT or 8000}`.
+- `start.sh` runs FastAPI on `${PORT:-10000}` by default.
+- For local `start.sh` usage, set `NUTRISSISTANT_API_URL=http://127.0.0.1:10000` (or set `PORT` and use the same value in both places).
+
 ### Run
 
 ```bash
+export PORT=10000
+export NUTRISSISTANT_API_URL="http://127.0.0.1:${PORT}"
 bash start.sh
 ```
 
@@ -209,11 +204,11 @@ What this starts:
 ### Basic API Checks
 
 ```bash
-curl http://127.0.0.1:10000/health
-curl http://127.0.0.1:10000/api/team_info
-curl http://127.0.0.1:10000/api/agent_info
-curl -o architecture.png http://127.0.0.1:10000/api/model_architecture
-curl -X POST http://127.0.0.1:10000/api/execute \
+curl http://127.0.0.1:${PORT:-10000}/health
+curl http://127.0.0.1:${PORT:-10000}/api/team_info
+curl http://127.0.0.1:${PORT:-10000}/api/agent_info
+curl -o architecture.png http://127.0.0.1:${PORT:-10000}/api/model_architecture
+curl -X POST http://127.0.0.1:${PORT:-10000}/api/execute \
   -H "Content-Type: application/json" \
   -d '{"prompt":"Create a weekly wellness plan"}'
 ```

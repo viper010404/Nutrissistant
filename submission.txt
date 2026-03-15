@@ -1,0 +1,2 @@
+Render URL: https://nutrissistant.onrender.com
+GitHub Repo URL: https://github.com/viper010404/Nutrissistant
