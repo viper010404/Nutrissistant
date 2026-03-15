@@ -7,3 +7,6 @@ venv/
 API_KEY.txt
 .env.*
 !.env.example
+
+# ignore instructions file
+instructions.pdf
