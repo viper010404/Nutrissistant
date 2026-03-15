@@ -1,5 +1,5 @@
 {
-    "user_query": "can you find a different recipe than the one you just gave me, and update ?",
+    "user_query": "Plan 2 gym workouts for this week. I prefer morning sessions",
     "user_profile": "I'm Ido, 21 year old student. I have some spare time, I'd like to get into shape and lose 10-15 kg in the next year (My height  is 1.80 m and my weight is 150 kg). I enjoy cycling and boxing.",
     "schedule_data": {
         "Monday": {
@@ -24,7 +24,7 @@
         },
         "Tuesday": {
             "06:00": "-",
-            "07:00": "-",
+            "07:00": "Tuesday Morning: Bodyweight Strength & Low-Impact Conditioning",
             "08:00": "-",
             "09:00": "-",
             "10:00": "-",
@@ -64,7 +64,7 @@
         },
         "Thursday": {
             "06:00": "-",
-            "07:00": "Thursday Morning: Boxing Technique & Low-Impact Conditioning",
+            "07:00": "Thursday Morning: Boxing-Style Conditioning & Core (No Equipment)",
             "08:00": "-",
             "09:00": "-",
             "10:00": "-",
@@ -72,7 +72,7 @@
             "12:00": "-",
             "13:00": "-",
             "14:00": "-",
-            "15:00": "Morning: Shadowboxing, Footwork & Conditioning",
+            "15:00": "-",
             "16:00": "-",
             "17:00": "-",
             "18:00": "-",
@@ -84,7 +84,7 @@
         },
         "Friday": {
             "06:00": "-",
-            "07:00": "-",
+            "07:00": "Thursday Morning: Boxing Technique & Low-Impact Conditioning",
             "08:00": "-",
             "09:00": "-",
             "10:00": "-",
@@ -116,7 +116,7 @@
             "16:00": "-",
             "17:00": "-",
             "18:00": "-",
-            "19:00": "-",
+            "19:00": "Meal: Chicken Enchilada Skillet",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -794,94 +794,179 @@
                     "gluten-free",
                     "dinner"
                 ]
+            },
+            {
+                "recipe_id": "db_483668",
+                "name": "Chicken Enchilada Skillet",
+                "description": "Quick skillet enchilada-style chicken with torn corn tortillas, tomatoes, onion and melted cheese \u2014 a fast, satisfying Saturday dinner with meat and vegetables.",
+                "component": "main_course",
+                "prep_time_mins": 10,
+                "cook_time_mins": 10,
+                "total_time_mins": 20,
+                "ingredients": [
+                    {
+                        "name": "cooked shredded chicken",
+                        "quantity": 2,
+                        "unit": "cups"
+                    },
+                    {
+                        "name": "corn tortillas",
+                        "quantity": 6,
+                        "unit": "pieces"
+                    },
+                    {
+                        "name": "tomatoes (diced)",
+                        "quantity": 1,
+                        "unit": "cup"
+                    },
+                    {
+                        "name": "shredded cheese (cheddar or Mexican blend)",
+                        "quantity": 1,
+                        "unit": "cup"
+                    },
+                    {
+                        "name": "onion (finely chopped)",
+                        "quantity": 0.5,
+                        "unit": "cup"
+                    },
+                    {
+                        "name": "olive oil",
+                        "quantity": 1,
+                        "unit": "tbsp"
+                    },
+                    {
+                        "name": "salt",
+                        "quantity": 0.5,
+                        "unit": "tsp"
+                    },
+                    {
+                        "name": "black pepper",
+                        "quantity": 0.25,
+                        "unit": "tsp"
+                    }
+                ],
+                "instructions": [
+                    "Heat a large skillet over medium heat and add olive oil.",
+                    "Add chopped onion and saut\u00e9 3\u20134 minutes until softened.",
+                    "Add the cooked shredded chicken and diced tomatoes; season with salt and pepper and cook 2\u20133 minutes until heated through.",
+                    "Tear the corn tortillas into bite-sized pieces and add to the skillet, stirring to coat and warm them.",
+                    "Sprinkle the shredded cheese evenly over the skillet, cover for 1\u20132 minutes until the cheese melts.",
+                    "Stir gently to combine and serve hot. Optional: garnish with chopped cilantro, a squeeze of lime, or a dollop of plain yogurt or sour cream."
+                ],
+                "nutrition_per_serving": {
+                    "calories": 221.5,
+                    "protein_g": 20.2,
+                    "carbs_g": 21.4,
+                    "fat_g": 6.0,
+                    "fiber_g": 3.0
+                },
+                "tags": [
+                    "quick",
+                    "skillet",
+                    "chicken",
+                    "dinner",
+                    "vegetables",
+                    "Saturday"
+                ]
             }
         ],
         "fitness": {
-            "goal": "Raise weekly activity, build aerobic base and full-body strength with low-impact intervals suitable for a beginner.",
+            "goal": "Build foundational strength, increase daily calorie burn, and protect joints while starting steady weight loss.",
             "duration_limit_mins": 60,
-            "workout_name": "Monday Afternoon: Interval Walk + Bodyweight Circuit",
+            "workout_name": "Bodyweight Strength Circuit (AM)",
             "difficulty": "beginner",
-            "focus_type": "mixed",
+            "focus_type": "strength",
             "session_outline": [
                 {
                     "section": "warmup",
                     "minutes": 10,
                     "items": [
-                        "5 minutes easy walking (level surface)",
-                        "Dynamic mobility: leg swings, arm circles, hip circles (5 min total)"
+                        "Brisk march or easy jog in place \u2014 2 minutes",
+                        "Dynamic hip swings and leg swings \u2014 1 minute each side",
+                        "Arm circles + shoulder mobility \u2014 2 minutes",
+                        "Bodyweight glute bridges \u2014 2 sets of 10 slow reps to wake hips",
+                        "Ankle & knee mobility (controlled knee lifts) \u2014 2 minutes"
                     ]
                 },
                 {
                     "section": "main",
                     "minutes": 40,
                     "items": [
-                        "Interval walk: 10 rounds \u2014 1 min brisk (fast but sustainable) / 1 min easy walk",
-                        "Bodyweight circuit: 3 rounds of 6 exercises, minimal rest between movements; 60\u201390s rest between rounds"
+                        "3 rounds circuit (perform each exercise then rest 60s between rounds):",
+                        "A. Incline or knee push-ups \u2014 8-12 reps",
+                        "B. Box-free squats or sit-to-stand from a chair \u2014 12-15 reps",
+                        "C. Reverse lunges (alternating) or static split holds \u2014 8-10 reps per leg",
+                        "D. Glute bridges (single-leg progressions optional) \u2014 12-15 reps",
+                        "E. Plank (or knee-plank) \u2014 30-45 seconds",
+                        "F. Low-impact cardio finisher: marching high knees or step-ups \u2014 60s"
                     ]
                 },
                 {
                     "section": "cooldown",
                     "minutes": 10,
                     "items": [
-                        "5 minutes easy walking to lower heart rate",
-                        "5 minutes seated/standing stretching: hamstrings, quads, chest, calves"
+                        "Slow walking or marching to bring HR down \u2014 2 minutes",
+                        "Seated hamstring and quad stretches \u2014 3 minutes",
+                        "Chest and shoulder stretch \u2014 2 minutes",
+                        "Deep diaphragmatic breathing + gentle spinal twists \u2014 3 minutes"
                     ]
                 }
             ],
             "exercise_details": [
                 {
-                    "name": "Brisk walk intervals",
-                    "sets": 1,
-                    "reps": "10 rounds: 1 min brisk / 1 min easy",
-                    "rest_seconds": 0,
-                    "notes": "Push pace to moderately hard but conversational (RPE ~6/10). Do on flat, safe route."
-                },
-                {
-                    "name": "Bodyweight squats (or box-assisted sit-to-stand)",
+                    "name": "Incline or Knee Push-ups",
                     "sets": 3,
                     "reps": "8-12",
                     "rest_seconds": 60,
-                    "notes": "Feet hip-width; use a chair for support if needed."
+                    "notes": "Use a wall or bench for incline if floor push-ups are too challenging. Keep core braced and avoid sagging hips."
                 },
                 {
-                    "name": "Incline push-ups (hands on counter/wall to reduce load)",
-                    "sets": 3,
-                    "reps": "8-12",
-                    "rest_seconds": 60,
-                    "notes": "Keep core engaged; choose wall/bench height so form is maintained."
-                },
-                {
-                    "name": "Glute bridges",
-                    "sets": 3,
-                    "reps": "10-15",
-                    "rest_seconds": 45,
-                    "notes": "Squeeze glutes at top; can pause 1s at peak for extra activation."
-                },
-                {
-                    "name": "Standing calf raises",
+                    "name": "Bodyweight Squats or Sit-to-Stand",
                     "sets": 3,
                     "reps": "12-15",
-                    "rest_seconds": 30,
-                    "notes": "Use chair back for balance if needed."
+                    "rest_seconds": 60,
+                    "notes": "If knees feel sensitive, use a chair to perform sit-to-stand to reduce joint load. Focus on hip hinging and upright chest."
                 },
                 {
-                    "name": "Dead-bug core",
+                    "name": "Reverse Lunges (alternating)",
                     "sets": 3,
-                    "reps": "8-10 per side",
-                    "rest_seconds": 30,
-                    "notes": "Keep lower back gently pressed to the floor; move controlly."
+                    "reps": "8-10 per leg",
+                    "rest_seconds": 60,
+                    "notes": "Go shallow if balance or knees are an issue. Hold onto a stable surface for balance if needed."
+                },
+                {
+                    "name": "Glute Bridges",
+                    "sets": 3,
+                    "reps": "12-15",
+                    "rest_seconds": 45,
+                    "notes": "Squeeze glutes at the top; progress to single-leg bridges when comfortable."
+                },
+                {
+                    "name": "Plank (or Knee-Plank)",
+                    "sets": 3,
+                    "reps": "30-45s",
+                    "rest_seconds": 45,
+                    "notes": "Keep a neutral spine; drop to knees for easier variation."
+                },
+                {
+                    "name": "Low-Impact Cardio Finisher (marching high knees / step-ups)",
+                    "sets": 3,
+                    "reps": "60s per round",
+                    "rest_seconds": 45,
+                    "notes": "Keep intensity moderate; aim to raise heart rate without jarring the joints."
                 }
             ],
             "safety_notes": [
-                "Start at a comfortable intensity \u2014 aim to progress pace or rounds gradually across weeks.",
-                "If you feel sharp joint pain, stop the movement and switch to a lower-impact option (e.g., longer walking, seated exercises).",
-                "Hydrate and wear supportive footwear during walking intervals."
+                "Begin at a comfortable intensity and progress week-to-week; prioritise controlled movement and breathing.",
+                "Given your current weight, favour low-impact options (incline push-ups, chair sit-to-stand, step-ups) to protect knees and lower back.",
+                "Stop and seek medical attention if you experience chest pain, dizziness, or unusual shortness of breath.",
+                "If you have any pre-existing conditions, check with a healthcare provider before beginning strenuous exercise."
             ]
         }
     },
     "workouts": {
-        "current_workout_id": "workout_5f6a353562a6",
-        "current_routine_id": "routine_6dc22f735914",
+        "current_workout_id": "workout_08d13a6163d2",
+        "current_routine_id": "routine_2b9369c7b79a",
         "history": [
             {
                 "id": "workout_2616090620bb",
@@ -2519,6 +2604,216 @@
                         "If dizziness, chest pain, or intense breathlessness occur, stop and seek medical advice."
                     ]
                 }
+            },
+            {
+                "id": "workout_de8df5e437cd",
+                "created_at": "2026-03-15T14:53:39.874137+00:00",
+                "source": "agent",
+                "source_query": "Plan 2 gym workouts for this week. I prefer morning sessions",
+                "response_text": "Done \u2014 I created two no-equipment morning gym sessions for this week: Tuesday 07:00 and Thursday 07:00, each ~60 minutes and beginner-friendly with joint-protecting options.",
+                "scheduled_slots": [
+                    {
+                        "day": "Tuesday",
+                        "time": "07:00",
+                        "event": "Gym Workout"
+                    }
+                ],
+                "routine_id": "routine_2b9369c7b79a",
+                "unit_index": 0,
+                "unit_day": "Tuesday",
+                "focus_type": "strength",
+                "draft": {
+                    "goal": "Build foundational strength, increase daily calorie burn, and protect joints while starting steady weight loss.",
+                    "duration_limit_mins": 60,
+                    "workout_name": "Bodyweight Strength Circuit (AM)",
+                    "difficulty": "beginner",
+                    "focus_type": "strength",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 10,
+                            "items": [
+                                "Brisk march or easy jog in place \u2014 2 minutes",
+                                "Dynamic hip swings and leg swings \u2014 1 minute each side",
+                                "Arm circles + shoulder mobility \u2014 2 minutes",
+                                "Bodyweight glute bridges \u2014 2 sets of 10 slow reps to wake hips",
+                                "Ankle & knee mobility (controlled knee lifts) \u2014 2 minutes"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 40,
+                            "items": [
+                                "3 rounds circuit (perform each exercise then rest 60s between rounds):",
+                                "A. Incline or knee push-ups \u2014 8-12 reps",
+                                "B. Box-free squats or sit-to-stand from a chair \u2014 12-15 reps",
+                                "C. Reverse lunges (alternating) or static split holds \u2014 8-10 reps per leg",
+                                "D. Glute bridges (single-leg progressions optional) \u2014 12-15 reps",
+                                "E. Plank (or knee-plank) \u2014 30-45 seconds",
+                                "F. Low-impact cardio finisher: marching high knees or step-ups \u2014 60s"
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 10,
+                            "items": [
+                                "Slow walking or marching to bring HR down \u2014 2 minutes",
+                                "Seated hamstring and quad stretches \u2014 3 minutes",
+                                "Chest and shoulder stretch \u2014 2 minutes",
+                                "Deep diaphragmatic breathing + gentle spinal twists \u2014 3 minutes"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Incline or Knee Push-ups",
+                            "sets": 3,
+                            "reps": "8-12",
+                            "rest_seconds": 60,
+                            "notes": "Use a wall or bench for incline if floor push-ups are too challenging. Keep core braced and avoid sagging hips."
+                        },
+                        {
+                            "name": "Bodyweight Squats or Sit-to-Stand",
+                            "sets": 3,
+                            "reps": "12-15",
+                            "rest_seconds": 60,
+                            "notes": "If knees feel sensitive, use a chair to perform sit-to-stand to reduce joint load. Focus on hip hinging and upright chest."
+                        },
+                        {
+                            "name": "Reverse Lunges (alternating)",
+                            "sets": 3,
+                            "reps": "8-10 per leg",
+                            "rest_seconds": 60,
+                            "notes": "Go shallow if balance or knees are an issue. Hold onto a stable surface for balance if needed."
+                        },
+                        {
+                            "name": "Glute Bridges",
+                            "sets": 3,
+                            "reps": "12-15",
+                            "rest_seconds": 45,
+                            "notes": "Squeeze glutes at the top; progress to single-leg bridges when comfortable."
+                        },
+                        {
+                            "name": "Plank (or Knee-Plank)",
+                            "sets": 3,
+                            "reps": "30-45s",
+                            "rest_seconds": 45,
+                            "notes": "Keep a neutral spine; drop to knees for easier variation."
+                        },
+                        {
+                            "name": "Low-Impact Cardio Finisher (marching high knees / step-ups)",
+                            "sets": 3,
+                            "reps": "60s per round",
+                            "rest_seconds": 45,
+                            "notes": "Keep intensity moderate; aim to raise heart rate without jarring the joints."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Begin at a comfortable intensity and progress week-to-week; prioritise controlled movement and breathing.",
+                        "Given your current weight, favour low-impact options (incline push-ups, chair sit-to-stand, step-ups) to protect knees and lower back.",
+                        "Stop and seek medical attention if you experience chest pain, dizziness, or unusual shortness of breath.",
+                        "If you have any pre-existing conditions, check with a healthcare provider before beginning strenuous exercise."
+                    ]
+                }
+            },
+            {
+                "id": "workout_08d13a6163d2",
+                "created_at": "2026-03-15T14:53:39.874137+00:00",
+                "source": "agent",
+                "source_query": "Plan 2 gym workouts for this week. I prefer morning sessions",
+                "response_text": "Done \u2014 I created two no-equipment morning gym sessions for this week: Tuesday 07:00 and Thursday 07:00, each ~60 minutes and beginner-friendly with joint-protecting options.",
+                "scheduled_slots": [
+                    {
+                        "day": "Thursday",
+                        "time": "07:00",
+                        "event": "Gym Workout"
+                    }
+                ],
+                "routine_id": "routine_2b9369c7b79a",
+                "unit_index": 1,
+                "unit_day": "Thursday",
+                "focus_type": "boxing",
+                "draft": {
+                    "goal": "Improve aerobic fitness and coordination with boxing-style intervals and core work that suits a no-equipment morning session.",
+                    "duration_limit_mins": 60,
+                    "workout_name": "Shadowboxing Intervals + Core Circuit (AM)",
+                    "difficulty": "beginner",
+                    "focus_type": "boxing",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 10,
+                            "items": [
+                                "Light marching or easy hop/step in place \u2014 2 minutes",
+                                "Dynamic shoulder, neck and trunk rotations \u2014 3 minutes",
+                                "Shadowboxing slow rounds focusing on stance and jab-cross technique \u2014 3 minutes",
+                                "Ankle and hip loosening drills \u2014 2 minutes"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 40,
+                            "items": [
+                                "Interval blocks: 6 x (3-minute shadowboxing round at moderate intensity + 60s recovery). Focus on jab-cross, slip, and footwork.",
+                                "Core-strength circuit (2 rounds): dead bugs 10-12, bird dogs 8-10 per side, side plank 20-30s per side.",
+                                "Optional low-impact cardio bursts between core moves: mountain climbers (slow controlled) 30-40s or step-back burpees (no jump) 8-10 reps."
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 10,
+                            "items": [
+                                "Slow walking and shoulder shake-out \u2014 2 minutes",
+                                "Standing quad and calf stretch \u2014 3 minutes",
+                                "Seated hamstring stretch and gentle spine twists \u2014 3 minutes",
+                                "Focused breathing to return HR to baseline \u2014 2 minutes"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Shadowboxing (moderate intensity rounds)",
+                            "sets": 6,
+                            "reps": "3 min rounds",
+                            "rest_seconds": 60,
+                            "notes": "Keep rounds controlled: focus on technique, rhythmic breathing, and light footwork. Move on the balls of the feet but avoid excessive bouncing if joints hurt."
+                        },
+                        {
+                            "name": "Dead Bugs",
+                            "sets": 2,
+                            "reps": "10-12",
+                            "rest_seconds": 30,
+                            "notes": "Keep lower back in contact with the floor; move slowly to build core stability."
+                        },
+                        {
+                            "name": "Bird Dogs",
+                            "sets": 2,
+                            "reps": "8-10 per side",
+                            "rest_seconds": 30,
+                            "notes": "Perform with slow controlled movement; maintain a neutral spine."
+                        },
+                        {
+                            "name": "Side Plank",
+                            "sets": 2,
+                            "reps": "20-30s per side",
+                            "rest_seconds": 30,
+                            "notes": "Drop to knee-side support if full side plank is too challenging."
+                        },
+                        {
+                            "name": "Mountain Climbers (controlled) or Step-back Burpees (low-impact)",
+                            "sets": 2,
+                            "reps": "30-40s / 8-10 reps",
+                            "rest_seconds": 45,
+                            "notes": "Choose the lower-impact option (step-back burpee with no jump) if knees or back feel stressed."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Shadowboxing should be performed with good posture\u2014don\u2019t overreach on punches; use footwork to create distance instead.",
+                        "Favor low-impact versions of cardio moves to reduce joint stress; avoid high-impact jumping if you feel discomfort.",
+                        "Keep hydration and allow at least 24\u201348 hours between intense sessions if muscles feel overly sore.",
+                        "If you have new or worsening joint pain, reduce range of motion or skip the offending exercise and consult a professional."
+                    ]
+                }
             }
         ],
         "routines": [
@@ -2730,11 +3025,39 @@
                         "title": "Morning: Shadowboxing, Footwork & Conditioning"
                     }
                 ]
+            },
+            {
+                "id": "routine_2b9369c7b79a",
+                "created_at": "2026-03-15T14:53:39.874137+00:00",
+                "source": "agent",
+                "source_query": "Plan 2 gym workouts for this week. I prefer morning sessions",
+                "response_text": "Done \u2014 I created two no-equipment morning gym sessions for this week: Tuesday 07:00 and Thursday 07:00, each ~60 minutes and beginner-friendly with joint-protecting options.",
+                "routine_name": "Two Morning Gym Sessions: Strength + Boxing-Style Conditioning",
+                "goal": "Begin sustainable weight loss and improve fitness with two weekly morning, no-equipment gym workouts (strength and boxing-style conditioning) that protect joints and build consistency.",
+                "version": 1,
+                "units": [
+                    {
+                        "unit_id": "workout_de8df5e437cd",
+                        "day": "Tuesday",
+                        "time": "07:00",
+                        "focus_type": "strength",
+                        "title": "Tuesday Morning: Bodyweight Strength & Low-Impact Conditioning"
+                    },
+                    {
+                        "unit_id": "workout_08d13a6163d2",
+                        "day": "Thursday",
+                        "time": "07:00",
+                        "focus_type": "boxing",
+                        "title": "Thursday Morning: Boxing-Style Conditioning & Core (No Equipment)"
+                    }
+                ]
             }
         ]
     },
     "missing_info": [],
-    "allergies": [],
+    "allergies": [
+        "nuts"
+    ],
     "dietary_restrictions": [
         "vegetarian",
         "vegetarian (overridden for this meal \u2014 meat allowed)",
@@ -2748,7 +3071,8 @@
     "equipment": [],
     "general_workout_restrictions": [
         "prefer morning workouts (Thursday)",
-        "prefer afternoons"
+        "prefer afternoons",
+        "prefer morning sessions"
     ],
     "status": "idle",
     "chat_history": [
@@ -2936,111 +3260,110 @@
             "timestamp": "2026-03-15T13:44:37.254353+00:00",
             "role": "agent",
             "content": "Removed 'Meal: Quick Chicken & Vegetable Stir-Fry with Quick-Cook Brown Rice' from your schedule. Scheduled hard event 'Meal: Lemon Garlic Salmon with Roasted Asparagus and Wild Rice' on Monday at 19:00.\n\nI found a great recipe for you: Quick Chickpea & Spinach Coconut Curry. It takes about 35 minutes.\n\nI've added Quick Chickpea & Spinach Coconut Curry to your schedule for Monday at 19:00."
+        },
+        {
+            "timestamp": "2026-03-15T14:38:48.398765+00:00",
+            "role": "user",
+            "content": "Find me a recipe for Saturday dinner. I have 40 minutes to prepare it and I want something with meat and vegetables. I am allergic to nuts."
+        },
+        {
+            "timestamp": "2026-03-15T14:41:42.048739+00:00",
+            "role": "agent",
+            "content": "Proposed 'Meal: Saturday Dinner (Meat & Vegetables, Nut-free, 40min)' on Saturday at 19:00.\n\nI found a great recipe for you: Chicken Enchilada Skillet. It takes about 20 minutes."
+        },
+        {
+            "timestamp": "2026-03-15T14:47:27.367621+00:00",
+            "role": "user",
+            "content": "Can you reschedule my Thursday morning workout to Friday?"
+        },
+        {
+            "timestamp": "2026-03-15T14:48:00.914351+00:00",
+            "role": "agent",
+            "content": "Cleared old 'Thursday Morning: Boxing Technique & Low-Impact Conditioning' to make room for reschedule. Rescheduled 'Thursday Morning: Boxing Technique & Low-Impact Conditioning' on Friday at 07:00."
+        },
+        {
+            "timestamp": "2026-03-15T14:51:58.086202+00:00",
+            "role": "user",
+            "content": "Plan 2 gym workouts for this week. I prefer morning sessions"
+        },
+        {
+            "timestamp": "2026-03-15T14:53:39.936203+00:00",
+            "role": "agent",
+            "content": "Proposed 'Gym Workout' on Tuesday at 07:00. Proposed 'Gym Workout' on Thursday at 07:00.\n\nDone \u2014 I created two no-equipment morning gym sessions for this week: Tuesday 07:00 and Thursday 07:00, each ~60 minutes and beginner-friendly with joint-protecting options.\n\nI have successfully added your workouts to the calendar."
         }
     ],
     "last_found_recipe": {
-        "recipe_id": "llm_generated_001",
-        "name": "Quick Chickpea & Spinach Coconut Curry",
-        "description": "A simple, vegetarian one-pan curry of chickpeas and spinach in a lightly spiced coconut-tomato sauce \u2014 ready in about 35 minutes and great with rice or naan.",
+        "recipe_id": "db_483668",
+        "name": "Chicken Enchilada Skillet",
+        "description": "Quick skillet enchilada-style chicken with torn corn tortillas, tomatoes, onion and melted cheese \u2014 a fast, satisfying Saturday dinner with meat and vegetables.",
         "component": "main_course",
-        "prep_time_mins": 15,
-        "cook_time_mins": 20,
-        "total_time_mins": 35,
+        "prep_time_mins": 10,
+        "cook_time_mins": 10,
+        "total_time_mins": 20,
         "ingredients": [
+            {
+                "name": "cooked shredded chicken",
+                "quantity": 2,
+                "unit": "cups"
+            },
+            {
+                "name": "corn tortillas",
+                "quantity": 6,
+                "unit": "pieces"
+            },
+            {
+                "name": "tomatoes (diced)",
+                "quantity": 1,
+                "unit": "cup"
+            },
+            {
+                "name": "shredded cheese (cheddar or Mexican blend)",
+                "quantity": 1,
+                "unit": "cup"
+            },
+            {
+                "name": "onion (finely chopped)",
+                "quantity": 0.5,
+                "unit": "cup"
+            },
             {
                 "name": "olive oil",
                 "quantity": 1,
                 "unit": "tbsp"
             },
             {
-                "name": "yellow onion",
-                "quantity": 1,
-                "unit": "medium"
-            },
-            {
-                "name": "garlic cloves",
-                "quantity": 3,
-                "unit": "cloves"
-            },
-            {
-                "name": "fresh ginger, minced",
-                "quantity": 1,
-                "unit": "tbsp"
-            },
-            {
-                "name": "ground cumin",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "ground turmeric",
+                "name": "salt",
                 "quantity": 0.5,
                 "unit": "tsp"
             },
             {
-                "name": "red chili flakes",
+                "name": "black pepper",
                 "quantity": 0.25,
                 "unit": "tsp"
-            },
-            {
-                "name": "canned diced tomatoes",
-                "quantity": 1,
-                "unit": "cup"
-            },
-            {
-                "name": "canned chickpeas, drained and rinsed",
-                "quantity": 1.5,
-                "unit": "cups"
-            },
-            {
-                "name": "fresh spinach (packed)",
-                "quantity": 4,
-                "unit": "cups"
-            },
-            {
-                "name": "light coconut milk",
-                "quantity": 0.75,
-                "unit": "cup"
-            },
-            {
-                "name": "salt",
-                "quantity": 0.75,
-                "unit": "tsp"
-            },
-            {
-                "name": "fresh cilantro, chopped",
-                "quantity": 2,
-                "unit": "tbsp"
-            },
-            {
-                "name": "lime juice",
-                "quantity": 1,
-                "unit": "tbsp"
             }
         ],
         "instructions": [
-            "Prep: peel and finely chop the onion; mince the garlic and ginger; drain and rinse the chickpeas.",
-            "Heat oil in a large skillet over medium heat. Add the chopped onion and saut\u00e9 until translucent, about 5\u20136 minutes.",
-            "Add the garlic and ginger and cook 1 minute until fragrant. Stir in cumin, turmeric, and red chili flakes and cook 30 seconds to bloom the spices.",
-            "Add the diced tomatoes and cook 3\u20134 minutes until the mixture thickens slightly.",
-            "Stir in the chickpeas and coconut milk. Bring to a gentle simmer and cook 6\u20138 minutes so flavors meld and sauce reduces slightly.",
-            "Fold in the spinach by handfuls, letting it wilt between additions. Cook 1\u20132 minutes more until all spinach is wilted and evenly distributed.",
-            "Season with salt and lime juice, taste and adjust seasoning. Sprinkle chopped cilantro over the curry and remove from heat.",
-            "Serve hot as-is or with steamed rice, quinoa, or flatbread."
+            "Heat a large skillet over medium heat and add olive oil.",
+            "Add chopped onion and saut\u00e9 3\u20134 minutes until softened.",
+            "Add the cooked shredded chicken and diced tomatoes; season with salt and pepper and cook 2\u20133 minutes until heated through.",
+            "Tear the corn tortillas into bite-sized pieces and add to the skillet, stirring to coat and warm them.",
+            "Sprinkle the shredded cheese evenly over the skillet, cover for 1\u20132 minutes until the cheese melts.",
+            "Stir gently to combine and serve hot. Optional: garnish with chopped cilantro, a squeeze of lime, or a dollop of plain yogurt or sour cream."
         ],
         "nutrition_per_serving": {
-            "calories": 407,
-            "protein_g": 16,
-            "carbs_g": 52,
-            "fat_g": 15,
-            "fiber_g": 12
+            "calories": 221.5,
+            "protein_g": 20.2,
+            "carbs_g": 21.4,
+            "fat_g": 6.0,
+            "fiber_g": 3.0
         },
         "tags": [
-            "vegetarian",
             "quick",
-            "one-pan",
-            "gluten-free",
-            "dinner"
+            "skillet",
+            "chicken",
+            "dinner",
+            "vegetables",
+            "Saturday"
         ]
     }
 }
