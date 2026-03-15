@@ -1,6 +1,6 @@
 {
-    "user_query": "hi",
-    "user_profile": "I'm Galit, a 21 year-old student. I want to maintain a healthy lifestyle and gain some muscle mass. I dont have any nutritional restrictions. I go to the gym",
+    "user_query": "Can you give me a protein heavy meal for Sunday dinner? Preferably Italian, with no necessary prep time limit",
+    "user_profile": "",
     "schedule_data": {
         "Monday": {
             "06:00": "-",
@@ -9,14 +9,14 @@
             "09:00": "-",
             "10:00": "-",
             "11:00": "-",
-            "12:00": "Meal: Warm Quinoa Bowl with Pan-Seared Chicken, Roasted Veggies & Chickpeas",
+            "12:00": "-",
             "13:00": "-",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Monday Evening: Lower-Body Strength",
             "18:00": "-",
-            "19:00": "Monday 19:00 \u2014 Full-Body Strength (Evening)",
+            "19:00": "-",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -29,12 +29,12 @@
             "09:00": "-",
             "10:00": "-",
             "11:00": "-",
-            "12:00": "Meal: Tuna & White-Bean Salad with Mixed Greens",
+            "12:00": "-",
             "13:00": "-",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Thursday Evening: Low-Intensity Cardio & Habit Review",
             "18:00": "-",
             "19:00": "-",
             "20:00": "-",
@@ -49,14 +49,14 @@
             "09:00": "-",
             "10:00": "-",
             "11:00": "-",
-            "12:00": "Meal: Warm Lentil & Roasted Sweet Potato Salad with Tahini-Lemon Dressing",
+            "12:00": "-",
             "13:00": "-",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Tuesday Evening: Mobility & Core (Optional)",
             "18:00": "-",
-            "19:00": "Wednesday 19:00 \u2014 Lower Focus + Conditioning (Evening)",
+            "19:00": "-",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -69,12 +69,12 @@
             "09:00": "-",
             "10:00": "-",
             "11:00": "-",
-            "12:00": "Meal: Chicken Caesar Wrap",
+            "12:00": "-",
             "13:00": "-",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Friday Evening: Full-Body Power & Conditioning",
             "18:00": "-",
             "19:00": "-",
             "20:00": "-",
@@ -89,14 +89,14 @@
             "09:00": "-",
             "10:00": "-",
             "11:00": "-",
-            "12:00": "Meal: Greek Salmon Brown Rice Bowl",
+            "12:00": "-",
             "13:00": "-",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Wednesday Evening: Upper-Body Strength (Pull & Press)",
             "18:00": "-",
-            "19:00": "Friday 19:00 \u2014 Upper & Posterior Focus (Evening)",
+            "19:00": "-",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -110,13 +110,13 @@
             "10:00": "-",
             "11:00": "-",
             "12:00": "-",
-            "13:00": "Meal: Quick Grilled Chicken & Quinoa Bowl (Yogurt-Herb Dressing)",
+            "13:00": "-",
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Saturday: Active Recovery or Full Rest",
             "18:00": "-",
-            "19:00": "Meal: Pan-Seared Salmon with Mashed Sweet Potato and Saut\u00e9ed Spinach, Microwaved Sweet Potato Mash, Quick Saut\u00e9ed Spinach with Garlic, Lemon & Toasted Pumpkin Seeds",
+            "19:00": "-",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -134,9 +134,9 @@
             "14:00": "-",
             "15:00": "-",
             "16:00": "-",
-            "17:00": "-",
+            "17:00": "Sunday: Flexible Recovery & Prep",
             "18:00": "-",
-            "19:00": "Meal: Pan-Seared Salmon with Warm Lentil & Spinach Salad",
+            "19:00": "Meal: Crispy Parmesan Chicken and Linguine",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -148,930 +148,748 @@
             "date": "2026-03-15",
             "meals": [
                 {
-                    "meal_id": "lunch_monday",
-                    "meal_type": "lunch",
+                    "meal_id": "meal_33ae8895",
+                    "meal_type": "dinner",
                     "day_of_week": "Monday",
                     "dishes": [
                         {
-                            "recipe_id": "llm_generated_001",
-                            "name": "Warm Quinoa Bowl with Pan-Seared Chicken, Roasted Veggies & Chickpeas",
-                            "description": "A balanced, high-protein warm quinoa bowl ready in under 30 minutes: fluffy quinoa, pan-seared lean protein (chicken or tofu), quick-roasted bell pepper, zucchini and red onion, lemony chickpeas, fresh parsley and optional feta. Mild and beginner-friendly.",
+                            "recipe_id": "86054",
+                            "name": "Crispy Parmesan Chicken and Linguine",
+                            "description": "Parmesan-crusted, pan-seared chicken breasts served over garlic-parmesan linguine \u2014 a protein-forward Italian-American main perfect for Sunday dinner.",
                             "component": "main_course",
-                            "prep_time_mins": 10,
-                            "cook_time_mins": 18,
-                            "total_time_mins": 28,
+                            "prep_time_mins": 15,
+                            "cook_time_mins": 20,
+                            "total_time_mins": 35,
                             "ingredients": [
                                 {
-                                    "name": "quinoa (dry)",
+                                    "name": "boneless skinless chicken breast halves",
+                                    "quantity": 2,
+                                    "unit": "pieces"
+                                },
+                                {
+                                    "name": "parmesan cheese, grated",
                                     "quantity": 0.75,
                                     "unit": "cup"
                                 },
                                 {
-                                    "name": "water (for quinoa)",
-                                    "quantity": 1.25,
-                                    "unit": "cup"
-                                },
-                                {
-                                    "name": "chicken breast (boneless, skinless)",
-                                    "quantity": 4,
-                                    "unit": "oz"
-                                },
-                                {
-                                    "name": "canned chickpeas (drained, rinsed)",
+                                    "name": "salt",
                                     "quantity": 1,
-                                    "unit": "cup"
+                                    "unit": "tsp"
                                 },
                                 {
-                                    "name": "bell pepper (any color), sliced",
-                                    "quantity": 1,
-                                    "unit": "item"
+                                    "name": "ground black pepper",
+                                    "quantity": 0.5,
+                                    "unit": "tsp"
                                 },
                                 {
-                                    "name": "zucchini, halved and sliced",
-                                    "quantity": 1,
-                                    "unit": "item"
-                                },
-                                {
-                                    "name": "red onion, sliced",
-                                    "quantity": 1,
-                                    "unit": "item"
+                                    "name": "cayenne pepper",
+                                    "quantity": 0.25,
+                                    "unit": "tsp"
                                 },
                                 {
                                     "name": "olive oil",
-                                    "quantity": 1.5,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "lemon juice",
                                     "quantity": 2,
                                     "unit": "tbsp"
                                 },
                                 {
-                                    "name": "fresh parsley, chopped",
-                                    "quantity": 0.25,
-                                    "unit": "cup"
-                                },
-                                {
-                                    "name": "feta cheese, crumbled (optional)",
-                                    "quantity": 1,
-                                    "unit": "oz"
-                                },
-                                {
-                                    "name": "salt and pepper",
-                                    "quantity": 1,
-                                    "unit": "tsp"
-                                }
-                            ],
-                            "instructions": [
-                                "Rinse quinoa in a fine mesh strainer. Combine the 0.75 cup quinoa with 1.25 cups water and a pinch of salt in a small saucepan. Bring to a boil, reduce heat, cover and simmer 12\u201315 minutes until water is absorbed. Remove from heat and let stand covered 5 minutes; fluff with a fork.",
-                                "While the quinoa cooks, pat the chicken dry and season both sides with salt and pepper. Heat 1 tbsp olive oil in a nonstick skillet over medium-high heat. Cook chicken 4\u20135 minutes per side (depending on thickness) until internal temperature reaches 165\u00b0F (75\u00b0C). Remove to a cutting board to rest 3\u20134 minutes, then slice. (If using tofu: press firm tofu 15 minutes beforehand, cube ~6 oz, and pan-sear 3\u20134 minutes per side.)",
-                                "In the same skillet, add the remaining 0.5 tbsp olive oil. Add sliced bell pepper, zucchini and red onion. Saut\u00e9 6\u20138 minutes until vegetables are tender-crisp and slightly browned. Season with a pinch of salt and pepper.",
-                                "Toss the drained chickpeas with lemon juice and chopped parsley in a small bowl. Add a tiny pinch of salt if desired.",
-                                "Assemble the bowl: place the cooked quinoa into a bowl, top with sliced chicken (or tofu), saut\u00e9ed vegetables and lemony chickpeas. Sprinkle with crumbled feta (optional) and extra parsley. Serve warm."
-                            ],
-                            "nutrition_per_serving": {
-                                "calories": 640,
-                                "protein_g": 38,
-                                "carbs_g": 74,
-                                "fat_g": 22,
-                                "fiber_g": 14
-                            },
-                            "tags": [
-                                "high-protein",
-                                "quick",
-                                "main_course",
-                                "gluten-free",
-                                "beginner-friendly",
-                                "mild"
-                            ]
-                        }
-                    ],
-                    "warnings": [
-                        "No allergies specified. Recipes may include dairy, nuts, eggs \u2014 flag if you have any intolerances or allergies.",
-                        "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=95, refinement_loops=0",
-                        "Contains dairy (feta) \u2014 omit to make dairy-free/vegan.",
-                        "If using chicken, ensure internal temperature reaches 165\u00b0F (75\u00b0C). If substituting tofu, use ~6 oz pressed tofu for comparable texture; protein will change slightly."
-                    ],
-                    "suggestions": [
-                        "Research suggests prioritizing lunch as the principal meal supports metabolic efficiency for evening chronotypes; this lunch is protein-forward and vegetable-rich.",
-                        "Batch-cook quinoa and roast extra vegetables ahead (e.g., Sunday) to keep weekday prep under 30 minutes.",
-                        "Include canned legumes (chickpeas) for quick fiber and plant protein.",
-                        "This recipe was evaluated as written; ingredient quantities represent the full recipe used to produce the stated nutrition_per_serving. If you want two smaller servings, split as preferred but nutrition_per_serving will change.",
-                        "If quinoa seems undercooked, add up to 2\u20133 tbsp extra water during cooking and check for tenderness; a 1.25 cups water ratio works for many stovetops but may vary.",
-                        "To lower calories/fat, reduce olive oil to 1 tbsp total and skip or reduce feta; to boost protein (still under max 40 g), increase chicken to 6 oz or add 1\u20132 tbsp Greek yogurt as a sauce (if dairy is acceptable)."
-                    ]
-                },
-                {
-                    "meal_id": "lunch_tuesday",
-                    "meal_type": "lunch",
-                    "day_of_week": "Tuesday",
-                    "dishes": [
-                        {
-                            "recipe_id": "llm_generated",
-                            "name": "Tuna & White-Bean Salad with Mixed Greens",
-                            "description": "A quick no-cook, protein-forward lunch: canned tuna and cannellini beans tossed with fresh vegetables, lemon and olive oil, served over mixed greens with a slice of whole-grain bread.",
-                            "component": "main_course",
-                            "prep_time_mins": 15,
-                            "cook_time_mins": 0,
-                            "total_time_mins": 15,
-                            "ingredients": [
-                                {
-                                    "name": "tuna (canned in water), drained",
-                                    "quantity": 85,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "cannellini (white) beans, canned, drained",
-                                    "quantity": 130,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "mixed salad greens",
-                                    "quantity": 60,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "cherry tomatoes, halved",
-                                    "quantity": 90,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "celery, chopped",
-                                    "quantity": 40,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "red onion, finely chopped",
-                                    "quantity": 20,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "fresh parsley, chopped",
+                                    "name": "linguine",
                                     "quantity": 8,
-                                    "unit": "g"
+                                    "unit": "oz"
                                 },
                                 {
-                                    "name": "extra-virgin olive oil",
-                                    "quantity": 15,
-                                    "unit": "g"
+                                    "name": "garlic, minced",
+                                    "quantity": 3,
+                                    "unit": "cloves"
                                 },
                                 {
-                                    "name": "fresh lemon juice",
-                                    "quantity": 15,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "whole-grain bread",
-                                    "quantity": 1,
-                                    "unit": "slice"
-                                }
-                            ],
-                            "instructions": [
-                                "Drain the tuna and cannellini beans well. Place the tuna in a medium bowl and flake lightly with a fork.",
-                                "Add the drained cannellini beans to the bowl and gently mash about one-third of the beans with the fork to create a creamier texture while leaving the rest whole.",
-                                "Stir in chopped celery, halved cherry tomatoes, finely chopped red onion, and parsley.",
-                                "In a small bowl or jar, whisk together the lemon juice and olive oil with a pinch of salt and black pepper (to taste).",
-                                "Pour the dressing over the tuna-and-bean mixture and toss gently to combine.",
-                                "Arrange mixed greens on a plate, top with the tuna-and-bean mixture, and serve with the slice of whole-grain bread on the side."
-                            ],
-                            "nutrition_per_serving": {
-                                "calories": 486,
-                                "protein_g": 37,
-                                "carbs_g": 48,
-                                "fat_g": 16,
-                                "fiber_g": 15
-                            },
-                            "tags": [
-                                "no-cook",
-                                "high-protein",
-                                "fiber-rich",
-                                "quick",
-                                "beginner"
-                            ]
-                        }
-                    ],
-                    "warnings": [
-                        "Canned fish and legumes are used; check freshness and sodium levels if you are monitoring salt intake.",
-                        "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=94, refinement_loops=0",
-                        "Nutrition estimates (notably fiber) are somewhat optimistic for the portion; canned ingredients can be higher in sodium\u2014use low-sodium cans or rinse/drain to reduce sodium."
-                    ],
-                    "suggestions": [
-                        "Using canned, ready-to-eat proteins and beans keeps prep time low and supports adequate protein intake for muscle maintenance.",
-                        "Research suggests Mediterranean-style lunches (vegetables + legumes + lean protein) help metabolic health\u2014this meal follows that pattern.",
-                        "Use low-sodium canned tuna and beans or rinse beans thoroughly to lower sodium; optionally reduce olive oil to 10 g to cut fat/calories.",
-                        "For reliably higher fiber, increase the beans by ~30 g or add extra vegetables (e.g., bell pepper) or a larger slice of whole-grain bread.",
-                        "If gluten-free is needed, swap the bread for a gluten-free roll or omit it; seasoning (salt/pepper) is optional to taste."
-                    ]
-                },
-                {
-                    "meal_id": "lunch_wednesday",
-                    "meal_type": "lunch",
-                    "day_of_week": "Wednesday",
-                    "dishes": [
-                        {
-                            "recipe_id": "llm_lentil_sweetpotato_salad_001",
-                            "name": "Warm Lentil & Roasted Sweet Potato Salad with Tahini-Lemon Dressing",
-                            "description": "A quick, plant-forward warm main: tender brown lentils and roasted sweet potato tossed with spinach (or arugula), toasted sunflower seeds and a simple tahini-lemon dressing. Beginner-friendly and ready in ~30 minutes.",
-                            "component": "main_course",
-                            "prep_time_mins": 10,
-                            "cook_time_mins": 20,
-                            "total_time_mins": 30,
-                            "ingredients": [
-                                {
-                                    "name": "dry brown or green lentils",
-                                    "quantity": 200,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "sweet potato (peeled and diced)",
-                                    "quantity": 200,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "baby spinach or arugula",
-                                    "quantity": 120,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "tahini",
-                                    "quantity": 2,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "fresh lemon juice",
-                                    "quantity": 2,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "olive oil",
-                                    "quantity": 1,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "garlic (minced)",
-                                    "quantity": 1,
-                                    "unit": "clove"
-                                },
-                                {
-                                    "name": "sunflower seeds (toasted)",
-                                    "quantity": 2,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "salt",
-                                    "quantity": 1,
-                                    "unit": "tsp"
-                                },
-                                {
-                                    "name": "black pepper",
-                                    "quantity": 0.5,
-                                    "unit": "tsp"
-                                },
-                                {
-                                    "name": "feta cheese (optional)",
-                                    "quantity": 57,
-                                    "unit": "g"
-                                }
-                            ],
-                            "instructions": [
-                                "Preheat oven to 425\u00b0F (220\u00b0C). Toss diced sweet potato with 1/2 tbsp olive oil and a pinch of salt and pepper; spread in a single layer on a baking sheet.",
-                                "Roast sweet potato for 18\u201322 minutes, turning once, until edges are browned and pieces are tender.",
-                                "While sweet potato roasts, rinse lentils. Place lentils in a pot with 3 cups (750 ml) water, bring to a boil, reduce to a simmer and cook uncovered 18\u201320 minutes until tender but holding shape. Drain any excess water.",
-                                "Make the dressing: whisk together tahini, lemon juice, remaining 1/2 tbsp olive oil, minced garlic and 1/4 tsp salt. If too thick, thin with 1\u20132 tsp warm water until pourable.",
-                                "In a large bowl combine warm lentils, roasted sweet potato, greens and sunflower seeds. Pour dressing over and gently toss to combine. Taste and adjust salt and pepper.",
-                                "Divide between plates (recipe yields ~2 servings). If using, crumble feta on top of each serving. Serve warm or at room temperature."
-                            ],
-                            "nutrition_per_serving": {
-                                "calories": 594,
-                                "protein_g": 31,
-                                "carbs_g": 78,
-                                "fat_g": 21,
-                                "fiber_g": 27
-                            },
-                            "tags": [
-                                "warm",
-                                "salad",
-                                "plant-forward",
-                                "high-fiber",
-                                "quick"
-                            ]
-                        }
-                    ],
-                    "warnings": [
-                        "Contains nuts/seeds and possibly dairy if cheese is added; remove or replace if you have sensitivities.",
-                        "EVAL_TRACE: strict_runs=2, strict_pass=2, llm_runs=2, best_llm_score=94, refinement_loops=1",
-                        "Contains tahini (sesame) and sunflower seeds \u2014 common allergens. Feta is optional (dairy) \u2014 omit or substitute for vegan/dairy-free.",
-                        "Total time equals the user's available 30 minutes; this requires multitasking (start lentils and roast sweet potato together)."
-                    ],
-                    "suggestions": [
-                        "Lentils and sweet potato provide slow-release carbs and fiber to support daytime energy without heavy evening digestion.",
-                        "Prepare lentils in a larger batch for 2\u20133 meals to save time.",
-                        "To save time: use 1 can (~400 g) cooked lentils (drained) \u2014 skip simmering and shorten total time.",
-                        "To lower calories: reduce tahini to 1 tbsp and use 1 tsp olive oil or omit feta.",
-                        "Vegan option: omit feta and add 2 tbsp extra toasted seeds or 1/4 cup cooked quinoa for extra protein.",
-                        "Start lentils and roast simultaneously; stir/turn sweet potato once to stay within 30 min. Pre-cook lentils ahead for faster assembly."
-                    ]
-                },
-                {
-                    "meal_id": "lunch_thursday",
-                    "meal_type": "lunch",
-                    "day_of_week": "Thursday",
-                    "dishes": [
-                        {
-                            "recipe_id": "db_314780",
-                            "name": "Chicken Caesar Wrap",
-                            "description": "Quick 15-minute whole-wheat wrap with cooked chicken (or swap turkey), romaine, tomato and a sprinkle of Parmesan \u2014 handheld lunch, easy to assemble.",
-                            "component": "main_course",
-                            "prep_time_mins": 10,
-                            "cook_time_mins": 5,
-                            "total_time_mins": 15,
-                            "ingredients": [
-                                {
-                                    "name": "boneless skinless chicken breast (or thinly sliced deli turkey)",
-                                    "quantity": 100,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "whole wheat tortilla",
-                                    "quantity": 1,
-                                    "unit": "piece"
-                                },
-                                {
-                                    "name": "romaine lettuce, shredded",
-                                    "quantity": 40,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "tomato, sliced",
-                                    "quantity": 30,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "Parmesan cheese, grated",
-                                    "quantity": 10,
-                                    "unit": "g"
-                                }
-                            ],
-                            "instructions": [
-                                "If using raw chicken, thinly slice and quickly pan-sear for 4\u20135 minutes until cooked through; for fastest assembly use pre-cooked chicken or deli turkey slices.",
-                                "Lay the whole wheat tortilla flat. Layer romaine, tomato slices, cooked chicken/turkey, and sprinkle Parmesan.",
-                                "Optionally fold in a light Caesar-style dressing (use sparingly to control calories) or a smear of hummus for Mediterranean twist.",
-                                "Roll tightly, cut in half if desired, and serve with carrot sticks or a small side salad."
-                            ],
-                            "nutrition_per_serving": {
-                                "calories": 388,
-                                "protein_g": 35.2,
-                                "carbs_g": 11.6,
-                                "fat_g": 22.6,
-                                "fiber_g": 4.2
-                            },
-                            "tags": [
-                                "quick",
-                                "wrap",
-                                "lunch",
-                                "handheld"
-                            ]
-                        }
-                    ],
-                    "warnings": [
-                        "Pre-sliced deli meats can be higher in sodium and preservatives; choose minimally processed options where possible.",
-                        "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=90, refinement_loops=0",
-                        "Fiber is slightly below the requested minimum (4.2 g vs 5 g). Dressing (if added) may increase calories/fat and introduce allergens (dairy/eggs) via classic Caesar dressing."
-                    ],
-                    "suggestions": [
-                        "Handheld wraps are quick to assemble and portable for student schedules\u2014keep hummus and pre-washed greens on hand.",
-                        "If aiming to increase muscle gain, add a dairy or plant-protein side (e.g., yogurt or a protein shake) after this lunch or post-workout.",
-                        "Add a side of carrot sticks, an apple, or extra shredded cabbage/romaine to raise fiber to meet the >=5 g target.",
-                        "Swap the chicken for thinly sliced roast turkey (matches your description) or use smashed chickpeas + a touch of lemon and cumin for a vegetarian option; chickpea version will lower protein unless you increase portion size.",
-                        "To guarantee the 15-minute window, use pre-cooked rotisserie chicken or deli turkey slices and pre-shredded lettuce."
-                    ]
-                },
-                {
-                    "meal_id": "lunch_friday",
-                    "meal_type": "lunch",
-                    "day_of_week": "Friday",
-                    "dishes": [
-                        {
-                            "recipe_id": "llm_generated",
-                            "name": "Greek Salmon Brown Rice Bowl",
-                            "description": "Quick Greek-style bowl with a base of cooked brown rice, pan-seared salmon, a simple cucumber-tomato salad with Kalamata olives and oregano, plus a light tzatziki-style yogurt scoop. High-protein and fiber-rich, beginner-friendly and ready in ~25 minutes when rice is pre-cooked or using quick-cook rice.",
-                            "component": "main_course",
-                            "prep_time_mins": 10,
-                            "cook_time_mins": 15,
-                            "total_time_mins": 25,
-                            "ingredients": [
-                                {
-                                    "name": "cooked brown rice",
-                                    "quantity": 1,
-                                    "unit": "cup"
-                                },
-                                {
-                                    "name": "salmon fillet (about 5 oz / 142 g)",
-                                    "quantity": 142,
-                                    "unit": "g"
-                                },
-                                {
-                                    "name": "cucumber",
-                                    "quantity": 0.5,
-                                    "unit": "medium"
-                                },
-                                {
-                                    "name": "tomato (medium)",
-                                    "quantity": 1,
-                                    "unit": "medium"
-                                },
-                                {
-                                    "name": "Kalamata olives",
-                                    "quantity": 6,
-                                    "unit": "count"
-                                },
-                                {
-                                    "name": "plain Greek yogurt (0% or low-fat)",
-                                    "quantity": 0.33,
-                                    "unit": "cup"
-                                },
-                                {
-                                    "name": "olive oil",
-                                    "quantity": 1,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "fresh lemon juice",
-                                    "quantity": 1,
-                                    "unit": "tbsp"
-                                },
-                                {
-                                    "name": "garlic (minced)",
-                                    "quantity": 1,
-                                    "unit": "clove"
-                                },
-                                {
-                                    "name": "dried oregano",
-                                    "quantity": 0.5,
-                                    "unit": "tsp"
-                                },
-                                {
-                                    "name": "salt",
+                                    "name": "red pepper flakes",
                                     "quantity": 0.25,
                                     "unit": "tsp"
-                                },
-                                {
-                                    "name": "black pepper",
-                                    "quantity": 0.125,
-                                    "unit": "tsp"
                                 }
                             ],
                             "instructions": [
-                                "If using pre-cooked or microwaveable brown rice, heat according to package while you prepare the rest (keeps total time ~25 minutes). If starting from dry brown rice, cook separately (may push total time >30 min).",
-                                "Pat salmon dry and season both sides with a pinch (about 1/8 tsp) of salt and a little black pepper.",
-                                "Heat a nonstick skillet over medium-high. Add 1 tsp of the olive oil to the pan. When hot, place the salmon skin-side down (if present). Sear without moving 3\u20134 minutes to crisp, then flip and cook 3\u20134 more minutes until opaque and it flakes easily with a fork (or reaches 145\u00b0F / 63\u00b0C internal temperature). Remove and let rest.",
-                                "While the salmon cooks, make the cucumber-tomato salad: dice the cucumber and tomato and place in a bowl. Add the olives (halved if preferred), 1 tsp olive oil, 1/2 tbsp (1.5 tsp) lemon juice, 1/4 tsp dried oregano, and a pinch of salt and pepper. Toss to combine.",
-                                "Make quick tzatziki: in a small bowl, mix Greek yogurt with minced garlic, the remaining 1/2 tbsp (1.5 tsp) lemon juice, a pinch of dried oregano, and a little black pepper. Stir and taste; adjust lemon or garlic as desired.",
-                                "Assemble the bowl: place 1 cup warm brown rice in a bowl, top with the salmon fillet, spoon the cucumber-tomato salad to one side, and add a scoop (about 1/3 cup) of the yogurt tzatziki on the side. Finish with a squeeze of lemon over the salmon if desired.",
-                                "Optional garnish: extra oregano or cracked black pepper. For a vegetarian swap, replace salmon with grilled marinated tempeh (see suggestions)."
+                                "Preheat oven to 400\u00b0F (200\u00b0C). Pound chicken to an even ~1/2-inch thickness; season both sides with salt, pepper, and cayenne.",
+                                "Press chicken into grated parmesan (option: mix 1/2 cup panko breadcrumbs with the parmesan for extra crust).",
+                                "Heat 1 tbsp olive oil in an oven-safe skillet over medium-high heat. Sear chicken 2\u20133 minutes per side until golden-brown.",
+                                "Transfer skillet to oven and bake 8\u201310 minutes (until internal temp reaches 165\u00b0F / 74\u00b0C) or until cooked through. Remove and rest 5 minutes.",
+                                "While chicken cooks, boil linguine in salted water per package directions; reserve 1/2 cup pasta water before draining.",
+                                "In a large skillet, heat remaining 1 tbsp olive oil over medium; saut\u00e9 garlic 30\u201360 seconds until fragrant. Add cooked linguine, 1/2 cup grated parmesan, a splash of reserved pasta water, and red pepper flakes. Toss to combine and create a light sauce, adding more pasta water as needed.",
+                                "Plate linguine, top with rested chicken, and sprinkle extra parmesan and red pepper flakes to taste."
                             ],
                             "nutrition_per_serving": {
-                                "calories": 720,
-                                "protein_g": 43,
-                                "carbs_g": 56,
-                                "fat_g": 34,
-                                "fiber_g": 6
+                                "calories": 815,
+                                "protein_g": 52,
+                                "carbs_g": 85,
+                                "fat_g": 28,
+                                "fiber_g": 4
                             },
                             "tags": [
-                                "greek",
-                                "high-protein",
-                                "quick",
-                                "pescatarian",
-                                "beginner-friendly",
-                                "tempeh_swap_possible"
+                                "Italian",
+                                "high_protein",
+                                "chicken",
+                                "dinner"
                             ]
                         }
                     ],
-                    "warnings": [
-                        "Seafood and dairy present in this meal; omit or swap if you have sensitivities or preferences.",
-                        "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=93, refinement_loops=0",
-                        "If you start from dry brown rice (not pre-cooked or quick-cook), total time will likely exceed 30 minutes.",
-                        "Sodium note: Kalamata olives and added salt raise sodium\u2014reduce olives or rinse them to lower sodium if needed."
-                    ],
-                    "suggestions": [
-                        "Including a higher-protein lunch before an evening workout is useful for overall daily protein distribution supporting muscle gain.",
-                        "Research suggests Mediterranean-style components (vegetables, legumes, lean protein) improve metabolic markers\u2014this bowl follows that approach.",
-                        "To keep within 30 minutes, use microwaveable pre-cooked brown rice or quick-cook farro (check package cook time).",
-                        "Low-sodium options: halve the olives or rinse them, reduce added salt, or substitute low-sodium olives.",
-                        "Doneness tip: cook salmon to 145\u00b0F / 63\u00b0C internal temp or until flesh is opaque and flakes easily; thicker fillets may need an extra minute or two per side.",
-                        "Vegetarian swap: grill or pan-sear 4\u20135 oz tempeh slices marinated 10\u201315 minutes in lemon, garlic, olive oil, and oregano \u2014 this will change nutrition values (protein may vary).",
-                        "Make extra rice ahead and refrigerate portions to cut prep time on busy days."
-                    ]
+                    "warnings": [],
+                    "suggestions": []
                 }
             ]
         },
         "fitness": {
-            "goal": "Build full-body strength and hypertrophy using progressive bodyweight variations and time-under-tension.",
-            "duration_limit_mins": 60,
-            "workout_name": "Monday 60-min Evening Full-Body Strength",
+            "goal": "Increase lower-body strength and robustness with compound lifts plus targeted accessory work; include explicit warm-up progression and rest standards.",
+            "duration_limit_mins": 65,
+            "workout_name": "Monday Evening Lower Strength",
             "difficulty": "intermediate",
-            "focus_type": "full-body strength",
+            "focus_type": "strength",
             "session_outline": [
                 {
                     "section": "warmup",
-                    "minutes": 10,
+                    "minutes": 15,
                     "items": [
-                        "3 minutes light cardio in place (march or easy jog)",
-                        "Dynamic mobility: leg swings, arm circles, hip circles (3 min)",
-                        "2 rounds: 10 slow bodyweight squats + 6 slow incline or knee push-ups"
+                        "5 minutes easy row or bike (gradual build)",
+                        "Dynamic mobility: leg swings front-to-back and side-to-side, hip circles, world's greatest stretch (2 rounds)",
+                        "Barbell warm-up progression for squat: empty bar x8, 50% working-load x5, 70% x3 (these warm-up sets are additional to main working sets)"
                     ]
                 },
                 {
                     "section": "main",
-                    "minutes": 45,
+                    "minutes": 40,
                     "items": [
-                        "A. Push: Push-ups 4 sets, 8-12 reps, 90s rest",
-                        "B. Legs: Bodyweight squats (or slow tempo squats) 4 sets, 12-20 reps, 60s rest",
-                        "C. Unilateral: Reverse lunges 3 sets, 8-12 each leg, 75s rest",
-                        "D. Hinge: Glute bridge (progress to single-leg) 3 sets, 12-20 reps, 45s rest",
-                        "E. Core/upper-back: Planks 3 sets, 45-60s (or 3 x 12 supermans), 45s rest"
+                        "Barbell back squat: 3 working sets heavy (build with warm-ups above); standardized rest 120s between heavy sets",
+                        "Romanian deadlift: 3 sets (accessory), superset option with calf raises to save time, rest 60-90s",
+                        "Bulgarian split squat (dumbbell or barbell): 3 sets per leg (perform as alternating legs if short on time; see rest rules below)",
+                        "Seated or standing calf raises: 3 sets"
                     ]
                 },
                 {
                     "section": "cooldown",
-                    "minutes": 5,
+                    "minutes": 10,
                     "items": [
-                        "Standing hamstring & quad stretch, chest opener (30-45s each)",
-                        "Controlled breathing and gentle shoulder mobility"
+                        "Hamstring and quad static stretches (4-6 minutes total)",
+                        "Short foam-roll focus on quads and glutes (3-4 minutes)",
+                        "Diaphragmatic breathing (1-2 minutes)"
                     ]
                 }
             ],
             "exercise_details": [
                 {
-                    "name": "Push-ups",
-                    "sets": 4,
-                    "reps": "8-12",
-                    "rest_seconds": 90,
-                    "notes": "2s descent, 1s ascent. Regress to knee or incline push-ups if needed. If >12 reps easy, use slower eccentrics (3s down) or pause at bottom."
-                },
-                {
-                    "name": "Bodyweight Squats",
-                    "sets": 4,
-                    "reps": "12-20",
-                    "rest_seconds": 60,
-                    "notes": "Full depth as comfortable. Slow negatives increase difficulty. If too easy, try narrow/tempo variations or pause at the bottom."
-                },
-                {
-                    "name": "Reverse Lunges",
+                    "name": "Barbell back squat",
                     "sets": 3,
-                    "reps": "8-12 each leg",
+                    "reps": "5-8",
+                    "rest_seconds": 120,
+                    "notes": "Use the warm-up progression (empty bar x8, 50% x5, 70% x3) before working sets. Prioritize technique and use safety pins or a spotter for heavy work. If you miss a target rep on two consecutive top-set attempts or RPE \u2265 8, reduce subsequent working sets by 1 and drop load 5-10%."
+                },
+                {
+                    "name": "Romanian deadlift",
+                    "sets": 3,
+                    "reps": "8-10",
                     "rest_seconds": 75,
-                    "notes": "Step back into the lunge to reduce knee stress. Keep torso tall. If balance is an issue, hold a wall or chair for light support."
+                    "notes": "Emphasize hip hinge and controlled eccentric; superset with calf raises to save time (reduce rest to 45-60s when supersetting)."
                 },
                 {
-                    "name": "Glute Bridge",
+                    "name": "Bulgarian split squat (dumbbell or barbell)",
                     "sets": 3,
-                    "reps": "12-20",
+                    "reps": "8-10 each leg",
                     "rest_seconds": 45,
-                    "notes": "Squeeze glutes at the top for 2s. Progress to single-leg glute bridge when 15-20 reps become easy."
+                    "notes": "If performed as straight sets per leg, rest 45s between sets per leg. If alternating legs, rest ~30s between legs but maintain total rest per pair \u2248 60-90s."
                 },
                 {
-                    "name": "Plank or Supermans",
+                    "name": "Seated/standing calf raises",
                     "sets": 3,
-                    "reps": "Plank: 45-60s OR Supermans: 12",
+                    "reps": "12-15",
                     "rest_seconds": 45,
-                    "notes": "Choose plank for core endurance or supermans for posterior chain. Maintain a neutral spine and avoid sagging hips."
+                    "notes": "Pause at the top for full contraction and control the descent."
                 }
             ],
             "safety_notes": [
-                "Estimated timing: warmup ~10 min; main ~45 min (including rests); cooldown ~5 min. Use a timer for rests.",
-                "Form-first: stop any movement that causes sharp joint pain. Differentiate muscle burn from joint pain by reducing range or regressing movement.",
-                "Progression: add 1 rep per set every 1\u20132 weeks; when upper bound is sustainable for two sessions, add a set or increase difficulty (tempo, unilateral variations)."
+                "Warm up thoroughly with the prescribed barbell progression; warm-up sets are additional to main working-set time.",
+                "Standardized rest guidance: heavy compound lifts = 120s; main accessory lifts = 60-90s; movement supersets shorten rest as noted.",
+                "Weekly load-management rule (concrete): If your top squat set on Monday is RPE \u2265 7 or form breakdown occurs, remove the 3rd working set of trap-bar deadlift on Friday (i.e., do 2 heavy sets Friday) OR perform 3 sets at 60-70% on Friday. To reduce Monday volume specifically, drop Bulgarian split squat by one set (from 3 to 2) before reducing heavy squat sets."
             ]
         }
     },
     "workouts": {
-        "current_workout_id": "workout_1d18b787994d",
-        "current_routine_id": "routine_7dece6a02320",
+        "current_workout_id": "workout_d53d59248491",
+        "current_routine_id": "routine_840e7d043154",
         "history": [
             {
-                "id": "workout_1939bde4059b",
-                "created_at": "2026-03-15T18:13:22.852309+00:00",
+                "id": "workout_416eb7230e22",
+                "created_at": "2026-03-15T20:36:46.079813+00:00",
                 "source": "agent",
-                "source_query": "Plan my week: I want 3 workouts, prefer evening sessions. I want you to plan my lunch on the days: Monday - Friday (30 minute prepare)",
-                "response_text": "Done \u2014 I created a 3-session weekly evening workout plan (Mon/Wed/Fri at ~19:00) focused on muscle gain with no-special-equipment primary options, plus a simple 30-minute lunch prep plan for Monday\u2013Friday (default lunch time 12:00). Research supports 3 \u00d7 ~1-hour sessions per week as a realistic, effective starting point for strength and functional gains.",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
                 "scheduled_slots": [
                     {
                         "day": "Monday",
-                        "time": "19:00",
-                        "event": "Evening Workout"
+                        "time": "17:00"
                     }
                 ],
-                "routine_id": "routine_7dece6a02320",
+                "routine_id": "routine_840e7d043154",
                 "unit_index": 0,
                 "unit_day": "Monday",
                 "focus_type": "strength",
                 "draft": {
-                    "goal": "Build full-body strength and hypertrophy using progressive bodyweight variations and time-under-tension.",
-                    "duration_limit_mins": 60,
-                    "workout_name": "Monday 60-min Evening Full-Body Strength",
+                    "goal": "Increase lower-body strength and robustness with compound lifts plus targeted accessory work; include explicit warm-up progression and rest standards.",
+                    "duration_limit_mins": 65,
+                    "workout_name": "Monday Evening Lower Strength",
                     "difficulty": "intermediate",
-                    "focus_type": "full-body strength",
+                    "focus_type": "strength",
                     "session_outline": [
                         {
                             "section": "warmup",
-                            "minutes": 10,
+                            "minutes": 15,
                             "items": [
-                                "3 minutes light cardio in place (march or easy jog)",
-                                "Dynamic mobility: leg swings, arm circles, hip circles (3 min)",
-                                "2 rounds: 10 slow bodyweight squats + 6 slow incline or knee push-ups"
-                            ]
-                        },
-                        {
-                            "section": "main",
-                            "minutes": 45,
-                            "items": [
-                                "A. Push: Push-ups 4 sets, 8-12 reps, 90s rest",
-                                "B. Legs: Bodyweight squats (or slow tempo squats) 4 sets, 12-20 reps, 60s rest",
-                                "C. Unilateral: Reverse lunges 3 sets, 8-12 each leg, 75s rest",
-                                "D. Hinge: Glute bridge (progress to single-leg) 3 sets, 12-20 reps, 45s rest",
-                                "E. Core/upper-back: Planks 3 sets, 45-60s (or 3 x 12 supermans), 45s rest"
-                            ]
-                        },
-                        {
-                            "section": "cooldown",
-                            "minutes": 5,
-                            "items": [
-                                "Standing hamstring & quad stretch, chest opener (30-45s each)",
-                                "Controlled breathing and gentle shoulder mobility"
-                            ]
-                        }
-                    ],
-                    "exercise_details": [
-                        {
-                            "name": "Push-ups",
-                            "sets": 4,
-                            "reps": "8-12",
-                            "rest_seconds": 90,
-                            "notes": "2s descent, 1s ascent. Regress to knee or incline push-ups if needed. If >12 reps easy, use slower eccentrics (3s down) or pause at bottom."
-                        },
-                        {
-                            "name": "Bodyweight Squats",
-                            "sets": 4,
-                            "reps": "12-20",
-                            "rest_seconds": 60,
-                            "notes": "Full depth as comfortable. Slow negatives increase difficulty. If too easy, try narrow/tempo variations or pause at the bottom."
-                        },
-                        {
-                            "name": "Reverse Lunges",
-                            "sets": 3,
-                            "reps": "8-12 each leg",
-                            "rest_seconds": 75,
-                            "notes": "Step back into the lunge to reduce knee stress. Keep torso tall. If balance is an issue, hold a wall or chair for light support."
-                        },
-                        {
-                            "name": "Glute Bridge",
-                            "sets": 3,
-                            "reps": "12-20",
-                            "rest_seconds": 45,
-                            "notes": "Squeeze glutes at the top for 2s. Progress to single-leg glute bridge when 15-20 reps become easy."
-                        },
-                        {
-                            "name": "Plank or Supermans",
-                            "sets": 3,
-                            "reps": "Plank: 45-60s OR Supermans: 12",
-                            "rest_seconds": 45,
-                            "notes": "Choose plank for core endurance or supermans for posterior chain. Maintain a neutral spine and avoid sagging hips."
-                        }
-                    ],
-                    "safety_notes": [
-                        "Estimated timing: warmup ~10 min; main ~45 min (including rests); cooldown ~5 min. Use a timer for rests.",
-                        "Form-first: stop any movement that causes sharp joint pain. Differentiate muscle burn from joint pain by reducing range or regressing movement.",
-                        "Progression: add 1 rep per set every 1\u20132 weeks; when upper bound is sustainable for two sessions, add a set or increase difficulty (tempo, unilateral variations)."
-                    ]
-                }
-            },
-            {
-                "id": "workout_1d18b787994d",
-                "created_at": "2026-03-15T18:13:22.852309+00:00",
-                "source": "agent",
-                "source_query": "Plan my week: I want 3 workouts, prefer evening sessions. I want you to plan my lunch on the days: Monday - Friday (30 minute prepare)",
-                "response_text": "Done \u2014 I created a 3-session weekly evening workout plan (Mon/Wed/Fri at ~19:00) focused on muscle gain with no-special-equipment primary options, plus a simple 30-minute lunch prep plan for Monday\u2013Friday (default lunch time 12:00). Research supports 3 \u00d7 ~1-hour sessions per week as a realistic, effective starting point for strength and functional gains.",
-                "scheduled_slots": [
-                    {
-                        "day": "Wednesday",
-                        "time": "19:00",
-                        "event": "Evening Workout"
-                    }
-                ],
-                "routine_id": "routine_7dece6a02320",
-                "unit_index": 1,
-                "unit_day": "Wednesday",
-                "focus_type": "mixed",
-                "draft": {
-                    "goal": "Develop lower-body strength, unilateral control, and metabolic conditioning to support hypertrophy and work capacity.",
-                    "duration_limit_mins": 60,
-                    "workout_name": "Wednesday 60-min Evening Lower + Conditioning",
-                    "difficulty": "intermediate",
-                    "focus_type": "lower-body strength with conditioning",
-                    "session_outline": [
-                        {
-                            "section": "warmup",
-                            "minutes": 10,
-                            "items": [
-                                "5 minutes light cardio (marching, high knees, or bike if at gym)",
-                                "Dynamic leg mobility: hip circles, leg swings, ankle mobility",
-                                "2 sets: 8 slow bodyweight squats + 6 forward or reverse lunges each side"
+                                "5 minutes easy row or bike (gradual build)",
+                                "Dynamic mobility: leg swings front-to-back and side-to-side, hip circles, world's greatest stretch (2 rounds)",
+                                "Barbell warm-up progression for squat: empty bar x8, 50% working-load x5, 70% x3 (these warm-up sets are additional to main working sets)"
                             ]
                         },
                         {
                             "section": "main",
                             "minutes": 40,
                             "items": [
-                                "A. Single-leg hinge: Single-leg Romanian deadlift (bodyweight reach) 3 sets, 10 each side, 60s rest",
-                                "B. Quad/glute: Walking lunges or reverse lunges 4 sets, 12-16 steps each leg, 60s rest",
-                                "C. Power/conditioning: Jump squats or squat pulses 3 sets, 8-12 reps, 90s rest",
-                                "D. Posterior chain: Single-leg glute bridge 3 sets, 10-12 each leg, 45s rest",
-                                "E. Core & calves superset: Standing calf raises 3 x 20 + Dead-bug 3 x 12, 30-45s rest between supersets"
+                                "Barbell back squat: 3 working sets heavy (build with warm-ups above); standardized rest 120s between heavy sets",
+                                "Romanian deadlift: 3 sets (accessory), superset option with calf raises to save time, rest 60-90s",
+                                "Bulgarian split squat (dumbbell or barbell): 3 sets per leg (perform as alternating legs if short on time; see rest rules below)",
+                                "Seated or standing calf raises: 3 sets"
                             ]
                         },
                         {
                             "section": "cooldown",
                             "minutes": 10,
                             "items": [
-                                "Self-massage or foam-roll substitute for quads & hamstrings (2-3 min each)",
-                                "Static stretches for hips, hamstrings, calves (30-45s each)"
+                                "Hamstring and quad static stretches (4-6 minutes total)",
+                                "Short foam-roll focus on quads and glutes (3-4 minutes)",
+                                "Diaphragmatic breathing (1-2 minutes)"
                             ]
                         }
                     ],
                     "exercise_details": [
                         {
-                            "name": "Single-Leg Romanian Deadlift (bodyweight reach)",
+                            "name": "Barbell back squat",
                             "sets": 3,
-                            "reps": "10 each leg",
-                            "rest_seconds": 60,
-                            "notes": "Hinge at hips, reach toward the ground with opposite hand for balance. Slight bend in standing knee. Use a chair for support if needed."
+                            "reps": "5-8",
+                            "rest_seconds": 120,
+                            "notes": "Use the warm-up progression (empty bar x8, 50% x5, 70% x3) before working sets. Prioritize technique and use safety pins or a spotter for heavy work. If you miss a target rep on two consecutive top-set attempts or RPE \u2265 8, reduce subsequent working sets by 1 and drop load 5-10%."
                         },
                         {
-                            "name": "Walking Lunges / Reverse Lunges",
-                            "sets": 4,
-                            "reps": "12-16 steps each leg",
-                            "rest_seconds": 60,
-                            "notes": "Long stride emphasizes glutes; keep torso tall and control descent. If space is limited, do reverse lunges in place."
+                            "name": "Romanian deadlift",
+                            "sets": 3,
+                            "reps": "8-10",
+                            "rest_seconds": 75,
+                            "notes": "Emphasize hip hinge and controlled eccentric; superset with calf raises to save time (reduce rest to 45-60s when supersetting)."
                         },
                         {
-                            "name": "Jump Squats or Squat Pulses",
+                            "name": "Bulgarian split squat (dumbbell or barbell)",
                             "sets": 3,
-                            "reps": "8-12",
-                            "rest_seconds": 90,
-                            "notes": "If joint-sensitive, prefer squat pulses. For jumps, land softly and absorb force through hips and knees."
-                        },
-                        {
-                            "name": "Single-Leg Glute Bridge",
-                            "sets": 3,
-                            "reps": "10-12 each leg",
+                            "reps": "8-10 each leg",
                             "rest_seconds": 45,
-                            "notes": "Drive through the heel and squeeze glutes at the top. Add a 2s pause at top for extra tension."
+                            "notes": "If performed as straight sets per leg, rest 45s between sets per leg. If alternating legs, rest ~30s between legs but maintain total rest per pair \u2248 60-90s."
                         },
                         {
-                            "name": "Standing Calf Raises + Dead Bug",
+                            "name": "Seated/standing calf raises",
                             "sets": 3,
-                            "reps": "Calves: 20 / Dead Bug: 12",
+                            "reps": "12-15",
                             "rest_seconds": 45,
-                            "notes": "Perform as a superset to save time: calf raises immediately followed by dead bug. Keep core engaged during dead bug."
+                            "notes": "Pause at the top for full contraction and control the descent."
                         }
                     ],
                     "safety_notes": [
-                        "Estimated timing: warmup ~10, main ~40, cooldown ~10. If short on time, superset compatible movements and reduce rest to 45s.",
-                        "When performing jump variations, ensure a clear, slightly cushioned landing surface to protect joints.",
-                        "Balance regressions: hold a stable surface (chair/wall) during single-leg work until stable.",
-                        "Progression: +1\u20132 reps per set every 1\u20132 weeks. Once you hit the upper bound across sets for two sessions, add one set or increase difficulty (tempo, pauses, or add load at the gym)."
+                        "Warm up thoroughly with the prescribed barbell progression; warm-up sets are additional to main working-set time.",
+                        "Standardized rest guidance: heavy compound lifts = 120s; main accessory lifts = 60-90s; movement supersets shorten rest as noted.",
+                        "Weekly load-management rule (concrete): If your top squat set on Monday is RPE \u2265 7 or form breakdown occurs, remove the 3rd working set of trap-bar deadlift on Friday (i.e., do 2 heavy sets Friday) OR perform 3 sets at 60-70% on Friday. To reduce Monday volume specifically, drop Bulgarian split squat by one set (from 3 to 2) before reducing heavy squat sets."
                     ]
                 }
             },
             {
-                "id": "workout_c5797c1a20f5",
-                "created_at": "2026-03-15T18:13:22.852309+00:00",
+                "id": "workout_2dcf833cb0d8",
+                "created_at": "2026-03-15T20:36:46.079856+00:00",
                 "source": "agent",
-                "source_query": "Plan my week: I want 3 workouts, prefer evening sessions. I want you to plan my lunch on the days: Monday - Friday (30 minute prepare)",
-                "response_text": "Done \u2014 I created a 3-session weekly evening workout plan (Mon/Wed/Fri at ~19:00) focused on muscle gain with no-special-equipment primary options, plus a simple 30-minute lunch prep plan for Monday\u2013Friday (default lunch time 12:00). Research supports 3 \u00d7 ~1-hour sessions per week as a realistic, effective starting point for strength and functional gains.",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
                 "scheduled_slots": [
                     {
-                        "day": "Friday",
-                        "time": "19:00",
-                        "event": "Evening Workout"
+                        "day": "Wednesday",
+                        "time": "17:00"
                     }
                 ],
-                "routine_id": "routine_7dece6a02320",
-                "unit_index": 2,
-                "unit_day": "Friday",
-                "focus_type": "strength",
+                "routine_id": "routine_840e7d043154",
+                "unit_index": 1,
+                "unit_day": "Tuesday",
+                "focus_type": "mobility",
                 "draft": {
-                    "goal": "Prioritize upper-body pushing and posterior-chain (pull) strength with safe no-equipment pulling alternatives; core stability finish.",
-                    "duration_limit_mins": 60,
-                    "workout_name": "Friday 60-min Evening Upper + Posterior Emphasis",
-                    "difficulty": "intermediate",
-                    "focus_type": "upper-body strength and core",
+                    "goal": "Improve joint range of motion and reinforce core stability; optional short evening session to aid recovery and technique.",
+                    "duration_limit_mins": 25,
+                    "workout_name": "Tuesday Mobility & Core Flow",
+                    "difficulty": "beginner",
+                    "focus_type": "mobility",
                     "session_outline": [
                         {
                             "section": "warmup",
-                            "minutes": 10,
+                            "minutes": 5,
                             "items": [
-                                "Arm swings, shoulder circles, thoracic rotations (5 minutes)",
-                                "2 sets: 8 incline or regular push-ups + 10 scapular push-ups"
+                                "Light dynamic cardio 3-5 minutes (bike or walk)",
+                                "Gentle thoracic rotations and shoulder circles"
                             ]
                         },
                         {
                             "section": "main",
-                            "minutes": 45,
+                            "minutes": 15,
                             "items": [
-                                "A. Horizontal push: Push-up variations 4 sets, 8-12 reps, 90s rest",
-                                "B. Pull/posterior alternative: High-rep supermans + scapular retraction drills 4 sets, 10-15 reps, 75s rest",
-                                "C. Vertical push: Pike push-ups 3 sets, 6-10 reps, 90s rest",
-                                "D. Triceps: Chair dips or bench-supported dips 3 sets, 8-15 reps, 60s rest",
-                                "E. Core circuit: 3 rounds \u2014 Side plank 30-45s each side + Hollow-body rocks x12, 45s rest"
+                                "Thoracic rotations, cat-cow, world's greatest stretch",
+                                "Banded shoulder dislocations and hip-flexor stretch",
+                                "Core: plank progression and dead-bug variations"
                             ]
                         },
                         {
                             "section": "cooldown",
                             "minutes": 5,
                             "items": [
-                                "Doorway chest stretch, posterior shoulder stretch, child's pose (30-45s each)",
-                                "Controlled breathing to return heart rate to baseline"
+                                "Gentle full-body stretch and diaphragmatic breathing"
                             ]
                         }
                     ],
                     "exercise_details": [
                         {
-                            "name": "Push-up variations (standard/incline/decline as suitable)",
-                            "sets": 4,
-                            "reps": "8-12",
-                            "rest_seconds": 90,
-                            "notes": "Select a variation that challenges you in the target range. Slow eccentrics increase difficulty without equipment."
-                        },
-                        {
-                            "name": "Supermans + Scapular Retractions (posterior alternative)",
-                            "sets": 4,
-                            "reps": "10-15",
-                            "rest_seconds": 75,
-                            "notes": "Lie prone for supermans (hold 2s at top). Follow with scapular retraction drills (standing or prone). These are the primary no-equipment pulling substitutes. If you have safe gym anchors, consider inverted rows or cable rows as progressions."
-                        },
-                        {
-                            "name": "Pike Push-ups",
+                            "name": "Plank (front or knee)",
                             "sets": 3,
-                            "reps": "6-10",
-                            "rest_seconds": 90,
-                            "notes": "Progress by elevating feet for more range; regress by using a higher incline. Keep neck neutral."
+                            "reps": "30-60 sec",
+                            "rest_seconds": 30,
+                            "notes": "Keep hips neutral and breathe steadily; regress to knees if needed."
                         },
                         {
-                            "name": "Chair Dips",
+                            "name": "Dead bug",
                             "sets": 3,
-                            "reps": "8-15",
-                            "rest_seconds": 60,
-                            "notes": "Use a sturdy chair. Keep shoulders down and stop if anterior shoulder pain occurs. Regress with bench-supported push-ups or triceps extensions (if gym weights become available)."
-                        },
-                        {
-                            "name": "Side Plank + Hollow-Body Rocks",
-                            "sets": 3,
-                            "reps": "Side plank: 30-45s each side / Hollow rocks: 12",
-                            "rest_seconds": 45,
-                            "notes": "Maintain ribcage tucked and neutral pelvis. Short high-quality holds are preferable to long collapsing holds."
+                            "reps": "8-12 each side",
+                            "rest_seconds": 30,
+                            "notes": "Move slowly and keep the low back in contact with the floor."
                         }
                     ],
                     "safety_notes": [
-                        "Primary pulling options are bodyweight posterior alternatives (supermans, scapular retractions). Only use household anchors (table/door towel rows) after a careful safety check of the anchor \u2014 stop immediately if any wobble/creak is felt.",
-                        "Optional gym progressions: inverted rows, assisted pull-ups, lat pulldown, or single-arm rows. Only add these if you have access to appropriate gym equipment and know safe setup.",
-                        "Slow controlled tempo is better than many fast reps. If you experience sharp joint pain, stop and regress the exercise."
+                        "Mobility work should be controlled \u2014 avoid painful end-range movements.",
+                        "If schedule conflicts, perform this later in the evening as a light recovery option or skip for an extra rest day."
+                    ]
+                }
+            },
+            {
+                "id": "workout_2af7c7eda729",
+                "created_at": "2026-03-15T20:36:46.079869+00:00",
+                "source": "agent",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
+                "scheduled_slots": [
+                    {
+                        "day": "Friday",
+                        "time": "17:00"
+                    }
+                ],
+                "routine_id": "routine_840e7d043154",
+                "unit_index": 2,
+                "unit_day": "Wednesday",
+                "focus_type": "strength",
+                "draft": {
+                    "goal": "Develop pulling and pressing strength with balanced accessory work, warm-up progression for heavy compounds, and time-efficient superset options.",
+                    "duration_limit_mins": 70,
+                    "workout_name": "Wednesday Evening Upper Strength",
+                    "difficulty": "intermediate",
+                    "focus_type": "strength",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 15,
+                            "items": [
+                                "5 minutes easy row or assault bike",
+                                "Band pull-aparts, YTWs, scapular pull-up prep (2 rounds)",
+                                "Bench press warm-up progression: empty bar x8, 50% working-load x5, 70% x3; pull-up/scapular warm-ups as needed"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 45,
+                            "items": [
+                                "Weighted pull-ups or lat pulldown: 3-4 working sets heavy, rest 120s",
+                                "Barbell or dumbbell bench press: 3 working sets heavy, rest 120s",
+                                "One-arm dumbbell row: 3 sets each side (can be paired/supersetted with face pulls)",
+                                "Accessory circuit: face pulls and triceps extensions (3 sets)"
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 10,
+                            "items": [
+                                "Upper-body static stretch (pecs, lats, rear delts) and breathing",
+                                "Light banded shoulder mobility"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Weighted pull-ups / assisted pull-ups",
+                            "sets": 4,
+                            "reps": "5-8",
+                            "rest_seconds": 120,
+                            "notes": "Use assistance or lat pulldown if needed; maintain scapular control. Time-saver: reduce to 3 sets and superset with rows if pressed for time."
+                        },
+                        {
+                            "name": "Barbell bench press",
+                            "sets": 3,
+                            "reps": "5-8",
+                            "rest_seconds": 120,
+                            "notes": "Use warm-up progression and a spotter or safety arms for heavy sets; control eccentrics to protect shoulders."
+                        },
+                        {
+                            "name": "One-arm dumbbell row",
+                            "sets": 3,
+                            "reps": "8-10 each side",
+                            "rest_seconds": 60,
+                            "notes": "Drive the elbow back and squeeze lats; can be performed as alternating sets if short on time."
+                        },
+                        {
+                            "name": "Face pulls (cable)",
+                            "sets": 3,
+                            "reps": "12-15",
+                            "rest_seconds": 45,
+                            "notes": "Focus on rear delt activation and shoulder health; can be moved to cooldown to shorten the main block."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Control eccentrics and reduce load if you feel shoulder pain.",
+                        "If short on time, prioritize heavy top sets with longer rest (120s) and pair accessory work into supersets (60-90s rest) to shorten total session.",
+                        "Research indicates social support and planning improve adherence to gym programs \u2014 consider scheduling a consistent training partner or weekly check-in."
+                    ]
+                }
+            },
+            {
+                "id": "workout_c3cf38a84770",
+                "created_at": "2026-03-15T20:36:46.079879+00:00",
+                "source": "agent",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
+                "scheduled_slots": [
+                    {
+                        "day": "Tuesday",
+                        "time": "17:00"
+                    }
+                ],
+                "routine_id": "routine_840e7d043154",
+                "unit_index": 3,
+                "unit_day": "Thursday",
+                "focus_type": "cardio",
+                "draft": {
+                    "goal": "Active recovery through steady-state aerobic work plus a brief planning moment to support adherence and habit formation.",
+                    "duration_limit_mins": 30,
+                    "workout_name": "Thursday Steady-State Cardio & Habit Check",
+                    "difficulty": "beginner",
+                    "focus_type": "cardio",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 5,
+                            "items": [
+                                "Easy dynamic mobility and 2 minutes light cycling or treadmill walk"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 20,
+                            "items": [
+                                "20 minutes steady-state row, bike, or treadmill at a conversational pace"
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 5,
+                            "items": [
+                                "Walking cooldown and lower-body stretches",
+                                "2-3 minute habit/planning prompt: identify one scheduling barrier this week and one small coping plan"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Row or bike steady state",
+                            "sets": 1,
+                            "reps": "20 min",
+                            "rest_seconds": 0,
+                            "notes": "Keep effort around 60-70% perceived exertion; maintain steady breathing."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Keep intensity moderate so this session supports recovery for Friday.",
+                        "Use the habit review to plan social support or blocked gym time; evidence suggests social and planning strategies aid long-term adherence."
+                    ]
+                }
+            },
+            {
+                "id": "workout_5ef640927431",
+                "created_at": "2026-03-15T20:36:46.079891+00:00",
+                "source": "agent",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
+                "scheduled_slots": [
+                    {
+                        "day": "Thursday",
+                        "time": "17:00"
+                    }
+                ],
+                "routine_id": "routine_840e7d043154",
+                "unit_index": 4,
+                "unit_day": "Friday",
+                "focus_type": "mixed",
+                "draft": {
+                    "goal": "Combine power, strength, and metabolic conditioning with clear priority and auto-regulation rules tied to Monday's load.",
+                    "duration_limit_mins": 65,
+                    "workout_name": "Friday Evening Power & Conditioning",
+                    "difficulty": "intermediate",
+                    "focus_type": "mixed",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 12,
+                            "items": [
+                                "3-5 minutes assault bike or row (build intensity)",
+                                "Dynamic mobilities: hip openers, shoulder circles, kettlebell halos",
+                                "Trap-bar deadlift warm-up progression when used: empty bar / light handle x8, 50% x5, 70% x3"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 40,
+                            "items": [
+                                "Power set: kettlebell swings + medicine ball slams (explosive emphasis) \u2014 3-4 sets",
+                                "Strength circuit: trap-bar deadlift, push press, bent-over row (3 rounds) \u2014 or shortened strength priority if Monday was heavy",
+                                "Conditioning finisher: 8-10 minute EMOM or 4 rounds of 1 min hard effort + 1 min rest"
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 13,
+                            "items": [
+                                "Walking cooldown and full-body stretch",
+                                "Foam rolling and diaphragmatic breathing"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Kettlebell swings",
+                            "sets": 4,
+                            "reps": "12-15",
+                            "rest_seconds": 60,
+                            "notes": "Explosive hip hinge; control descent and maintain neutral spine."
+                        },
+                        {
+                            "name": "Trap-bar deadlift",
+                            "sets": 3,
+                            "reps": "5-6",
+                            "rest_seconds": 120,
+                            "notes": "Use neutral spine and drive through the heels. Auto-regulation rule: if Monday squat session top set was RPE \u2265 7 or you completed 3+ very heavy sets, limit trap-bar to 2 heavy sets or perform 3 sets at 60-70% to prioritize recovery."
+                        },
+                        {
+                            "name": "Push press (barbell or dumbbells)",
+                            "sets": 3,
+                            "reps": "6-8",
+                            "rest_seconds": 90,
+                            "notes": "Use leg drive to assist the press and keep reps explosive but controlled. If prioritizing strength, do push press before the conditioning finisher; if prioritizing conditioning, perform it after."
+                        },
+                        {
+                            "name": "Conditioning finisher (assault bike / sled / row)",
+                            "sets": 4,
+                            "reps": "1 min on / 1 min off",
+                            "rest_seconds": 60,
+                            "notes": "Max sustainable effort during work intervals; scale duration or intensity based on fatigue. If strength is priority, shorten finisher to 4-6 minutes."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Progress power movements gradually and ensure technique before adding load.",
+                        "If you cannot complete top working sets at target reps for two consecutive sets, reduce subsequent main lift sets by 1 and cut the finisher by 50%.",
+                        "Explicit weekly volume reduction prescription: to lower global weekly volume, first remove accessory/higher-rep sets (e.g., drop one Bulgarian split-squat set), then reduce accessory sets on Wednesday (face pulls/triceps) before cutting heavy compound sets."
+                    ]
+                }
+            },
+            {
+                "id": "workout_697323d3be95",
+                "created_at": "2026-03-15T20:36:46.079901+00:00",
+                "source": "agent",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
+                "scheduled_slots": [
+                    {
+                        "day": "Saturday",
+                        "time": "17:00"
+                    }
+                ],
+                "routine_id": "routine_840e7d043154",
+                "unit_index": 5,
+                "unit_day": "Saturday",
+                "focus_type": "recovery",
+                "draft": {
+                    "goal": "Promote recovery with low-intensity movement or rest; choose active recovery when energy is available or full rest after a hard week.",
+                    "duration_limit_mins": 30,
+                    "workout_name": "Saturday Recovery / Optional Skill Practice",
+                    "difficulty": "beginner",
+                    "focus_type": "recovery",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 5,
+                            "items": [
+                                "Gentle joint mobilization and 3 minutes easy cardio (bike/walk)"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 20,
+                            "items": [
+                                "Foam rolling and mobility flow; light technique drills (e.g., Turkish get-up progressions)",
+                                "Optional easy walk, swim, or bike (keep heart rate low)"
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 5,
+                            "items": [
+                                "Relaxed stretching and breath work"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Foam rolling and mobility",
+                            "sets": 1,
+                            "reps": "20 min",
+                            "rest_seconds": 0,
+                            "notes": "Address tight areas and restore movement quality; keep intensity low."
+                        }
+                    ],
+                    "safety_notes": [
+                        "If Friday was high intensity, choose full rest here. If feeling stiff but fresh, use this for light movement and mobility.",
+                        "Avoid aggressive stretching into sharp pain."
+                    ]
+                }
+            },
+            {
+                "id": "workout_d53d59248491",
+                "created_at": "2026-03-15T20:36:46.079912+00:00",
+                "source": "agent",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
+                "scheduled_slots": [
+                    {
+                        "day": "Sunday",
+                        "time": "17:00"
+                    }
+                ],
+                "routine_id": "routine_840e7d043154",
+                "unit_index": 6,
+                "unit_day": "Sunday",
+                "focus_type": "mobility",
+                "draft": {
+                    "goal": "Support recovery and prepare mentally/physically for the coming week with a restorative mobility session and brief planning.",
+                    "duration_limit_mins": 20,
+                    "workout_name": "Sunday Flex Recovery",
+                    "difficulty": "beginner",
+                    "focus_type": "mobility",
+                    "session_outline": [
+                        {
+                            "section": "warmup",
+                            "minutes": 5,
+                            "items": [
+                                "Easy walking or light activity"
+                            ]
+                        },
+                        {
+                            "section": "main",
+                            "minutes": 10,
+                            "items": [
+                                "Gentle mobility: hip openers, thoracic rotations, hamstring flossing",
+                                "Short visualization/plan: identify one training focus for the coming week"
+                            ]
+                        },
+                        {
+                            "section": "cooldown",
+                            "minutes": 5,
+                            "items": [
+                                "Breathing practice and full-body stretch"
+                            ]
+                        }
+                    ],
+                    "exercise_details": [
+                        {
+                            "name": "Gentle mobility sequence",
+                            "sets": 1,
+                            "reps": "10-15 min",
+                            "rest_seconds": 0,
+                            "notes": "Keep movements controlled and restorative; skip any movement that feels sharp or uncomfortable."
+                        }
+                    ],
+                    "safety_notes": [
+                        "Treat Sunday as a true rest day if you feel accumulated fatigue \u2014 recovery is critical for progress.",
+                        "Modify or skip movements that reproduce discomfort."
                     ]
                 }
             }
         ],
         "routines": [
             {
-                "id": "routine_7dece6a02320",
-                "created_at": "2026-03-15T18:13:22.852309+00:00",
+                "id": "routine_840e7d043154",
+                "created_at": "2026-03-15T20:36:46.079926+00:00",
                 "source": "agent",
-                "source_query": "Plan my week: I want 3 workouts, prefer evening sessions. I want you to plan my lunch on the days: Monday - Friday (30 minute prepare)",
-                "response_text": "Done \u2014 I created a 3-session weekly evening workout plan (Mon/Wed/Fri at ~19:00) focused on muscle gain with no-special-equipment primary options, plus a simple 30-minute lunch prep plan for Monday\u2013Friday (default lunch time 12:00). Research supports 3 \u00d7 ~1-hour sessions per week as a realistic, effective starting point for strength and functional gains.",
-                "routine_name": "3x/Week Evening Muscle-Gain Plan (No-Equipment Primary)",
-                "goal": "Maintain a healthy lifestyle and progressively gain muscle mass with three evening gym-friendly workouts per week; provide 30-minute lunch prep Monday\u2013Friday (default 12:00).",
+                "source_query": "I have access to all standard gym equipment ",
+                "response_text": "Here is a cohesive, gym-equipped weekly routine aligned to your preference for Monday/Wednesday/Friday evenings. It includes clear warm-up progressions, standardized rest rules, and explicit load-management guidance to balance performance and recovery.",
+                "routine_name": "Evening-Focused Strength & Conditioning (Gym Equipped)",
+                "goal": "Build full-body strength and power, improve conditioning, and support recovery with main sessions on Monday, Wednesday, and Friday evenings.",
                 "version": 1,
                 "units": [
                     {
-                        "unit_id": "workout_1939bde4059b",
+                        "unit_id": "workout_416eb7230e22",
                         "day": "Monday",
-                        "time": "19:00",
+                        "time": "17:00",
                         "focus_type": "strength",
-                        "title": "Monday 19:00 \u2014 Full-Body Strength (Evening)"
+                        "title": "Monday Evening: Lower-Body Strength"
                     },
                     {
-                        "unit_id": "workout_1d18b787994d",
+                        "unit_id": "workout_2dcf833cb0d8",
                         "day": "Wednesday",
-                        "time": "19:00",
-                        "focus_type": "mixed",
-                        "title": "Wednesday 19:00 \u2014 Lower Focus + Conditioning (Evening)"
+                        "time": "17:00",
+                        "focus_type": "mobility",
+                        "title": "Tuesday Evening: Mobility & Core (Optional)"
                     },
                     {
-                        "unit_id": "workout_c5797c1a20f5",
+                        "unit_id": "workout_2af7c7eda729",
                         "day": "Friday",
-                        "time": "19:00",
+                        "time": "17:00",
                         "focus_type": "strength",
-                        "title": "Friday 19:00 \u2014 Upper & Posterior Focus (Evening)"
+                        "title": "Wednesday Evening: Upper-Body Strength (Pull & Press)"
+                    },
+                    {
+                        "unit_id": "workout_c3cf38a84770",
+                        "day": "Tuesday",
+                        "time": "17:00",
+                        "focus_type": "cardio",
+                        "title": "Thursday Evening: Low-Intensity Cardio & Habit Review"
+                    },
+                    {
+                        "unit_id": "workout_5ef640927431",
+                        "day": "Thursday",
+                        "time": "17:00",
+                        "focus_type": "mixed",
+                        "title": "Friday Evening: Full-Body Power & Conditioning"
+                    },
+                    {
+                        "unit_id": "workout_697323d3be95",
+                        "day": "Saturday",
+                        "time": "17:00",
+                        "focus_type": "recovery",
+                        "title": "Saturday: Active Recovery or Full Rest"
+                    },
+                    {
+                        "unit_id": "workout_d53d59248491",
+                        "day": "Sunday",
+                        "time": "17:00",
+                        "focus_type": "mobility",
+                        "title": "Sunday: Flexible Recovery & Prep"
                     }
                 ]
             }
@@ -1082,1010 +900,136 @@
     "dietary_restrictions": [],
     "general_meal_restrictions": [],
     "injuries": [],
-    "equipment": [],
+    "equipment": [
+        "all standard gym equipment"
+    ],
     "general_workout_restrictions": [
-        "prefer evening sessions",
-        "target 3 workouts per week",
-        "no equipment available"
+        "Preferred workout days/times: Monday, Wednesday, Friday evenings"
     ],
     "status": "idle",
     "chat_history": [
         {
-            "timestamp": "2026-03-15T17:26:20.727121+00:00",
+            "timestamp": "2026-03-15T20:24:18.874094+00:00",
             "role": "user",
-            "content": "plan 2 meals for me on Sunday. I want lunch (30 minutes to prepare) and dinner (60 minutes to prepare)"
+            "content": "Can you give me a protein heavy meal for Sunday dinner?"
         },
         {
-            "timestamp": "2026-03-15T17:30:31.693434+00:00",
-            "role": "agent",
-            "content": "Proposed 'Lunch' on Sunday at 12:00. Proposed 'Dinner' on Sunday at 18:00.\n\nPrepared your meal plan.\n\nI've successfully added these meals to your schedule."
-        },
-        {
-            "timestamp": "2026-03-15T17:44:01.985876+00:00",
+            "timestamp": "2026-03-15T20:25:03.143033+00:00",
             "role": "user",
-            "content": "plan lunch on Saturday (30 minute prepare) and also dinner on Saturday (60 minute prepare)"
+            "content": "I'd like Italian. no necessary limit on prep time"
         },
         {
-            "timestamp": "2026-03-15T17:52:45.484223+00:00",
-            "role": "agent",
-            "content": "Proposed 'Lunch: Grilled Chicken & Quinoa Bowl (<=30min prep, high-protein)' on Saturday at 13:00. Proposed 'Dinner: Pan-Seared Salmon, Sweet Potato & Saut\u00e9ed Greens (<=60min prep, muscle-building)' on Saturday at 19:00.\n\nPrepared your meal plan.\n\nI've successfully added these meals to your schedule."
-        },
-        {
-            "timestamp": "2026-03-15T17:55:29.283582+00:00",
+            "timestamp": "2026-03-15T20:29:53.745508+00:00",
             "role": "user",
-            "content": "Plan my week: I want 3 workouts, prefer evening sessions. I want you to plan my lunch on the days: Monday - Friday (30 minute prepare)"
+            "content": "I'd like Italian. no necessary limit on prep time"
         },
         {
-            "timestamp": "2026-03-15T18:13:22.916024+00:00",
-            "role": "agent",
-            "content": "Proposed 'Evening Workout' on Monday at 19:00. Proposed 'Evening Workout' on Wednesday at 19:00. Proposed 'Evening Workout' on Friday at 19:00. Proposed 'Lunch (30 min prep)' on Monday at 12:00. Proposed 'Lunch (30 min prep)' on Tuesday at 12:00. Proposed 'Lunch (30 min prep)' on Wednesday at 12:00. Proposed 'Lunch (30 min prep)' on Thursday at 12:00. Proposed 'Lunch (30 min prep)' on Friday at 12:00.\n\nDone \u2014 I created a 3-session weekly evening workout plan (Mon/Wed/Fri at ~19:00) focused on muscle gain with no-special-equipment primary options, plus a simple 30-minute lunch prep plan for Monday\u2013Friday (default lunch time 12:00). Research supports 3 \u00d7 ~1-hour sessions per week as a realistic, effective starting point for strength and functional gains.\n\nPrepared your meal plan.\n\nI have successfully added your workouts to the calendar.\n\nI've successfully added these meals to your schedule."
-        },
-        {
-            "timestamp": "2026-03-15T18:21:40.548683+00:00",
+            "timestamp": "2026-03-15T20:30:48.923248+00:00",
             "role": "user",
-            "content": "hi"
+            "content": "Can you give me a 3 time a week full body workout routine? I prefer Monday, Wednesday, Friday evenings"
         },
         {
-            "timestamp": "2026-03-15T18:21:56.007027+00:00",
-            "role": "agent",
-            "content": "Hi! I\u2019m here to help plan meals, find recipes, and schedule workouts\u2014what would you like to do next?"
-        },
-        {
-            "timestamp": "2026-03-15T18:28:44.093168+00:00",
+            "timestamp": "2026-03-15T20:31:38.839098+00:00",
             "role": "user",
-            "content": "can you solve a math problem for me?"
+            "content": "I have access to all standard gym equipment "
         },
         {
-            "timestamp": "2026-03-15T18:29:04.043049+00:00",
-            "role": "agent",
-            "content": "Absolutely \u2014 I\u2019d be happy to help with a math problem. What problem would you like me to solve?"
-        },
-        {
-            "timestamp": "2026-03-15T18:31:05.749089+00:00",
+            "timestamp": "2026-03-15T20:32:07.897799+00:00",
             "role": "user",
-            "content": "can you solve a math problem for me?"
+            "content": "I'd like Italian. no necessary limit on prep time"
         },
         {
-            "timestamp": "2026-03-15T18:31:29.092522+00:00",
-            "role": "agent",
-            "content": "Hi \u2014 I can\u2019t help solve general math problems, but I can help with nutrition-related calculations (calories, macros), plan meals, find recipes, or schedule workouts. Which of those would you like help with?"
-        },
-        {
-            "timestamp": "2026-03-15T19:02:56.644378+00:00",
+            "timestamp": "2026-03-15T20:42:04.423480+00:00",
             "role": "user",
-            "content": "hi"
+            "content": "Can you give me a protein heavy meal for Sunday dinner? Preferably Italian, with no necessary prep time limit"
         },
         {
-            "timestamp": "2026-03-15T19:03:15.404657+00:00",
+            "timestamp": "2026-03-15T20:43:38.853509+00:00",
             "role": "agent",
-            "content": "Hi there! I\u2019m Nutrissistant \u2014 I can help plan meals, find recipes, or schedule workout routines; which would you like to start with?"
+            "content": "Proposed 'Protein-Heavy Italian Dinner' on Sunday at 19:00.\n\nI found a great recipe for you: Crispy Parmesan Chicken and Linguine. It takes about 35 minutes."
+        },
+        {
+            "timestamp": "2026-03-15T20:45:56.882700+00:00",
+            "role": "user",
+            "content": "Can you please give me a weekly meal plan. Make it protein dense, with about 2000 daily calories and an average of 30 to 90 minute prep time on weekdays. No dietary restrictions and not special needs."
         }
     ],
-    "meals": {
-        "plans": [
+    "last_found_recipe": {
+        "recipe_id": "86054",
+        "name": "Crispy Parmesan Chicken and Linguine",
+        "description": "Parmesan-crusted, pan-seared chicken breasts served over garlic-parmesan linguine \u2014 a protein-forward Italian-American main perfect for Sunday dinner.",
+        "component": "main_course",
+        "prep_time_mins": 15,
+        "cook_time_mins": 20,
+        "total_time_mins": 35,
+        "ingredients": [
             {
-                "id": "plan_253d4c2f0d8b",
-                "plan_name": "Custom Meal Plan",
-                "created_at": "2026-03-15T17:30:31.693434+00:00",
-                "meals": [
-                    {
-                        "meal_id": "sunday_lunch_2026-03-15_12",
-                        "meal_type": "lunch",
-                        "day_of_week": "Sunday",
-                        "dishes": [],
-                        "warnings": [
-                            "No allergies or dietary restrictions reported.",
-                            "If you frequently skip meals under time pressure, research suggests prioritizing lunch as the day's main meal to support energy and muscle-repair needs.",
-                            "Agent raised an exception: Too many arguments to single-input tool STRICT_EVALUATOR.\n                Consider using StructuredTool instead. Args: [{'recipe_id': 'llm_generated_candidate_1', 'name': 'Grilled Lemon Chicken & Quinoa Protein Bowl', 'description': 'Balanced protein-forward bowl with grilled lemon chicken, quinoa, roasted veggies, chickpeas, and a lemon-olive oil dressing\u2014ready in ~30 minutes.', 'component': 'main_course', 'prep_time_mins': 10, 'cook_time_mins': 18, 'total_time_mins': 28, 'ingredients': [{'name': 'boneless skinless chicken breast', 'quantity': 6, 'unit': 'oz'}, {'name': 'quinoa (dry)', 'quantity': 3, 'unit': '/4_cup'}, {'name': 'canned chickpeas (drained, rinsed)', 'quantity': 1, 'unit': 'cup'}, {'name': 'mixed vegetables (cherry tomatoes, cucumber, bell pepper)', 'quantity': 1.5, 'unit': 'cups'}, {'name': 'olive oil', 'quantity': 1, 'unit': 'tbsp'}, {'name': 'lemon juice', 'quantity': 1, 'unit': 'tbsp'}, {'name': 'garlic (minced)', 'quantity': 1, 'unit': 'clove'}, {'name': 'salt', 'quantity': 0.25, 'unit': 'tsp'}, {'name': 'black pepper', 'quantity': 0.125, 'unit': 'tsp'}, {'name': 'fresh parsley (chopped)', 'quantity': 2, 'unit': 'tbsp'}], 'instructions': ['Cook quinoa: combine 3/4 cup dry quinoa with 1.5 cups water, bring to boil, simmer covered 12-15 minutes until water absorbed; fluff.', 'Meanwhile, season chicken with salt, pepper, half the lemon juice and 1 tsp olive oil; grill or pan-sear 3-4 min per side until internal temp 165\u00b0F; rest 5 minutes, then slice.', 'Toss chickpeas and mixed vegetables with remaining lemon juice, minced garlic, olive oil, and parsley; season to taste.', 'Assemble bowls with quinoa base, sliced chicken, chickpea-vegetable mix; drizzle extra dressing if desired.'], 'nutrition_per_serving': {'calories': 700, 'protein_g': 42, 'carbs_g': 55, 'fat_g': 20, 'fiber_g': 10}, 'tags': ['high-protein', 'quick', 'bowl']}, {'meal_context': {'meal_id': 'sunday_lunch_2026-03-15_12', 'meal_type': 'lunch', 'day_of_week': 'Sunday', 'free_time_mins': 30, 'course': 'main_course'}}]"
-                        ],
-                        "suggestions": [
-                            "Batch-cook a double portion of grain and protein (e.g., 2 servings quinoa + 2 portions chicken/tofu) so leftovers can be used for another meal.",
-                            "Use canned legumes (rinsed) to cut prep time while increasing protein and fiber density.",
-                            "Include a source of carbohydrate with protein post-workout to support muscle recovery if you train in the morning."
-                        ]
-                    },
-                    {
-                        "meal_id": "sunday_dinner_2026-03-15_18",
-                        "meal_type": "dinner",
-                        "day_of_week": "Sunday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_generated_001",
-                                "name": "Pan-Seared Salmon with Warm Lentil & Spinach Salad",
-                                "component": "main_course"
-                            }
-                        ],
-                        "warnings": [
-                            "No allergies or dietary restrictions reported.",
-                            "If you are lactose-intolerant, avoid dairy-based sleep-supporting elements and choose alternatives (e.g., soy yogurt or a small portion of nuts).",
-                            "EVAL_TRACE: strict_runs=3, strict_pass=1, llm_runs=1, best_llm_score=95, refinement_loops=0",
-                            "Cook salmon to a safe doneness (cook until opaque and flaky; if using a thermometer, aim for 125\u2013145\u00b0F / 52\u201363\u00b0C depending on preferred doneness). Check and remove bones before serving.",
-                            "Nutrition estimates are approximate and may vary by exact portion sizes and type of salmon used. Contains dairy (Greek yogurt) and seeds (pumpkin seeds) \u2014 swap if allergic."
-                        ],
-                        "suggestions": [
-                            "Research suggests moderating evening caloric load and emphasizing vegetables, legumes, and lean proteins to support metabolic health and sleep quality.",
-                            "Include tryptophan-containing foods (e.g., dairy, nuts, seeds, tofu) as a small component to support sleep, but keep the meal relatively light to avoid late-night digestion issues.",
-                            "Use leftovers from lunch (grains/protein) where appropriate to reduce total prep time while keeping the dinner lighter.",
-                            "Time-saver: use canned, rinsed lentils (no simmer step) to shorten active time.",
-                            "Dairy-free swap: replace Greek yogurt with a dollop of mashed avocado or soy yogurt.",
-                            "Vegetarian swap: replace salmon with 200 g firm tofu (pressed) pan-seared; adjust seasoning and cooking time.",
-                            "For lower fat: reduce olive oil to 1 tbsp and use low-fat Greek yogurt; for extra tryptophan, add a small handful (15 g) of chopped walnuts on the salad."
-                        ]
-                    }
-                ]
+                "name": "boneless skinless chicken breast halves",
+                "quantity": 2,
+                "unit": "pieces"
             },
             {
-                "id": "plan_3d314359f124",
-                "plan_name": "Custom Meal Plan",
-                "created_at": "2026-03-15T17:52:45.484223+00:00",
-                "meals": [
-                    {
-                        "meal_id": "sat-lunch-01",
-                        "meal_type": "lunch",
-                        "day_of_week": "Saturday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_generated",
-                                "name": "Quick Grilled Chicken & Quinoa Bowl (Yogurt-Herb Dressing)",
-                                "description": "Thin-sliced, quick-pan-seared chicken served over cooked quinoa with chickpeas, cucumber, cherry tomatoes and mixed greens. Simple lemon-yogurt herb dressing keeps fat moderate while delivering high protein and fiber. Designed for \u226430 minutes using quick-cook or pre-cooked quinoa.",
-                                "component": "main_course",
-                                "prep_time_mins": 8,
-                                "cook_time_mins": 12,
-                                "total_time_mins": 20,
-                                "ingredients": [
-                                    {
-                                        "name": "boneless skinless chicken breast",
-                                        "quantity": 4,
-                                        "unit": "oz"
-                                    },
-                                    {
-                                        "name": "cooked quinoa",
-                                        "quantity": 1,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "canned chickpeas, rinsed",
-                                        "quantity": 0.25,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "mixed salad greens",
-                                        "quantity": 1.5,
-                                        "unit": "cups"
-                                    },
-                                    {
-                                        "name": "cucumber, chopped",
-                                        "quantity": 0.5,
-                                        "unit": "medium"
-                                    },
-                                    {
-                                        "name": "cherry tomatoes, halved",
-                                        "quantity": 6,
-                                        "unit": "each"
-                                    },
-                                    {
-                                        "name": "plain Greek yogurt",
-                                        "quantity": 2,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "tahini",
-                                        "quantity": 1,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "fresh lemon juice",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "olive oil",
-                                        "quantity": 1,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "garlic, minced",
-                                        "quantity": 1,
-                                        "unit": "clove"
-                                    },
-                                    {
-                                        "name": "salt and pepper",
-                                        "quantity": 0.25,
-                                        "unit": "tsp"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Prep: Pat the chicken dry and season both sides with salt and pepper. If thick, slice horizontally or pound to ~1/2\" thickness so it cooks quickly.",
-                                    "Heat 1 tsp olive oil in a nonstick skillet over medium-high heat. Add chicken and cook 3\u20134 minutes per side until golden and internal temperature reaches 165\u00b0F (74\u00b0C). Remove and let rest 2\u20133 minutes, then slice thinly.",
-                                    "Reheat 1 cup cooked quinoa per package instructions (or cook quick-cook quinoa) so it is ready within the time limit.",
-                                    "Make dressing: whisk together Greek yogurt, tahini, lemon juice, minced garlic and a pinch of salt; add 1\u20132 tsp water to thin if needed.",
-                                    "Assemble bowl: place quinoa in bowl, top with mixed greens, cucumber, cherry tomatoes, chickpeas and sliced chicken. Drizzle dressing and serve."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 620,
-                                    "protein_g": 49,
-                                    "carbs_g": 62,
-                                    "fat_g": 16,
-                                    "fiber_g": 11
-                                },
-                                "tags": [
-                                    "high-protein",
-                                    "quick",
-                                    "lunch",
-                                    "bowl",
-                                    "beginner-friendly",
-                                    "mild"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "Contains poultry \u2014 cook to safe internal temperature (165\u00b0F / 74\u00b0C) and avoid cross-contamination.",
-                            "If adding tahini or yogurt, note these are common allergens for some people (user currently reports no allergies).",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=95, refinement_loops=0",
-                            "Ingredient quantities are listed per serving (e.g., 4 oz chicken per serving). Clarify scaling if cooking for multiple servings.",
-                            "To guarantee \u226430 minutes, use pre-cooked or quick-cook quinoa or reheat leftover quinoa; standard dry quinoa may exceed the time target."
-                        ],
-                        "suggestions": [
-                            "Research suggests distributing protein across meals supports muscle maintenance and growth; aim for ~30+ g protein at this meal.",
-                            "To save time, cook a larger batch of quinoa and chicken earlier in the week for quick assembly.",
-                            "Include a small high-protein snack (e.g., Greek yogurt or a protein shake) after gym sessions if additional protein is needed.",
-                            "Reduce tahini to 1/2 tsp or use nonfat Greek yogurt to lower fat/calories slightly.",
-                            "Thin-slice chicken before cooking (or pound) to ensure 3\u20134 min per side timing for beginners.",
-                            "Make extra quinoa ahead to save time on future meals and ensure consistent nutrition targets."
-                        ]
-                    },
-                    {
-                        "meal_id": "sat-dinner-01",
-                        "meal_type": "dinner",
-                        "day_of_week": "Saturday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_generated_001",
-                                "name": "Pan-Seared Salmon with Mashed Sweet Potato and Saut\u00e9ed Spinach",
-                                "description": "Beginner-friendly pan-seared salmon served with mashed sweet potato and quickly saut\u00e9ed spinach. Emphasizes lean protein and omega-3s; ready in ~35 minutes.",
-                                "component": "main_course",
-                                "prep_time_mins": 10,
-                                "cook_time_mins": 25,
-                                "total_time_mins": 35,
-                                "ingredients": [
-                                    {
-                                        "name": "salmon fillet (skin on or off)",
-                                        "quantity": 170,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "sweet potato (medium), scrubbed and cubed",
-                                        "quantity": 200,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "olive oil",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "baby spinach (or chopped kale)",
-                                        "quantity": 100,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "lemon",
-                                        "quantity": 0.5,
-                                        "unit": "whole"
-                                    },
-                                    {
-                                        "name": "garlic, minced",
-                                        "quantity": 1,
-                                        "unit": "clove"
-                                    },
-                                    {
-                                        "name": "salt",
-                                        "quantity": 0.5,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "black pepper",
-                                        "quantity": 0.25,
-                                        "unit": "tsp"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Preheat oven to 220\u00b0C (425\u00b0F) if roasting sweet potato; otherwise prepare a microwave-safe dish. Toss cubed sweet potato with a pinch of salt and roast 22\u201325 minutes until tender and lightly browned, or microwave 6\u20138 minutes (turn once) until soft.",
-                                    "While sweet potato cooks, pat salmon dry and season both sides with about 0.25 tsp salt and a pinch of pepper.",
-                                    "Heat a nonstick or heavy skillet over medium-high heat with ~2 tsp of the olive oil. When oil is hot and shimmering, add salmon skin-side down (if skin on). Sear without moving 3\u20134 minutes until a golden crust forms. Flip and cook 2\u20133 minutes more for medium; add 1\u20132 minutes if thicker or you prefer well done. (Cook until fish flakes easily or reaches 63\u00b0C/145\u00b0F.) Remove salmon and squeeze half the lemon over the fillet.",
-                                    "Lower heat to medium, add remaining oil as needed and saut\u00e9 minced garlic 30 seconds until fragrant. Add spinach (or kale) and toss until wilted and bright green \u2014 1\u20132 minutes for spinach (2\u20133 minutes for kale). Season with remaining salt, pepper and a squeeze of lemon.",
-                                    "When sweet potato is tender, drain and mash with a fork or masher. Season with a pinch of salt and a little lemon zest or pepper. For a creamier mash, stir in up to 1 tsp olive oil or a tablespoon of warm water.",
-                                    "Plate: spoon mashed sweet potato, place salmon on top or beside it, add saut\u00e9ed greens, and garnish with the remaining lemon wedge."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 660,
-                                    "protein_g": 43,
-                                    "carbs_g": 44,
-                                    "fat_g": 33,
-                                    "fiber_g": 8
-                                },
-                                "tags": [
-                                    "gluten-free",
-                                    "high-protein",
-                                    "omega-3",
-                                    "sleep-friendly",
-                                    "beginner",
-                                    "30-45-min"
-                                ]
-                            },
-                            {
-                                "recipe_id": "db_128804",
-                                "name": "Microwaved Sweet Potato Mash",
-                                "description": "Quick mashed sweet potato prepared in the microwave: a simple source of complex carbs and potassium, lightly seasoned with olive oil, salt, and pepper. Beginner-friendly, ready in ~20 minutes.",
-                                "component": "side_dish",
-                                "prep_time_mins": 5,
-                                "cook_time_mins": 12,
-                                "total_time_mins": 17,
-                                "ingredients": [
-                                    {
-                                        "name": "sweet potato",
-                                        "quantity": 1,
-                                        "unit": "large"
-                                    },
-                                    {
-                                        "name": "olive oil",
-                                        "quantity": 1,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "unsalted butter (optional)",
-                                        "quantity": 0.5,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "salt",
-                                        "quantity": 0.25,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "black pepper",
-                                        "quantity": 0.125,
-                                        "unit": "tsp"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Pierce the sweet potato several times all over with a fork.",
-                                    "Place on a microwave-safe plate and microwave on high for 8\u201312 minutes, turning once halfway, until very tender (see wattage note in suggestions).",
-                                    "Slice open and scoop the flesh into a bowl.",
-                                    "Mash with olive oil and optional butter until smooth; season with salt and black pepper to taste.",
-                                    "Serve warm alongside the pan-seared salmon and saut\u00e9ed greens."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 225.7,
-                                    "protein_g": 2.6,
-                                    "carbs_g": 33.7,
-                                    "fat_g": 9.7,
-                                    "fiber_g": 4.4
-                                },
-                                "tags": [
-                                    "quick",
-                                    "microwave",
-                                    "sweet potato",
-                                    "potassium",
-                                    "fiber",
-                                    "beginner"
-                                ]
-                            },
-                            {
-                                "recipe_id": "llm_generated_001",
-                                "name": "Quick Saut\u00e9ed Spinach with Garlic, Lemon & Toasted Pumpkin Seeds",
-                                "description": "A fast, nutrient-dense side of wilted spinach brightened with lemon and finished with a small handful of toasted pumpkin seeds for texture, extra protein and healthy fats. Beginner-friendly and ready in under 15 minutes \u2014 pairs perfectly with pan-seared salmon and sweet potato.",
-                                "component": "side_dish",
-                                "prep_time_mins": 5,
-                                "cook_time_mins": 8,
-                                "total_time_mins": 13,
-                                "ingredients": [
-                                    {
-                                        "name": "fresh spinach",
-                                        "quantity": 200,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "extra-virgin olive oil",
-                                        "quantity": 1,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "garlic (minced)",
-                                        "quantity": 2,
-                                        "unit": "clove"
-                                    },
-                                    {
-                                        "name": "fresh lemon juice",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "toasted pumpkin seeds",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "salt",
-                                        "quantity": 0.25,
-                                        "unit": "tsp"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Heat a large nonstick skillet over medium-high heat. Add the olive oil and swirl to coat.",
-                                    "Add the minced garlic and saut\u00e9 30 seconds until fragrant, taking care not to brown it.",
-                                    "Add the spinach (in batches if needed) and toss/saut\u00e9 until just wilted, about 2\u20134 minutes total.",
-                                    "Remove from heat, stir in lemon juice and salt, sprinkle toasted pumpkin seeds on top, and serve immediately."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 120,
-                                    "protein_g": 5.5,
-                                    "carbs_g": 6.0,
-                                    "fat_g": 9.0,
-                                    "fiber_g": 4.2
-                                },
-                                "tags": [
-                                    "side",
-                                    "quick",
-                                    "high-fiber",
-                                    "sleep-friendly",
-                                    "beginner"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "Contains fish (salmon) \u2014 check for freshness and cook to a safe internal temperature. If allergic to fish, substitute with tofu or lean poultry.",
-                            "If adding nuts/seeds, these are common allergens\u2014omit if needed.",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=95, refinement_loops=0",
-                            "Ingredient note: the listed olive oil = 1 tbsp but instructions reference using oil for searing + saut\u00e9 + optional mash; if you allocate extra oil the fat value will increase. Use a nonstick pan or reduce oil to stay within target fat range.",
-                            "Nutrition values are approximate and depend on salmon cut (farmed vs wild) and exact oil used.",
-                            "EVAL_TRACE: strict_runs=2, strict_pass=1, llm_runs=1, best_llm_score=94, refinement_loops=0",
-                            "Original evaluated draft mentioned optional pecans; that suggestion was removed from final instructions to keep ingredients list \u22646 and avoid inconsistency.",
-                            "Microwave wattage varies \u2014 timing is approximate.",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=97, refinement_loops=0",
-                            "Nutrition values are estimated and may vary with exact seed amount; fat is near the upper target\u2014reduce seed or oil slightly to lower fat."
-                        ],
-                        "suggestions": [
-                            "Research suggests favoring lean proteins and vegetables in the evening and including tryptophan-rich foods (e.g., salmon, dairy, nuts) may support sleep quality.",
-                            "Aim to distribute protein across meals \u2014 pairing this dinner (~30+ g protein) with earlier protein intake supports muscle-building goals.",
-                            "Prepare sweet potatoes in bulk or use microwave technique to reduce hands-on time and stay within the 60-minute window.",
-                            "If short on time, microwave the sweet potato (6\u20138 min) to keep total time nearer 25 min.",
-                            "To lower fat slightly, use 2 tsp olive oil total and rely on nonstick pan; this will reduce fat by \u22486 g.",
-                            "Food-safety tip for beginners: cook salmon to 63\u00b0C/145\u00b0F internal temperature or until it flakes easily and is opaque through most of the fillet.",
-                            "Microwave timing guide: ~8\u201310 min for 1000 W, ~10\u201312 min for 700\u2013800 W; test doneness with a fork.",
-                            "This recipe yields approximately 1 side serving (nutrition per serving as shown). Double quantities for additional servings.",
-                            "If you want crunch, optionally stir in 1 tbsp chopped pecans (add to ingredients) \u2014 omit if avoiding nuts.",
-                            "To lower fat further, use 1/2 tbsp pumpkin seeds or 1 tsp olive oil and add 1\u20132 tbsp water to help wilt the spinach.",
-                            "Optional seasoning: freshly ground black pepper or a pinch of red pepper flakes (mild) and a small amount of lemon zest for extra brightness.",
-                            "If using kale instead of spinach, increase cook time by 2\u20133 minutes and add a splash of water to help soften the leaves."
-                        ]
-                    }
-                ]
+                "name": "parmesan cheese, grated",
+                "quantity": 0.75,
+                "unit": "cup"
             },
             {
-                "id": "plan_b2a35e851a61",
-                "plan_name": "Weekly Meal Plan",
-                "created_at": "2026-03-15T18:13:22.916024+00:00",
-                "meals": [
-                    {
-                        "meal_id": "lunch_monday",
-                        "meal_type": "lunch",
-                        "day_of_week": "Monday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_generated_001",
-                                "name": "Warm Quinoa Bowl with Pan-Seared Chicken, Roasted Veggies & Chickpeas",
-                                "description": "A balanced, high-protein warm quinoa bowl ready in under 30 minutes: fluffy quinoa, pan-seared lean protein (chicken or tofu), quick-roasted bell pepper, zucchini and red onion, lemony chickpeas, fresh parsley and optional feta. Mild and beginner-friendly.",
-                                "component": "main_course",
-                                "prep_time_mins": 10,
-                                "cook_time_mins": 18,
-                                "total_time_mins": 28,
-                                "ingredients": [
-                                    {
-                                        "name": "quinoa (dry)",
-                                        "quantity": 0.75,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "water (for quinoa)",
-                                        "quantity": 1.25,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "chicken breast (boneless, skinless)",
-                                        "quantity": 4,
-                                        "unit": "oz"
-                                    },
-                                    {
-                                        "name": "canned chickpeas (drained, rinsed)",
-                                        "quantity": 1,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "bell pepper (any color), sliced",
-                                        "quantity": 1,
-                                        "unit": "item"
-                                    },
-                                    {
-                                        "name": "zucchini, halved and sliced",
-                                        "quantity": 1,
-                                        "unit": "item"
-                                    },
-                                    {
-                                        "name": "red onion, sliced",
-                                        "quantity": 1,
-                                        "unit": "item"
-                                    },
-                                    {
-                                        "name": "olive oil",
-                                        "quantity": 1.5,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "lemon juice",
-                                        "quantity": 2,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "fresh parsley, chopped",
-                                        "quantity": 0.25,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "feta cheese, crumbled (optional)",
-                                        "quantity": 1,
-                                        "unit": "oz"
-                                    },
-                                    {
-                                        "name": "salt and pepper",
-                                        "quantity": 1,
-                                        "unit": "tsp"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Rinse quinoa in a fine mesh strainer. Combine the 0.75 cup quinoa with 1.25 cups water and a pinch of salt in a small saucepan. Bring to a boil, reduce heat, cover and simmer 12\u201315 minutes until water is absorbed. Remove from heat and let stand covered 5 minutes; fluff with a fork.",
-                                    "While the quinoa cooks, pat the chicken dry and season both sides with salt and pepper. Heat 1 tbsp olive oil in a nonstick skillet over medium-high heat. Cook chicken 4\u20135 minutes per side (depending on thickness) until internal temperature reaches 165\u00b0F (75\u00b0C). Remove to a cutting board to rest 3\u20134 minutes, then slice. (If using tofu: press firm tofu 15 minutes beforehand, cube ~6 oz, and pan-sear 3\u20134 minutes per side.)",
-                                    "In the same skillet, add the remaining 0.5 tbsp olive oil. Add sliced bell pepper, zucchini and red onion. Saut\u00e9 6\u20138 minutes until vegetables are tender-crisp and slightly browned. Season with a pinch of salt and pepper.",
-                                    "Toss the drained chickpeas with lemon juice and chopped parsley in a small bowl. Add a tiny pinch of salt if desired.",
-                                    "Assemble the bowl: place the cooked quinoa into a bowl, top with sliced chicken (or tofu), saut\u00e9ed vegetables and lemony chickpeas. Sprinkle with crumbled feta (optional) and extra parsley. Serve warm."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 640,
-                                    "protein_g": 38,
-                                    "carbs_g": 74,
-                                    "fat_g": 22,
-                                    "fiber_g": 14
-                                },
-                                "tags": [
-                                    "high-protein",
-                                    "quick",
-                                    "main_course",
-                                    "gluten-free",
-                                    "beginner-friendly",
-                                    "mild"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "No allergies specified. Recipes may include dairy, nuts, eggs \u2014 flag if you have any intolerances or allergies.",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=95, refinement_loops=0",
-                            "Contains dairy (feta) \u2014 omit to make dairy-free/vegan.",
-                            "If using chicken, ensure internal temperature reaches 165\u00b0F (75\u00b0C). If substituting tofu, use ~6 oz pressed tofu for comparable texture; protein will change slightly."
-                        ],
-                        "suggestions": [
-                            "Research suggests prioritizing lunch as the principal meal supports metabolic efficiency for evening chronotypes; this lunch is protein-forward and vegetable-rich.",
-                            "Batch-cook quinoa and roast extra vegetables ahead (e.g., Sunday) to keep weekday prep under 30 minutes.",
-                            "Include canned legumes (chickpeas) for quick fiber and plant protein.",
-                            "This recipe was evaluated as written; ingredient quantities represent the full recipe used to produce the stated nutrition_per_serving. If you want two smaller servings, split as preferred but nutrition_per_serving will change.",
-                            "If quinoa seems undercooked, add up to 2\u20133 tbsp extra water during cooking and check for tenderness; a 1.25 cups water ratio works for many stovetops but may vary.",
-                            "To lower calories/fat, reduce olive oil to 1 tbsp total and skip or reduce feta; to boost protein (still under max 40 g), increase chicken to 6 oz or add 1\u20132 tbsp Greek yogurt as a sauce (if dairy is acceptable)."
-                        ]
-                    },
-                    {
-                        "meal_id": "lunch_tuesday",
-                        "meal_type": "lunch",
-                        "day_of_week": "Tuesday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_generated",
-                                "name": "Tuna & White-Bean Salad with Mixed Greens",
-                                "description": "A quick no-cook, protein-forward lunch: canned tuna and cannellini beans tossed with fresh vegetables, lemon and olive oil, served over mixed greens with a slice of whole-grain bread.",
-                                "component": "main_course",
-                                "prep_time_mins": 15,
-                                "cook_time_mins": 0,
-                                "total_time_mins": 15,
-                                "ingredients": [
-                                    {
-                                        "name": "tuna (canned in water), drained",
-                                        "quantity": 85,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "cannellini (white) beans, canned, drained",
-                                        "quantity": 130,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "mixed salad greens",
-                                        "quantity": 60,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "cherry tomatoes, halved",
-                                        "quantity": 90,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "celery, chopped",
-                                        "quantity": 40,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "red onion, finely chopped",
-                                        "quantity": 20,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "fresh parsley, chopped",
-                                        "quantity": 8,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "extra-virgin olive oil",
-                                        "quantity": 15,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "fresh lemon juice",
-                                        "quantity": 15,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "whole-grain bread",
-                                        "quantity": 1,
-                                        "unit": "slice"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Drain the tuna and cannellini beans well. Place the tuna in a medium bowl and flake lightly with a fork.",
-                                    "Add the drained cannellini beans to the bowl and gently mash about one-third of the beans with the fork to create a creamier texture while leaving the rest whole.",
-                                    "Stir in chopped celery, halved cherry tomatoes, finely chopped red onion, and parsley.",
-                                    "In a small bowl or jar, whisk together the lemon juice and olive oil with a pinch of salt and black pepper (to taste).",
-                                    "Pour the dressing over the tuna-and-bean mixture and toss gently to combine.",
-                                    "Arrange mixed greens on a plate, top with the tuna-and-bean mixture, and serve with the slice of whole-grain bread on the side."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 486,
-                                    "protein_g": 37,
-                                    "carbs_g": 48,
-                                    "fat_g": 16,
-                                    "fiber_g": 15
-                                },
-                                "tags": [
-                                    "no-cook",
-                                    "high-protein",
-                                    "fiber-rich",
-                                    "quick",
-                                    "beginner"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "Canned fish and legumes are used; check freshness and sodium levels if you are monitoring salt intake.",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=94, refinement_loops=0",
-                            "Nutrition estimates (notably fiber) are somewhat optimistic for the portion; canned ingredients can be higher in sodium\u2014use low-sodium cans or rinse/drain to reduce sodium."
-                        ],
-                        "suggestions": [
-                            "Using canned, ready-to-eat proteins and beans keeps prep time low and supports adequate protein intake for muscle maintenance.",
-                            "Research suggests Mediterranean-style lunches (vegetables + legumes + lean protein) help metabolic health\u2014this meal follows that pattern.",
-                            "Use low-sodium canned tuna and beans or rinse beans thoroughly to lower sodium; optionally reduce olive oil to 10 g to cut fat/calories.",
-                            "For reliably higher fiber, increase the beans by ~30 g or add extra vegetables (e.g., bell pepper) or a larger slice of whole-grain bread.",
-                            "If gluten-free is needed, swap the bread for a gluten-free roll or omit it; seasoning (salt/pepper) is optional to taste."
-                        ]
-                    },
-                    {
-                        "meal_id": "lunch_wednesday",
-                        "meal_type": "lunch",
-                        "day_of_week": "Wednesday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_lentil_sweetpotato_salad_001",
-                                "name": "Warm Lentil & Roasted Sweet Potato Salad with Tahini-Lemon Dressing",
-                                "description": "A quick, plant-forward warm main: tender brown lentils and roasted sweet potato tossed with spinach (or arugula), toasted sunflower seeds and a simple tahini-lemon dressing. Beginner-friendly and ready in ~30 minutes.",
-                                "component": "main_course",
-                                "prep_time_mins": 10,
-                                "cook_time_mins": 20,
-                                "total_time_mins": 30,
-                                "ingredients": [
-                                    {
-                                        "name": "dry brown or green lentils",
-                                        "quantity": 200,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "sweet potato (peeled and diced)",
-                                        "quantity": 200,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "baby spinach or arugula",
-                                        "quantity": 120,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "tahini",
-                                        "quantity": 2,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "fresh lemon juice",
-                                        "quantity": 2,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "olive oil",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "garlic (minced)",
-                                        "quantity": 1,
-                                        "unit": "clove"
-                                    },
-                                    {
-                                        "name": "sunflower seeds (toasted)",
-                                        "quantity": 2,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "salt",
-                                        "quantity": 1,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "black pepper",
-                                        "quantity": 0.5,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "feta cheese (optional)",
-                                        "quantity": 57,
-                                        "unit": "g"
-                                    }
-                                ],
-                                "instructions": [
-                                    "Preheat oven to 425\u00b0F (220\u00b0C). Toss diced sweet potato with 1/2 tbsp olive oil and a pinch of salt and pepper; spread in a single layer on a baking sheet.",
-                                    "Roast sweet potato for 18\u201322 minutes, turning once, until edges are browned and pieces are tender.",
-                                    "While sweet potato roasts, rinse lentils. Place lentils in a pot with 3 cups (750 ml) water, bring to a boil, reduce to a simmer and cook uncovered 18\u201320 minutes until tender but holding shape. Drain any excess water.",
-                                    "Make the dressing: whisk together tahini, lemon juice, remaining 1/2 tbsp olive oil, minced garlic and 1/4 tsp salt. If too thick, thin with 1\u20132 tsp warm water until pourable.",
-                                    "In a large bowl combine warm lentils, roasted sweet potato, greens and sunflower seeds. Pour dressing over and gently toss to combine. Taste and adjust salt and pepper.",
-                                    "Divide between plates (recipe yields ~2 servings). If using, crumble feta on top of each serving. Serve warm or at room temperature."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 594,
-                                    "protein_g": 31,
-                                    "carbs_g": 78,
-                                    "fat_g": 21,
-                                    "fiber_g": 27
-                                },
-                                "tags": [
-                                    "warm",
-                                    "salad",
-                                    "plant-forward",
-                                    "high-fiber",
-                                    "quick"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "Contains nuts/seeds and possibly dairy if cheese is added; remove or replace if you have sensitivities.",
-                            "EVAL_TRACE: strict_runs=2, strict_pass=2, llm_runs=2, best_llm_score=94, refinement_loops=1",
-                            "Contains tahini (sesame) and sunflower seeds \u2014 common allergens. Feta is optional (dairy) \u2014 omit or substitute for vegan/dairy-free.",
-                            "Total time equals the user's available 30 minutes; this requires multitasking (start lentils and roast sweet potato together)."
-                        ],
-                        "suggestions": [
-                            "Lentils and sweet potato provide slow-release carbs and fiber to support daytime energy without heavy evening digestion.",
-                            "Prepare lentils in a larger batch for 2\u20133 meals to save time.",
-                            "To save time: use 1 can (~400 g) cooked lentils (drained) \u2014 skip simmering and shorten total time.",
-                            "To lower calories: reduce tahini to 1 tbsp and use 1 tsp olive oil or omit feta.",
-                            "Vegan option: omit feta and add 2 tbsp extra toasted seeds or 1/4 cup cooked quinoa for extra protein.",
-                            "Start lentils and roast simultaneously; stir/turn sweet potato once to stay within 30 min. Pre-cook lentils ahead for faster assembly."
-                        ]
-                    },
-                    {
-                        "meal_id": "lunch_thursday",
-                        "meal_type": "lunch",
-                        "day_of_week": "Thursday",
-                        "dishes": [
-                            {
-                                "recipe_id": "db_314780",
-                                "name": "Chicken Caesar Wrap",
-                                "description": "Quick 15-minute whole-wheat wrap with cooked chicken (or swap turkey), romaine, tomato and a sprinkle of Parmesan \u2014 handheld lunch, easy to assemble.",
-                                "component": "main_course",
-                                "prep_time_mins": 10,
-                                "cook_time_mins": 5,
-                                "total_time_mins": 15,
-                                "ingredients": [
-                                    {
-                                        "name": "boneless skinless chicken breast (or thinly sliced deli turkey)",
-                                        "quantity": 100,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "whole wheat tortilla",
-                                        "quantity": 1,
-                                        "unit": "piece"
-                                    },
-                                    {
-                                        "name": "romaine lettuce, shredded",
-                                        "quantity": 40,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "tomato, sliced",
-                                        "quantity": 30,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "Parmesan cheese, grated",
-                                        "quantity": 10,
-                                        "unit": "g"
-                                    }
-                                ],
-                                "instructions": [
-                                    "If using raw chicken, thinly slice and quickly pan-sear for 4\u20135 minutes until cooked through; for fastest assembly use pre-cooked chicken or deli turkey slices.",
-                                    "Lay the whole wheat tortilla flat. Layer romaine, tomato slices, cooked chicken/turkey, and sprinkle Parmesan.",
-                                    "Optionally fold in a light Caesar-style dressing (use sparingly to control calories) or a smear of hummus for Mediterranean twist.",
-                                    "Roll tightly, cut in half if desired, and serve with carrot sticks or a small side salad."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 388,
-                                    "protein_g": 35.2,
-                                    "carbs_g": 11.6,
-                                    "fat_g": 22.6,
-                                    "fiber_g": 4.2
-                                },
-                                "tags": [
-                                    "quick",
-                                    "wrap",
-                                    "lunch",
-                                    "handheld"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "Pre-sliced deli meats can be higher in sodium and preservatives; choose minimally processed options where possible.",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=90, refinement_loops=0",
-                            "Fiber is slightly below the requested minimum (4.2 g vs 5 g). Dressing (if added) may increase calories/fat and introduce allergens (dairy/eggs) via classic Caesar dressing."
-                        ],
-                        "suggestions": [
-                            "Handheld wraps are quick to assemble and portable for student schedules\u2014keep hummus and pre-washed greens on hand.",
-                            "If aiming to increase muscle gain, add a dairy or plant-protein side (e.g., yogurt or a protein shake) after this lunch or post-workout.",
-                            "Add a side of carrot sticks, an apple, or extra shredded cabbage/romaine to raise fiber to meet the >=5 g target.",
-                            "Swap the chicken for thinly sliced roast turkey (matches your description) or use smashed chickpeas + a touch of lemon and cumin for a vegetarian option; chickpea version will lower protein unless you increase portion size.",
-                            "To guarantee the 15-minute window, use pre-cooked rotisserie chicken or deli turkey slices and pre-shredded lettuce."
-                        ]
-                    },
-                    {
-                        "meal_id": "lunch_friday",
-                        "meal_type": "lunch",
-                        "day_of_week": "Friday",
-                        "dishes": [
-                            {
-                                "recipe_id": "llm_generated",
-                                "name": "Greek Salmon Brown Rice Bowl",
-                                "description": "Quick Greek-style bowl with a base of cooked brown rice, pan-seared salmon, a simple cucumber-tomato salad with Kalamata olives and oregano, plus a light tzatziki-style yogurt scoop. High-protein and fiber-rich, beginner-friendly and ready in ~25 minutes when rice is pre-cooked or using quick-cook rice.",
-                                "component": "main_course",
-                                "prep_time_mins": 10,
-                                "cook_time_mins": 15,
-                                "total_time_mins": 25,
-                                "ingredients": [
-                                    {
-                                        "name": "cooked brown rice",
-                                        "quantity": 1,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "salmon fillet (about 5 oz / 142 g)",
-                                        "quantity": 142,
-                                        "unit": "g"
-                                    },
-                                    {
-                                        "name": "cucumber",
-                                        "quantity": 0.5,
-                                        "unit": "medium"
-                                    },
-                                    {
-                                        "name": "tomato (medium)",
-                                        "quantity": 1,
-                                        "unit": "medium"
-                                    },
-                                    {
-                                        "name": "Kalamata olives",
-                                        "quantity": 6,
-                                        "unit": "count"
-                                    },
-                                    {
-                                        "name": "plain Greek yogurt (0% or low-fat)",
-                                        "quantity": 0.33,
-                                        "unit": "cup"
-                                    },
-                                    {
-                                        "name": "olive oil",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "fresh lemon juice",
-                                        "quantity": 1,
-                                        "unit": "tbsp"
-                                    },
-                                    {
-                                        "name": "garlic (minced)",
-                                        "quantity": 1,
-                                        "unit": "clove"
-                                    },
-                                    {
-                                        "name": "dried oregano",
-                                        "quantity": 0.5,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "salt",
-                                        "quantity": 0.25,
-                                        "unit": "tsp"
-                                    },
-                                    {
-                                        "name": "black pepper",
-                                        "quantity": 0.125,
-                                        "unit": "tsp"
-                                    }
-                                ],
-                                "instructions": [
-                                    "If using pre-cooked or microwaveable brown rice, heat according to package while you prepare the rest (keeps total time ~25 minutes). If starting from dry brown rice, cook separately (may push total time >30 min).",
-                                    "Pat salmon dry and season both sides with a pinch (about 1/8 tsp) of salt and a little black pepper.",
-                                    "Heat a nonstick skillet over medium-high. Add 1 tsp of the olive oil to the pan. When hot, place the salmon skin-side down (if present). Sear without moving 3\u20134 minutes to crisp, then flip and cook 3\u20134 more minutes until opaque and it flakes easily with a fork (or reaches 145\u00b0F / 63\u00b0C internal temperature). Remove and let rest.",
-                                    "While the salmon cooks, make the cucumber-tomato salad: dice the cucumber and tomato and place in a bowl. Add the olives (halved if preferred), 1 tsp olive oil, 1/2 tbsp (1.5 tsp) lemon juice, 1/4 tsp dried oregano, and a pinch of salt and pepper. Toss to combine.",
-                                    "Make quick tzatziki: in a small bowl, mix Greek yogurt with minced garlic, the remaining 1/2 tbsp (1.5 tsp) lemon juice, a pinch of dried oregano, and a little black pepper. Stir and taste; adjust lemon or garlic as desired.",
-                                    "Assemble the bowl: place 1 cup warm brown rice in a bowl, top with the salmon fillet, spoon the cucumber-tomato salad to one side, and add a scoop (about 1/3 cup) of the yogurt tzatziki on the side. Finish with a squeeze of lemon over the salmon if desired.",
-                                    "Optional garnish: extra oregano or cracked black pepper. For a vegetarian swap, replace salmon with grilled marinated tempeh (see suggestions)."
-                                ],
-                                "nutrition_per_serving": {
-                                    "calories": 720,
-                                    "protein_g": 43,
-                                    "carbs_g": 56,
-                                    "fat_g": 34,
-                                    "fiber_g": 6
-                                },
-                                "tags": [
-                                    "greek",
-                                    "high-protein",
-                                    "quick",
-                                    "pescatarian",
-                                    "beginner-friendly",
-                                    "tempeh_swap_possible"
-                                ]
-                            }
-                        ],
-                        "warnings": [
-                            "Seafood and dairy present in this meal; omit or swap if you have sensitivities or preferences.",
-                            "EVAL_TRACE: strict_runs=1, strict_pass=1, llm_runs=1, best_llm_score=93, refinement_loops=0",
-                            "If you start from dry brown rice (not pre-cooked or quick-cook), total time will likely exceed 30 minutes.",
-                            "Sodium note: Kalamata olives and added salt raise sodium\u2014reduce olives or rinse them to lower sodium if needed."
-                        ],
-                        "suggestions": [
-                            "Including a higher-protein lunch before an evening workout is useful for overall daily protein distribution supporting muscle gain.",
-                            "Research suggests Mediterranean-style components (vegetables, legumes, lean protein) improve metabolic markers\u2014this bowl follows that approach.",
-                            "To keep within 30 minutes, use microwaveable pre-cooked brown rice or quick-cook farro (check package cook time).",
-                            "Low-sodium options: halve the olives or rinse them, reduce added salt, or substitute low-sodium olives.",
-                            "Doneness tip: cook salmon to 145\u00b0F / 63\u00b0C internal temp or until flesh is opaque and flakes easily; thicker fillets may need an extra minute or two per side.",
-                            "Vegetarian swap: grill or pan-sear 4\u20135 oz tempeh slices marinated 10\u201315 minutes in lemon, garlic, olive oil, and oregano \u2014 this will change nutrition values (protein may vary).",
-                            "Make extra rice ahead and refrigerate portions to cut prep time on busy days."
-                        ]
-                    }
-                ]
+                "name": "salt",
+                "quantity": 1,
+                "unit": "tsp"
+            },
+            {
+                "name": "ground black pepper",
+                "quantity": 0.5,
+                "unit": "tsp"
+            },
+            {
+                "name": "cayenne pepper",
+                "quantity": 0.25,
+                "unit": "tsp"
+            },
+            {
+                "name": "olive oil",
+                "quantity": 2,
+                "unit": "tbsp"
+            },
+            {
+                "name": "linguine",
+                "quantity": 8,
+                "unit": "oz"
+            },
+            {
+                "name": "garlic, minced",
+                "quantity": 3,
+                "unit": "cloves"
+            },
+            {
+                "name": "red pepper flakes",
+                "quantity": 0.25,
+                "unit": "tsp"
             }
         ],
-        "current_plan_id": "plan_b2a35e851a61"
+        "instructions": [
+            "Preheat oven to 400\u00b0F (200\u00b0C). Pound chicken to an even ~1/2-inch thickness; season both sides with salt, pepper, and cayenne.",
+            "Press chicken into grated parmesan (option: mix 1/2 cup panko breadcrumbs with the parmesan for extra crust).",
+            "Heat 1 tbsp olive oil in an oven-safe skillet over medium-high heat. Sear chicken 2\u20133 minutes per side until golden-brown.",
+            "Transfer skillet to oven and bake 8\u201310 minutes (until internal temp reaches 165\u00b0F / 74\u00b0C) or until cooked through. Remove and rest 5 minutes.",
+            "While chicken cooks, boil linguine in salted water per package directions; reserve 1/2 cup pasta water before draining.",
+            "In a large skillet, heat remaining 1 tbsp olive oil over medium; saut\u00e9 garlic 30\u201360 seconds until fragrant. Add cooked linguine, 1/2 cup grated parmesan, a splash of reserved pasta water, and red pepper flakes. Toss to combine and create a light sauce, adding more pasta water as needed.",
+            "Plate linguine, top with rested chicken, and sprinkle extra parmesan and red pepper flakes to taste."
+        ],
+        "nutrition_per_serving": {
+            "calories": 815,
+            "protein_g": 52,
+            "carbs_g": 85,
+            "fat_g": 28,
+            "fiber_g": 4
+        },
+        "tags": [
+            "Italian",
+            "high_protein",
+            "chicken",
+            "dinner"
+        ]
     }
 }
