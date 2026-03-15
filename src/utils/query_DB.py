@@ -1,70 +1,105 @@
 
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import os
 from dotenv import load_dotenv
 
+from constants import (
+    DB_NOT_FOUND_MESSAGE as DATABASE_NOT_FOUND_MESSAGE,
+    DB_EMPTY_RESULT_MESSAGE as EMPTY_QUERY_RESULT_MESSAGE,
+    DB_SUCCESS_MESSAGE as SUCCESSFUL_QUERY_MESSAGE,
+    DB_ERROR_MESSAGE as ERROR_QUERY_MESSAGE,
+    DB_TABLE_NAMES as TABLE_NAMES,
+)
+
 load_dotenv()
 SUPABASE_URL = os.getenv("SUPABASE_DB_URL")
-# SUPABASE_URL="postgresql://postgres:KA8n2f4CzDS07CaT@db.jotytkqymcmdenzrytfi.supabase.co:5432/postgres"
+    
 
-# if SUPABASE_URL and SUPABASE_URL.startswith("postgres://"):
-#     SUPABASE_URL = SUPABASE_URL.replace("postgres://", "postgresql://", 1)
-
-DATABASE_NOT_FOUND_MESSAGE = "SUPABASE_DB_URL not found. Cannot connect to database."
-EMPTY_QUERY_RESULT_MESSAGE = "Connection successful, but no recipes that fit query were found."
-SUCCESSFUL_QUERY_MESSAGE = "Success! Here are your recipes:\n"
-ERROR_QUERY_MESSAGE = "Error querying Supabase: "
-
-TABLE_NAMES =  ["recipes", "usda_foods"]
-
-def query_database(query):
+def query_database(query, params=None):
     if not SUPABASE_URL:
         return DATABASE_NOT_FOUND_MESSAGE, None
-        
+
     engine = create_engine(SUPABASE_URL)
-    
+
     try:
-        df_result = pd.read_sql(query, engine)
-        
+        df_result = pd.read_sql(text(query), engine, params=params)
+
         if df_result.empty:
             return EMPTY_QUERY_RESULT_MESSAGE, None
-        else:
-            return SUCCESSFUL_QUERY_MESSAGE, df_result
-            
+        return SUCCESSFUL_QUERY_MESSAGE, df_result
+
     except Exception as e:
         return ERROR_QUERY_MESSAGE + str(e), None
 
+def get_ingridiants_dict(ingridiants, quantities):
+    ingridiants_list = ingridiants.split(",")
+    quantities_list = quantities.split(",")
+    if len(ingridiants_list) != len(quantities_list):
+        if len(ingridiants_list) > len(quantities_list):
+            quantities_list += [""] * (len(ingridiants_list) - len(quantities_list))
+        else:
+            ingridiants_list += [""] * (len(quantities_list) - len(ingridiants_list))
+    dic = [{"name": ingridiant, 
+           "quantity": quantity}
+            for ingridiant, quantity in zip(ingridiants_list, quantities_list)]
+    return dic
+    
+    
+def parse_recipes_query_result_full(df_result):
+    recipes = [
+        {
+            "id": row["id"],
+            "name": row["name"],
+            "minutes": row["minutes"],
+            "PrepTime": row.get("prep_time_mins"),
+            "CookTime": row.get("cook_time_mins"),
+            "category": row["category"],
+            "tags": row["tags"],
+            "description": row.get("description"),
+            "ingredients": get_ingridiants_dict(row["ingredients"], row["ingredients_quantities"]),
+            "instructions": row.get("instructions"),
+            "nutritoin_info": {
+                "calories": row["calories"],
+                "fat_content": row["FatContent"],
+                "saturated_fat_content": row["SaturatedFatContent"],
+                "cholesterol_content": row["CholesterolContent"],
+                "carbohydrate_content": row["CarbohydrateContent"],
+                "sugar_content": row["SugarContent"],
+                "fiber_content": row["FiberContent"],
+                "protein_content": row["ProteinContent"],
+            }}
+        for _, row in df_result.iterrows()
+    ]
+    return recipes
 
 def parse_recipes_query_result(df_result):
+    
     recipes = []
     for _, row in df_result.iterrows():
-        recipe = {
-            "name": row["name"],
-            "ingredients": row["ingredients"],
-            "instructions": row["instructions"],
-            "steps": row["steps"],
-            "calories": row["calories"],
-            "minutes": row["minutes"]
-        }
+        recipe = dict()
+        for column in df_result.columns:
+            recipe[column] = row[column]
         recipes.append(recipe)
     return recipes
 
-def parse_usda_foods_query_result(df_result):
-    foods = []
-    for _, row in df_result.iterrows():
-        food = {
-            "fdc_id": row["fdc_id"],
-            "food_name": row["food_name"],
-            "calories": row["calories"],
-            "protein_g": row["protein_g"],
-            "carbs_g": row["carbs_g"],
-            "fat_g": row["fat_g"],
-            "fiber_g": row["fiber_g"]
-        }
-        foods.append(food)
-    return foods
 
+def test_quick_usda():
+    """
+    Connects to Supabase and prints foods from USDA database that match 'chicken'.
+    """
+    query = """
+       SELECT food_name, calories, description
+       FROM usda_foods
+       WHERE food_name ILIKE '%bread%'
+       LIMIT 5;"""
+    message, df = query_database(query)
+    
+    if df is not None and not df.empty:
+        print(SUCCESSFUL_QUERY_MESSAGE)
+        print(df.to_string(index=False))
+    else:
+        print(message)
 
 def test_quick_recipes():
     """
@@ -98,3 +133,5 @@ def test_quick_recipes():
         
 if __name__ == "__main__":
     test_quick_recipes()
+    # test_quick_usda()
+    pass
