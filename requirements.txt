@@ -1,0 +1,16 @@
+fastapi
+pydantic
+uvicorn
+requests
+python-dotenv
+langchain-openai
+langchain-core
+langchain-text-splitters
+pinecone
+streamlit==1.55.0
+pandas
+sqlalchemy
+tqdm
+psycopg2
+httpx
+websockets
