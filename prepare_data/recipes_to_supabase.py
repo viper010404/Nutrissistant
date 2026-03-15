@@ -1,8 +1,15 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import os
+import sys
+from pathlib import Path
 from dotenv import load_dotenv
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from constants import RECIPE_CSV_PATH
 # Load environment variables
 load_dotenv()
 SUPABASE_URL = os.getenv("SUPABASE_DB_URL")
@@ -33,24 +40,31 @@ def build_recipe_database():
     
     # Use the exact column names from CSV
     target_columns = [
-        'Name', 'TotalTime', 'Keywords', 
-        'RecipeIngredientParts', 'RecipeInstructions', 'Calories'
+        'RecipeId', 'Name', 'TotalTime', 'Keywords', 
+        'PrepTime', 'CookTime', 'Description',
+        'RecipeIngredientParts', 'RecipeIngredientQuantities',
+        'RecipeInstructions', 'Calories', 'RecipeCategory',
+        'FatContent', 'SaturatedFatContent', 'CholesterolContent','CarbohydrateContent', 'SugarContent', 'FiberContent', 'ProteinContent'
     ]
     
-    df = pd.read_csv("recipes.csv", usecols=target_columns)
+    df = pd.read_csv(RECIPE_CSV_PATH, usecols=target_columns)
 
     # Rename columns to be lowercased and SQL-friendly
     df = df.rename(columns={
+        'RecipeId': "id",
         'Name': 'name',
         'TotalTime': 'total_time',
         'Keywords': 'tags',
         'RecipeIngredientParts': 'ingredients',
-        'RecipeInstructions': 'steps',
-        'Calories': 'calories'
+        'RecipeInstructions': 'instructions',
+        'RecipeIngredientQuantities': 'ingredients_quantities',
+        'Calories': 'calories',
+        'RecipeCategory': 'category',
+        'Description': 'description',
     })
 
     # Drop rows with missing critical data
-    df = df.dropna(subset=['name', 'total_time', 'ingredients', 'steps'])
+    df = df.dropna(subset=['name', 'total_time', 'ingredients', 'instructions'])
 
     print("Converting ISO 8601 durations to integer minutes...")
     
@@ -66,7 +80,18 @@ def build_recipe_database():
     
     # Convert back to an integer
     df['minutes'] = df['minutes'].astype(int)
+
+    extracted_prep_time = df['PrepTime'].str.extract(r'PT(?:(?P<prep_hours>\d+)H)?(?:(?P<prep_minutes>\d+)M)?')
+    extracted_cook_time = df['CookTime'].str.extract(r'PT(?:(?P<cook_hours>\d+)H)?(?:(?P<cook_minutes>\d+)M)?')
     
+    extracted_prep_time = extracted_prep_time.fillna(0).astype(float)
+    extracted_cook_time = extracted_cook_time.fillna(0).astype(float)
+
+    df['prep_time_mins'] = (extracted_prep_time['prep_hours'] * 60) + extracted_prep_time['prep_minutes']
+    df['cook_time_mins'] = (extracted_cook_time['cook_hours'] * 60) + extracted_cook_time['cook_minutes']
+    df['prep_time_mins'] = df['prep_time_mins'].astype(int)
+    df['cook_time_mins'] = df['cook_time_mins'].astype(int)
+
     # Drop the old 'total_time' column
     df = df.drop(columns=['total_time'])
 
@@ -76,7 +101,7 @@ def build_recipe_database():
 
     # Clean the R-style vector strings
     print("Cleaning ingredient and instruction formatting...")
-    cols_to_clean = ['tags', 'ingredients', 'steps']
+    cols_to_clean = ['tags', 'ingredients', 'instructions', 'description']
     for col in cols_to_clean:
         df[col] = df[col].apply(clean_r_vector_string)
 
