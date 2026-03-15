@@ -16,6 +16,7 @@ dependencies:
   - uvicorn
   - psycopg2
   - pip:
+      - langchain
       - langchain-openai
       - langchain-core
       - langchain-text-splitters

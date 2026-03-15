@@ -10,6 +10,8 @@ from langchain_core.messages import SystemMessage, HumanMessage
 import schedule_agent
 import workout_agent
 import state_manager
+from src.meal_planner.main import execute_weekly_meal_task
+from src.recipe_extractor.main import run_recipe_extractor
 
 # Load environment variables
 load_dotenv()
@@ -43,10 +45,9 @@ def _parse_json_response_content(content):
 
 
 def _attach_slots_to_units(units, scheduled_slots):
-    """Attach available schedule slots to routine units using day match then index fallback."""
+    """Attach available schedule slots to routine units. Modifies scheduled_slots in-place."""
     prepared_units = []
-    free_slots = [slot for slot in scheduled_slots if isinstance(slot, dict)]
-
+    
     for unit in units:
         if isinstance(unit, dict):
             unit_copy = dict(unit)
@@ -55,31 +56,34 @@ def _attach_slots_to_units(units, scheduled_slots):
         unit_copy["scheduled_slots"] = []
         prepared_units.append(unit_copy)
 
-    # Prefer day-label matching first.
+    # First pass: try to match by exact day label
     for unit in prepared_units:
         day_label = (unit.get("day") or unit.get("day_label") or "").strip().lower()
         if not day_label:
             continue
+            
         match_idx = next(
-            (
-                idx for idx, slot in enumerate(free_slots)
-                if str(slot.get("day", "")).strip().lower() == day_label
-            ),
+            (idx for idx, slot in enumerate(scheduled_slots) 
+             if isinstance(slot, dict) and str(slot.get("day", "")).strip().lower() == day_label),
             None,
         )
         if match_idx is not None:
-            unit["scheduled_slots"].append(free_slots.pop(match_idx))
+            unit["scheduled_slots"].append(scheduled_slots.pop(match_idx))
 
-    # Fill remaining units in order with remaining slots.
+    # Second pass: fill remaining units with any remaining slots (AVOIDING meal slots!)
     for unit in prepared_units:
-        if not free_slots:
-            break
         if unit["scheduled_slots"]:
             continue
-        unit["scheduled_slots"].append(free_slots.pop(0))
+        
+        match_idx = next(
+            (idx for idx, slot in enumerate(scheduled_slots) 
+             if isinstance(slot, dict) and not any(kw in str(slot.get("event", "")).lower() for kw in ["meal", "dinner", "lunch", "breakfast", "recipe"])),
+            None,
+        )
+        if match_idx is not None:
+            unit["scheduled_slots"].append(scheduled_slots.pop(match_idx))
 
     return prepared_units
-
 
 def get_user_data():
     """Fetches the current user data from the state manager."""
@@ -128,9 +132,11 @@ def analyze_intent_and_extract_metadata(user_query, state, step_tracer):
     2. REWRITE QUERY (CONTINUATION & MERGING): Output a `resolved_query` that makes the user's intent completely explicit and standalone. 
        - If the user is providing missing information to a previous request (e.g., "I have 2kg dumbbells"), you MUST combine it with their original goal from the history. 
        - If they say "remove these", rewrite as "Remove the workouts we just scheduled".
-    3. EXTRACT NEW CONTEXT: Categorize new persistent info into `extracted_context`.
+    3. EXTRACT NEW CONTEXT: Categorize new persistent info into `extracted_context`. If the user provides new details that conflict with the current, override the old and write the new.
+       - `general_meal_restrictions`: ONLY use this for actual food items, flavors, or ingredients the user dislikes/avoids (e.g., "no mushrooms", "I hate spicy food"). DO NOT put time limits (e.g., "40 minutes") or meal types (e.g., "lunch") here.
     4. MINIMIZE QUESTIONS: Only ask absolutely necessary questions for the task.
-       - For WORKOUT generation: Check if Target workouts/week, Preferred time, and Equipment are known.
+       - For WORKOUT generation: Check if Target workouts/week, Preferred time, and Equipment are known (or it could be just one workout).
+       - For RECIPE or MEAL generation: If the user provides NO specific constraints (like a preferred cuisine, specific craving, or max prep time), add "preferred cuisine or maximum prep time" to `missing_info`.
        - For SCHEDULE tasks: DO NOT ask for the target day or time if the user leaves them out. The scheduling system is autonomous and will automatically find the next open slot. NEVER add day or time to `missing_info` for a scheduling request.
     5. AVOID RE-ASKING: Do NOT ask for information already in the 'CURRENT KNOWN CONTEXT'.
     6. INFER CONTINUATION: If the user is answering a question, infer the task from the 'Pending Info'.
@@ -154,9 +160,12 @@ def analyze_intent_and_extract_metadata(user_query, state, step_tracer):
     ALLOWED TASKS:
     - "SCHEDULE": Moving, removing, booking, or checking availability on the calendar.
     - "WORKOUT": Generating new routines or changing the actual exercises/content of a workout.
-    - "PLAN_MEAL": Generating new meals or changing the actual food/recipes.
-    - "FIND_RECIPE": Searching for or extracting recipe details.
+    - "PLAN_MEAL": Generating meal plans for whole days/weeks, OR generating multiple specific meals/recipes in one go (e.g., "find 2 recipes for Monday").
+    - "FIND_RECIPE": Generating or finding a SINGLE recipe only.
     - "OTHER": Anything that doesn't fit the above.
+
+    COMBINATIONS:
+    - If the user asks to "plan my whole week" or "plan everything", output BOTH "WORKOUT" and "PLAN_MEAL" (and "SCHEDULE" if calendar integration is needed).
     """
     
     user_prompt = f"Query: {user_query}"
@@ -202,11 +211,20 @@ def check_for_clarification(missing_info, step_tracer):
 
 
 def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
-    """Validates the generated plans for conflicts."""
+    """Validates the generated plans for conflicts and generates a friendly warning."""
     
-    sys_prompt = """Compare the nutrition and fitness drafts. 
-    Are there any critical conflicts? (e.g. heavy leg day with zero carb recovery meal).
-    Return JSON: {"status": "ok" | "error", "reason": "...", "suggested_fix": "..."}"""
+    sys_prompt = """You are Nutrissistant, a helpful fitness and nutrition assistant. Compare the nutrition and fitness drafts. 
+    Are there any critical conflicts? (e.g. heavy leg day with a zero-carb recovery meal, or a heavy meal scheduled 30 minutes before a high-intensity run).
+    
+    If there is a conflict, you MUST generate a friendly, conversational message for the user. Explain the issue simply, and ask if they would like you to fix it.
+    
+    Return JSON strictly matching this schema: 
+    {
+        "status": "ok" | "error", 
+        "internal_reason": "Brief technical reason for the logs", 
+        "friendly_message": "e.g., 'I noticed you have a heavy leg day planned on Tuesday, but your post-workout meal is very low in carbs. Would you like me to find a better recovery recipe?'"
+    }"""
+    
     user_prompt = f"Nutrition: {nutrition_draft}\nFitness: {fitness_draft}"
 
     messages = [
@@ -277,7 +295,6 @@ Selection policy:
 
         step_tracer.append({
             "module": MODULE_NAME,
-            "stage": "workout_pipeline_selection",
             "prompt": {"system": sys_prompt, "user": user_prompt},
             "response": {
                 "pipeline": pipeline,
@@ -290,7 +307,6 @@ Selection policy:
         fallback = "reflection" if not isinstance(current_routine, dict) else "simple_rag"
         step_tracer.append({
             "module": MODULE_NAME,
-            "stage": "workout_pipeline_selection_fallback",
             "prompt": {"system": sys_prompt, "user": user_prompt},
             "response": {
                 "pipeline": fallback,
@@ -317,9 +333,14 @@ def orchestrate_workflow(user_query):
         "content": user_query
     })
     
+    # 🛑 CHECKPOINT 1: Save the user's chat message to disk IMMEDIATELY
+    # This ensures it doesn't get lost if we reload the state later!
+    state_manager.save_state(state)
+    
     routine_generated = False
     latest_routine_response = None
     routine_draft = None
+    recipe_data = None
     
     shared_context = {
         "workout_time_limit_mins": None,
@@ -343,20 +364,19 @@ def orchestrate_workflow(user_query):
     
     for key in context_keys:
         if key in extracted and isinstance(extracted[key], list):
+            if key not in state:
+                state[key] = []
             for item in extracted[key]:
-                # Append only if it's not already in the list
-                if item not in state.get(key, []):
+                if item not in state[key]:
                     state[key].append(item)
                     context_changed = True
                     
     if context_changed:
         state_manager.save_state(state)
-        # Update our local reference to pass down to other agents if needed
-        shared_context["updated_user_context"] = {k: state[k] for k in context_keys}
+        shared_context["updated_user_context"] = {k: state.get(k, []) for k in context_keys}
 
     missing_info = intent_data.get("missing_info", [])
     
-    # Normalize tasks — handle both plain strings ("SCHEDULE") and dicts ({"type": "SCHEDULE", ...})
     raw_tasks = intent_data.get("tasks", [])
     task_aliases = {"PLAN_WORKOUT": "WORKOUT", "EXTRACT_WORKOUT": "WORKOUT"}
     def _extract_task_str(t):
@@ -368,8 +388,55 @@ def orchestrate_workflow(user_query):
     tasks = set(task_aliases.get(s, s) for s in (_extract_task_str(t) for t in raw_tasks) if s)
 
     # --- AUTONOMIC BEHAVIOR TRIGGER ---
-    if "WORKOUT" in tasks or "PLAN_MEAL" in tasks:
+    if "WORKOUT" in tasks or "PLAN_MEAL" in tasks or "FIND_RECIPE" in tasks:
         tasks.add("SCHEDULE")
+
+    # ==========================================
+    # 🛑 EARLY EXIT: CONVERSATIONAL & UNRECOGNIZED TASKS
+    # ==========================================
+    valid_tasks = {"WORKOUT", "PLAN_MEAL", "FIND_RECIPE", "SCHEDULE"}
+    if not tasks.intersection(valid_tasks):
+        
+        # 1. Create a prompt specifically for casual chat
+        fallback_system_prompt = """
+        You are Nutrissistant, a friendly, encouraging health and wellness AI agent. 
+        The user just said something conversational (like a greeting, "thanks", or general chat) OR something off-topic. 
+        Respond warmly, naturally, and briefly (1-3 sentences). 
+        If it's a greeting, say hello back and gently remind them that you can help plan meals, find recipes, and schedule workout routines.
+        If they asked for something you can't do, politely explain that and suggest something you can help with instead.
+        
+        IMPORTANT: Return your response strictly as a JSON object with a single key: "reply".
+        """
+        
+        # 2. Pass the query and recent chat history so it knows what was just said
+        fallback_payload = {
+            "user_query": effective_query,
+            "recent_history": [msg.get("content") for msg in state.get("chat_history", [])[-4:]]
+        }
+        
+        # 3. Use your existing LLM utility to generate the message
+        from src.utils import LLM_utils as llm_utils_module
+        fallback_result = llm_utils_module._invoke_json_llm(
+            fallback_system_prompt, 
+            fallback_payload,
+            step_tracer=step_tracer,
+            module_name=MODULE_NAME
+        )
+        
+        # 4. Extract the reply, with a safe hardcoded fallback just in case the LLM times out
+        final_response = fallback_result.get("reply", "Hello! I am Nutrissistant. How can I help you with your meals and workouts today?")
+        
+        # 5. Save and exit instantly!
+        state["chat_history"].append({
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "role": "agent",
+            "content": final_response
+        })
+        state["status"] = "idle"
+        state["user_query"] = effective_query
+        state_manager.save_state(state)
+        
+        return {"response": final_response, "steps": step_tracer}
 
     # Handle missing info first
     if missing_info:
@@ -379,13 +446,10 @@ def orchestrate_workflow(user_query):
         state_manager.save_state(state)
         return {"response": clarification, "steps": step_tracer}
     elif state.get("status") == "asking":
-        # If we were asking, and now missing_info is empty, the user answered!
-        # Clear the asking status so we don't get stuck.
         state["status"] = "idle"
         state["missing_info"] = []
         state_manager.save_state(state)
 
-    # Extract current state data (Rest of your existing function continues here...)
     nutrition_draft = state.get("plan_drafts", {}).get("nutrition", None)
     fitness_draft = state.get("plan_drafts", {}).get("fitness", None)
     workouts_state = state.get("workouts", {}) if isinstance(state.get("workouts"), dict) else {}
@@ -399,8 +463,7 @@ def orchestrate_workflow(user_query):
     # PHASE 1: GATHER CONSTRAINTS (Read)
     # ==========================================
     if "SCHEDULE" in tasks:
-        # Check if we are generating something new (Workout, Meal) or JUST scheduling
-        is_generation_planned = "WORKOUT" in tasks or "PLAN_MEAL" in tasks
+        is_generation_planned = "WORKOUT" in tasks or "PLAN_MEAL" in tasks or "FIND_RECIPE" in tasks
         
         schedule_result = schedule_agent.execute_schedule_task(
             user_query=effective_query, 
@@ -410,10 +473,8 @@ def orchestrate_workflow(user_query):
         )
         shared_context = schedule_result.get("shared_context", shared_context)
         
-        # Only output schedule responses if it's relevant (skip silence on background gathering)
         schedule_resp = schedule_result.get("response", "").strip()
         if schedule_resp:
-            # Only hide the default response if we are secretly gathering slots for a workout generator
             if is_generation_planned and schedule_resp == "Checked schedule constraints.":
                 pass 
             elif schedule_resp == "Checked schedule constraints.":
@@ -446,16 +507,65 @@ def orchestrate_workflow(user_query):
         latest_routine_response = routine_result.get("response", "Prepared your weekly routine.")
         responses.append(latest_routine_response)
 
-    if "PLAN_MEAL" in tasks:
-        prep_limit = shared_context.get("meal_prep_time_limit_mins", 30)
-        nutrition_draft = f"Placeholder Nutrition Plan (Under {prep_limit} mins prep)"
-        responses.append("Placeholder: Planned your meals.")
-        
     if "FIND_RECIPE" in tasks:
-        responses.append("Placeholder: Found your recipe.")
+        recipe_context = {
+            "request_type": "generate", 
+            "meal_context": {
+                "free_time_mins": shared_context.get("meal_prep_time_limit_mins"),
+                "description": effective_query
+            },
+            "constraints": {
+                "dietary_restrictions": state.get("dietary_restrictions", []),
+                "allergies": state.get("allergies", []),
+                "excluded_ingredients": state.get("general_meal_restrictions", [])
+            },
+            "user_preferences": {
+                "general": effective_query 
+            }
+        }
         
-    if "OTHER" in tasks:
-        responses.append("I'm sorry, I can't help with that.")
+        recipe_result = run_recipe_extractor(recipe_context, step_tracer)
+        
+        if recipe_result.get("status") in ["success", "partial"]:
+            recipe_data = recipe_result.get("recipe", {})
+            recipe_name = recipe_data.get("name", "a matching recipe")
+            prep_time = recipe_data.get("total_time_mins", "some")
+            responses.append(f"I found a great recipe for you: {recipe_name}. It takes about {prep_time} minutes.")
+        else:
+            responses.append("I couldn't find a recipe that perfectly matched those constraints, but I can try generating a custom one if you'd like.")
+
+    if "PLAN_MEAL" in tasks:
+        meal_plan_context = {
+            "dietary_restrictions": state.get("dietary_restrictions", []),
+            "allergies": state.get("allergies", []),
+            "excluded_ingredients": state.get("general_meal_restrictions", []),
+            # Optional: you can drop 'query' here since user_query is passed natively below
+        }
+        
+        # Execute the agent with the correct function name and arguments
+        meal_plan_result = execute_weekly_meal_task(
+            user_query=effective_query,
+            shared_context=shared_context,
+            step_tracer=step_tracer,
+            optional_task_context=meal_plan_context
+        )
+        
+        # Extract the schema using the correct key 'meal_plan'
+        nutrition_draft = meal_plan_result.get("meal_plan", {})
+        latest_meal_response = meal_plan_result.get("response", "I've planned your meals based on your request.")
+        responses.append(latest_meal_response)
+
+    # Grab the active drafts (either newly generated, or loaded from existing state)
+    active_fitness = routine_draft or fitness_draft 
+    active_nutrition = nutrition_draft or state.get("plan_drafts", {}).get("nutrition")
+
+    # If both exist in some form, run the passive warning check
+    if active_fitness and active_nutrition:
+        conflict_check = validate_and_resolve_conflicts(active_nutrition, active_fitness, step_tracer)
+        if conflict_check.get("status") == "error":
+            # Show the friendly conversational warning to the user
+            responses.append(f"**Heads up:** {conflict_check.get('friendly_message')}")
+
 
     # ==========================================
     # PHASE 3: COMMIT & SYNC (Write)
@@ -463,13 +573,27 @@ def orchestrate_workflow(user_query):
     if routine_generated and isinstance(routine_draft, dict):
         routine_units = routine_draft.get("units", []) if isinstance(routine_draft.get("units"), list) else []
         
-        # Supervisor maps the free slots gathered in Phase 1 to the generated units
+        # Maps the free slots gathered in Phase 1 and REMOVES them from the pool
         units_with_slots = _attach_slots_to_units(routine_units, shared_context.get("scheduled_slots", []))
         
+        # --- NEW: WORKOUT FALLBACK SCHEDULER ---
+        # If the LLM didn't give us enough slots for a full week, auto-fill them safely!
+        fallback_days = ["Monday", "Wednesday", "Friday", "Tuesday", "Thursday", "Saturday", "Sunday"]
+        used_days = [slot.get("day") for u in units_with_slots for slot in u.get("scheduled_slots", []) if slot.get("day")]
+        
+        for unit in units_with_slots:
+            if not unit.get("scheduled_slots"):
+                # Find a logical day not already used by this routine
+                available_days = [d for d in fallback_days if d not in used_days]
+                chosen_day = available_days[0] if available_days else "Monday"
+                
+                # Auto-fill to 17:00
+                unit["scheduled_slots"] = [{"day": chosen_day, "time": "17:00"}]
+                used_days.append(chosen_day)
+
         base_name = current_routine.get("routine_name", "Weekly Routine") if isinstance(current_routine, dict) else "Weekly Routine"
         routine_name = routine_draft.get("routine_name") or base_name
         
-        # Save to state
         state_manager.save_weekly_routine(
             routine_name=routine_name,
             goal=routine_draft.get("goal", "general fitness"),
@@ -479,19 +603,140 @@ def orchestrate_workflow(user_query):
             source="agent",
         )
         
-        # Autonomically lock the new units into the calendar
         if "SCHEDULE" in tasks:
             schedule_agent.commit_routine_to_calendar(units_with_slots, step_tracer)
-            responses.append("I have successfully added these to your calendar.")
-
-    # Update global state plan drafts
+            responses.append("I have successfully added your workouts to the calendar.")
+            
+    # 🛑 CHECKPOINT 2: Refresh state from disk AFTER agents have done their saving!
     state = state_manager.load_state()
+
+    # --- PROCESS MULTI-MEAL PLANS ---
+    if "PLAN_MEAL" in tasks and nutrition_draft and isinstance(nutrition_draft.get("meals"), list):
+        from uuid import uuid4
+        
+        # Safely initialize meals state if it doesn't exist yet
+        if "meals" not in state:
+            state["meals"] = {"plans": [], "current_plan_id": None}
+            
+        plan_id = f"plan_{uuid4().hex[:12]}"
+        
+        # Build the historical plan record
+        new_plan = {
+            "id": plan_id,
+            "plan_name": "Weekly Meal Plan" if "week" in effective_query.lower() else "Custom Meal Plan",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "meals": nutrition_draft.get("meals", [])
+        }
+        
+        state["meals"]["plans"].append(new_plan)
+        state["meals"]["current_plan_id"] = plan_id
+
+        # Loop through the array and schedule each meal independently
+        if "SCHEDULE" in tasks:
+            slots_pool = shared_context.get("scheduled_slots", []) 
+            
+            for meal in new_plan["meals"]:
+                day = meal.get("day_of_week") or "Sunday"
+                meal_type = meal.get("meal_type", "lunch").lower()
+                dishes = meal.get("dishes", [])
+                
+                if day and dishes:
+                    dish_names = ", ".join([d.get("name", "Recipe") for d in dishes])
+                    
+                    time = None
+                    # 1. SMART MAPPING: Match the Schedule Agent's slots to the meal type
+                    for i, slot in enumerate(slots_pool):
+                        s_day = slot.get("day", day)
+                        s_time = slot.get("time", "")
+                        try:
+                            # Extract the hour (e.g., "18:00" -> 18)
+                            hour = int(s_time.split(":")[0])
+                        except Exception:
+                            hour = 0
+                            
+                        if meal_type == "breakfast" and 6 <= hour <= 10:
+                            time = s_time; day = s_day; slots_pool.pop(i); break
+                        elif meal_type == "lunch" and 11 <= hour <= 15:
+                            time = s_time; day = s_day; slots_pool.pop(i); break
+                        elif meal_type == "dinner" and 17 <= hour <= 23:
+                            time = s_time; day = s_day; slots_pool.pop(i); break
+                            
+                    # 2. FALLBACK: If the schedule agent didn't provide a matching time
+                    if not time:
+                        if meal_type == "breakfast": time = "08:00"
+                        elif meal_type == "lunch": time = "13:00"
+                        elif meal_type == "dinner": time = "19:00"
+                        elif meal_type == "snack": time = "16:00"
+                        else: time = "12:00"
+                    
+                    # 3. Write to calendar
+                    if "schedule_data" not in state:
+                        state["schedule_data"] = {}
+                    if day not in state["schedule_data"]:
+                        state["schedule_data"][day] = {}
+                        
+                    state["schedule_data"][day][time] = f"Meal: {dish_names}"
+            
+            responses.append("I've successfully added these meals to your schedule.")
+
+    if "FIND_RECIPE" in tasks and "SCHEDULE" in tasks and recipe_data:
+        recipe_name = recipe_data.get("name", "New Recipe")
+        slots = shared_context.get("scheduled_slots", [])
+        
+        # 1. Grab the slot the Schedule Agent found, or use a Fallback
+        if slots:
+            target_slot = slots[0] 
+            day = target_slot.get("day")
+            time = target_slot.get("time")
+        else:
+            # FALLBACK: If you didn't give a time and the schedule agent skipped it,
+            # we assign it to a default dinner slot so it still shows up on the calendar.
+            day = "Monday" 
+            time = "19:00"
+            
+        if day and time:
+            if "schedule_data" not in state:
+                state["schedule_data"] = {}
+            if day not in state["schedule_data"]:
+                state["schedule_data"][day] = {}
+                
+            state["schedule_data"][day][time] = f"Meal: {recipe_name}"
+            
+            # If we used the fallback, explicitly tell the user where we put it
+            if not slots:
+                responses.append(f"I've added {recipe_name} to your schedule for {day} at {time}.")
+
     if "plan_drafts" not in state:
-        state["plan_drafts"] = {}
+        state["plan_drafts"] = {"nutrition": [], "fitness": {}}
+        
     if nutrition_draft is not None:
         state["plan_drafts"]["nutrition"] = nutrition_draft
     if fitness_draft is not None:
         state["plan_drafts"]["fitness"] = fitness_draft
+        
+    if recipe_data:
+        state["last_found_recipe"] = recipe_data
+        
+        # Safely get or initialize the nutrition dictionary
+        nutrition_draft = state["plan_drafts"].get("nutrition")
+        if not isinstance(nutrition_draft, dict):
+            nutrition_draft = {"date": datetime.now(timezone.utc).date().isoformat(), "meals": []}
+            state["plan_drafts"]["nutrition"] = nutrition_draft
+            
+        # Wrap the single recipe into a proper "meal" schema
+        from uuid import uuid4
+        single_recipe_meal = {
+            "meal_id": f"meal_{uuid4().hex[:8]}",
+            "meal_type": "dinner", # Default fallback
+            "day_of_week": "Monday", # Default fallback
+            "dishes": [recipe_data],
+            "warnings": [],
+            "suggestions": []
+        }
+        
+        # Append the properly shaped meal
+        if isinstance(nutrition_draft.get("meals"), list):
+            nutrition_draft["meals"].append(single_recipe_meal)
 
     state["user_query"] = effective_query
     state["status"] = "idle"
@@ -501,13 +746,14 @@ def orchestrate_workflow(user_query):
     if not final_response:
         final_response = "I'm sorry, I couldn't find an action to take based on that. Could you rephrase what you'd like to do?"
 
-
-    # Log the agent's response
+    # Safely append the agent's final answer to the freshly loaded history
     state["chat_history"].append({
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "role": "agent",
         "content": final_response
     })
+    
+    # 🛑 CHECKPOINT 3: Final combined save
     state_manager.save_state(state)
 
     return {"response": final_response, "steps": step_tracer}

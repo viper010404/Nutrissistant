@@ -57,6 +57,10 @@ def extract_schedule_intent(user_query, step_tracer):
     2. RELATIVE DAYS: If the user asks to move an event to "another day" without specifying the day, output "OTHER" for the `preferred_day`.
     3. MATCHING: For RESCHEDULE or REMOVE, you MUST exactly extract ONLY the name inside the single quotes from the 'CURRENT BOOKED EVENTS' list for the `event_name` field. (e.g., If the list says `Monday at 18:00: 'Gym Workout'`, output `Gym Workout`, NOT the day/time).
     4. ROUTINE GENERATION: If the user asks to plan a routine (e.g., "plan 3 evening workouts"), output a "FIND_SLOT" action for EACH session. You MUST assign specific, spaced-out days (e.g., "Monday", "Wednesday", "Friday") for `preferred_day` to ensure they aren't scheduled on the same day.
+    5. BIOLOGICAL SPACING (MEALS & WORKOUTS): You MUST analyze the CURRENT BOOKED EVENTS to prevent conflicts.
+       - If scheduling a Workout: Do not place it within 2 hours after a scheduled meal.
+       - If scheduling a Meal: If there is a workout that day, explicitly set `preferred_time` to 1-2 hours AFTER the workout for recovery, or 2+ hours BEFORE. 
+       - Always output a specific `preferred_time` that respects these biological rules whenever possible.
 
     Output strictly in JSON with a list of "events":
     {{
@@ -280,7 +284,7 @@ def execute_schedule_task(user_query, step_tracer, shared_context=None, mode="ex
         "shared_context": shared_context
     }
 
-    
+
 def commit_routine_to_calendar(units_with_slots, step_tracer):
     """
     Takes a finalized routine from another agent (Workout, Meal Planner) 
@@ -306,11 +310,11 @@ def commit_routine_to_calendar(units_with_slots, step_tracer):
     state_manager.save_state(state)
     
     # Log the commit action
-    step_tracer.append({
-        "module": MODULE_NAME,
-        "stage": "commit_to_calendar",
-        "data": units_with_slots,
-        "response": messages
-    })
+    # step_tracer.append({
+    #     "module": MODULE_NAME,
+    #     "stage": "commit_to_calendar",
+    #     "data": units_with_slots,
+    #     "response": messages
+    # })
     
     return {"status": "success", "messages": messages}
