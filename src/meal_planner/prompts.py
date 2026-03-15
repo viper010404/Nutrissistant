@@ -80,7 +80,7 @@ Output schema (strict):
 }
 
 Rules:
-- If query requests a weekly plan, produce 7 days × 3 meals each (breakfast, lunch, dinner).
+- If query requests a weekly plan, produce 7 days × 3 meals each (breakfast, lunch, dinner). If asked to output a specific number of meals, only output that EXACT number.
 - Every meal MUST include at least one component in the `components` array.
 - The `components` array is a planning spec passed to a recipe extractor — NOT finished recipes. Fill it with actionable descriptions.
 - If `pipeline_mode` is "reflection", revise ONLY the meal blueprint (`meals` and `components`) using `initial_draft` and `reflection_feedback`.

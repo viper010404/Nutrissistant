@@ -118,14 +118,14 @@ def _run_meal_plan_critique(
         module_name="MealPlannerReflectionCritic",
     )
 
-    if step_tracer is not None and hasattr(step_tracer, "append"):
-        step_tracer.append(
-            {
-                "module": "MealPlanner",
-                "stage": f"meal_reflection_critique_{iteration}",
-                "response": critique,
-            }
-        )
+    # if step_tracer is not None and hasattr(step_tracer, "append"):
+    #     step_tracer.append(
+    #         {
+    #             "module": "MealPlanner",
+    #             "stage": f"meal_reflection_critique_{iteration}",
+    #             "response": critique,
+    #         }
+    #     )
 
     return critique if isinstance(critique, dict) else {}
 
@@ -177,19 +177,19 @@ def run_meal_planner(task: str | dict, step_tracer: list | None = None, shared_c
     rag_query = f"{query}\nUser profile: {user_context.get('user_profile', '')}"
     rag_result = tools_module.fetch_nutrition_rag_context(rag_query)
 
-    if step_tracer is not None and hasattr(step_tracer, "append"):
-        step_tracer.append(
-            {
-                "module": "MealPlanner",
-                "stage": "nutrition_rag",
-                "query": rag_query,
-                "retrieval": {
-                    "status": rag_result.get("status"),
-                    "reason": rag_result.get("reason"),
-                    "sources": rag_result.get("sources", []),
-                },
-            }
-        )
+    # if step_tracer is not None and hasattr(step_tracer, "append"):
+    #     step_tracer.append(
+    #         {
+    #             "module": "MealPlanner",
+    #             "stage": "nutrition_rag",
+    #             "query": rag_query,
+    #             "retrieval": {
+    #                 "status": rag_result.get("status"),
+    #                 "reason": rag_result.get("reason"),
+    #                 "sources": rag_result.get("sources", []),
+    #             },
+    #         }
+    #     )
 
     raw_blueprint = tools_module.generate_meal_blueprint(
         query=query,
@@ -235,14 +235,14 @@ def run_meal_planner(task: str | dict, step_tracer: list | None = None, shared_c
                 step_tracer=step_tracer,
             )
 
-            if step_tracer is not None and hasattr(step_tracer, "append"):
-                step_tracer.append(
-                    {
-                        "module": "MealPlanner",
-                        "stage": f"meal_reflection_refinement_{iteration}",
-                        "response": raw_blueprint,
-                    }
-                )
+            # if step_tracer is not None and hasattr(step_tracer, "append"):
+            #     step_tracer.append(
+            #         {
+            #             "module": "MealPlanner",
+            #             "stage": f"meal_reflection_refinement_{iteration}",
+            #             "response": raw_blueprint,
+            #         }
+            #     )
 
     blueprint = _normalize_meal_blueprint(raw_blueprint)
 
@@ -260,25 +260,41 @@ def run_meal_planner(task: str | dict, step_tracer: list | None = None, shared_c
                 optional_task_context=optional_task_context,
             )
 
-            if step_tracer is not None and hasattr(step_tracer, "append"):
-                step_tracer.append(
-                    {
-                        "module": "MealPlanner",
-                        "stage": "recipe_extractor_input",
-                        "payload": extractor_input,
-                    }
-                )
+            # if step_tracer is not None and hasattr(step_tracer, "append"):
+            #     step_tracer.append(
+            #         {
+            #             "module": "MealPlanner",
+            #             "stage": "recipe_extractor_input",
+            #             "payload": extractor_input,
+            #         }
+            #     )
 
             recipe_result = recipe_extractor_module.run_recipe_extractor(extractor_input, step_tracer=step_tracer)
             recipe, warnings, suggestions = tools_module.extract_recipe_from_result(recipe_result)
             meal_warnings.extend(warnings)
             meal_suggestions.extend(suggestions)
-            if isinstance(recipe, dict):
-                dishes.append({
-                    "recipe_id": recipe.get("recipe_id") or recipe.get("id"),
-                    "name": recipe.get("name", "Unnamed Dish"),
-                    "component": component_plan.get("component", "main_course"),
-                })
+            # --- NEW SAFETY NET: Prevent silent failures ---
+            if not isinstance(recipe, dict) or not recipe.get("name"):
+                import uuid
+                recipe = {
+                    "recipe_id": f"fallback_{uuid.uuid4().hex[:8]}",
+                    "name": component_plan.get("description", "Agent Custom Dish"),
+                    "description": "The agent planned this meal, but the recipe details failed to generate properly due to an AI timeout.",
+                    "prep_time_mins": component_plan.get("free_time_mins", 30),
+                    "ingredients": [],
+                    "instructions": ["Ask Nutrissistant to specifically generate a recipe for this dish!"],
+                    "nutrition_per_serving": {}
+                }
+
+            # Keep the entire recipe object, just ensure the component label is correct
+            recipe["component"] = component_plan.get("component", "main_course")
+            dishes.append(recipe)
+            # if isinstance(recipe, dict):
+            #     dishes.append({
+            #         "recipe_id": recipe.get("recipe_id") or recipe.get("id"),
+            #         "name": recipe.get("name", "Unnamed Dish"),
+            #         "component": component_plan.get("component", "main_course"),
+            #     })
 
         final_meals.append(
             {
@@ -293,8 +309,8 @@ def run_meal_planner(task: str | dict, step_tracer: list | None = None, shared_c
 
     final_output = tools_module.build_final_meal_output(blueprint.get("date"), final_meals)
 
-    if step_tracer is not None and hasattr(step_tracer, "append"):
-        step_tracer.append({"module": "MealPlanner", "stage": "final_output", "response": final_output})
+    # if step_tracer is not None and hasattr(step_tracer, "append"):
+    #     step_tracer.append({"module": "MealPlanner", "stage": "final_output", "response": final_output})
 
     return final_output
 
