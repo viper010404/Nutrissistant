@@ -1,0 +1,22 @@
+name: nutrissistant
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - fastapi
+  - pydantic
+  - requests
+  - streamlit=1.55.0
+  - pandas
+  - sqlalchemy
+  - tqdm
+  - python-dotenv
+  - uvicorn
+  - psycopg2
+  - pip:
+      - langchain-openai
+      - langchain-core
+      - langchain-text-splitters
+      - pinecone
