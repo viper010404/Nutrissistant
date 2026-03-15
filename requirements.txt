@@ -3,6 +3,7 @@ pydantic
 uvicorn
 requests
 python-dotenv
+langchain
 langchain-openai
 langchain-core
 langchain-text-splitters
