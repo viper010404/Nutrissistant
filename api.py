@@ -64,7 +64,7 @@ def get_agent_info():
 @app.get("/api/model_architecture")
 def get_model_architecture():
     """Returns the architecture diagram as a PNG image."""
-    image_path = "architecture_diagram.png" # Make sure this file exists in your folder!
+    image_path = "agent_architecture.png"
     if not os.path.exists(image_path):
         raise HTTPException(status_code=404, detail="Architecture diagram not found.")
     
