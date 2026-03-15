@@ -322,6 +322,7 @@ Rules:
 12. When pipeline_mode is "simple_rag", prioritize minimal targeted edits for update requests.
 13. When pipeline_mode is "reflection", return a complete cohesive full-week routine.
 14. You MUST strictly adhere to the `user_context` provided in the payload. Do not include exercises requiring equipment the user does not have. You must modify the routine to accommodate any listed injuries or restrictions.
+15. Look at the user's requested time or the provided schedule context. If a workout is scheduled for the afternoon or evening, you MUST NOT name it "Morning Workout" or "A.M. Routine". Ensure the workout name and `title` logically match the time of day it is being performed.
 """
 
 
