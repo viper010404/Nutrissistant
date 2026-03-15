@@ -12,3 +12,5 @@ pandas
 sqlalchemy
 tqdm
 psycopg2
+httpx
+websockets
