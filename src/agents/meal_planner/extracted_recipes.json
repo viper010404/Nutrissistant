@@ -1220,5 +1220,157 @@
       "vegetarian",
       "beginner-friendly"
     ]
+  },
+  {
+    "recipe_id": "llm_qc_salad_001",
+    "name": "Quinoa & Chickpea Salad Bowl with Roasted Veg and Lemon-Tahini Dressing",
+    "description": "Hearty plant-forward main: fluffy quinoa, protein-rich chickpeas, and oven-roasted seasonal vegetables tossed with mixed greens, fresh parsley, and a bright lemon-tahini dressing. Simple, beginner-friendly, and ready in 30 minutes. Optional: crumble feta or top with grilled chicken (listed as optional add-ins).",
+    "component": "main_course",
+    "prep_time_mins": 10,
+    "cook_time_mins": 20,
+    "total_time_mins": 30,
+    "ingredients": [
+      {
+        "name": "quinoa, uncooked",
+        "quantity": 0.75,
+        "unit": "cup"
+      },
+      {
+        "name": "canned chickpeas, drained and rinsed",
+        "quantity": 1,
+        "unit": "15 oz can"
+      },
+      {
+        "name": "seasonal vegetables (e.g., bell pepper, zucchini, carrot), chopped",
+        "quantity": 3,
+        "unit": "cups"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "tahini",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "garlic, minced",
+        "quantity": 1,
+        "unit": "clove"
+      },
+      {
+        "name": "mixed salad greens",
+        "quantity": 4,
+        "unit": "cups"
+      },
+      {
+        "name": "fresh parsley, chopped",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "salt",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 0.25,
+        "unit": "tsp"
+      }
+    ],
+    "instructions": [
+      "Preheat oven to 425°F (220°C). Toss chopped seasonal vegetables with 1/2 tbsp olive oil, a pinch of salt, and a little black pepper. Spread on a baking sheet and roast 15–18 minutes until tender and lightly browned.",
+      "While vegetables roast, rinse quinoa in a fine-mesh sieve. Combine quinoa with 1 1/2 cups water and a pinch of salt in a small pot. Bring to a boil, reduce to a simmer, cover, and cook 12–15 minutes until water is absorbed. Remove from heat and let sit covered 5 minutes, then fluff with a fork.",
+      "Drain and rinse chickpeas; pat lightly dry. Optionally season with a pinch of salt and pepper or warm briefly in a skillet.",
+      "Make the dressing: whisk together tahini, lemon juice, minced garlic, remaining 1/2 tbsp olive oil, 1/4 tsp salt, and 1/8 tsp black pepper. If too thick, thin with 1–2 tsp warm water until pourable. Taste and adjust lemon or salt.",
+      "In a large bowl, combine warm quinoa, chickpeas, and roasted vegetables. Toss with about half the dressing so flavors meld.",
+      "Divide mixed greens between bowls, top with the warm quinoa-chickpea-veg mixture, drizzle remaining dressing, and sprinkle chopped parsley. Serve warm or at room temperature. Offer optional feta or grilled chicken on the side if desired."
+    ],
+    "nutrition_per_serving": {
+      "calories": 600,
+      "protein_g": 22,
+      "carbs_g": 82,
+      "fat_g": 20,
+      "fiber_g": 14
+    },
+    "tags": [
+      "plant-based",
+      "vegetarian",
+      "healthy",
+      "quick",
+      "main_course"
+    ]
+  },
+  {
+    "recipe_id": "llm_side_chickpea_quinoa_001",
+    "name": "5-Minute Chickpea & Brown Rice Side Salad",
+    "description": "No-cook plant-forward side combining ready-to-eat brown rice, canned chickpeas, mixed greens, and a simple olive oil & red wine vinegar dressing. Ready in about 5 minutes — beginner-friendly and high in fiber.",
+    "component": "side_dish",
+    "prep_time_mins": 5,
+    "cook_time_mins": 0,
+    "total_time_mins": 5,
+    "ingredients": [
+      {
+        "name": "ready-to-eat brown rice pouch (or cooked brown rice)",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "canned chickpeas, drained and rinsed",
+        "quantity": 0.5,
+        "unit": "cup"
+      },
+      {
+        "name": "mixed salad greens",
+        "quantity": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "cherry tomatoes, halved",
+        "quantity": 0.5,
+        "unit": "cup"
+      },
+      {
+        "name": "extra-virgin olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "red wine vinegar",
+        "quantity": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "instructions": [
+      "Open the ready-to-eat brown rice pouch and add the rice to a medium bowl.",
+      "Add the drained and rinsed chickpeas to the bowl.",
+      "Add mixed salad greens and halved cherry tomatoes.",
+      "Drizzle with olive oil and red wine vinegar; season with salt and pepper to taste.",
+      "Gently toss to combine and serve immediately."
+    ],
+    "nutrition_per_serving": {
+      "calories": 350,
+      "protein_g": 12,
+      "carbs_g": 45,
+      "fat_g": 12,
+      "fiber_g": 8
+    },
+    "tags": [
+      "vegan",
+      "vegetarian",
+      "quick",
+      "no_cook",
+      "whole_grain",
+      "legume",
+      "side_dish"
+    ]
   }
 ]

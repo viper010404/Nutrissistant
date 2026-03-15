@@ -35,7 +35,7 @@
             "15:00": "-",
             "16:00": "-",
             "17:00": "Thursday Evening: Low-Intensity Cardio & Habit Review",
-            "18:00": "Meal: Pan-baked or oven-roasted lean protein (e.g., salmon fillet or skinless chicken breast) seasoned with olive oil, lemon, garlic, and mixed herbs; serve on a small bed (1/2 cup cooked) of whole grain (quinoa, farro, or bulgur) with a quick saut\u00e9 of spinach and cherry tomatoes mixed in., Mediterranean Chickpea & Cucumber Side Salad, Greek Yogurt Berry & Walnut Cup",
+            "18:00": "-",
             "19:00": "-",
             "20:00": "-",
             "21:00": "-",
@@ -404,7 +404,7 @@
         }
     },
     "workouts": {
-        "current_workout_id": "workout_d53d59248491",
+        "current_workout_id": "workout_c3cf38a84770",
         "current_routine_id": "routine_840e7d043154",
         "history": [
             {
@@ -1066,6 +1066,16 @@
             "timestamp": "2026-03-15T21:29:20.228618+00:00",
             "role": "agent",
             "content": "Proposed 'Tuesday Dinner' on Tuesday at 18:00.\n\nPrepared your meal plan.\n\nI've successfully added these meals to your schedule."
+        },
+        {
+            "timestamp": "2026-03-15T21:37:05.799594+00:00",
+            "role": "user",
+            "content": "I want a new meal plan with the same meals in Monday and Sunday but remove the Tuesday dinner and do a new Wednesday dinner, Italian, with no specific prep time limit"
+        },
+        {
+            "timestamp": "2026-03-15T22:00:53.860180+00:00",
+            "role": "user",
+            "content": "hi"
         }
     ],
     "last_found_recipe": {

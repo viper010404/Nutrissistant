@@ -298,6 +298,9 @@ elif st.session_state.current_page == 'home':
                 st.session_state.current_page = 'all recipes'
                 st.rerun()
             if st.button("Current Recipes"):
+                # Clear the historical view so it defaults back to the active plan
+                st.session_state.view_plan_id = None 
+                st.session_state.pop("selected_recipe_id", None)
                 st.session_state.current_page = 'current recipes'
                 st.rerun()
             if st.button("Workout History"):
@@ -596,26 +599,26 @@ elif st.session_state.current_page == 'workouts':
                         label_bits.append(f"{day} {time}".strip())
                     st.markdown(f"- {' | '.join(label_bits)}")
 
-                    col_a, col_b = st.columns([1, 1])
-                    with col_a:
-                        if st.button("Open Unit", key=f"open_unit_{routine_id}_{unit_id}"):
-                            st.session_state.selected_unit_id = unit_id
-                            state_manager.set_current_routine(routine_id)
-                            if unit_id:
-                                state_manager.set_current_workout(unit_id)
-                            st.session_state.current_page = "routine"
-                            st.rerun()
-                    with col_b:
-                        if unit_id and unit_id == current_id:
-                            st.caption("Currently selected unit")
+                col_a, col_b = st.columns([1, 1])
+                with col_a:
+                    if st.button("Open Unit", key=f"open_unit_{routine_id}_{unit_id}"):
+                        st.session_state.selected_unit_id = unit_id
+                        state_manager.set_current_routine(routine_id)
+                        if unit_id:
+                            state_manager.set_current_workout(unit_id)
+                        st.session_state.current_page = "routine"
+                        st.rerun()
+                with col_b:
+                    if unit_id and unit_id == current_id:
+                        st.caption("Currently selected unit")
 
-                if not is_current_routine and st.button("Set as Current Routine", key=f"set_routine_{routine_id}"):
-                    state_manager.set_current_routine(routine_id)
-                    if units:
-                        first_unit_id = units[0].get("unit_id")
-                        if first_unit_id:
-                            state_manager.set_current_workout(first_unit_id)
-                    st.rerun()
+            if not is_current_routine and st.button("Set as Current Routine", key=f"set_routine_{routine_id}"):
+                state_manager.set_current_routine(routine_id)
+                if units:
+                    first_unit_id = units[0].get("unit_id")
+                    if first_unit_id:
+                        state_manager.set_current_workout(first_unit_id)
+                st.rerun()
 
     if not routines:
         st.markdown("No routines generated yet. Ask Nutrissistant to create your weekly routine.")
@@ -929,6 +932,9 @@ elif st.session_state.current_page == 'all recipes':
             st.rerun()
     with col_current:
         if st.button("View Current Recipes →"):
+            # Clear the historical view so it defaults back to the active plan
+            st.session_state.view_plan_id = None 
+            st.session_state.pop("selected_recipe_id", None)
             st.session_state.current_page = 'current recipes'
             st.rerun()
 
@@ -997,14 +1003,13 @@ elif st.session_state.current_page == 'all recipes':
                 col_a, col_b = st.columns([1, 1])
                 with col_a:
                     if st.button("Open Plan", key=f"open_plan_{plan_id}"):
-                        if "meals" not in state or not isinstance(state["meals"], dict):
-                            state["meals"] = {"plans": plans, "current_plan_id": None}
-                        state["meals"]["current_plan_id"] = plan_id
-                        state_manager.save_state(state)
+                        # Tell the next page exactly which plan to load
+                        st.session_state.view_plan_id = plan_id
                         st.session_state.pop("selected_recipe_id", None)
                         st.session_state.current_page = "current recipes"
                         st.rerun()
                 
+                # Actually save the new current plan to the JSON file
                 if not is_current_plan and st.button("Set as Current Plan", key=f"set_plan_{plan_id}"):
                     if "meals" not in state or not isinstance(state["meals"], dict):
                         state["meals"] = {"plans": plans, "current_plan_id": None}
@@ -1019,7 +1024,10 @@ elif st.session_state.current_page == 'all recipes':
             
             # Iterate in reverse so the newest recipes are at the top
             for idx, recipe in enumerate(reversed(saved_recipes)):
-                recipe_id = recipe.get("recipe_id", f"saved_rec_{idx}")
+                # FIX: Guarantee the recipe has an ID, and force it into the dict
+                recipe_id = recipe.get("recipe_id") or recipe.get("id") or f"saved_rec_{idx}"
+                recipe["recipe_id"] = recipe_id
+                
                 recipe_name = recipe.get("name", "Saved Recipe")
                 prep_time = recipe.get("total_time_mins", "—")
                 
@@ -1037,12 +1045,18 @@ elif st.session_state.current_page == 'all recipes':
                         # Make this historical recipe the "active" one, then jump to the view page
                         state["last_found_recipe"] = recipe
                         state_manager.save_state(state)
-                        st.session_state.selected_recipe_id = recipe.get("recipe_id")
+                        
+                        # Use the guaranteed ID!
+                        st.session_state.selected_recipe_id = recipe_id
+                        
+                        # Hide the full weekly plan so this single recipe is the focus
+                        st.session_state.view_plan_id = "HIDE_PLAN" 
                         st.session_state.current_page = "current recipes"
                         st.rerun()
 
     else:
         st.markdown("No meal plans or recipes generated yet. Ask Nutrissistant to plan your meals or find a recipe!")
+
 # ==========================================
 # CURRENT RECIPES PAGE
 # ==========================================
@@ -1147,36 +1161,52 @@ elif st.session_state.current_page == 'current recipes':
     plans = meals_state.get("plans", [])
     current_plan_id = meals_state.get("current_plan_id")
     single_recipe = state.get("last_found_recipe")
-    
-    # Also support a direct "last_found_recipe" if they just asked for a single recipe
-    single_recipe = state.get("last_found_recipe")
 
-    current_plan = next((p for p in plans if p.get("id") == current_plan_id), None)
+    # 1. Determine which plan to show (historical vs. active)
+    display_plan_id = st.session_state.get("view_plan_id", current_plan_id)
+    is_active_plan = (display_plan_id == current_plan_id or display_plan_id is None)
+    
+    if display_plan_id == "HIDE_PLAN":
+        current_plan = None
+    else:
+        current_plan = next((p for p in plans if p.get("id") == display_plan_id), None)
+        
     all_dishes = []
 
-    # 1. Grab dishes from the active meal plan
-    if current_plan and current_plan.get("meals"):
-        st.markdown(f"## {current_plan.get('plan_name', 'Weekly Meal Plan')}")
-        for m in current_plan.get("meals", []):
-            day = m.get("day_of_week", "")
-            m_type = m.get("meal_type", "")
-            for dish in m.get("dishes", []):
-                dish["_context_label"] = f"{day} {m_type}".strip()
-                all_dishes.append(dish)
-                
-    # 2. Grab the recently found single recipe
-    if single_recipe:
-        single_recipe["_context_label"] = "Recently Found"
-        # Ensure it has a fallback ID so the buttons work
-        if "recipe_id" not in single_recipe:
-            single_recipe["recipe_id"] = "latest_single_recipe"
-        all_dishes.append(single_recipe)
+    if display_plan_id == "HIDE_PLAN":
+        # 2A. Only show the recently searched single recipe
+        if single_recipe:
+            single_recipe["_context_label"] = "Recently Found"
+            if "recipe_id" not in single_recipe:
+                single_recipe["recipe_id"] = "latest_single_recipe"
+            all_dishes.append(single_recipe)
+    else:
+        # 2B. Grab dishes from the targeted meal plan
+        if current_plan and current_plan.get("meals"):
+            st.markdown(f"## {current_plan.get('plan_name', 'Weekly Meal Plan')}")
+            for m in current_plan.get("meals", []):
+                day = m.get("day_of_week", "")
+                m_type = m.get("meal_type", "")
+                for dish in m.get("dishes", []):
+                    dish["_context_label"] = f"{day} {m_type}".strip()
+                    all_dishes.append(dish)
+                    
+        # 2C. Optional: Grab the recently found single recipe ONLY if we're on the active plan
+        if is_active_plan and single_recipe:
+            single_recipe["_context_label"] = "Recently Found"
+            if "recipe_id" not in single_recipe:
+                single_recipe["recipe_id"] = "latest_single_recipe"
+            all_dishes.append(single_recipe)
 
     # 3. Create the UI selection
     if all_dishes:
         st.markdown("### Select a Meal")
         
-        # FIX: Check both "recipe_id" and "id" so the UI doesn't break
+        # FIX: Guarantee every dish has an ID so the array matching doesn't break
+        for idx, dish in enumerate(all_dishes):
+            if not dish.get("recipe_id") and not dish.get("id"):
+                dish["recipe_id"] = f"fallback_id_{idx}"
+                
         valid_recipe_ids = [d.get("recipe_id") or d.get("id") for d in all_dishes if isinstance(d, dict)]
         selected_recipe_id = st.session_state.get("selected_recipe_id")
         
@@ -1185,15 +1215,15 @@ elif st.session_state.current_page == 'current recipes':
             
         st.session_state.selected_recipe_id = selected_recipe_id
         
-        # FIX: Find the dish using both keys
+        # FIX: Find the dish using both keys safely
         selected_dish = next((d for d in all_dishes if (d.get("recipe_id") or d.get("id")) == selected_recipe_id), None)
         
         # Display recipe buttons
         recipe_cols = st.columns(max(len(all_dishes), 1))
         for idx, dish in enumerate(all_dishes):
             with recipe_cols[idx]:
-                # Safely get the ID
-                r_id = dish.get("recipe_id") or dish.get("id") or f"fallback_{idx}"
+                # Safely get the guaranteed ID
+                r_id = dish.get("recipe_id") or dish.get("id")
                 label = dish.get("_context_label", f"Dish {idx+1}")
                 name = dish.get("name", "Recipe")
                 button_label = f"{label}\n{name}"
@@ -1238,18 +1268,24 @@ elif st.session_state.current_page == 'current recipes':
             st.markdown('<div class="section-header">Ingredients</div>', unsafe_allow_html=True)
             ingredients = selected_dish.get("ingredients", [])
             
-            # FIX: Tell the user if the LLM hallucinated and forgot the ingredients
+            # FIX: Safely handle missing ingredients AND LLM string hallucinations
             if not ingredients:
                 st.info("No ingredients provided by the agent.")
             else:
                 for ing in ingredients:
-                    name = ing.get("name", "")
-                    qty = ing.get("quantity", "")
-                    unit = ing.get("unit", "")
+                    if isinstance(ing, dict):
+                        name = ing.get("name", "Unknown Item")
+                        qty = ing.get("quantity", "")
+                        unit = ing.get("unit", "")
+                        display_val = f"{qty} {unit}".strip()
+                    else:
+                        name = str(ing)
+                        display_val = ""
+                        
                     st.markdown(
                         f'<div class="ingredient-row">'
                         f'<span class="ingredient-name">{name}</span>'
-                        f'<span>{qty} {unit}</span>'
+                        f'<span>{display_val}</span>'
                         f'</div>',
                         unsafe_allow_html=True
                     )
@@ -1288,6 +1324,6 @@ elif st.session_state.current_page == 'current recipes':
                     st.markdown(f"**Step {idx}:** {step}")
                 
         st.markdown("---")
-        if st.button("View Meal History"):
+        if st.button("View Meal History", key="nav_back_to_meal_history"):
             st.session_state.current_page = 'all recipes'
             st.rerun()
