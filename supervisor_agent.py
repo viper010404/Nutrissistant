@@ -356,10 +356,16 @@ def orchestrate_workflow(user_query):
 
     missing_info = intent_data.get("missing_info", [])
     
-    # Normalize tasks
+    # Normalize tasks — handle both plain strings ("SCHEDULE") and dicts ({"type": "SCHEDULE", ...})
     raw_tasks = intent_data.get("tasks", [])
     task_aliases = {"PLAN_WORKOUT": "WORKOUT", "EXTRACT_WORKOUT": "WORKOUT"}
-    tasks = set(task_aliases.get(t, t) for t in raw_tasks if isinstance(t, str))
+    def _extract_task_str(t):
+        if isinstance(t, str):
+            return t
+        if isinstance(t, dict):
+            return t.get("type") or t.get("task") or t.get("name") or ""
+        return ""
+    tasks = set(task_aliases.get(s, s) for s in (_extract_task_str(t) for t in raw_tasks) if s)
 
     # --- AUTONOMIC BEHAVIOR TRIGGER ---
     if "WORKOUT" in tasks or "PLAN_MEAL" in tasks:
