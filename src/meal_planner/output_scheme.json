@@ -1,0 +1,48 @@
+{
+    "_description": "Output schema for Meal Planner. IMPORTANT: each item in dishes[] must be identical in shape to recipe_extractor.output_scheme.json -> recipe object.",
+    "date": "YYYY-MM-DD",
+    "meals": [
+        {
+            "meal_id": "string",
+            "meal_type": "breakfast | lunch | dinner | snack",
+            "day_of_week": "string",
+            "dishes": [
+                {
+                    "recipe_id": "string",
+                    "name": "string",
+                    "component": "main_course | side_dish | dessert",
+                    "description": "string",
+                    "prep_time_mins": "number",
+                    "cook_time_mins": "number",
+                    "total_time_mins": "number",
+                    "ingredients": [
+                        {
+                            "name": "string",
+                            "quantity": "number",
+                            "unit": "string"
+                        }
+                    ],
+                    "instructions": [
+                        "string"
+                    ],
+                    "nutrition_per_serving": {
+                        "calories": "number",
+                        "protein_g": "number",
+                        "carbs_g": "number",
+                        "fat_g": "number",
+                        "fiber_g": "number"
+                    },
+                    "tags": [
+                        "string"
+                    ]
+                }
+            ],
+            "warnings": [
+                "string"
+            ],
+            "suggestions": [
+                "string"
+            ]
+        }
+    ]
+}
