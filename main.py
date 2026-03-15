@@ -332,7 +332,8 @@ elif st.session_state.current_page == 'home':
                     with st.spinner("Nutrissistant is thinking..."):
                         # Call the supervisor 
                         try:
-                            api_base_url = os.getenv("NUTRISSISTANT_API_URL", "http://localhost:8000").rstrip("/")
+                            default_api_base = f"http://127.0.0.1:{os.getenv('PORT', '10000')}"
+                            api_base_url = os.getenv("NUTRISSISTANT_API_URL", default_api_base).rstrip("/")
                             api_url = f"{api_base_url}/api/execute"
                             payload = {"prompt": user_prompt}
 
