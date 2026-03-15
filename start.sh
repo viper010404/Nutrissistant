@@ -4,6 +4,7 @@ set -e
 # Start Streamlit on internal port 8501
 export STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 streamlit run main.py \
+  --server.address 127.0.0.1 \
   --server.port 8501 \
   --server.headless true \
   --server.enableCORS false \
