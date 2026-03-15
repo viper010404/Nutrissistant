@@ -860,14 +860,23 @@ _PROXY_POOL_TIMEOUT_SECONDS = float(os.getenv("PROXY_POOL_TIMEOUT_SECONDS", "5.0
 @app.websocket("/{path:path}")
 async def _ws_proxy(path: str, websocket: WebSocket):
     """Proxy WebSocket connections to the Streamlit process."""
-    await websocket.accept()
+    # Forward the subprotocol requested by the browser. Chrome strictly
+    # requires the server to echo it back; Safari is lenient and works either
+    # way. Without this, Chrome/Windows users get a silent WebSocket drop and
+    # the Streamlit UI never loads.
+    requested_subprotocols = websocket.scope.get("subprotocols", [])
+    subprotocol = requested_subprotocols[0] if requested_subprotocols else None
+    await websocket.accept(subprotocol=subprotocol)
     qs = websocket.scope.get("query_string", b"").decode()
     target = f"{_STREAMLIT_WS}/{path}" + (f"?{qs}" if qs else "")
     try:
         upstream = None
         for _ in range(_PROXY_RETRIES):
             try:
-                upstream = await websockets.connect(target)
+                upstream = await websockets.connect(
+                    target,
+                    subprotocols=[subprotocol] if subprotocol else None,
+                )
                 break
             except Exception:
                 await asyncio.sleep(_PROXY_RETRY_DELAY_SECONDS)
