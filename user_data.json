@@ -1,5 +1,5 @@
 {
-    "user_query": "Can you plan me a Tuesday Dinner please",
+    "user_query": "Can you find me a recipe for a hamburger",
     "user_profile": "",
     "schedule_data": {
         "Monday": {
@@ -16,7 +16,7 @@
             "16:00": "-",
             "17:00": "Monday Evening: Lower-Body Strength",
             "18:00": "Meal: Chinese Cabbage, Snow Pea and Mushroom Stir-Fry",
-            "19:00": "-",
+            "19:00": "Meal: Bill's Most Wonderful Hamburgers",
             "20:00": "-",
             "21:00": "-",
             "22:00": "-",
@@ -327,6 +327,92 @@
                         "If you want slightly more satiety/calories, increase yogurt to 125 g or berries to 40 g; this will raise calories and protein proportionally.",
                         "Wash and dry berries ahead of time to keep prep within 5 minutes on busy nights."
                     ]
+                },
+                {
+                    "meal_id": "meal_c6746982",
+                    "meal_type": "dinner",
+                    "day_of_week": "Monday",
+                    "dishes": [
+                        {
+                            "recipe_id": "db_351248",
+                            "name": "Bill's Most Wonderful Hamburgers",
+                            "description": "A grilled classic hamburger with seasoned ground beef and flavorful condiments. Makes 4 burgers.",
+                            "component": "main_course",
+                            "prep_time_mins": 12,
+                            "cook_time_mins": 20,
+                            "total_time_mins": 32,
+                            "ingredients": [
+                                {
+                                    "name": "ground beef (80/20)",
+                                    "quantity": 1,
+                                    "unit": "lb"
+                                },
+                                {
+                                    "name": "egg",
+                                    "quantity": 1,
+                                    "unit": "large"
+                                },
+                                {
+                                    "name": "onion, finely chopped",
+                                    "quantity": 0.5,
+                                    "unit": "cup"
+                                },
+                                {
+                                    "name": "garlic cloves, minced",
+                                    "quantity": 2,
+                                    "unit": "clove"
+                                },
+                                {
+                                    "name": "prepared mustard",
+                                    "quantity": 1,
+                                    "unit": "tbsp"
+                                },
+                                {
+                                    "name": "ketchup",
+                                    "quantity": 1,
+                                    "unit": "tbsp"
+                                },
+                                {
+                                    "name": "olive oil",
+                                    "quantity": 1,
+                                    "unit": "tbsp"
+                                },
+                                {
+                                    "name": "salt",
+                                    "quantity": 1,
+                                    "unit": "tsp"
+                                },
+                                {
+                                    "name": "black pepper",
+                                    "quantity": 0.5,
+                                    "unit": "tsp"
+                                }
+                            ],
+                            "instructions": [
+                                "In a bowl, gently mix ground beef, egg, chopped onion, minced garlic, mustard, ketchup, salt, and pepper until just combined\u2014do not overwork.",
+                                "Divide mixture into 4 equal portions and form into patties about 3/4-inch thick; press a slight dimple in the center of each to promote even cooking.",
+                                "Preheat grill or a skillet to medium-high and brush with olive oil.",
+                                "Cook patties 4\u20135 minutes per side for medium (adjust time for desired doneness). For safety, cook ground beef to an internal temperature of 160\u00b0F (71\u00b0C).",
+                                "Remove from heat and let rest 3 minutes.",
+                                "Serve on toasted buns with desired toppings (lettuce, tomato, sliced onion, cheese, pickles, condiments)."
+                            ],
+                            "nutrition_per_serving": {
+                                "calories": 530.6,
+                                "protein_g": 36.4,
+                                "carbs_g": 17.2,
+                                "fat_g": 34.8,
+                                "fiber_g": 2.1
+                            },
+                            "tags": [
+                                "beef",
+                                "grill",
+                                "classic",
+                                "main_course"
+                            ]
+                        }
+                    ],
+                    "warnings": [],
+                    "suggestions": []
                 }
             ]
         },
@@ -1076,84 +1162,98 @@
             "timestamp": "2026-03-15T22:00:53.860180+00:00",
             "role": "user",
             "content": "hi"
+        },
+        {
+            "timestamp": "2026-03-15T22:01:08.778120+00:00",
+            "role": "agent",
+            "content": "Hi there! I can help plan meals, find recipes, and schedule workout routines \u2014 what would you like to do next?"
+        },
+        {
+            "timestamp": "2026-03-15T22:01:49.871678+00:00",
+            "role": "user",
+            "content": "Can you find me a recipe for a hamburger"
+        },
+        {
+            "timestamp": "2026-03-15T22:03:34.806302+00:00",
+            "role": "agent",
+            "content": "I found a great recipe for you: Bill's Most Wonderful Hamburgers. It takes about 32 minutes.\n\nI've added Bill's Most Wonderful Hamburgers to your schedule for Monday at 19:00."
         }
     ],
     "last_found_recipe": {
-        "recipe_id": "db_129769",
-        "name": "Chinese Cabbage, Snow Pea and Mushroom Stir-Fry",
-        "description": "Quick Chinese-style vegetable stir-fry that pairs with steamed rice \u2014 crisp snow peas, tender napa cabbage and shiitake mushrooms in a light savory-sweet sauce.",
+        "recipe_id": "db_351248",
+        "name": "Bill's Most Wonderful Hamburgers",
+        "description": "A grilled classic hamburger with seasoned ground beef and flavorful condiments. Makes 4 burgers.",
         "component": "main_course",
-        "prep_time_mins": 10,
-        "cook_time_mins": 15,
-        "total_time_mins": 25,
+        "prep_time_mins": 12,
+        "cook_time_mins": 20,
+        "total_time_mins": 32,
         "ingredients": [
             {
-                "name": "Chinese cabbage (napa), shredded",
-                "quantity": 200,
-                "unit": "g"
+                "name": "ground beef (80/20)",
+                "quantity": 1,
+                "unit": "lb"
             },
             {
-                "name": "Snow peas, trimmed",
-                "quantity": 100,
-                "unit": "g"
+                "name": "egg",
+                "quantity": 1,
+                "unit": "large"
             },
             {
-                "name": "Shiitake mushrooms, sliced",
-                "quantity": 100,
-                "unit": "g"
+                "name": "onion, finely chopped",
+                "quantity": 0.5,
+                "unit": "cup"
             },
             {
-                "name": "Fresh ginger, minced",
+                "name": "garlic cloves, minced",
+                "quantity": 2,
+                "unit": "clove"
+            },
+            {
+                "name": "prepared mustard",
+                "quantity": 1,
+                "unit": "tbsp"
+            },
+            {
+                "name": "ketchup",
+                "quantity": 1,
+                "unit": "tbsp"
+            },
+            {
+                "name": "olive oil",
+                "quantity": 1,
+                "unit": "tbsp"
+            },
+            {
+                "name": "salt",
                 "quantity": 1,
                 "unit": "tsp"
             },
             {
-                "name": "Light soy sauce",
-                "quantity": 2,
-                "unit": "tbsp"
-            },
-            {
-                "name": "Ketjap manis (or substitute: 1 tbsp soy + 1 tsp sugar)",
-                "quantity": 1,
-                "unit": "tbsp"
-            },
-            {
-                "name": "Caster (superfine) sugar",
+                "name": "black pepper",
                 "quantity": 0.5,
                 "unit": "tsp"
-            },
-            {
-                "name": "Vegetable oil",
-                "quantity": 1,
-                "unit": "tbsp"
-            },
-            {
-                "name": "Garlic, minced (optional)",
-                "quantity": 1,
-                "unit": "clove"
             }
         ],
         "instructions": [
-            "Heat oil in a wok or large skillet over high heat.",
-            "Add minced garlic and ginger; stir-fry 20\u201330 seconds until fragrant.",
-            "Add shiitake mushrooms; stir-fry 2\u20133 minutes until starting to soften.",
-            "Add snow peas and shredded Chinese cabbage; stir-fry 2\u20133 minutes until vegetables are crisp-tender.",
-            "Stir together light soy sauce, ketjap manis and sugar; pour over vegetables and toss to coat.",
-            "Cook another 1\u20132 minutes to heat through and slightly thicken sauce. Serve immediately over steamed white or brown rice."
+            "In a bowl, gently mix ground beef, egg, chopped onion, minced garlic, mustard, ketchup, salt, and pepper until just combined\u2014do not overwork.",
+            "Divide mixture into 4 equal portions and form into patties about 3/4-inch thick; press a slight dimple in the center of each to promote even cooking.",
+            "Preheat grill or a skillet to medium-high and brush with olive oil.",
+            "Cook patties 4\u20135 minutes per side for medium (adjust time for desired doneness). For safety, cook ground beef to an internal temperature of 160\u00b0F (71\u00b0C).",
+            "Remove from heat and let rest 3 minutes.",
+            "Serve on toasted buns with desired toppings (lettuce, tomato, sliced onion, cheese, pickles, condiments)."
         ],
         "nutrition_per_serving": {
-            "calories": 248.2,
-            "protein_g": 8.4,
-            "carbs_g": 14.2,
-            "fat_g": 19.2,
-            "fiber_g": 5.0
+            "calories": 530.6,
+            "protein_g": 36.4,
+            "carbs_g": 17.2,
+            "fat_g": 34.8,
+            "fiber_g": 2.1
         },
         "tags": [
-            "Chinese",
-            "vegetarian",
-            "stir-fry",
-            "quick",
-            "pairs-with-rice"
+            "beef",
+            "grill",
+            "classic",
+            "main_course"
         ]
     },
     "meals": {

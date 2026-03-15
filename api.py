@@ -849,8 +849,12 @@ _HOP_BY_HOP = frozenset([
     "trailer", "proxy-authorization", "proxy-authenticate",
     "upgrade", "content-encoding",
 ])
-_PROXY_RETRIES = 8
-_PROXY_RETRY_DELAY_SECONDS = 0.35
+_PROXY_RETRIES = int(os.getenv("PROXY_RETRIES", "12"))
+_PROXY_RETRY_DELAY_SECONDS = float(os.getenv("PROXY_RETRY_DELAY_SECONDS", "0.5"))
+_PROXY_CONNECT_TIMEOUT_SECONDS = float(os.getenv("PROXY_CONNECT_TIMEOUT_SECONDS", "5.0"))
+_PROXY_READ_TIMEOUT_SECONDS = float(os.getenv("PROXY_READ_TIMEOUT_SECONDS", "20.0"))
+_PROXY_WRITE_TIMEOUT_SECONDS = float(os.getenv("PROXY_WRITE_TIMEOUT_SECONDS", "20.0"))
+_PROXY_POOL_TIMEOUT_SECONDS = float(os.getenv("PROXY_POOL_TIMEOUT_SECONDS", "5.0"))
 
 
 @app.websocket("/{path:path}")
@@ -912,7 +916,13 @@ async def _http_proxy(path: str, request: Request):
     }
     body = await request.body()
     resp = None
-    async with httpx.AsyncClient(follow_redirects=True, timeout=5.0) as client:
+    timeout = httpx.Timeout(
+        connect=_PROXY_CONNECT_TIMEOUT_SECONDS,
+        read=_PROXY_READ_TIMEOUT_SECONDS,
+        write=_PROXY_WRITE_TIMEOUT_SECONDS,
+        pool=_PROXY_POOL_TIMEOUT_SECONDS,
+    )
+    async with httpx.AsyncClient(follow_redirects=True, timeout=timeout) as client:
         for _ in range(_PROXY_RETRIES):
             try:
                 resp = await client.request(
@@ -922,12 +932,12 @@ async def _http_proxy(path: str, request: Request):
                     content=body,
                 )
                 break
-            except (httpx.ConnectTimeout, httpx.ConnectError):
+            except (httpx.TimeoutException, httpx.TransportError):
                 await asyncio.sleep(_PROXY_RETRY_DELAY_SECONDS)
 
     if resp is None:
         return Response(
-            content="Nutrissistant UI is starting up. Please refresh in a few seconds.",
+            content="Nutrissistant UI is starting or waking up. Please refresh in a few seconds.",
             status_code=503,
             media_type="text/plain",
         )
