@@ -1,0 +1,61 @@
+{
+    "_description": "Input schema for the Recipe Extractor Agent",
+
+    "request_type": "generate | revise",
+
+    "meal_context": {
+        "meal_id": "string",
+        "meal_type": "breakfast | lunch | dinner | snack",
+        "day_of_week": "string",
+        "free_time_mins": "number",
+        "description": "string",
+        "course": "main_course | side_dish | dessert | any",
+        "components": ["main_course", "side_dish"]
+    },
+
+    "nutritional_targets_min": {
+        "calories": "number",
+        "FatContent": "number",
+        "SaturatedFatContent": "number",
+        "CarbohydrateContent": "number",
+        "ProteinContent": "number",
+        "FiberContent": "number",
+        "SugarContent": "number",
+        "SodiumContent": "number",
+        "CholesterolContent": "number"
+    },
+
+    "nutritional_targets_max": {
+        "calories": "number",
+        "FatContent": "number",
+        "SaturatedFatContent": "number",
+        "CarbohydrateContent": "number",
+        "ProteinContent": "number",
+        "FiberContent": "number",
+        "SugarContent": "number",
+        "SodiumContent": "number",
+        "CholesterolContent": "number"
+    },
+
+    "constraints": {
+        "dietary_restrictions": ["string"],
+        "allergies": ["string"],
+        "excluded_ingredients": ["string"],
+        "available_ingredients": ["string"],
+        "must_have_all_ingredients": "boolean",
+        "max_ingredients": "number"
+    },
+
+    "revision_context": {
+        "original_recipe_id": "string | null",
+        "original_recipe_name": "string | null",
+        "feedback": "string",
+        "keep_base_recipe": "boolean"
+    },
+
+    "user_preferences": {
+        "cooking_skill": "beginner | intermediate | advanced",
+        "prefer_simple_recipes": "boolean",
+        "spice_tolerance": "mild | medium | hot"
+    }
+}
