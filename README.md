@@ -30,25 +30,35 @@ Project goal:
 
 ### Agent Components
 
-**Supervisor Agent** — LLM Router and Orchestrator
+**Supervisor Agent** — Router-Orchestrator Agent
 
-The Supervisor acts as the reasoning backbone of the system. It receives every user prompt, classifies intent into task types (WORKOUT, SCHEDULE, PLAN_MEAL, FIND_RECIPE), extracts persistent context such as equipment, injuries, and dietary restrictions, and decides which agents to invoke and in which order. It runs a three-phase pipeline: gather constraints, execute domain tasks, commit outputs. At the end, it merges all agent results into a single coherent response and updates shared state.
+The Supervisor is the top-level control agent. It receives the raw user prompt, performs intent and context extraction, maps the request into task types (for example WORKOUT, SCHEDULE, PLAN_MEAL, FIND_RECIPE), and coordinates execution across downstream agents. It is also responsible for response composition and for emitting the step trace that explains how the final answer was produced.
 
-**Schedule Agent** — ReAct-style Calendar Agent
+**Schedule Agent** — Plan-and-Execute Agent
 
-The Schedule Agent operates in a ReAct pattern: it reasons about the current calendar state and takes targeted actions such as adding, removing, or rescheduling events. Given a user request, it parses the intended scheduling action, reads the live weekly schedule, applies a slot-finding algorithm, and writes the resolved event back to state. It can also run in a non-destructive constraint-gathering mode to provide available time slots to other agents before any plan is finalized.
+The Schedule Agent follows a plan-and-execute design. In the planning stage, an LLM extracts a structured action plan (`events[]`) from user language, including action type, target event, preferred day, and preferred time. In the execution stage, deterministic slot-allocation logic applies that plan against a sandbox copy of the weekly calendar, resolves feasible placements/reschedules, and then commits results to state (or returns proposal-only slots in gather mode). This design separates semantic interpretation (LLM planning) from reliable calendar mutation (rule-based execution).
 
 **Workout Agent** — Reflection RAG Agent
 
-The Workout Agent uses a Retrieval-Augmented Generation pipeline with an optional reflection loop. For new routine creation it runs iteratively: generate a candidate routine, then pass it to a critique LLM that checks safety, structure, and user alignment, then refine based on feedback. This repeats up to a configurable iteration limit. For smaller updates (swapping exercises, adjusting intensity) it falls back to a direct single-pass RAG generation. Scientific workout context is retrieved from a Pinecone vector index to ground generated plans in evidence.
+The Workout Agent is a retrieval-augmented generation agent with two operation modes. For routine creation and large edits, it runs a reflection loop (`generation -> critique -> refinement`) to improve safety and alignment. For smaller updates, it uses a faster single-pass RAG generation path. It consumes schedule-derived constraints from shared context and uses vector retrieval evidence when Pinecone is configured.
 
-**Recipe Extractor Agent** — Tool-Calling Agent
+**Recipe Extractor Agent** — Tool-Calling Agent (LangChain AgentExecutor)
 
-The Recipe Extractor is a LangChain `AgentExecutor`-based agent with a structured tool set. It reasons over a defined workflow: identify the target recipe component, choose a retrieval strategy (structured DB query, free-text DB query, or vector similarity search), build a candidate pool, and evaluate results through a two-stage pipeline: a hard-filter `STRICT_EVALUATOR` followed by a soft-ranking `LLM_EVALUATOR`. The final selected recipe is returned in a schema-validated output format. Fallback to LLM generation is available when retrieval returns no suitable candidates.
+The Recipe Extractor is a tool-using agent that can retrieve, evaluate, revise, and finalize recipes in structured JSON form. It uses a staged strategy: candidate generation/retrieval, strict filtering, quality ranking, optional revision, and finalization.
 
-**Meal Planner Agent** — Structured Output Agent
+Recipe Extractor tools:
+- `FREE_QUERY_DATABASE`: LLM converts free-form context into DB query parameters, then retrieves candidate recipes.
+- `STRACTURED_DATABASE_QUERY`: deterministic DB filtering for explicit constraints (time, category, nutrition, ingredients).
+- `USE_VECTOR_DB`: semantic nearest-neighbor retrieval over recipe embeddings.
+- `LLM_GENERATION`: generates a new recipe when retrieval candidates are insufficient.
+- `STRICT_EVALUATOR`: rule-based pass/fail gate (nutrition bounds, excluded ingredients, time constraints).
+- `LLM_EVALUATOR`: soft scoring and ranking among valid candidates.
+- `LLM_REVISER`: revises an existing recipe using feedback and constraints.
+- `GET_FULL_RECEPIE_DETAILS`: final DB fetch by recipe_id for complete output payload.
 
-The Meal Planner Agent operates against a defined input/output schema contract. It accepts meal context (meal type, day, available time, nutritional targets, restrictions) and returns a structured meal plan payload. It uses the Recipe Extractor Agent as a sub-component for individual dish resolution and is responsible for assembling complete daily or weekly nutrition plans within the constraints defined by the user profile.
+**Meal Planner Agent** — Schema-Driven Planning Agent
+
+The Meal Planner layer is defined by a strict output contract in `src/meal_planner/output_scheme.json`, including date-level meals, dish arrays, warnings, and suggestions. It standardizes how full meal plans should be represented and how dish objects should align with recipe output shape. In practice, it acts as the nutrition-plan composition contract around recipe-level generation/extraction outputs.
 
 ### Supporting Runtime Components
 
@@ -216,8 +226,3 @@ curl -X POST http://127.0.0.1:10000/api/execute \
 4. Review final response and execution trace.
 5. Inspect schedule and generated plan artifacts in the UI pages.
 
-## Notes
-
-- Keep secrets only in `.env` or deployment environment variables.
-- For deployment, the same start command (`bash start.sh`) is used with platform-provided `PORT`.
-- Team metadata and sample prompts in API info can be updated before final submission.
