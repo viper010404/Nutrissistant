@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import base64
 import requests
@@ -331,9 +332,10 @@ elif st.session_state.current_page == 'home':
                     with st.spinner("Nutrissistant is thinking..."):
                         # Call the supervisor 
                         try:
-                            api_url = "http://localhost:8000/api/execute"
+                            api_base_url = os.getenv("NUTRISSISTANT_API_URL", "http://localhost:8000").rstrip("/")
+                            api_url = f"{api_base_url}/api/execute"
                             payload = {"prompt": user_prompt}
-                            
+
                             res = requests.post(api_url, json=payload)
                             data = res.json()
                             
