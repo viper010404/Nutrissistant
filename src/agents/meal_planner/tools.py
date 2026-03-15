@@ -11,28 +11,30 @@ from langchain_openai import OpenAIEmbeddings
 from pinecone import Pinecone
 from pydantic import SecretStr
 
+from src.config import RECIPE_EMBED_MODEL_DEFAULT
+
 # Ensure project root is importable when this file is executed directly.
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.dirname(CURRENT_DIR)
+AGENTS_DIR = os.path.dirname(CURRENT_DIR)
+SRC_DIR = os.path.dirname(AGENTS_DIR)
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 if PROJECT_ROOT not in sys.path:
 	sys.path.insert(0, PROJECT_ROOT)
 
-import state_manager
-from src.meal_planner import prompts as prompts_module
+from src.core import state_manager
+from src.agents.meal_planner import prompts as prompts_module
 from src.utils import LLM_utils as llm_utils_module
+from src.utils.LLM_utils import LLMOD_API_KEY, OPENAI_API_BASE
 
 
 load_dotenv()
 
 MODULE_NAME = "MealPlanner"
-EXTRACTED_RECIPES_PATH = os.path.join(PROJECT_ROOT, "src", "meal_planner", "extracted_recipes.json")
+EXTRACTED_RECIPES_PATH = os.path.join(PROJECT_ROOT, "src", "agents", "meal_planner", "extracted_recipes.json")
 
-LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX_NAME_NUTRITION = os.getenv("PINECONE_INDEX_NAME_NUTRITION")
-EMBEDDING_MODEL = os.getenv("NUTRITION_VECTOR_EMBED_MODEL", "RPRTHPB-text-embedding-3-small")
+EMBEDDING_MODEL = os.getenv("NUTRITION_VECTOR_EMBED_MODEL", RECIPE_EMBED_MODEL_DEFAULT)
 
 
 

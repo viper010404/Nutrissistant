@@ -1,26 +1,15 @@
-import os
 import json
 from dotenv import load_dotenv
 
-from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
-import state_manager
+from src.core import state_manager
+from src.utils.LLM_utils import json_llm
 
 # Load environment variables
 load_dotenv()
 
-LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
-MODEL_NAME = "RPRTHPB-gpt-5-mini" 
 MODULE_NAME = "ScheduleAgent" 
-
-# JSON LLM for strict data extraction 
-json_llm = ChatOpenAI(
-    api_key=LLMOD_API_KEY,
-    base_url=OPENAI_API_BASE,
-    model=MODEL_NAME,
-).bind(response_format={"type": "json_object"})
 
 def extract_schedule_intent(user_query, step_tracer):
     """

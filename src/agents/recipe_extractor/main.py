@@ -3,11 +3,11 @@ Recipe Extractor Agent – entry point.
 
 Usage
 -----
-    from src.recipe_extractor.main import run_recipe_extractor
+    from src.agents.recipe_extractor.main import run_recipe_extractor
     result = run_recipe_extractor(context_dict)
 
 Or run directly:
-    python -m src.recipe_extractor.main
+    python -m src.agents.recipe_extractor.main
 """
 
 from __future__ import annotations
@@ -20,6 +20,9 @@ from typing import Any
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+
+from src.config import LLM_MODEL_NAME
+from src.utils.LLM_utils import LLMOD_API_KEY, OPENAI_API_BASE
 
 try:
     from langchain.agents import AgentExecutor, create_openai_tools_agent
@@ -35,15 +38,15 @@ except ImportError:
 load_dotenv()
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.dirname(CURRENT_DIR)
+AGENTS_DIR = os.path.dirname(CURRENT_DIR)
+SRC_DIR = os.path.dirname(AGENTS_DIR)
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 RECIPE_EXTRACTOR_MODULE_PREFIXES = (
-    "src.recipe_extractor",
-    "src.recipe_extractor",
+    "src.agents.recipe_extractor",
 )
 
 # ── lazy module imports (avoids circular deps & heavy init at module level) ──
@@ -76,9 +79,7 @@ def _get_tools_module():
 
 
 # ── LLM configuration ───────────────────────────────────────────────────────
-LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
-MODEL_NAME = os.getenv("RECIPE_AGENT_MODEL", "RPRTHPB-gpt-5-mini")
+MODEL_NAME = os.getenv("RECIPE_AGENT_MODEL", LLM_MODEL_NAME)
 
 
 # ── agent builder ─────────────────────────────────────────────────────────────
@@ -188,7 +189,7 @@ def run_recipe_extractor(context: dict, step_tracer: list | None = None) -> dict
     Parameters
     ----------
     context : dict
-        Must follow the input schema (see src/recipe_extractor/input_scheme.json).
+        Must follow the expected recipe-extractor input shape.
     step_tracer : list, optional
         If provided, each LLM call's prompt + response is appended to this list
         for debugging / logging.
@@ -196,8 +197,7 @@ def run_recipe_extractor(context: dict, step_tracer: list | None = None) -> dict
     Returns
     -------
     dict
-        Agent output following the output schema
-        (see src/recipe_extractor/output_scheme.json).
+        Agent output following the expected recipe-extractor output shape.
         Always contains at least: ``status``, ``source``, ``meal_context``,
         ``recipe``, ``warnings``, ``suggestions``.
         On hard failure: ``status="failed"`` with a ``message`` key.
@@ -254,9 +254,6 @@ def run_recipe_extractor(context: dict, step_tracer: list | None = None) -> dict
 
         parsed = _copy_meal_id_from_context(parsed, context)
 
-        # if step_tracer is not None and hasattr(step_tracer, "append"):
-        #     step_tracer.append({"module": "RecipeExtractorAgent", "output": parsed})
-
         return parsed
 
     except Exception as exc:  # noqa: BLE001
@@ -267,106 +264,6 @@ def run_recipe_extractor(context: dict, step_tracer: list | None = None) -> dict
             "warnings": [],
             "suggestions": [],
         }
-
-
-# ── CLI / quick-test ──────────────────────────────────────────────────────────
-# if __name__ == "__main__":
-    # steps = []
-    # sample_context = {
-    #     "request_type": "generate",
-    #     "meal_context": {
-    #         "meal_id": "meal_001",
-    #         "meal_type": "dinner",
-    #         "day_of_week": "Monday",
-    #         "free_time_mins": 45,
-    #         "description": "A healthy high-protein dinner with chicken",
-    #         "course": "main_course",
-    #         "components": ["main_course"],
-    #     },
-    #     "nutritional_targets_min": {
-    #         "calories": 400,
-    #         "ProteinContent": 35,
-    #     },
-    #     "nutritional_targets_max": {
-    #         "calories": 700,
-    #         "FatContent": 25,
-    #         "CarbohydrateContent": 60,
-    #     },
-    #     "constraints": {
-    #         "dietary_restrictions": [],
-    #         "allergies": [],
-    #         "excluded_ingredients": [],
-    #         "available_ingredients": ["chicken breast", "broccoli", "olive oil", "garlic"],
-    #         "must_have_all_ingredients": False,
-    #         "max_ingredients": 10,
-    #     },
-    #     "revision_context": {
-    #         "original_recipe_id": None,
-    #         "original_recipe_name": None,
-    #         "feedback": "",
-    #         "keep_base_recipe": False,
-    #     },
-    #     "user_preferences": {
-    #         "cooking_skill": "beginner",
-    #         "prefer_simple_recipes": True,
-    #         "spice_tolerance": "medium",
-    #     },
-    # }
-
-    # result = run_recipe_extractor(sample_context, step_tracer=steps)
-    # print(json.dumps(result, indent=2, ensure_ascii=False))
-
-
-# likley to use stractured query db
-# if __name__ == "__main__":
-#     from src.recipe_extractor.main import run_recipe_extractor
-
-#     context = {
-#         "request_type": "generate",
-#         "meal_context": {
-#             "meal_id": "meal_123",
-#             "meal_type": "dinner",
-#             "day_of_week": "Tuesday",
-#             "free_time_mins": 35,
-#             "description": "Find an existing chicken and rice dinner recipe from the database",
-#             "course": "main_course",
-#             "components": ["main_course"]
-#         },
-#         "nutritional_targets_min": {
-#             "calories": 350,
-#             "ProteinContent": 25
-#         },
-#         "nutritional_targets_max": {
-#             "calories": 750,
-#             "FatContent": 30,
-#             "CarbohydrateContent": 80
-#         },
-#         "constraints": {
-#             "dietary_restrictions": [],
-#             "allergies": [],
-#             "excluded_ingredients": ["shrimp"],
-#             "available_ingredients": ["chicken breast", "rice", "broccoli", "garlic"],
-#             "must_have_all_ingredients": False,
-#             "max_ingredients": 12
-#         },
-#         "revision_context": {
-#             "original_recipe_id": None,
-#             "original_recipe_name": None,
-#             "feedback": "",
-#             "keep_base_recipe": False
-#         },
-#         "user_preferences": {
-#             "cooking_skill": "beginner",
-#             "prefer_simple_recipes": True,
-#             "spice_tolerance": "mild"
-#         }
-#     }
-
-#     steps = []
-#     result = run_recipe_extractor(context, step_tracer=steps)
-
-#     print(result.get("source"))
-#     print(result)
 
 # Vector DB test context — vague/style-driven, no structured filters
 # Expected agent path: STRACTURED_DATABASE_QUERY fails/returns empty → USE_VECTOR_DB

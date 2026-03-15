@@ -10,10 +10,10 @@ from langchain_core.tools import Tool
 _MODULE_NAME = "RecipeExtractor"
 
 
-prompts_module = import_module("src.recipe_extractor.prompts")
+prompts_module = import_module("src.agents.recipe_extractor.prompts")
 query_db_module = import_module("src.utils.query_DB")
 llm_utils_module = import_module("src.utils.LLM_utils")
-utils_module = import_module("src.recipe_extractor.utils")
+utils_module = import_module("src.agents.recipe_extractor.utils")
 
 parse_recipes_query_result = query_db_module.parse_recipes_query_result
 query_database = query_db_module.query_database

@@ -6,7 +6,7 @@ This agent:
 2) Reads user data and extracts constraints (allergies, dietary restrictions, etc.).
 3) Plans meals and components.
 4) Delegates component recipe generation to the Recipe Extractor.
-5) Returns output shaped like src/meal_planner/output_scheme.json.
+5) Returns a structured meal-plan JSON output.
 """
 
 from __future__ import annotations
@@ -18,7 +18,8 @@ from datetime import date
 from typing import Any
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.dirname(CURRENT_DIR)
+AGENTS_DIR = os.path.dirname(CURRENT_DIR)
+SRC_DIR = os.path.dirname(AGENTS_DIR)
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 
 if PROJECT_ROOT not in sys.path:
@@ -26,11 +27,11 @@ if PROJECT_ROOT not in sys.path:
 
 from importlib import import_module
 
-prompts_module = import_module("src.meal_planner.prompts")
+prompts_module = import_module("src.agents.meal_planner.prompts")
 query_db_module = import_module("src.utils.query_DB")
 llm_utils_module = import_module("src.utils.LLM_utils")
-tools_module = import_module("src.meal_planner.tools")
-recipe_extractor_module = import_module("src.recipe_extractor.main")
+tools_module = import_module("src.agents.meal_planner.tools")
+recipe_extractor_module = import_module("src.agents.recipe_extractor.main")
 
 MAX_REFLECTION_LOOPS = 2
 
@@ -158,7 +159,7 @@ def run_meal_planner(task: str | dict, step_tracer: list | None = None, shared_c
     Returns
     -------
     dict
-        Meal plan following src/meal_planner/output_scheme.json.
+        Structured meal plan JSON payload.
     """
     shared_context = shared_context or {}
     optional_task_context = {}

@@ -25,7 +25,7 @@ Project goal:
 
 ### Architecture Diagram
 
-![Nutrissistant Architecture](agent_architecture.png)
+![Nutrissistant Architecture](images/agent_architecture.png)
 
 
 ### Agent Components
@@ -58,7 +58,7 @@ Recipe Extractor tools:
 
 **Meal Planner Agent** — Schema-Driven Planning Agent
 
-The Meal Planner layer is defined by a strict output contract in `src/meal_planner/output_scheme.json`, including date-level meals, dish arrays, warnings, and suggestions. It standardizes how full meal plans should be represented and how dish objects should align with recipe output shape. In practice, it acts as the nutrition-plan composition contract around recipe-level generation/extraction outputs.
+The Meal Planner layer uses a strict structured JSON output contract, including date-level meals, dish arrays, warnings, and suggestions. It standardizes how full meal plans should be represented and how dish objects should align with recipe output shape. In practice, it acts as the nutrition-plan composition contract around recipe-level generation/extraction outputs.
 
 ### Supporting Runtime Components
 
@@ -66,7 +66,7 @@ The Meal Planner layer is defined by a strict output contract in `src/meal_plann
 - Exposes required endpoints and standard response envelopes.
 - Serves architecture image and proxies non-API traffic to Streamlit.
 
-`state_manager.py` + `user_data.json`
+`src/core/state_manager.py` + `user_data.json`
 - Persistent state backbone shared by supervisor and task agents.
 
 `main.py`
@@ -94,7 +94,7 @@ The Meal Planner layer is defined by a strict output contract in `src/meal_plann
 - Routine draft contract:
   - Structured weekly units returned by workout generation and consumed by schedule commit logic.
 - Persistent state contract:
-  - Single source of truth in `user_data.json` accessed through `state_manager.py`.
+  - Single source of truth in `user_data.json` accessed through `src/core/state_manager.py`.
 
 ## API Endpoints
 

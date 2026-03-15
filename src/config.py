@@ -7,8 +7,7 @@ CATAGORY_TYPES = {'meal_type': 10, 'dietary': 9, 'cuisine': 30, 'occasion': 7, '
 
 # ── database ─────────────────────────────────────────────────────────────────
 DB_RECIPES_TABLE = "recipes"
-DB_USDA_TABLE = "usda_foods"
-DB_TABLE_NAMES = [DB_RECIPES_TABLE, DB_USDA_TABLE]
+DB_TABLE_NAMES = [DB_RECIPES_TABLE]
 DB_NOT_FOUND_MESSAGE = "SUPABASE_DB_URL not found. Cannot connect to database."
 DB_EMPTY_RESULT_MESSAGE = "Connection successful, but no recipes that fit query were found."
 DB_SUCCESS_MESSAGE = "Success! Here are your recipes:\n"

@@ -7,8 +7,10 @@ from importlib import import_module
 from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings
 from pinecone import Pinecone
+from src.config import RECIPE_EMBED_MODEL_DEFAULT
+from src.utils.LLM_utils import LLMOD_API_KEY, OPENAI_API_BASE
 
-prompts_module = import_module("src.recipe_extractor.prompts")
+prompts_module = import_module("src.agents.recipe_extractor.prompts")
 query_db_module = import_module("src.utils.query_DB")
 llm_utils_module = import_module("src.utils.LLM_utils")
 
@@ -21,9 +23,7 @@ load_dotenv()
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX_NAME_RECIPES = os.getenv("PINECONE_INDEX_NAME_RECIPES")
-LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
-RECIPE_VECTOR_EMBED_MODEL = os.getenv("RECIPE_VECTOR_EMBED_MODEL", "RPRTHPB-text-embedding-3-small")
+RECIPE_VECTOR_EMBED_MODEL = os.getenv("RECIPE_VECTOR_EMBED_MODEL", RECIPE_EMBED_MODEL_DEFAULT)
 
 
 NUMERIC_RECIPE_FIELDS = [

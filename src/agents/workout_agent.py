@@ -3,48 +3,27 @@ import json
 import re
 from dotenv import load_dotenv
 
-from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.messages import SystemMessage, HumanMessage
 from pinecone import Pinecone
 from pydantic import SecretStr
 
-import state_manager
+from src.config import RECIPE_EMBED_MODEL_DEFAULT
+from src.core import state_manager
+from src.utils.LLM_utils import LLMOD_API_KEY, OPENAI_API_BASE, json_llm, _parse_json_response_content
 
 # Load environment variables
 load_dotenv()
 
-LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX_NAME_WORKOUTS = os.getenv("PINECONE_INDEX_NAME_WORKOUTS")
-MODEL_NAME = "RPRTHPB-gpt-5-mini"
-EMBEDDING_MODEL = "RPRTHPB-text-embedding-3-small"
+EMBEDDING_MODEL = RECIPE_EMBED_MODEL_DEFAULT
 MODULE_NAME = "WorkoutAgent"
 PIPELINE_SIMPLE_RAG = "simple_rag"
 PIPELINE_REFLECTION = "reflection"
 MAX_REFLECTION_LOOPS = 3
 
-json_llm = ChatOpenAI(
-    api_key=SecretStr(LLMOD_API_KEY or ""),
-    base_url=OPENAI_API_BASE,
-    model=MODEL_NAME,
-).bind(response_format={"type": "json_object"})
-
-critique_json_llm = ChatOpenAI(
-    api_key=SecretStr(LLMOD_API_KEY or ""),
-    base_url=OPENAI_API_BASE,
-    model=MODEL_NAME,
-).bind(response_format={"type": "json_object"})
-
-
-def _parse_json_response_content(content):
-    if isinstance(content, list):
-        content = "".join(
-            block if isinstance(block, str) else block.get("text", "")
-            for block in content
-        )
-    return json.loads(content)
+critique_json_llm = json_llm
 
 
 def _fetch_workout_rag_context(user_query, top_k=4, max_chunk_chars=1200):

@@ -1,47 +1,20 @@
-import os
-import json
 from dotenv import load_dotenv
-from pydantic import SecretStr
 from datetime import datetime, timedelta, timezone
 
-from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
-import schedule_agent
-import workout_agent
-import state_manager
-from src.meal_planner.main import execute_weekly_meal_task
-from src.recipe_extractor.main import run_recipe_extractor
+from src.agents import schedule_agent
+from src.agents import workout_agent
+from src.core import state_manager
+from src.agents.meal_planner.main import execute_weekly_meal_task
+from src.agents.recipe_extractor.main import run_recipe_extractor
+from src.utils import LLM_utils as llm_utils_module
+from src.utils.LLM_utils import text_llm
 
 # Load environment variables
 load_dotenv()
 
-LLMOD_API_KEY = os.getenv("LLMOD_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
-MODEL_NAME = "RPRTHPB-gpt-5-mini"
 MODULE_NAME = "Supervisor" 
-
-text_llm = ChatOpenAI(
-    api_key=SecretStr(LLMOD_API_KEY or ""),
-    base_url=OPENAI_API_BASE,
-    model=MODEL_NAME
-)
-
-# JSON LLM for strict data extraction 
-json_llm = ChatOpenAI(
-    api_key=SecretStr(LLMOD_API_KEY or ""),
-    base_url=OPENAI_API_BASE,
-    model=MODEL_NAME,
-).bind(response_format={"type": "json_object"})
-
-
-def _parse_json_response_content(content):
-    if isinstance(content, list):
-        content = "".join(
-            block if isinstance(block, str) else block.get("text", "")
-            for block in content
-        )
-    return json.loads(content)
 
 
 def _attach_slots_to_units(units, scheduled_slots):
@@ -170,21 +143,12 @@ def analyze_intent_and_extract_metadata(user_query, state, step_tracer):
     
     user_prompt = f"Query: {user_query}"
 
-    messages = [
-        SystemMessage(content=sys_prompt),
-        HumanMessage(content=user_prompt)
-    ]
-
-    response = json_llm.invoke(messages)
-    result = _parse_json_response_content(response.content)
-    
-    step_tracer.append({
-        "module": MODULE_NAME,
-        "prompt": {"system": sys_prompt, "user": user_prompt},
-        "response": result
-    })
-    
-    return result
+    return llm_utils_module._invoke_json_llm(
+        sys_prompt,
+        user_prompt,
+        step_tracer=step_tracer,
+        module_name=MODULE_NAME,
+    )
 
 def check_for_clarification(missing_info, step_tracer):
     """Generates a polite clarification question."""
@@ -227,21 +191,12 @@ def validate_and_resolve_conflicts(nutrition_draft, fitness_draft, step_tracer):
     
     user_prompt = f"Nutrition: {nutrition_draft}\nFitness: {fitness_draft}"
 
-    messages = [
-        SystemMessage(content=sys_prompt),
-        HumanMessage(content=user_prompt)
-    ]
-
-    response = json_llm.invoke(messages)
-    result = _parse_json_response_content(response.content)
-    
-    step_tracer.append({
-        "module": MODULE_NAME,
-        "prompt": {"system": sys_prompt, "user": user_prompt},
-        "response": result
-    })
-    
-    return result
+    return llm_utils_module._invoke_json_llm(
+        sys_prompt,
+        user_prompt,
+        step_tracer=step_tracer,
+        module_name=MODULE_NAME,
+    )
 
 
 def _select_workout_pipeline(user_query, current_routine, step_tracer):
@@ -279,29 +234,20 @@ Selection policy:
             "units": compact_units,
         }
 
-    user_prompt = json.dumps({
+    user_prompt = {
         "query": user_query,
         "current_routine": compact_routine,
-    })
+    }
 
     try:
-        response = json_llm.invoke([
-            SystemMessage(content=sys_prompt),
-            HumanMessage(content=user_prompt)
-        ])
-        result = _parse_json_response_content(response.content)
+        result = llm_utils_module._invoke_json_llm(
+            sys_prompt,
+            user_prompt,
+            step_tracer=step_tracer,
+            module_name=MODULE_NAME,
+        )
         raw_pipeline = (result.get("pipeline") or "").strip().lower()
         pipeline = raw_pipeline if raw_pipeline in ("reflection", "simple_rag") else "simple_rag"
-
-        step_tracer.append({
-            "module": MODULE_NAME,
-            "prompt": {"system": sys_prompt, "user": user_prompt},
-            "response": {
-                "pipeline": pipeline,
-                "raw_pipeline": raw_pipeline,
-                "reason": result.get("reason", "")
-            }
-        })
         return pipeline
     except Exception as e:
         fallback = "reflection" if not isinstance(current_routine, dict) else "simple_rag"
@@ -415,7 +361,6 @@ def orchestrate_workflow(user_query):
         }
         
         # 3. Use your existing LLM utility to generate the message
-        from src.utils import LLM_utils as llm_utils_module
         fallback_result = llm_utils_module._invoke_json_llm(
             fallback_system_prompt, 
             fallback_payload,
@@ -756,4 +701,7 @@ def orchestrate_workflow(user_query):
     # 🛑 CHECKPOINT 3: Final combined save
     state_manager.save_state(state)
 
-    return {"response": final_response, "steps": step_tracer}
+    return {
+        "response": final_response,
+        "steps": step_tracer,
+    }
