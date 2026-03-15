@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from pydantic import BaseModel
 import os
 
@@ -16,12 +16,8 @@ class ExecuteRequest(BaseModel):
 
 @app.get("/")
 def root():
-    """Basic root endpoint so the primary Render URL does not return 404."""
-    return {
-        "service": "Nutrissistant API",
-        "status": "ok",
-        "docs": "/docs"
-    }
+    """Redirect base URL to the interactive API docs."""
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health")
