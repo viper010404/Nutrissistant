@@ -1,5 +1,5 @@
 {
-    "user_query": "can you solve a math problem for me?",
+    "user_query": "hi",
     "user_profile": "I'm Galit, a 21 year-old student. I want to maintain a healthy lifestyle and gain some muscle mass. I dont have any nutritional restrictions. I go to the gym",
     "schedule_data": {
         "Monday": {
@@ -1085,7 +1085,8 @@
     "equipment": [],
     "general_workout_restrictions": [
         "prefer evening sessions",
-        "target 3 workouts per week"
+        "target 3 workouts per week",
+        "no equipment available"
     ],
     "status": "idle",
     "chat_history": [
@@ -1148,6 +1149,16 @@
             "timestamp": "2026-03-15T18:31:29.092522+00:00",
             "role": "agent",
             "content": "Hi \u2014 I can\u2019t help solve general math problems, but I can help with nutrition-related calculations (calories, macros), plan meals, find recipes, or schedule workouts. Which of those would you like help with?"
+        },
+        {
+            "timestamp": "2026-03-15T19:02:56.644378+00:00",
+            "role": "user",
+            "content": "hi"
+        },
+        {
+            "timestamp": "2026-03-15T19:03:15.404657+00:00",
+            "role": "agent",
+            "content": "Hi there! I\u2019m Nutrissistant \u2014 I can help plan meals, find recipes, or schedule workout routines; which would you like to start with?"
         }
     ],
     "meals": {
